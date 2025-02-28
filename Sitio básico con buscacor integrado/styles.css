@@ -1,0 +1,228 @@
+/* Importar fuente personalizada */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f0f2f5;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-top: 0;
+}
+
+/* Estilo para la imagen flotante con texto alrededor */
+.float-image {
+    float: left;
+    margin: 0 20px 20px 0;
+    width: 300px;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    shape-outside: circle(150px at center);
+    clip-path: circle(150px at center);
+    object-fit: cover;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+    .float-image {
+        float: none;
+        display: block;
+        margin: 0 auto 20px auto;
+        width: 80%;
+        clip-path: none;
+        shape-outside: none;
+    }
+}
+
+/* Menú de navegación */
+.menu {
+    background-color: #1b1b1b;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.menu .logo img {
+    height: 50px;
+    margin-right: 30px;
+}
+
+.menu .menu-toggle {
+    display: none;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.menu .menu-toggle i {
+    font-size: 24px;
+    color: #fff;
+}
+
+.menu .menu-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.menu .menu-links li {
+    position: relative;
+}
+
+.menu .menu-links a {
+    display: block;
+    color: #fff;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    font-weight: 500;
+}
+
+.menu .menu-links a:hover,
+.menu .menu-links a:focus {
+    background-color: #d21026;
+}
+
+.menu .menu-links .dropdown:hover > .submenu,
+.menu .menu-links .dropdown:focus-within > .submenu {
+    display: block;
+}
+
+/* Submenús */
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #2c2c2c;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.submenu li {
+    margin: 0;
+    width: 100%;
+}
+
+.submenu a {
+    padding: 10px 20px;
+    color: #fff;
+    font-weight: normal;
+}
+
+.submenu a:hover {
+    background-color: #ff6b6b;
+    color: #fff;
+}
+
+/* Barra de búsqueda */
+.menu .search-bar {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.menu .search-bar input {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 20px 0 0 20px;
+    outline: none;
+    width: 150px;
+    transition: width 0.4s ease-in-out;
+}
+
+.menu .search-bar input:focus {
+    width: 250px;
+}
+
+.menu .search-bar button {
+    padding: 8px 10px;
+    border: none;
+    background-color: #ff6b6b;
+    color: white;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    outline: none;
+}
+
+.menu .search-bar button:hover {
+    background-color: #e55b5b;
+}
+
+/* Resaltado */
+.highlight {
+    background-color: yellow;
+}
+
+/* Responsividad */
+@media screen and (max-width: 768px) {
+    .menu {
+        flex-wrap: wrap;
+    }
+
+    .menu .logo {
+        flex: 1 1 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .menu .menu-toggle {
+        display: block;
+    }
+
+    .menu .menu-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .menu.active .menu-links {
+        display: flex;
+    }
+
+    .menu .menu-links li {
+        width: 100%;
+    }
+
+    .menu .menu-links a {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .submenu {
+        position: static;
+        background-color: #1b1b1b;
+        box-shadow: none;
+    }
+
+    .submenu a {
+        padding-left: 30px;
+    }
+
+    .menu .search-bar {
+        flex: 1 1 100%;
+        margin: 10px 0;
+        justify-content: center;
+    }
+}
