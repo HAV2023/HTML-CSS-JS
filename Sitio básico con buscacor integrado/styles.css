@@ -1,228 +1,229 @@
-/* Importar fuente personalizada */
+/* ================================
+   Importación de Fuente Personalizada
+   ================================ */
+/* Se importa la fuente Montserrat de Google Fonts con pesos 400 (normal) y 700 (negrita) */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
 
-/* Estilos generales */
+
+/* ================================
+   Estilos Generales
+   ================================ */
 body {
+    /* Elimina el margen por defecto del body */
     margin: 0;
+    /* Define la fuente global para todo el documento */
     font-family: 'Montserrat', sans-serif;
+    /* Color de fondo suave y moderno */
     background-color: #f0f2f5;
 }
 
+/* ================================
+   Contenedor Principal
+   ================================ */
 .container {
+    /* Ancho del 80% del contenedor */
     width: 80%;
+    /* Centrado automático y margen superior e inferior de 20px */
     margin: 20px auto;
+    /* Espacio interno de 30px */
     padding: 30px;
+    /* Fondo blanco para resaltar el contenido */
     background-color: #fff;
+    /* Incluye padding y border en el ancho total */
     box-sizing: border-box;
+    /* Sombra suave para un efecto de tarjeta elevada */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* ================================
+   Estilo para el Título
+   ================================ */
 h1 {
+    /* Elimina el margen superior para un diseño más compacto */
     margin-top: 0;
 }
 
-/* Estilo para la imagen flotante con texto alrededor */
+/* ================================
+   Imagen Flotante con Texto Alrededor
+   ================================ */
 .float-image {
+    /* La imagen flota a la izquierda del texto */
     float: left;
+    /* Espacio a la derecha y abajo de la imagen */
     margin: 0 20px 20px 0;
+    /* Ancho fijo para la imagen */
     width: 300px;
+    /* Evita que la imagen se desborde en pantallas pequeñas */
     max-width: 100%;
+    /* Bordes redondeados */
     border-radius: 10px;
+    /* Sombra suave para dar efecto de elevación */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* El texto fluye alrededor de la imagen en forma de círculo */
     shape-outside: circle(150px at center);
+    /* La imagen se recorta en forma circular */
     clip-path: circle(150px at center);
+    /* La imagen se escala sin deformarse */
     object-fit: cover;
 }
 
-/* Ajustes para pantallas pequeñas */
+/* ================================
+   Responsividad para la Imagen
+   ================================ */
 @media screen and (max-width: 768px) {
     .float-image {
+        /* La imagen deja de flotar en pantallas pequeñas */
         float: none;
+        /* Se comporta como un bloque */
         display: block;
+        /* Centra la imagen */
         margin: 0 auto 20px auto;
+        /* La imagen ocupa el 80% del ancho del contenedor */
         width: 80%;
+        /* Se elimina el efecto circular */
         clip-path: none;
         shape-outside: none;
     }
 }
 
-/* Menú de navegación */
+/* ================================
+   Menú de Navegación
+   ================================ */
 .menu {
+    /* Color oscuro para el menú */
     background-color: #1b1b1b;
+    /* Flexbox para alinear elementos horizontalmente */
     display: flex;
+    /* Centra los elementos verticalmente */
     align-items: center;
+    /* Espaciado interno en el menú */
     padding: 10px 20px;
+    /* Permite que el menú sea responsive */
     flex-wrap: wrap;
+    /* Incluye padding y border en el ancho total */
     box-sizing: border-box;
+    /* El menú se pega en la parte superior al hacer scroll */
     position: sticky;
+    /* Se pega al borde superior de la pantalla */
     top: 0;
+    /* Asegura que el menú esté sobre el contenido */
     z-index: 1000;
 }
 
 .menu .logo img {
+    /* Altura fija para el logo */
     height: 50px;
+    /* Espacio a la derecha del logo */
     margin-right: 30px;
 }
 
 .menu .menu-toggle {
+    /* Oculto en pantallas grandes */
     display: none;
+    /* Cursor de mano cuando es clickeable */
     cursor: pointer;
+    /* Se alinea a la derecha */
     margin-left: auto;
 }
 
 .menu .menu-toggle i {
+    /* Tamaño del ícono de menú */
     font-size: 24px;
+    /* Color blanco para el ícono */
     color: #fff;
 }
 
+/* ================================
+   Enlaces del Menú
+   ================================ */
 .menu .menu-links {
+    /* Se elimina el estilo de lista */
     list-style: none;
+    /* Se resetea el margen y padding */
     margin: 0;
     padding: 0;
+    /* Flexbox para alinear horizontalmente */
     display: flex;
     align-items: center;
+    /* Ocupa el espacio restante */
     flex-grow: 1;
 }
 
-.menu .menu-links li {
-    position: relative;
-}
-
 .menu .menu-links a {
+    /* Los enlaces ocupan toda el área clickeable */
     display: block;
+    /* Color de texto blanco */
     color: #fff;
+    /* Espaciado interno para mejor clickeabilidad */
     padding: 14px 20px;
+    /* Sin subrayado en los enlaces */
     text-decoration: none;
+    /* Transición suave al hacer hover */
     transition: background-color 0.3s;
+    /* Peso medio para mejor legibilidad */
     font-weight: 500;
 }
 
 .menu .menu-links a:hover,
 .menu .menu-links a:focus {
+    /* Color de fondo al hacer hover */
     background-color: #d21026;
 }
 
-.menu .menu-links .dropdown:hover > .submenu,
-.menu .menu-links .dropdown:focus-within > .submenu {
-    display: block;
-}
-
-/* Submenús */
+/* ================================
+   Submenús (Dropdowns)
+   ================================ */
 .submenu {
+    /* Se ocultan por defecto */
     display: none;
+    /* Se posicionan relativos al padre */
     position: absolute;
+    /* Fondo oscuro para submenús */
     background-color: #2c2c2c;
+    /* Se muestran justo debajo del enlace padre */
     top: 100%;
     left: 0;
+    /* Ancho mínimo para los submenús */
     min-width: 180px;
+    /* Incluye padding y border en el ancho total */
     box-sizing: border-box;
+    /* Sombra para destacar el dropdown */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    /* Asegura que estén encima del contenido */
     z-index: 1000;
 }
 
-.submenu li {
-    margin: 0;
-    width: 100%;
-}
-
 .submenu a {
+    /* Espaciado interno */
     padding: 10px 20px;
+    /* Color de texto blanco */
     color: #fff;
-    font-weight: normal;
 }
 
 .submenu a:hover {
+    /* Color de fondo al hacer hover */
     background-color: #ff6b6b;
-    color: #fff;
 }
 
-/* Barra de búsqueda */
-.menu .search-bar {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-}
-
-.menu .search-bar input {
-    padding: 8px 10px;
-    border: none;
-    border-radius: 20px 0 0 20px;
-    outline: none;
-    width: 150px;
-    transition: width 0.4s ease-in-out;
-}
-
-.menu .search-bar input:focus {
-    width: 250px;
-}
-
-.menu .search-bar button {
-    padding: 8px 10px;
-    border: none;
-    background-color: #ff6b6b;
-    color: white;
-    border-radius: 0 20px 20px 0;
-    cursor: pointer;
-    outline: none;
-}
-
-.menu .search-bar button:hover {
-    background-color: #e55b5b;
-}
-
-/* Resaltado */
-.highlight {
-    background-color: yellow;
-}
-
-/* Responsividad */
+/* ================================
+   Responsividad del Menú
+   ================================ */
 @media screen and (max-width: 768px) {
-    .menu {
-        flex-wrap: wrap;
-    }
-
-    .menu .logo {
-        flex: 1 1 100%;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-
     .menu .menu-toggle {
+        /* Se muestra en pantallas pequeñas */
         display: block;
     }
 
     .menu .menu-links {
+        /* Se ocultan inicialmente */
         display: none;
+        /* Reorganiza verticalmente */
         flex-direction: column;
         width: 100%;
     }
 
     .menu.active .menu-links {
+        /* Se muestran al hacer clic */
         display: flex;
-    }
-
-    .menu .menu-links li {
-        width: 100%;
-    }
-
-    .menu .menu-links a {
-        padding: 10px;
-        text-align: center;
-    }
-
-    .submenu {
-        position: static;
-        background-color: #1b1b1b;
-        box-shadow: none;
-    }
-
-    .submenu a {
-        padding-left: 30px;
-    }
-
-    .menu .search-bar {
-        flex: 1 1 100%;
-        margin: 10px 0;
-        justify-content: center;
     }
 }
