@@ -1,55 +1,64 @@
+/* Estilos generales para eliminar los márgenes y establecer una fuente predeterminada */
 body, html {
-     margin: 0;
-     padding: 0;
-     font-family: Arial, sans-serif;
-   }
-   
-   .container {
-     position: relative;
-   }
-   
-   .hamburger-btn {
-     font-size: 30px;
-     cursor: pointer;
-     border: none;
-     background: none;
-     position: absolute;
-     top: 20px;
-     right: 20px;
-   }
-   
-   .side-menu {
-     position: fixed;
-     right: -250px;
-     top: 0;
-     width: 250px;
-     height: 100%;
-     background-color: #333;
-     color: white;
-     transition: right 0.3s ease;
-     padding-top: 60px;
-   }
-   
-   .side-menu ul {
-     list-style: none;
-     padding: 0;
-   }
-   
-   .side-menu ul li {
-     padding: 15px;
-     text-align: center;
-   }
-   
-   .side-menu ul li a {
-     color: white;
-     text-decoration: none;
-     display: block;
-   }
-   
-   .side-menu ul li a:hover {
-     background-color: #575757;
-   }
-   
-   .side-menu.active {
-     right: 0;
-   }
+    margin: 0; /* Elimina el margen exterior del body y html */
+    padding: 0; /* Elimina el relleno interior */
+    font-family: Arial, sans-serif; /* Usa Arial como fuente principal y una genérica sans-serif en caso de no estar disponible */
+}
+
+/* Contenedor principal para organizar los elementos */
+.container {
+    position: relative; /* Se usa para posicionar elementos internos de manera relativa */
+}
+
+/* Estilos para el botón de menú hamburguesa */
+.hamburger-btn {
+    font-size: 30px; /* Tamaño del icono o texto del botón */
+    cursor: pointer; /* Cambia el cursor a una mano para indicar que es clickeable */
+    border: none; /* Elimina los bordes del botón */
+    background: none; /* Elimina cualquier fondo del botón */
+    position: absolute; /* Se posiciona de manera absoluta dentro de su contenedor */
+    top: 20px; /* Se coloca a 20 píxeles desde la parte superior */
+    right: 20px; /* Se coloca a 20 píxeles desde la derecha */
+}
+
+/* Estilos del menú lateral */
+.side-menu {
+    position: fixed; /* Fija el menú en la pantalla sin moverse con el contenido */
+    right: -250px; /* Inicialmente, coloca el menú fuera de la vista en el lado derecho */
+    top: 0; /* Se coloca en la parte superior de la pantalla */
+    width: 250px; /* Ancho del menú lateral */
+    height: 100%; /* Ocupa toda la altura de la pantalla */
+    background-color: #333; /* Color de fondo oscuro */
+    color: white; /* Color del texto en blanco */
+    transition: right 0.3s ease; /* Transición suave al mover el menú */
+    padding-top: 60px; /* Espacio superior dentro del menú para evitar que los elementos queden pegados arriba */
+}
+
+/* Estilos de la lista dentro del menú */
+.side-menu ul {
+    list-style: none; /* Elimina los estilos predeterminados de la lista (viñetas) */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+/* Estilos para cada elemento de la lista */
+.side-menu ul li {
+    padding: 15px; /* Agrega espaciado dentro de cada elemento */
+    text-align: center; /* Centra el texto en cada elemento */
+}
+
+/* Estilos para los enlaces dentro de la lista */
+.side-menu ul li a {
+    color: white; /* Color del texto en blanco */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    display: block; /* Hace que los enlaces ocupen toda la anchura disponible para mejorar la usabilidad */
+}
+
+/* Efecto al pasar el mouse sobre los enlaces */
+.side-menu ul li a:hover {
+    background-color: #575757; /* Cambia el fondo a un tono más claro cuando se pasa el mouse */
+}
+
+/* Clase que activa el menú */
+.side-menu.active {
+    right: 0; /* Mueve el menú a la posición visible cuando se activa */
+}
