@@ -1,30 +1,35 @@
+/* Estilos globales para body y html */
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, sans-serif;
+    margin: 0; /* Elimina los márgenes predeterminados */
+    padding: 0; /* Elimina el relleno interno */
+    height: 100%; /* Asegura que ocupen toda la altura de la ventana del navegador */
+    font-family: Arial, sans-serif; /* Establece la fuente del texto */
 }
 
+/* Contenedor de la imagen de fondo */
 .image-container {
-    background: url('tu-imagen.jpg') no-repeat center center fixed;
-    background-size: cover;
-    height: 100vh;
-    position: relative;
+    background: url('tu-imagen.jpg') no-repeat center center fixed; /* Imagen de fondo centrada y fija */
+    background-size: cover; /* Ajusta la imagen para que cubra todo el contenedor sin distorsionarse */
+    height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+    position: relative; /* Permite posicionar elementos secundarios dentro de este contenedor */
 }
 
+/* Contenido que se mostrará sobre la imagen de fondo */
 .content {
-    position: relative;
-    z-index: 1;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    position: relative; /* Mantiene su posición dentro de .image-container */
+    z-index: 1; /* Asegura que este contenido se muestre por encima del fondo */
+    color: white; /* Texto en color blanco para mejor contraste */
+    text-align: center; /* Centra el texto horizontalmente */
+    padding: 20px; /* Agrega un espacio interno de 20px */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente (50% de opacidad) */
 }
 
+/* Estilos para el título */
 h1 {
-    font-size: 48px;
+    font-size: 48px; /* Tamaño de fuente grande para destacar */
 }
 
+/* Estilos para los párrafos */
 p {
-    font-size: 24px;
+    font-size: 24px; /* Tamaño de fuente intermedio para mejor lectura */
 }
