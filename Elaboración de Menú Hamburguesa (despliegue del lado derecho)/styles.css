@@ -1,1 +1,55 @@
+body, html {
+ &nbsp;&nbsp; margin: 0;
+ &nbsp;&nbsp; padding: 0;
+ &nbsp;&nbsp; font-family: Arial, sans-serif;
+}
 
+.container {
+ &nbsp;&nbsp; position: relative;
+}
+
+.hamburger-btn {
+ &nbsp;&nbsp; font-size: 30px;
+ &nbsp;&nbsp; cursor: pointer;
+ &nbsp;&nbsp; border: none;
+ &nbsp;&nbsp; background: none;
+ &nbsp;&nbsp; position: absolute;
+ &nbsp;&nbsp; top: 20px;
+ &nbsp;&nbsp; right: 20px;
+}
+
+.side-menu {
+ &nbsp;&nbsp; position: fixed;
+ &nbsp;&nbsp; right: -250px;
+ &nbsp;&nbsp; top: 0;
+ &nbsp;&nbsp; width: 250px;
+ &nbsp;&nbsp; height: 100%;
+ &nbsp;&nbsp; background-color: #333;
+ &nbsp;&nbsp; color: white;
+ &nbsp;&nbsp; transition: right 0.3s ease;
+ &nbsp;&nbsp; padding-top: 60px;
+}
+
+.side-menu ul {
+ &nbsp;&nbsp; list-style: none;
+ &nbsp;&nbsp; padding: 0;
+}
+
+.side-menu ul li {
+ &nbsp;&nbsp; padding: 15px;
+ &nbsp;&nbsp; text-align: center;
+}
+
+.side-menu ul li a {
+ &nbsp;&nbsp; color: white;
+ &nbsp;&nbsp; text-decoration: none;
+ &nbsp;&nbsp; display: block;
+}
+
+.side-menu ul li a:hover {
+ &nbsp;&nbsp; background-color: #575757;
+}
+
+.side-menu.active {
+ &nbsp;&nbsp; right: 0;
+}
