@@ -1,1 +1,41 @@
+/* Estilos generales para el cuerpo de la página */
+body {
+    font-family: Arial, sans-serif; /* Define la fuente predeterminada */
+    margin: 0; /* Elimina el margen exterior del body */
+    padding: 20px; /* Agrega un espacio interno de 20px alrededor del contenido */
+    background-color: #f4f4f4; /* Establece un color de fondo gris claro */
+}
+
+/* Estilos para el encabezado */
+header {
+    display: flex; /* Usa Flexbox para organizar los elementos dentro del header */
+    justify-content: space-between; /* Separa los elementos, alineándolos a los extremos */
+    align-items: center; /* Centra los elementos verticalmente */
+    background-color: #333; /* Color de fondo oscuro */
+    color: #fff; /* Color del texto en blanco */
+    padding: 10px; /* Agrega un espacio interno de 10px alrededor del contenido */
+}
+
+/* Estilos para el título principal */
+h1 {
+    margin: 0; /* Elimina el margen predeterminado del h1 */
+}
+
+/* Contenedor de los botones de cambio de idioma */
+#language-buttons {
+    display: flex; /* Usa Flexbox para alinear los botones en fila */
+    gap: 10px; /* Agrega un espacio de 10px entre los botones */
+}
+
+/* Estilos generales para los botones */
+button {
+    font-size: 16px; /* Tamaño de la fuente del botón */
+    padding: 10px; /* Agrega espacio interno al botón */
+    cursor: pointer; /* Cambia el cursor a un puntero al pasar sobre el botón */
+}
+
+/* Estilos para el contenido principal */
+main {
+    margin-top: 20px; /* Agrega un espacio superior de 20px para separar del header */
+}
 
