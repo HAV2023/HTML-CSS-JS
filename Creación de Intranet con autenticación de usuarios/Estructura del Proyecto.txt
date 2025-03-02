@@ -1,1 +1,9 @@
-
+/intranet
+    /css
+        styles.css
+    /js
+        scripts.js
+    /auth
+        login.html
+        restricted.html
+    index.html
