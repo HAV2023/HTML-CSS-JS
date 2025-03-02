@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang="es"> 
+<head>
+  <!-- Define el conjunto de caracteres como UTF-8 para admitir caracteres especiales como acentos -->
+  <meta charset="UTF-8">
+
+  <!-- Hace que el diseño sea responsive, adaptándose al ancho del dispositivo -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Título de la página que se muestra en la pestaña del navegador -->
+  <title>Menú Hamburguesa</title>
+
+  <!-- Vincula el archivo de estilos externo (CSS) -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Contenedor principal que envuelve el botón y el menú -->
+  <div class="container">
+
+    <!-- Botón de menú hamburguesa -->
+    <button id="hamburger-btn" class="hamburger-btn">
+      &#9776; <!-- Símbolo Unicode de "☰", que representa el icono del menú hamburguesa -->
+    </button>
+
+    <!-- Menú de pantalla completa -->
+    <nav id="full-screen-menu" class="full-screen-menu">
+      <ul>
+        <!-- Elementos del menú con enlaces a diferentes secciones de la página -->
+        <li><a href="#home">Inicio</a></li>
+        <li><a href="#about">Acerca de</a></li>
+        <li><a href="#services">Servicios</a></li>
+        <li><a href="#contact">Contacto</a></li>
+      </ul>
+    </nav>
+
+  </div>
+
+  <!-- Vincula el archivo de JavaScript externo que manejará la interacción del menú -->
+  <script src="script.js"></script>
+
+</body>
+</html>
 
