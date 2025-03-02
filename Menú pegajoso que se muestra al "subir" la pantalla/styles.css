@@ -1,1 +1,70 @@
+/* Elimina los márgenes y rellenos predeterminados del navegador y establece una fuente base */
+body, html {
+    margin: 0; /* Elimina el margen exterior */
+    padding: 0; /* Elimina el relleno interior */
+    font-family: Arial, sans-serif; /* Usa Arial como fuente principal, y si no está disponible, una genérica sans-serif */
+}
+
+/* Estilos para la barra de navegación */
+header {
+    background-color: #333; /* Fondo oscuro para el encabezado */
+    color: white; /* Texto en color blanco */
+    position: fixed; /* Fija la posición en la parte superior de la pantalla */
+    width: 100%; /* Ocupa el 100% del ancho de la pantalla */
+    top: 0; /* Posición en la parte superior */
+    left: 0; /* Alineado a la izquierda */
+    z-index: 1000; /* Asegura que el encabezado esté por encima de otros elementos */
+    transition: top 0.3s; /* Efecto de transición cuando el menú cambia de posición */
+}
+
+/* Contenedor de la barra de navegación */
+.navbar {
+    display: flex; /* Usa flexbox para organizar los elementos en fila */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    padding: 15px 0; /* Agrega relleno superior e inferior */
+}
+
+/* Lista de enlaces de navegación */
+.nav-links {
+    list-style: none; /* Elimina los estilos predeterminados de la lista (viñetas) */
+    display: flex; /* Muestra los elementos de la lista en una fila */
+}
+
+/* Elementos de la lista dentro de la navegación */
+.nav-links li {
+    margin: 0 15px; /* Espaciado entre los elementos de la lista */
+}
+
+/* Estilos para los enlaces dentro de la navegación */
+.nav-links li a {
+    color: white; /* Color del texto en blanco */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    font-size: 18px; /* Tamaño de la fuente de los enlaces */
+}
+
+/* Cambia el color del enlace al pasar el mouse */
+.nav-links li a:hover {
+    color: #FFD700; /* Color dorado al hacer hover */
+}
+
+/* Clase para ocultar el menú cuando se quiera ocultar dinámicamente */
+.hidden {
+    top: -60px; /* Mueve el menú hacia arriba fuera de la pantalla */
+}
+
+/* Secciones de la página */
+section {
+    padding: 100px 20px; /* Espaciado interno en cada sección */
+    height: 100vh; /* Cada sección ocupa el 100% de la altura de la pantalla */
+}
+
+/* Alternar colores de fondo en secciones impares */
+section:nth-child(odd) {
+    background-color: #f4f4f4; /* Gris claro */
+}
+
+/* Alternar colores de fondo en secciones pares */
+section:nth-child(even) {
+    background-color: #e4e4e4; /* Gris un poco más oscuro */
+}
 
