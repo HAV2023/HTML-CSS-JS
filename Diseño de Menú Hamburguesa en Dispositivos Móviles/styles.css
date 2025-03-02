@@ -1,1 +1,74 @@
+/* Elimina márgenes y rellenos predeterminados y establece la fuente predeterminada */
+body, html {
+    margin: 0; /* Elimina los márgenes predeterminados */
+    padding: 0; /* Elimina los rellenos predeterminados */
+    font-family: Arial, sans-serif; /* Usa Arial como fuente principal y sans-serif como alternativa */
+}
+
+/* Contenedor principal que agrupa el botón de menú hamburguesa y el menú lateral */
+.container {
+    position: relative; /* Define un contexto de posicionamiento para los elementos internos */
+}
+
+/* Estilos para el botón de menú hamburguesa */
+.hamburger-btn {
+    font-size: 30px; /* Tamaño del icono del botón */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar el mouse */
+    border: none; /* Elimina el borde del botón */
+    background: none; /* Elimina el fondo del botón */
+    position: absolute; /* Se posiciona de manera absoluta dentro del contenedor */
+    top: 20px; /* Se ubica a 20 píxeles desde la parte superior */
+    right: 20px; /* Se ubica a 20 píxeles desde la derecha */
+    z-index: 1000; /* Se asegura de que esté por encima de otros elementos */
+    display: none; /* Oculta el botón de menú hamburguesa por defecto */
+}
+
+/* Estilos para el menú lateral */
+.side-menu {
+    position: fixed; /* Fija el menú en la pantalla */
+    right: -250px; /* Inicialmente se encuentra oculto desplazado fuera de la pantalla */
+    top: 0; /* Se alinea con la parte superior de la pantalla */
+    width: 250px; /* Ancho del menú lateral */
+    height: 100%; /* Ocupa el 100% de la altura de la pantalla */
+    background-color: #333; /* Color de fondo oscuro */
+    color: white; /* Color del texto en blanco */
+    transition: right 0.3s ease; /* Agrega una transición suave al mostrar u ocultar el menú */
+    padding-top: 60px; /* Espacio superior dentro del menú para evitar que los elementos queden pegados arriba */
+}
+
+/* Estilos de la lista dentro del menú */
+.side-menu ul {
+    list-style-type: none; /* Elimina los estilos de lista predeterminados */
+    padding: 0; /* Elimina el relleno */
+}
+
+/* Espaciado entre los elementos de la lista */
+.side-menu ul li {
+    padding: 15px; /* Agrega espacio dentro de cada elemento */
+    text-align: center; /* Centra el texto de cada elemento */
+}
+
+/* Estilos para los enlaces dentro de la lista */
+.side-menu ul li a {
+    color: white; /* Color de texto en blanco */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    display: block; /* Hace que los enlaces ocupen toda la anchura disponible para mejorar la usabilidad */
+}
+
+/* Cambio de color cuando se pasa el mouse sobre un enlace */
+.side-menu ul li a:hover {
+    background-color: #575757; /* Cambia a color gris más claro cuando el usuario pasa el mouse */
+}
+
+/* Clase que activa el menú para hacerlo visible */
+.side-menu.active {
+    right: 0; /* Mueve el menú lateral a la posición visible en la pantalla */
+}
+
+/* Media query para dispositivos móviles */
+@media screen and (max-width: 768px) {
+    .hamburger-btn {
+        display: block; /* Muestra el botón de menú hamburguesa solo en dispositivos móviles */
+    }
+}
 
