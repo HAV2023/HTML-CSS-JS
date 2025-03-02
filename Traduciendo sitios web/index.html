@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración de la codificación de caracteres para admitir caracteres especiales -->
+    <meta charset="UTF-8">
 
+    <!-- Hace que el diseño sea responsivo en dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de la página que aparece en la pestaña del navegador -->
+    <title>Traducir Sitio</title>
+
+    <!-- Enlace a la hoja de estilos CSS externa -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <!-- Encabezado principal con un ID para poder traducirlo dinámicamente -->
+        <h1 id="titulo">Bienvenido a Mi Sitio Web</h1>
+
+        <!-- Contenedor con botones para cambiar el idioma -->
+        <div id="language-buttons">
+            <!-- Cada botón llama a la función JavaScript "translatePage()" pasando el idioma como argumento -->
+            <button onclick="translatePage('es')">Español</button>
+            <button onclick="translatePage('en')">Inglés</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Párrafos con ID para cambiar su contenido dinámicamente al traducir -->
+        <p id="contenido1">Este es el contenido de la página en español.</p>
+        <p id="contenido2">Aquí hay más contenido en español.</p>
+        <!-- Se pueden agregar más elementos para traducir -->
+    </main>
+
+    <!-- Importa el archivo JavaScript externo que maneja la traducción -->
+    <script src="script.js"></script>
+</body>
+</html>
