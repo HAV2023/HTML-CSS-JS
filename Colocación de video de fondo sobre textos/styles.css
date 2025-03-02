@@ -1,40 +1,58 @@
+/* ==========================
+   Estilos globales para body y html
+   ========================== */
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, sans-serif;
+    margin: 0; /* Elimina los márgenes predeterminados del navegador */
+    padding: 0; /* Elimina cualquier relleno interno */
+    height: 100%; /* Asegura que ocupen el 100% de la altura de la ventana del navegador */
+    font-family: Arial, sans-serif; /* Establece la fuente predeterminada como Arial, con respaldo en fuentes sans-serif */
 }
 
+/* ==========================
+   Contenedor del video de fondo
+   ========================== */
 .video-container {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
+    position: relative; /* Permite que los elementos dentro se posicionen en relación con este contenedor */
+    height: 100vh; /* Hace que el contenedor ocupe el 100% de la altura de la ventana */
+    overflow: hidden; /* Oculta cualquier contenido que se salga del contenedor */
 }
 
+/* ==========================
+   Configuración del video de fondo
+   ========================== */
 .video-background {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -1;
+    position: absolute; /* Posiciona el video de manera absoluta dentro de .video-container */
+    top: 50%; /* Mueve el video hacia abajo un 50% de la altura del contenedor */
+    left: 50%; /* Mueve el video hacia la derecha un 50% del ancho del contenedor */
+    transform: translate(-50%, -50%); /* Centra completamente el video en el contenedor */
+    min-width: 100%; /* Asegura que el video cubra al menos el ancho completo del contenedor */
+    min-height: 100%; /* Asegura que el video cubra al menos la altura completa del contenedor */
+    width: auto; /* Permite que el ancho del video se ajuste automáticamente sin distorsionarse */
+    height: auto; /* Permite que la altura del video se ajuste automáticamente sin distorsionarse */
+    z-index: -1; /* Envía el video al fondo para que otros elementos aparezcan encima */
 }
 
+/* ==========================
+   Contenedor del contenido sobre el video
+   ========================== */
 .content {
-    position: relative;
-    z-index: 1;
-    color: white;
-    text-align: center;
-    padding: 20px;
+    position: relative; /* Mantiene su posición en el flujo normal del documento */
+    z-index: 1; /* Asegura que el contenido aparezca por encima del video de fondo */
+    color: white; /* Texto en color blanco para mayor contraste sobre el video */
+    text-align: center; /* Centra el texto horizontalmente */
+    padding: 20px; /* Agrega un espacio interno de 20px alrededor del contenido */
 }
 
+/* ==========================
+   Estilos para el título
+   ========================== */
 h1 {
-    font-size: 48px;
+    font-size: 48px; /* Define un tamaño de fuente grande para el título principal */
 }
 
+/* ==========================
+   Estilos para los párrafos
+   ========================== */
 p {
-    font-size: 24px;
+    font-size: 24px; /* Define un tamaño de fuente más pequeño para los párrafos */
 }
