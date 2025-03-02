@@ -1,1 +1,51 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 
+.sticky-menu {
+    position: -webkit-sticky; /* Para navegadores Webkit */
+    position: sticky;
+    top: 0;
+    background-color: #333;
+    padding: 10px 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.sticky-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.sticky-menu ul li {
+    margin: 0 15px;
+}
+
+.sticky-menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.sticky-menu ul li a:hover {
+    color: #FFD700;
+}
+
+section {
+    padding: 60px 20px;
+}
+
+
+@media (max-width: 600px) {
+    .sticky-menu ul {
+        flex-direction: column;
+    }
+    .sticky-menu ul li {
+        margin: 10px 0;
+    }
+}
