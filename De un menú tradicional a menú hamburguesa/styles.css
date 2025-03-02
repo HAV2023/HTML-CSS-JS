@@ -1,1 +1,93 @@
+/* Elimina márgenes y rellenos predeterminados y establece la fuente predeterminada */
+body, html {
+    margin: 0; /* Elimina los márgenes predeterminados */
+    padding: 0; /* Elimina los rellenos predeterminados */
+    font-family: Arial, sans-serif; /* Usa Arial como fuente principal y sans-serif como alternativa */
+}
+
+/* Estilos para el encabezado */
+header {
+    background-color: #333; /* Fondo oscuro */
+    color: white; /* Texto en color blanco */
+    padding: 15px 0; /* Agrega espaciado arriba y abajo */
+}
+
+/* Contenedor de la barra de navegación */
+.navbar {
+    display: flex; /* Usa flexbox para organizar los elementos en fila */
+    justify-content: space-between; /* Distribuye los elementos a los extremos */
+    align-items: center; /* Alinea los elementos verticalmente */
+    max-width: 1920px; /* Establece un ancho máximo para la barra */
+    margin: 0 auto; /* Centra la barra en la página */
+    padding: 0 20px; /* Agrega relleno a los lados */
+}
+
+/* Estilos para el logo */
+.logo {
+    font-size: 24px; /* Tamaño del texto del logo */
+    font-weight: bold; /* Aplica negrita al texto */
+}
+
+/* Lista de enlaces de navegación */
+.nav-links {
+    list-style: none; /* Elimina los estilos predeterminados de la lista (viñetas) */
+    display: flex; /* Muestra los elementos en una fila */
+}
+
+/* Estilos para cada elemento de la lista */
+.nav-links li {
+    margin-left: 20px; /* Agrega separación entre los elementos de la lista */
+}
+
+/* Estilos para los enlaces de navegación */
+.nav-links li a {
+    color: white; /* Color del texto en blanco */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    font-size: 16px; /* Tamaño de fuente de los enlaces */
+}
+
+/* Estilos para el icono de menú hamburguesa */
+.hamburger {
+    display: none; /* Oculta el botón hamburguesa por defecto */
+    font-size: 30px; /* Tamaño del icono */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar el mouse */
+}
+
+/* Media query para pantallas pequeñas (dispositivos móviles) */
+@media (max-width: 768px) {
+    /* Oculta la navegación en dispositivos móviles y la hace tipo columna */
+    .nav-links {
+        display: none; /* Oculta los enlaces en pantallas pequeñas */
+        flex-direction: column; /* Organiza los enlaces en una columna */
+        width: 100%; /* Ocupa todo el ancho disponible */
+        position: absolute; /* Se posiciona de forma absoluta */
+        top: 60px; /* Se sitúa justo debajo del header */
+        left: 0; /* Alineado al lado izquierdo */
+        background-color: #333; /* Fondo oscuro */
+        padding: 0; /* Elimina relleno extra */
+    }
+
+    /* Cuando la clase "active" está presente, los enlaces se muestran */
+    .nav-links.active {
+        display: flex; /* Muestra los enlaces al activar la clase */
+    }
+
+    /* Ajusta el tamaño de cada elemento de la lista en móviles */
+    .nav-links li {
+        margin: 0; /* Elimina márgenes */
+        width: 100%; /* Cada enlace ocupa todo el ancho */
+        text-align: center; /* Centra el texto */
+    }
+
+    /* Estilos de los enlaces en dispositivos móviles */
+    .nav-links li a {
+        padding: 15px; /* Agrega espaciado para facilitar el clic */
+        display: block; /* Ocupa todo el ancho del contenedor */
+    }
+
+    /* Muestra el botón hamburguesa en dispositivos móviles */
+    .hamburger {
+        display: block; /* Hace visible el icono de hamburguesa */
+    }
+}
 
