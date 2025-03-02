@@ -1,1 +1,73 @@
+/* Elimina márgenes y rellenos predeterminados y establece la fuente predeterminada */
+body, html {
+    margin: 0; /* Elimina los márgenes predeterminados */
+    padding: 0; /* Elimina los rellenos predeterminados */
+    font-family: Arial, sans-serif; /* Usa Arial como fuente principal y sans-serif como alternativa */
+}
+
+/* Contenedor principal que agrupa el botón y el menú */
+.container {
+    position: relative; /* Define un contexto de posicionamiento para los elementos internos */
+}
+
+/* Estilos para el botón de menú hamburguesa */
+.hamburger-btn {
+    font-size: 30px; /* Tamaño del icono del botón */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar el mouse */
+    border: none; /* Elimina el borde del botón */
+    background: none; /* Elimina el fondo del botón */
+    position: absolute; /* Se posiciona de manera absoluta dentro del contenedor */
+    top: 20px; /* Se ubica a 20 píxeles desde la parte superior */
+    right: 20px; /* Se ubica a 20 píxeles desde la derecha */
+    z-index: 1000; /* Se asegura de que esté por encima de otros elementos */
+}
+
+/* Estilos para el menú de pantalla completa */
+.full-screen-menu {
+    position: fixed; /* Fija el menú en la pantalla */
+    top: 0; /* Se alinea con la parte superior de la pantalla */
+    left: 0; /* Se alinea con el lado izquierdo de la pantalla */
+    width: 100%; /* Ocupa el 100% del ancho de la pantalla */
+    height: 100%; /* Ocupa el 100% de la altura de la pantalla */
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro con opacidad del 80% para un efecto atenuado */
+    color: white; /* Color del texto en blanco */
+    display: flex; /* Usa flexbox para centrar el contenido */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Agrega una transición suave al mostrar u ocultar el menú */
+    opacity: 0; /* Inicialmente invisible */
+    visibility: hidden; /* No es visible ni accesible al principio */
+    z-index: 999; /* Se coloca justo debajo del botón del menú */
+}
+
+/* Estilos de la lista dentro del menú */
+.full-screen-menu ul {
+    list-style-type: none; /* Elimina los estilos de lista predeterminados */
+    padding: 0; /* Elimina el relleno */
+    text-align: center; /* Centra los elementos de la lista */
+}
+
+/* Espaciado entre los elementos de la lista */
+.full-screen-menu ul li {
+    margin: 20px 0; /* Agrega espacio entre los elementos del menú */
+}
+
+/* Estilos para los enlaces dentro de la lista */
+.full-screen-menu ul li a {
+    color: white; /* Color de texto en blanco */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    font-size: 24px; /* Tamaño de fuente grande para mejor visibilidad */
+    transition: color 0.3s; /* Agrega una transición suave al cambiar de color */
+}
+
+/* Cambio de color cuando se pasa el mouse sobre un enlace */
+.full-screen-menu ul li a:hover {
+    color: #FFD700; /* Cambia a color dorado cuando el usuario pasa el mouse */
+}
+
+/* Clase que activa el menú para hacerlo visible */
+.full-screen-menu.active {
+    opacity: 1; /* Hace el menú visible */
+    visibility: visible; /* Permite que el menú sea accesible */
+}
 
