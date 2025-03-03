@@ -1,1 +1,70 @@
+/* ====== Estilos Generales ====== */
+
+/* Configuración del cuerpo de la página */
+body {
+    font-family: Arial, sans-serif; /* Fuente predeterminada */
+    margin: 0; /* Elimina márgenes */
+    padding: 20px; /* Agrega espacio alrededor del contenido */
+    background-color: #f4f4f4; /* Fondo gris claro */
+}
+
+/* ====== Estilos para los enlaces ====== */
+
+/* Color y eliminación de subrayado de los enlaces */
+a {
+    color: #007BFF; /* Color azul para los enlaces */
+    text-decoration: none; /* Elimina el subrayado */
+}
+
+/* Cambio de estilo al pasar el cursor sobre los enlaces */
+a:hover {
+    text-decoration: underline; /* Subraya el enlace al pasar el mouse */
+}
+
+/* ====== Estilos para la ventana emergente (modal) ====== */
+
+/* Contenedor de la ventana emergente */
+.modal {
+    display: none; /* Oculta la ventana emergente por defecto */
+    position: fixed; /* Posición fija en la pantalla */
+    z-index: 1; /* Asegura que la ventana esté encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ocupa toda la pantalla */
+    height: 100%; /* Cubre toda la altura de la pantalla */
+    overflow: auto; /* Agrega desplazamiento si el contenido es demasiado grande */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro con opacidad */
+}
+
+/* ====== Estilos para el contenido de la ventana emergente ====== */
+
+/* Contenedor del contenido dentro del modal */
+.modal-content {
+    background-color: #fff; /* Fondo blanco */
+    margin: 15% auto; /* Centra verticalmente el modal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde gris oscuro */
+    width: 80%; /* Ancho del modal (80% del ancho de la pantalla) */
+    max-width: 500px; /* Define un ancho máximo */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Sombra para resaltar la ventana */
+}
+
+/* ====== Estilos para el botón de cerrar ====== */
+
+/* Botón "X" para cerrar la ventana */
+.close {
+    color: #aaa; /* Color gris claro */
+    float: right; /* Lo posiciona a la derecha */
+    font-size: 28px; /* Tamaño de la "X" */
+    font-weight: bold; /* Hace el texto más grueso */
+}
+
+/* Cambio de color cuando se pasa el mouse sobre el botón de cerrar */
+.close:hover,
+.close:focus {
+    color: black; /* Cambia el color a negro */
+    text-decoration: none; /* Elimina subrayado */
+    cursor: pointer; /* Cambia el cursor a una mano */
+}
 
