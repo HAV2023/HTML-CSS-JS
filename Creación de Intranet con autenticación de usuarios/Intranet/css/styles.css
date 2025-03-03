@@ -1,1 +1,100 @@
+/* styles.css */
+
+/* ======= Estilos globales ======= */
+
+/* Configuración general del cuerpo del documento */
+body {
+    font-family: Arial, sans-serif; /* Define la fuente principal */
+    margin: 0; /* Elimina el margen predeterminado */
+    padding: 0; /* Elimina el padding predeterminado */
+}
+
+/* ======= Estilos para el encabezado (header) ======= */
+
+header {
+    background-color: #4CAF50; /* Fondo verde */
+    color: white; /* Texto en color blanco */
+    padding: 10px 0; /* Espaciado interno arriba y abajo */
+    text-align: center; /* Centra el texto */
+}
+
+/* ======= Estilos para la barra de navegación ======= */
+
+nav ul {
+    list-style-type: none; /* Quita los puntos de la lista */
+    padding: 0; /* Elimina el padding predeterminado */
+    margin: 0; /* Elimina el margen predeterminado */
+    display: flex; /* Usa flexbox para organizar los elementos */
+    justify-content: center; /* Centra los elementos en la barra de navegación */
+}
+
+/* Espaciado entre los elementos de la lista */
+nav ul li {
+    margin: 0 10px; /* Agrega un margen horizontal entre los elementos */
+}
+
+/* Estilos para los enlaces de la navegación */
+nav ul li a {
+    color: white; /* Texto en color blanco */
+    text-decoration: none; /* Elimina el subrayado */
+}
+
+/* ======= Estilos para el contenido principal ======= */
+
+main {
+    padding: 20px; /* Agrega un espacio interno para separar el contenido */
+}
+
+/* ======= Estilos para el pie de página (footer) ======= */
+
+footer {
+    background-color: #4CAF50; /* Fondo verde */
+    color: white; /* Texto en color blanco */
+    text-align: center; /* Centra el texto */
+    padding: 10px 0; /* Espaciado interno */
+}
+
+/* ======= Estilos para el contenedor del formulario de inicio de sesión ======= */
+
+.login-container {
+    max-width: 400px; /* Establece un ancho máximo de 400px */
+    margin: 50px auto; /* Centra el contenedor horizontalmente */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera para efecto elevado */
+    text-align: center; /* Centra el contenido dentro del formulario */
+}
+
+/* Espaciado para el título del formulario */
+.login-container h2 {
+    margin-bottom: 20px;
+}
+
+/* ======= Estilos para los campos de entrada (input) ======= */
+
+.login-container input {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 10px; /* Espaciado interno */
+    margin: 10px 0; /* Espaciado entre los campos */
+}
+
+/* ======= Estilos para el botón de inicio de sesión ======= */
+
+.login-container button {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 10px; /* Espaciado interno */
+    background-color: #4CAF50; /* Fondo verde */
+    color: white; /* Texto en color blanco */
+    border: none; /* Elimina el borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor a puntero al pasar sobre el botón */
+}
+
+/* ======= Estilos para mensajes de error ======= */
+
+.error {
+    color: red; /* Texto en color rojo */
+    margin-top: 10px; /* Agrega espacio superior */
+}
 
