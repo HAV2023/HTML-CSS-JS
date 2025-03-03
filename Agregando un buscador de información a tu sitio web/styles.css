@@ -1,1 +1,7 @@
+/* styles.css */
+
+/* ======= Estilo para resaltar coincidencias en la búsqueda ======= */
+.highlight {
+    background-color: yellow; /* Establece un fondo amarillo para resaltar el texto */
+}
 
