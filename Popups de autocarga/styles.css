@@ -1,1 +1,81 @@
+/* ====== Estilos generales para la página ====== */
 
+/* Configuración del cuerpo de la página */
+body {
+    font-family: Arial, sans-serif; /* Fuente legible */
+    margin: 20px; /* Margen alrededor del contenido */
+    background-color: #f0f0f0; /* Fondo gris claro */
+}
+
+/* Estilo para el título principal */
+h1 {
+    text-align: center; /* Centrar el título */
+}
+
+/* Estilo para los párrafos */
+p {
+    line-height: 1.6; /* Espaciado entre líneas */
+    max-width: 800px; /* Limita el ancho del texto para mejor legibilidad */
+    margin: 0 auto 10px auto; /* Centrar los párrafos */
+}
+
+/* ====== Estilos para la ventana emergente (modal) ====== */
+
+/* Configuración del modal */
+.modal {
+    display: block; /* Se muestra al cargar la página */
+    position: fixed; /* Se mantiene fijo en la pantalla */
+    z-index: 1; /* Coloca el modal por encima del contenido */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ocupa toda la pantalla */
+    height: 100%;
+    overflow: auto; /* Permite desplazamiento si es necesario */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+}
+
+/* Estilo del contenido dentro del modal */
+.modal-contenido {
+    background-color: #fff; /* Fondo blanco */
+    margin: 10% auto; /* Centra vertical y horizontalmente */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra para dar efecto elevado */
+    width: 80%; /* Ocupará el 80% del ancho disponible */
+    max-width: 500px; /* Máximo ancho del modal */
+    position: relative; /* Posicionamiento relativo para manejar el botón de cierre */
+    animation: aparecer 0.5s ease-out; /* Animación de entrada */
+}
+
+/* ====== Animación de aparición del modal ====== */
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(-50px); } /* Empieza desplazado y con opacidad 0 */
+    to { opacity: 1; transform: translateY(0); } /* Se vuelve completamente visible */
+}
+
+/* ====== Estilo del botón de cerrar (X) ====== */
+.cerrar {
+    color: #aaa; /* Color gris claro */
+    position: absolute; /* Posicionado sobre el modal */
+    top: 10px;
+    right: 15px;
+    font-size: 28px; /* Tamaño de fuente grande */
+    font-weight: bold; /* Negrita */
+    cursor: pointer; /* Cursor en forma de mano */
+}
+
+/* Cambia de color al pasar el mouse */
+.cerrar:hover,
+.cerrar:focus {
+    color: #000; /* Se oscurece al pasar el mouse */
+}
+
+/* Estilo del título dentro del modal */
+.modal-contenido h1 {
+    margin-top: 0; /* Elimina el margen superior */
+}
+
+/* Justificación del texto dentro del modal */
+.modal-contenido p {
+    text-align: justify;
+}
