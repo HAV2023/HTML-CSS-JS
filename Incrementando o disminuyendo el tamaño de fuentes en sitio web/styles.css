@@ -1,1 +1,33 @@
+/* ====== Estilos generales ====== */
+
+/* Configuración del cuerpo de la página */
+body {
+    font-family: Arial, sans-serif; /* Fuente estándar y legible */
+    margin: 0; /* Elimina el margen predeterminado */
+    padding: 0; /* Elimina el relleno predeterminado */
+    line-height: 1.6; /* Espaciado entre líneas para mejorar la lectura */
+}
+
+/* ====== Contenedor principal ====== */
+.container {
+    margin: 20px; /* Margen alrededor del contenido */
+}
+
+/* ====== Estilos de los controles (botones) ====== */
+.controls {
+    margin-bottom: 20px; /* Espaciado entre los controles y el contenido */
+}
+
+/* Estilo general de los botones */
+button {
+    padding: 10px; /* Espaciado interno para hacerlos más grandes */
+    margin: 5px; /* Espaciado entre botones */
+    font-size: 16px; /* Tamaño de fuente adecuado */
+    cursor: pointer; /* Cambia el cursor a 'mano' cuando el usuario pase sobre ellos */
+}
+
+/* ====== Configuración del contenido de texto ====== */
+#text-content {
+    font-size: 16px; /* Tamaño de fuente inicial */
+}
 
