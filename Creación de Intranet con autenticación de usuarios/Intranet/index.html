@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración de la codificación de caracteres para admitir acentos, ñ y caracteres especiales -->
+    <meta charset="UTF-8">
+
+    <!-- Hace que la página sea responsiva en dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de la pestaña en el navegador -->
+    <title>Intranet - Inicio de Sesión</title>
+
+    <!-- Enlace a la hoja de estilos CSS externa -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- Contenedor principal del formulario de inicio de sesión -->
+    <div class="login-container">
+        <!-- Título del formulario -->
+        <h2>Inicio de Sesión</h2>
+
+        <!-- Formulario de inicio de sesión con un ID para manipulación con JavaScript -->
+        <form id="loginForm">
+            <!-- Etiqueta y campo de entrada para el nombre de usuario -->
+            <label for="username">Usuario</label>
+            <input type="text" id="username" name="username" required>
+
+            <!-- Etiqueta y campo de entrada para la contraseña -->
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" required>
+
+            <!-- Botón para enviar el formulario -->
+            <button type="submit">Ingresar</button>
+        </form>
+
+        <!-- Contenedor para mostrar mensajes de error si el inicio de sesión falla -->
+        <div id="loginError" class="error"></div>
+    </div>
+
+    <!-- Enlace al archivo JavaScript externo para manejar la validación del formulario -->
+    <script src="../js/scripts.js"></script>
+</body>
+</html>
 
