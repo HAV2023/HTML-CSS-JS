@@ -1,1 +1,41 @@
+/* ====== Estilos Generales ====== */
+
+/* Configuración del cuerpo de la página */
+body {
+    font-family: Arial, sans-serif; /* Usa una fuente clara y fácil de leer */
+}
+
+/* ====== Estilos para el contenedor del contenido ====== */
+.content {
+    max-width: 600px; /* Limita el ancho del contenido para mejorar la legibilidad */
+    margin: 20px auto; /* Centra el contenido horizontalmente */
+    padding: 20px; /* Añade espacio interno */
+}
+
+/* ====== Estilos para el botón "Más..." ====== */
+#loadMore {
+    display: none; /* Inicialmente oculto, se mostrará con JavaScript */
+    margin: 20px auto; /* Centra el botón horizontalmente */
+    display: block; /* Hace que el botón ocupe su propia línea */
+    padding: 10px 15px; /* Añade espacio interno */
+    background-color: #007BFF; /* Color azul para el botón */
+    color: white; /* Texto en color blanco */
+    border: none; /* Elimina bordes */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar el mouse */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* ====== Estilos para el botón "Ir arriba" ====== */
+#toTop {
+    display: none; /* Inicialmente oculto, se mostrará con JavaScript */
+    position: fixed; /* Se mantiene en la misma posición mientras el usuario hace scroll */
+    bottom: 20px; /* Distancia desde la parte inferior de la pantalla */
+    right: 20px; /* Distancia desde el lado derecho de la pantalla */
+    padding: 10px 15px; /* Espaciado interno */
+    background-color: #007BFF; /* Color azul */
+    color: white; /* Texto en color blanco */
+    border: none; /* Elimina bordes */
+    cursor: pointer; /* Muestra una mano al pasar el cursor */
+    border-radius: 5px; /* Bordes redondeados */
+}
 
