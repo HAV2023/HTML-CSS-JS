@@ -1,1 +1,20 @@
+La proporción 16:9 (o aspect ratio 16:9) es una relación de aspecto utilizada comúnmente en pantallas, videos y monitores. Esta relación significa que por cada 16 unidades de ancho, hay 9 unidades de alto.
 
+*Ejemplo visual de la relación 16:9:
+Si tienes un video con un ancho de 1920 píxeles, su altura será:
+( 1920 / 16 ) * 9 = 1080 píxeles
+Esto corresponde a la resolución Full HD (1920x1080).
+
+ Algunos ejemplos de resoluciones con esta relación de aspecto:
+- 1280x720 (HD)
+- 1920x1080 (Full HD)
+- 2560x1440 (2K)
+- 3840x2160 (4K)
+- 7680x4320 (8K)
+
+ ¿Por qué se usa esta proporción?
+- Es el estándar en televisión y plataformas como YouTube.
+- Se adapta bien a pantallas modernas sin dejar bordes negros.
+- Ofrece un equilibrio entre calidad y tamaño de video.
+
+Si un video no sigue esta proporción y se muestra en un contenedor 16:9, se pueden generar barras negras arriba y abajo o en los lados, dependiendo de la diferencia en la relación de aspecto.
