@@ -1,1 +1,25 @@
+/* Reseteo básico de márgenes y padding */
+* {
+  box-sizing: border-box;
+}
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Contenedor con flexbox para centrar la imagen */
+.contenedor {
+  display: flex;             /* Activamos flexbox */
+  justify-content: center;   /* Centra horizontalmente */
+  align-items: center;       /* Centra verticalmente */
+  min-height: 100vh;         /* Toma toda la altura disponible */
+  background-color: #f0f0f0; /* Fondo para visualizar el área fácilmente (opcional) */
+}
+
+/* Imagen con ajuste de tamaño automático si lo deseas (opcional) */
+.contenedor img {
+  max-width: 100%;
+  height: auto;
+}
