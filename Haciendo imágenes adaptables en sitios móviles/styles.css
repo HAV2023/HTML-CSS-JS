@@ -1,1 +1,79 @@
+/* ====== Estilos Generales ====== */
+
+/* Configuración global del cuerpo de la página */
+body {
+    font-family: Arial, sans-serif; /* Fuente legible */
+    margin: 0; /* Elimina el margen predeterminado */
+    padding: 0; /* Elimina el relleno predeterminado */
+    line-height: 1.6; /* Espaciado entre líneas para mejor lectura */
+    
+    /* Centra el contenido vertical y horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* La página ocupará al menos toda la altura de la pantalla */
+    min-height: 100vh;
+
+    background-color: #f0f0f0; /* Color de fondo gris claro */
+}
+
+/* ====== Contenedor principal ====== */
+.container {
+    max-width: 1200px; /* Máximo ancho para evitar que el contenido se expanda demasiado */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 20px; /* Espaciado interno */
+    background: white; /* Fondo blanco */
+    
+    /* Sombra sutil para un efecto de elevación */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ====== Estilos para el título ====== */
+h1 {
+    text-align: center; /* Centra el texto */
+    margin-bottom: 20px; /* Espaciado inferior */
+}
+
+/* ====== Galería de imágenes ====== */
+.image-gallery {
+    display: flex; /* Usa flexbox para distribuir las imágenes */
+    flex-wrap: wrap; /* Permite que las imágenes se acomoden en varias líneas */
+    gap: 10px; /* Espacio entre las imágenes */
+    justify-content: center; /* Centra las imágenes horizontalmente */
+}
+
+/* ====== Estilos de las imágenes ====== */
+.responsive-img {
+    /* Permite que las imágenes se adapten en 3 columnas */
+    flex: 1 1 calc(33.333% - 20px);
+    max-width: calc(33.333% - 20px);
+    
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: transform 0.3s; /* Efecto de animación al pasar el mouse */
+}
+
+/* Efecto al pasar el cursor sobre la imagen */
+.responsive-img:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+}
+
+/* ====== Responsividad: Ajustes para pantallas más pequeñas ====== */
+
+/* Media Query para dispositivos medianos (tablets) */
+@media (max-width: 768px) {
+    .responsive-img {
+        flex: 1 1 calc(50% - 10px); /* Ajusta las imágenes a 2 columnas */
+        max-width: calc(50% - 10px);
+    }
+}
+
+/* Media Query para dispositivos pequeños (móviles) */
+@media (max-width: 480px) {
+    .responsive-img {
+        flex: 1 1 100%; /* Ajusta las imágenes a 1 columna */
+        max-width: 100%;
+    }
+}
 
