@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración de codificación para caracteres especiales -->
+    <meta charset="UTF-8">
+
+    <!-- Hace que el diseño sea responsivo en dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de la pestaña en el navegador -->
+    <title>Intranet - Área Restringida</title>
+
+    <!-- Enlace al archivo CSS para estilos de la página -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- Encabezado principal de la Intranet -->
+    <header>
+        <h1>Bienvenido a la Intranet</h1>
+
+        <!-- Barra de navegación con enlaces a diferentes secciones -->
+        <nav>
+            <ul>
+                <!-- Enlace de regreso a la página de inicio -->
+                <li><a href="../index.html">Inicio</a></li>
+
+                <!-- Enlace a la sección de recursos -->
+                <li><a href="#recursos">Recursos</a></li>
+
+                <!-- Enlace a la sección de contacto -->
+                <li><a href="#contacto">Contacto</a></li>
+
+                <!-- Botón de cierre de sesión con un ID para manipulación con JavaScript -->
+                <li><a href="#" id="logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenido principal de la página -->
+    <main>
+        <!-- Sección de recursos disponibles solo para usuarios autenticados -->
+        <section id="recursos">
+            <h2>Recursos Restringidos</h2>
+            <p>Aquí puedes encontrar los recursos disponibles solo para usuarios autenticados.</p>
+        </section>
+    </main>
+
+    <!-- Archivo JavaScript para funcionalidades dinámicas -->
+    <script src="../js/scripts.js"></script>
+</body>
+</html>
 
