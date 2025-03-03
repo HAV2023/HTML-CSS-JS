@@ -1,66 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8"> <!-- Define la codificación del documento en UTF-8 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Hace que la página sea responsive -->
+    <meta charset="UTF-8"> <!-- Define la codificación de caracteres para admitir caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Permite la adaptación del sitio en dispositivos móviles -->
     <title>Video a Pantalla Completa</title>
     <style>
-        /* Reset de márgenes y padding para evitar espacios no deseados */
+        /* Reset de estilos para evitar espacios inesperados en los márgenes y paddings */
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box; /* Mantiene el tamaño de los elementos predecible */
+            box-sizing: border-box; /* Asegura que padding y border no aumenten el tamaño de los elementos */
         }
 
-        /* Evita que la página tenga scroll innecesario */
-        body {
-            overflow: hidden;
+        /* Asegurar que el body y html ocupen toda la pantalla y evitar el desbordamiento */
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Evita que aparezcan barras de desplazamiento */
         }
 
-        /* Contenedor que envuelve el video y lo ajusta al tamaño del viewport */
+        /* Contenedor del video en pantalla completa */
         .video-container {
-            position: fixed; /* Se mantiene fijo en la pantalla */
+            position: absolute; /* Se ajusta al 100% del viewport */
             top: 0;
             left: 0;
-            width: 100vw; /* Ocupa todo el ancho de la pantalla */
-            height: 100vh; /* Ocupa todo el alto de la pantalla */
+            width: 100%;
+            height: 100%;
         }
 
-        /* Estiliza el video para que cubra el contenedor sin distorsionarse */
+        /* Ajuste responsivo del video */
         video {
-            width: 100%; /* Ajusta el ancho al 100% del contenedor */
-            height: 100%; /* Ajusta el alto al 100% del contenedor */
-            object-fit: cover; /* Hace que el video llene el espacio sin deformarse */
+            width: 100%; /* Ocupa el ancho completo de la pantalla */
+            height: 100%; /* Ocupa el alto completo de la pantalla */
+            object-fit: cover; /* Ajusta el video sin distorsionarlo, recortando si es necesario */
+            min-width: 100vw; /* Asegura que se expanda en ancho */
+            min-height: 100vh; /* Asegura que se expanda en alto */
         }
 
-        /* Capa opcional para superponer contenido sobre el video */
+        /* Capa de superposición con texto */
         .overlay {
-            position: absolute; /* Permite posicionarlo dentro del contenedor */
-            top: 50%; /* Centra verticalmente */
-            left: 50%; /* Centra horizontalmente */
-            transform: translate(-50%, -50%); /* Ajusta el centro exacto */
+            position: absolute; /* Se coloca sobre el video */
+            top: 50%; /* Lo centra verticalmente */
+            left: 50%; /* Lo centra horizontalmente */
+            transform: translate(-50%, -50%); /* Ajuste fino para centrar completamente */
             color: white; /* Color del texto */
-            font-size: 2rem; /* Tamaño del texto */
-            font-family: Arial, sans-serif; /* Fuente del texto */
-            background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mayor legibilidad */
-            padding: 20px; /* Espaciado interno */
-            border-radius: 10px; /* Bordes redondeados */
+            font-size: 2rem; /* Tamaño de fuente del texto */
+            font-family: Arial, sans-serif; /* Fuente para mejor visibilidad */
+            background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejorar contraste */
+            padding: 20px; /* Espaciado interno para mejor visibilidad */
+            border-radius: 10px; /* Bordes redondeados para mejorar estética */
+            text-align: center; /* Centrar texto dentro del recuadro */
         }
     </style>
 </head>
 <body>
 
-    <!-- Contenedor del video que cubre toda la pantalla -->
+    <!-- Contenedor del video -->
     <div class="video-container">
-        <video autoplay muted loop> <!-- Reproduce el video automáticamente sin sonido y en bucle -->
-            <source src="video.mp4" type="video/mp4"> <!-- Ruta del video -->
+        <video autoplay muted loop playsinline> <!-- playsinline permite reproducción en dispositivos móviles sin pantalla completa -->
+            <source src="buscargrupos.mp4" type="video/mp4"> <!-- Define el video y su tipo -->
             Tu navegador no soporta videos HTML5. <!-- Mensaje alternativo en caso de incompatibilidad -->
         </video>
     </div>
 
-    <!-- Capa opcional para mostrar contenido encima del video -->
+    <!-- Capa con texto opcional -->
     <div class="overlay">Texto opcional encima del video</div>
 
 </body>
 </html>
-
