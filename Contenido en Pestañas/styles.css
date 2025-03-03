@@ -1,1 +1,61 @@
+/* ====== Estilos Generales ====== */
 
+/* Configuración del cuerpo de la página */
+body {
+  font-family: Arial, sans-serif; /* Fuente predeterminada */
+}
+
+/* ====== Estilos para las pestañas ====== */
+
+/* Contenedor de las pestañas */
+#tabs {
+  list-style: none; /* Elimina los estilos de lista predeterminados */
+  padding: 0; /* Elimina el padding predeterminado */
+  display: flex; /* Usa flexbox para alinear las pestañas en una fila */
+  justify-content: flex-start; /* Alinea las pestañas al inicio de la fila */
+  background-color: #f1f1f1; /* Color de fondo de la barra de pestañas */
+  margin: 0; /* Elimina el margen exterior */
+}
+
+/* Elementos de la lista dentro de las pestañas */
+#tabs li {
+  margin: 0; /* Elimina el margen exterior */
+}
+
+/* Estilos de los enlaces dentro de las pestañas */
+#tabs li a {
+  display: block; /* Convierte los enlaces en bloques clickeables */
+  padding: 10px 15px; /* Espaciado interno para un mejor diseño */
+  text-decoration: none; /* Elimina el subrayado del texto */
+  color: #000; /* Color del texto negro */
+  background-color: #e2e2e2; /* Color de fondo gris */
+  border-radius: 5px 5px 0 0; /* Bordes redondeados en la parte superior */
+  margin-right: 2px; /* Espaciado entre pestañas */
+}
+
+/* Cambio de color al pasar el cursor o enfocar */
+#tabs li a:hover, 
+#tabs li a:focus {
+  background-color: #d1d1d1; /* Color de fondo más oscuro al pasar el cursor */
+}
+
+/* ====== Estilos para el contenedor de contenido ====== */
+
+#container {
+  border: 1px solid #d1d1d1; /* Borde gris alrededor del contenedor */
+  border-top: none; /* Elimina el borde superior para integrarse con las pestañas */
+  padding: 20px; /* Espaciado interno para el contenido */
+  background-color: #fff; /* Fondo blanco para el contenido */
+}
+
+/* ====== Estilos para el contenido de cada pestaña ====== */
+
+/* Oculta todas las secciones de contenido por defecto */
+.content {
+  display: none;
+}
+
+/* Muestra solo el contenido de la pestaña seleccionada (usando anclajes `#id`) */
+.content:target {
+  display: block;
+}
