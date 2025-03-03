@@ -1,1 +1,90 @@
+/* ====== Estilos Generales ====== */
+
+/* Configuración del cuerpo de la página */
+body {
+    margin: 0; /* Elimina los márgenes predeterminados */
+    font-family: Arial, sans-serif; /* Fuente clara y estándar */
+}
+
+/* ====== Configuración del contenedor Masonry ====== */
+.container {
+    column-count: 3; /* Divide la cuadrícula en 3 columnas */
+    column-gap: 1em; /* Espacio entre columnas */
+    padding: 1em; /* Añade margen alrededor del contenedor */
+}
+
+/* ====== Estilos para los elementos Masonry ====== */
+.masonry-item {
+    display: inline-block; /* Permite que se adapten al diseño en columnas */
+    width: 100%; /* Asegura que cada elemento ocupe toda su columna */
+    margin: 0 0 1em; /* Espacio entre elementos */
+    cursor: pointer; /* Indica que los elementos son interactivos */
+    transition: all 0.3s ease-in-out, background-color 0.3s ease-in-out; /* Animación suave */
+    position: relative; /* Permite expandir el elemento sin afectar a los demás */
+}
+
+/* ====== Estilos del contenido dentro de cada Masonry Item ====== */
+.masonry-item p {
+    margin: 0;
+    padding: 1em;
+    color: #333; /* Color oscuro para el texto */
+}
+
+/* ====== Colores para cada masonry-item en estado normal (colapsado) ====== */
+.color-1 {
+    background-color: #FFC1C1; /* Rosa claro */
+}
+
+.color-2 {
+    background-color: #C1FFC1; /* Verde claro */
+}
+
+.color-3 {
+    background-color: #C1C1FF; /* Azul claro */
+}
+
+.color-4 {
+    background-color: #FFFFC1; /* Amarillo claro */
+}
+
+/* ====== Colores para cada masonry-item en estado expandido ====== */
+.color-1.expanded {
+    background-color: #FF7F7F; /* Rosa más intenso */
+}
+
+.color-2.expanded {
+    background-color: #7FFF7F; /* Verde más intenso */
+}
+
+.color-3.expanded {
+    background-color: #7F7FFF; /* Azul más intenso */
+}
+
+.color-4.expanded {
+    background-color: #FFFF7F; /* Amarillo más intenso */
+}
+
+/* ====== Estilos generales para el estado expandido ====== */
+.masonry-item.expanded {
+    position: fixed; /* Fija el elemento en la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: auto; /* Permite el desplazamiento si el contenido es largo */
+    z-index: 1000; /* Lo coloca por encima de otros elementos */
+}
+
+/* ====== Ajustes del texto cuando el elemento está expandido ====== */
+.masonry-item.expanded p {
+    padding: 2em; /* Mayor espaciado interno */
+    font-size: 1.2em; /* Fuente más grande para mejorar la lectura */
+}
+
+/* ====== Efecto al pasar el cursor ====== */
+.masonry-item:hover {
+    transform: scale(1.02); /* Aumenta ligeramente el tamaño */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra sutil para resaltar */
+}
 
