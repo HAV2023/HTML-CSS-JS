@@ -1,1 +1,223 @@
+/* ====== Importar Fuente Personalizada ====== */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+/* ====== Estilos Generales ====== */
+body {
+    margin: 0; /* Elimina el margen predeterminado */
+    font-family: 'Montserrat', sans-serif; /* Fuente moderna y legible */
+    background-color: #f0f2f5; /* Color de fondo claro */
+}
+
+/* Contenedor principal */
+.container {
+    width: 80%; /* Define el ancho del contenido */
+    margin: 20px auto; /* Centra el contenido */
+    padding: 30px;
+    background-color: #fff; /* Fondo blanco */
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para un efecto elevado */
+}
+
+h1 {
+    margin-top: 0;
+}
+
+/* ====== Menú de Navegación ====== */
+.menu {
+    background-color: #1b1b1b; /* Color de fondo oscuro */
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Asegura que el menú siempre esté en la parte superior */
+}
+
+/* Logo */
+.menu .logo img {
+    height: 50px;
+    margin-right: 30px;
+}
+
+/* Botón de menú para móviles */
+.menu .menu-toggle {
+    display: none;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.menu .menu-toggle i {
+    font-size: 24px;
+    color: #fff;
+}
+
+/* Lista de enlaces del menú */
+.menu .menu-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Permite que los enlaces ocupen el espacio disponible */
+}
+
+/* Estilo de los enlaces del menú */
+.menu .menu-links li {
+    position: relative;
+}
+
+.menu .menu-links a {
+    display: block;
+    color: #fff;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    font-weight: 500;
+}
+
+/* Efecto al pasar el mouse sobre los enlaces */
+.menu .menu-links a:hover,
+.menu .menu-links a:focus {
+    background-color: #d21026; /* Rojo oscuro */
+}
+
+/* Mostrar el submenú cuando el usuario pasa el cursor */
+.menu .menu-links .dropdown:hover > .submenu,
+.menu .menu-links .dropdown:focus-within > .submenu {
+    display: block;
+}
+
+/* ====== Submenús ====== */
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #2c2c2c; /* Color de fondo oscuro */
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.submenu li {
+    margin: 0;
+    width: 100%;
+}
+
+.submenu a {
+    padding: 10px 20px;
+    color: #fff;
+    font-weight: normal;
+}
+
+.submenu a:hover {
+    background-color: #ff6b6b; /* Rojo más claro */
+    color: #fff;
+}
+
+/* ====== Barra de Búsqueda ====== */
+.menu .search-bar {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+/* Estilo del campo de búsqueda */
+.menu .search-bar input {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 20px 0 0 20px;
+    outline: none;
+    width: 150px;
+    transition: width 0.4s ease-in-out;
+}
+
+/* Expande el campo de búsqueda al hacer clic */
+.menu .search-bar input:focus {
+    width: 250px;
+}
+
+/* Botón de búsqueda */
+.menu .search-bar button {
+    padding: 8px 10px;
+    border: none;
+    background-color: #ff6b6b; /* Rojo claro */
+    color: white;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Efecto al pasar el mouse sobre el botón de búsqueda */
+.menu .search-bar button:hover {
+    background-color: #e55b5b; /* Rojo más oscuro */
+}
+
+/* ====== Resaltado de Texto (para búsqueda) ====== */
+.highlight {
+    background-color: yellow;
+}
+
+/* ====== Responsividad para Dispositivos Móviles ====== */
+@media screen and (max-width: 768px) {
+    .menu {
+        flex-wrap: wrap;
+    }
+
+    /* Centrar logo en móviles */
+    .menu .logo {
+        flex: 1 1 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    /* Mostrar el botón de menú hamburguesa */
+    .menu .menu-toggle {
+        display: block;
+    }
+
+    /* Ocultar enlaces del menú en móviles y mostrarlos solo cuando el menú está activo */
+    .menu .menu-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .menu.active .menu-links {
+        display: flex;
+    }
+
+    /* Hacer que cada elemento del menú ocupe todo el ancho */
+    .menu .menu-links li {
+        width: 100%;
+    }
+
+    /* Centrar enlaces */
+    .menu .menu-links a {
+        padding: 10px;
+        text-align: center;
+    }
+
+    /* Ajustes para el submenú en móviles */
+    .submenu {
+        position: static;
+        background-color: #1b1b1b; /* Mantiene el fondo oscuro */
+        box-shadow: none;
+    }
+
+    /* Aumentar la sangría de los elementos del submenú */
+    .submenu a {
+        padding-left: 30px;
+    }
+
+    /* Centrar la barra de búsqueda */
+    .menu .search-bar {
+        flex: 1 1 100%;
+        margin: 10px 0;
+        justify-content: center;
+    }
+}
 
