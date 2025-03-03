@@ -1,1 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración de la codificación de caracteres para admitir acentos y caracteres especiales -->
+    <meta charset="UTF-8">
+    
+    <!-- Configuración de la vista para dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Título de la pestaña en el navegador -->
+    <title>Sitio de Tecnología Mejorado</title>
+    
+    <!-- Enlace a una fuente externa de Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
+    
+    <!-- Enlace a Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Enlace a tu archivo CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ====== Menú de navegación ====== -->
+    <nav class="menu">
+        <!-- Logo del sitio -->
+        <div class="logo">
+            <img src="logo.png" alt="TechLogo">
+        </div>
+
+        <!-- Botón de menú para móviles (Hamburguesa) -->
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <!-- Lista de enlaces del menú -->
+        <ul class="menu-links">
+            <li><a href="#" class="active">Inicio</a></li>
+
+            <!-- Menú desplegable para Productos -->
+            <li class="dropdown">
+                <a href="#">Productos <i class="fas fa-angle-down"></i></a>
+                <ul class="submenu">
+                    <li><a href="#">Software</a></li>
+                    <li><a href="#">Hardware</a></li>
+                    <li><a href="#">Accesorios</a></li>
+                </ul>
+            </li>
+
+            <!-- Menú desplegable para Servicios -->
+            <li class="dropdown">
+                <a href="#">Servicios <i class="fas fa-angle-down"></i></a>
+                <ul class="submenu">
+                    <li><a href="#">Consultoría</a></li>
+                    <li><a href="#">Soporte</a></li>
+                </ul>
+            </li>
+
+            <li><a href="#">Noticias</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+
+        <!-- Barra de búsqueda en la esquina superior derecha -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Buscar...">
+            <button type="button" id="searchButton"><i class="fas fa-search"></i></button>
+        </div>
+    </nav>
+
+    <!-- ====== Contenido principal ====== -->
+    <div class="container" id="content">
+        <h1>Bienvenidos al Sitio de Tecnología</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis viverra est ac consectetur tincidunt...</p>
+        <p>En nuestro sitio, encontrarás las últimas novedades en <strong>Tecnología</strong>, artículos interesantes y mucho más.</p>
+        <!-- Agrega más contenido aquí -->
+    </div>
+
+    <!-- Enlace a tu archivo JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
 
