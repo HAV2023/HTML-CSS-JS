@@ -1,1 +1,59 @@
+/* ====== Estilos Generales ====== */
+
+/* Configuración global del cuerpo de la página */
+body {
+    font-family: Arial, sans-serif; /* Fuente legible */
+    margin: 0; /* Elimina el margen predeterminado */
+    padding: 0; /* Elimina el relleno predeterminado */
+
+    /* Centra el contenido vertical y horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* La página ocupará al menos toda la altura de la pantalla */
+    min-height: 100vh;
+
+    background-color: #f0f0f0; /* Color de fondo gris claro */
+}
+
+/* ====== Estilos de la Ventana Emergente (Popup) ====== */
+.popup {
+    display: flex; /* Permite centrar el contenido */
+    justify-content: center;
+    align-items: center;
+    
+    /* Posicionamiento fijo para cubrir toda la pantalla */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* Fondo semi-transparente oscuro */
+    background: rgba(0, 0, 0, 0.8);
+
+    /* Z-index alto para que la ventana emergente esté por encima de otros elementos */
+    z-index: 1000;
+}
+
+/* ====== Contenedor de contenido dentro del popup ====== */
+.popup-content {
+    background: white; /* Fondo blanco */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+
+    /* Sombra para dar efecto de elevación */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ====== Clase para ocultar elementos ====== */
+.hidden {
+    display: none; /* Oculta el elemento */
+}
+
+/* ====== Estilos del contenido principal ====== */
+#main-content {
+    text-align: center; /* Centra el contenido de la página */
+}
 
