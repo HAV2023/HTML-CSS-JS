@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración de la codificación para admitir caracteres especiales -->
+    <meta charset="UTF-8">
+
+    <!-- Hace que la página sea responsiva en dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de la pestaña en el navegador -->
+    <title>Pestañas Horizontales</title>
+
+    <!-- Enlace al archivo CSS para estilos de la página -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Contenedor de las pestañas -->
+    <ul id="tabs">
+        <li><a href="#tab1" class="active">Pestaña 1</a></li> <!-- Pestaña activa por defecto -->
+        <li><a href="#tab2">Pestaña 2</a></li>
+        <li><a href="#tab3">Pestaña 3</a></li>
+    </ul>
+
+    <!-- Contenedor de los contenidos de cada pestaña -->
+    <div id="container">
+        <div class="content" id="tab1">
+            <h2>Pestaña 1</h2>
+            <p>Contenido de la pestaña 1.</p>
+        </div>
+        <div class="content" id="tab2">
+            <h2>Pestaña 2</h2>
+            <p>Contenido de la pestaña 2.</p>
+        </div>
+        <div class="content" id="tab3">
+            <h2>Pestaña 3</h2>
+            <p>Contenido de la pestaña 3.</p>
+        </div>
+    </div>
+
+    <!-- Script para manejar la activación de pestañas -->
+    <script>
+        // Selecciona todos los enlaces dentro del contenedor de pestañas
+        const tabs = document.querySelectorAll('#tabs a');
+
+        // Agrega un evento de clic a cada pestaña
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remueve la clase "active" de todas las pestañas
+                tabs.forEach(t => t.classList.remove('active'));
+
+                // Agrega la clase "active" solo a la pestaña clicada
+                this.classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
 
