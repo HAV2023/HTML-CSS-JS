@@ -1,1 +1,74 @@
+/* ====== Estilos Generales ====== */
+
+/* Reset de estilos para eliminar márgenes y paddings predeterminados */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Asegura que el tamaño de los elementos incluya bordes y padding */
+}
+
+/* Configuración general del cuerpo y la página */
+body, html {
+    height: 100%; /* Ocupa toda la altura de la pantalla */
+    font-family: Arial, sans-serif; /* Fuente legible y estándar */
+}
+
+/* ====== Contenedor principal del Hero Banner ====== */
+
+.hero {
+    position: relative; /* Permite posicionar los elementos internos de manera absoluta */
+    height: 100vh; /* Ocupa el 100% de la altura de la pantalla */
+    overflow: hidden; /* Oculta cualquier desbordamiento de las diapositivas */
+}
+
+/* ====== Estilos de las diapositivas ====== */
+
+.slide {
+    position: absolute; /* Se posicionan superpuestas una sobre otra */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ocupan todo el ancho */
+    height: 100%; /* Ocupan todo el alto */
+    opacity: 0; /* Se ocultan por defecto */
+    transition: opacity 1s ease-in-out; /* Transición suave al cambiar de diapositiva */
+}
+
+/* ====== Mostrar la diapositiva activa ====== */
+
+.slide.active {
+    opacity: 1; /* Solo la diapositiva activa es visible */
+}
+
+/* ====== Imágenes de las diapositivas ====== */
+
+.slide img {
+    width: 100%; /* La imagen ocupa todo el ancho */
+    height: 100%; /* La imagen ocupa todo el alto */
+    object-fit: cover; /* Asegura que la imagen cubra todo el contenedor sin deformarse */
+}
+
+/* ====== Texto sobre las imágenes ====== */
+
+.slide .text {
+    position: absolute; /* Se posiciona sobre la imagen */
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Centra completamente */
+    color: white; /* Texto en color blanco */
+    text-align: center; /* Texto alineado al centro */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para mejorar la legibilidad sobre la imagen */
+}
+
+/* ====== Estilos del título ====== */
+
+.slide h1 {
+    font-size: 4em; /* Tamaño grande para destacar */
+    margin-bottom: 0.5em; /* Espacio entre el título y el párrafo */
+}
+
+/* ====== Estilos del párrafo ====== */
+
+.slide p {
+    font-size: 1.5em; /* Tamaño adecuado para mejorar la legibilidad */
+}
 
