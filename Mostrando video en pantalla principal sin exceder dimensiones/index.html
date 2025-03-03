@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"> <!-- Define la codificación del documento en UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Hace que la página sea responsive -->
+    <title>Video a Pantalla Completa</title>
+    <style>
+        /* Reset de márgenes y padding para evitar espacios no deseados */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Mantiene el tamaño de los elementos predecible */
+        }
+
+        /* Evita que la página tenga scroll innecesario */
+        body {
+            overflow: hidden;
+        }
+
+        /* Contenedor que envuelve el video y lo ajusta al tamaño del viewport */
+        .video-container {
+            position: fixed; /* Se mantiene fijo en la pantalla */
+            top: 0;
+            left: 0;
+            width: 100vw; /* Ocupa todo el ancho de la pantalla */
+            height: 100vh; /* Ocupa todo el alto de la pantalla */
+        }
+
+        /* Estiliza el video para que cubra el contenedor sin distorsionarse */
+        video {
+            width: 100%; /* Ajusta el ancho al 100% del contenedor */
+            height: 100%; /* Ajusta el alto al 100% del contenedor */
+            object-fit: cover; /* Hace que el video llene el espacio sin deformarse */
+        }
+
+        /* Capa opcional para superponer contenido sobre el video */
+        .overlay {
+            position: absolute; /* Permite posicionarlo dentro del contenedor */
+            top: 50%; /* Centra verticalmente */
+            left: 50%; /* Centra horizontalmente */
+            transform: translate(-50%, -50%); /* Ajusta el centro exacto */
+            color: white; /* Color del texto */
+            font-size: 2rem; /* Tamaño del texto */
+            font-family: Arial, sans-serif; /* Fuente del texto */
+            background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mayor legibilidad */
+            padding: 20px; /* Espaciado interno */
+            border-radius: 10px; /* Bordes redondeados */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor del video que cubre toda la pantalla -->
+    <div class="video-container">
+        <video autoplay muted loop> <!-- Reproduce el video automáticamente sin sonido y en bucle -->
+            <source src="video.mp4" type="video/mp4"> <!-- Ruta del video -->
+            Tu navegador no soporta videos HTML5. <!-- Mensaje alternativo en caso de incompatibilidad -->
+        </video>
+    </div>
+
+    <!-- Capa opcional para mostrar contenido encima del video -->
+    <div class="overlay">Texto opcional encima del video</div>
+
+</body>
+</html>
 
