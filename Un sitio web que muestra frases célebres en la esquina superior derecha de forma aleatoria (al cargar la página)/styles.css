@@ -1,1 +1,66 @@
+/* ====== Estilos Generales ====== */
+
+/* Configuración del cuerpo de la página */
+body {
+    font-family: 'Georgia', serif; /* Usa una fuente serif elegante */
+    margin: 0; /* Elimina el margen predeterminado */
+    padding: 0; /* Elimina el padding predeterminado */
+    background-color: #f4f4f4; /* Fondo gris claro */
+}
+
+/* ====== Estilos para la estructura principal (header, main, footer) ====== */
+
+/* Agrega espacio y diseño a los bloques principales */
+header, main, footer {
+    padding: 20px; /* Agrega espacio interno */
+    margin: 20px; /* Agrega margen alrededor */
+    background-color: white; /* Fondo blanco para resaltar contenido */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera para efecto elevado */
+}
+
+/* ====== Estilos para el encabezado ====== */
+
+/* Ajusta el título principal */
+header h1 {
+    margin: 0; /* Elimina el margen predeterminado */
+    font-size: 2em; /* Ajusta el tamaño de fuente */
+}
+
+/* ====== Estilos para el contenedor de frases célebres ====== */
+
+/* Posiciona el cuadro de frases en la parte superior derecha */
+#quote-container {
+    position: absolute; /* Posición fija en la pantalla */
+    top: 10px; /* Distancia desde la parte superior */
+    right: 20px; /* Distancia desde la derecha */
+    background-color: #007BFF; /* Fondo azul */
+    color: white; /* Texto en color blanco */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+/* Estilo del texto de la frase */
+#quote {
+    margin: 0; /* Elimina márgenes */
+    font-size: 0.9em; /* Reduce el tamaño del texto */
+    font-style: italic; /* Aplica estilo cursiva */
+}
+
+/* ====== Estilos para las secciones ====== */
+
+/* Agrega separación entre secciones */
+section {
+    margin-bottom: 20px; /* Espaciado inferior */
+}
+
+/* ====== Estilos para el pie de página ====== */
+
+/* Centra el texto del footer */
+footer {
+    text-align: center; /* Alineación central */
+    font-size: 0.8em; /* Tamaño de fuente más pequeño */
+    color: #555; /* Color gris oscuro para menor contraste */
+}
 
