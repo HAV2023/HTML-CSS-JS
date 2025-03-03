@@ -7,3 +7,8 @@
         login.html
         restricted.html
     index.html
+
+Conclusión
+Este ejemplo básico les proporciona una estructura inicial para crear una intranet con autenticación de usuarios utilizando HTML, CSS y JavaScript. 
+En un entorno de producción, se recomienda implementar un servidor backend y una base de datos para gestionar de manera segura la autenticación y 
+los datos de los usuarios.
