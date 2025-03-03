@@ -1,1 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración de la codificación de caracteres para admitir acentos, ñ y caracteres especiales -->
+    <meta charset="UTF-8">
+
+    <!-- Hace que la página sea responsiva en dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de la pestaña en el navegador -->
+    <title>Sitio con Etiquetas Interactivas</title>
+
+    <!-- Estilos CSS internos -->
+    <style>
+        /* ====== Estilos Generales ====== */
+        body {
+            font-family: Arial, sans-serif; /* Fuente predeterminada */
+            margin: 0; /* Elimina márgenes */
+            padding: 20px; /* Agrega espacio alrededor del contenido */
+            background-color: #f4f4f4; /* Fondo gris claro */
+        }
+
+        /* ====== Ocultar los inputs de radio ====== */
+        .tab {
+            display: none; /* Oculta los inputs de radio */
+        }
+
+        /* ====== Estilos para las etiquetas de los tabs (botones de selección) ====== */
+        .tab-label {
+            display: block; /* Hace que las etiquetas sean bloques clickeables */
+            padding: 10px; /* Espaciado interno */
+            margin: 5px; /* Margen entre los botones */
+            background-color: #007BFF; /* Color azul */
+            color: white; /* Texto en blanco */
+            cursor: pointer; /* Cambia el cursor a puntero al pasar el mouse */
+        }
+
+        /* ====== Cambio de color al pasar el cursor sobre los labels ====== */
+        .tab-label:hover {
+            background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+        }
+
+        /* ====== Estilos para el contenido de cada tab ====== */
+        .tab-content {
+            display: none; /* Se ocultan inicialmente los contenidos */
+            padding: 15px; /* Espaciado interno */
+            border: 1px solid #ddd; /* Borde gris */
+            background-color: white; /* Fondo blanco */
+        }
+
+        /* ====== Mostrar el contenido cuando el input de radio está seleccionado ====== */
+        .tab:checked + .tab-label + .tab-content {
+            display: block; /* Muestra el contenido asociado */
+        }
+    </style>
+</head>
+<body>
+    <h1>Sitio con Etiquetas Interactivas</h1>
+
+    <!-- Primer Tab -->
+    <input type="radio" name="tabs" class="tab" id="tab1" checked> <!-- Opción seleccionada por defecto -->
+    <label class="tab-label" for="tab1">Contenido 1</label> <!-- Etiqueta asociada -->
+    <div class="tab-content">
+        <p>Este es el contenido del primer tab.</p>
+    </div>
+
+    <!-- Segundo Tab -->
+    <input type="radio" name="tabs" class="tab" id="tab2">
+    <label class="tab-label" for="tab2">Contenido 2</label>
+    <div class="tab-content">
+        <p>Este es el contenido del segundo tab.</p>
+    </div>
+
+    <!-- Tercer Tab -->
+    <input type="radio" name="tabs" class="tab" id="tab3">
+    <label class="tab-label" for="tab3">Contenido 3</label>
+    <div class="tab-content">
+        <p>Este es el contenido del tercer tab.</p>
+    </div>
+</body>
+</html>
 
