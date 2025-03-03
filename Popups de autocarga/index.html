@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración de la codificación de caracteres para admitir acentos y caracteres especiales -->
+    <meta charset="UTF-8">
+
+    <!-- Hace que la página sea responsiva en dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de la pestaña en el navegador -->
+    <title>Página Principal con Ventana Emergente</title>
+
+    <!-- Enlace al archivo CSS para los estilos de la página -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Contenido principal de la página -->
+    <h1>Página Principal</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dictum id ante quis sollicitudin...</p>
+    <p>Sed commodo congue enim eget tristique. Nunc iaculis urna eu sapien blandit venenatis quis sit amet sem...</p>
+    <p>Duis mollis tempor velit, non placerat sapien interdum id. Morbi vel pharetra leo...</p>
+    <p>Donec sodales efficitur ornare. Nunc commodo tristique sapien vitae volutpat...</p>
+    <p>Pellentesque leo tortor, lacinia quis rhoncus quis, dictum et dui...</p>
+
+    <!-- ====== Ventana emergente modal ====== -->
+    <div id="miModal" class="modal">
+        <div class="modal-contenido">
+            <!-- Botón para cerrar la ventana emergente -->
+            <span id="cerrar" class="cerrar">&times;</span>
+            
+            <!-- Contenido dentro de la ventana emergente -->
+            <h1>Hola a todos</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum...</p>
+            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
+        </div>
+    </div>
+
+    <!-- Archivo JavaScript para manejar la funcionalidad de la ventana emergente -->
+    <script src="script.js"></script>
+
+</body>
+</html>
 
