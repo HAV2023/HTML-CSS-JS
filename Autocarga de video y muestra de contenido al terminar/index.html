@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración de la codificación de caracteres para admitir acentos y caracteres especiales -->
+    <meta charset="UTF-8">
 
+    <!-- Título de la pestaña en el navegador -->
+    <title>Ventana Emergente con Video</title>
+
+    <!-- Enlace al archivo CSS para los estilos de la página -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Contenedor de la ventana emergente con el video -->
+    <div id="video-popup" class="popup">
+        <div class="popup-content">
+            <video id="intro-video" width="600" autoplay muted>
+                <source src="secdesa.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </div>
+    </div>
+
+    <!-- Contenido principal de la página (oculto hasta que termine el video) -->
+    <div id="main-content" class="hidden">
+        <h1>Bienvenido a Nuestro Sitio Web</h1>
+        <p>Gracias por ver el video introductorio. Ahora, puedes explorar nuestro contenido.</p>
+        <!-- Se puede agregar más contenido aquí -->
+    </div>
+
+    <!-- Enlace al archivo JavaScript para manejar la funcionalidad de la ventana emergente -->
+    <script src="script.js"></script>
+
+</body>
+</html>
