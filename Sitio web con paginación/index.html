@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración de la codificación para admitir acentos, ñ y caracteres especiales -->
+    <meta charset="UTF-8">
+
+    <!-- Hace que la página sea responsiva en dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de la pestaña en el navegador -->
+    <title>Paginación</title>
+
+    <!-- Enlace al archivo CSS para estilos de la página -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Contenedor principal de las páginas -->
+    <div id="content">
+        <!-- Página 1: Contiene varios párrafos de texto -->
+        <div class="page" id="page1">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...</p>
+            <p>Donec rhoncus id quam eu euismod. Sed sodales blandit neque ...</p>
+            <p>Fusce tristique euismod tortor, vel tristique orci tristique quis ...</p>
+            <p>Integer eros urna, consequat et blandit et, dictum sit amet mi ...</p>
+            <p>Suspendisse ut est a velit cursus molestie ...</p>
+        </div>
+
+        <!-- Página 2: Contiene una imagen -->
+        <div class="page" id="page2">
+            <img src="https://img-04.stickers.cloud/packs/38d1b4e2-888b-458a-ac96-f2b29960b2e0/webp/5c423666-2374-4e75-a540-6ca4142c89ae.webp">
+        </div>
+
+        <!-- Página 3: Contiene más párrafos de texto -->
+        <div class="page" id="page3">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ...</p>
+            <p>Nam nec ultrices erat. Duis consectetur rutrum orci ...</p>
+            <p>In accumsan aliquet sem, nec venenatis libero ...</p>
+        </div>
+
+        <!-- Se pueden agregar más páginas aquí -->
+    </div>
+
+    <!-- Navegación de paginación -->
+    <div id="pagination">
+        <a href="#page1">Página 1</a>
+        <a href="#page2">Página 2</a>
+        <a href="#page3">Página 3</a>
+        <!-- Se pueden agregar más enlaces de paginación aquí -->
+    </div>
+
+    <!-- Archivo JavaScript para manejar la paginación -->
+    <script src="scripts.js"></script>
+</body>
+</html>
 
