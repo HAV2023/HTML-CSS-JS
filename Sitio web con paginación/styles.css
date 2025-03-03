@@ -1,1 +1,44 @@
+/* ======= Estilos generales ======= */
+
+/* Configuración del cuerpo de la página */
+body {
+    font-family: Arial, sans-serif; /* Fuente predeterminada */
+}
+
+/* ======= Contenedor de las páginas ======= */
+
+/* Define el espacio alrededor del contenido */
+#content {
+    margin: 20px;
+}
+
+/* Oculta todas las páginas por defecto */
+.page {
+    display: none; /* Se mostrará dinámicamente con JavaScript */
+}
+
+/* ======= Estilos para la paginación ======= */
+
+/* Espaciado y alineación de la sección de paginación */
+#pagination {
+    margin: 20px; /* Espaciado alrededor de la paginación */
+    text-align: center; /* Centra los botones de paginación */
+}
+
+/* Estilos generales para los enlaces de paginación */
+#pagination a {
+    margin: 0 5px; /* Espaciado horizontal entre botones */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: blue; /* Color de texto azul */
+    border: 1px solid #ccc; /* Borde gris claro */
+    padding: 5px 10px; /* Espaciado interno para mayor accesibilidad */
+    border-radius: 5px; /* Bordes redondeados para un diseño más moderno */
+}
+
+/* Estilos para el enlace activo (página actual) */
+#pagination a.active {
+    background-color: #007bff; /* Color azul para indicar página activa */
+    color: white; /* Texto en blanco para contraste */
+    border: none; /* Elimina el borde para un mejor diseño */
+}
 
