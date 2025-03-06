@@ -42,16 +42,14 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    justify-content: space-between;
+}
+
+.menu .logo {
+    margin-right: 10px;
 }
 
 .menu .logo img {
     height: 50px;
-}
-
-.menu .menu-toggle {
-    display: none;
-    cursor: pointer;
 }
 
 .menu .menu-links {
@@ -60,6 +58,7 @@ body {
     padding: 0;
     display: flex;
     align-items: center;
+    margin-left: 10px;
 }
 
 .menu .menu-links li {
@@ -116,6 +115,7 @@ body {
 .menu .search-bar {
     display: flex;
     align-items: center;
+    margin-left: auto;
 }
 
 .menu .search-bar input {
