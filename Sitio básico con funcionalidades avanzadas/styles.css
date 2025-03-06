@@ -107,7 +107,8 @@ body {
     background-color: #ff6b6b;
 }
 
-.menu-links .dropdown:hover .submenu {
+.menu-links .dropdown:hover > .submenu,
+.menu-links .dropdown:focus-within > .submenu {
     display: block;
 }
 
