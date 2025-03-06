@@ -1,5 +1,6 @@
 /* ====== Importar Fuente Personalizada ====== */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'); /* Importamos FontAwesome */
 
 /* ====== Estilos Generales ====== */
 body {
@@ -42,14 +43,16 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
+    justify-content: space-between;
 }
 
 .menu .logo {
     margin-right: 10px;
 }
 
-.menu .logo img {
-    height: 50px;
+.menu .menu-toggle {
+    display: none;
+    cursor: pointer;
 }
 
 .menu .menu-links {
@@ -58,7 +61,7 @@ body {
     padding: 0;
     display: flex;
     align-items: center;
-    margin-left: 10px;
+    flex-grow: 1;
 }
 
 .menu .menu-links li {
@@ -66,7 +69,8 @@ body {
 }
 
 .menu .menu-links a {
-    display: block;
+    display: flex;
+    align-items: center;
     color: #fff;
     padding: 14px 20px;
     text-decoration: none;
@@ -79,6 +83,20 @@ body {
     background-color: #d21026;
 }
 
+/* Agregar flechita a los elementos con submenú */
+.menu-links .dropdown > a::after {
+    content: '\f078'; /* Icono de flecha hacia abajo */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-left: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Efecto de rotación al pasar el mouse */
+.menu-links .dropdown:hover > a::after {
+    transform: rotate(180deg);
+}
+
 /* ====== Submenús ====== */
 .submenu {
     display: none;
@@ -89,10 +107,18 @@ body {
     min-width: 180px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    list-style: none;
+    padding-left: 0;
 }
 
 .submenu li {
     width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .submenu a {
@@ -109,6 +135,8 @@ body {
 .menu-links .dropdown:hover > .submenu,
 .menu-links .dropdown:focus-within > .submenu {
     display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ====== Barra de Búsqueda ====== */
