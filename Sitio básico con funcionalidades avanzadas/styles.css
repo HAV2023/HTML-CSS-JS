@@ -18,6 +18,7 @@ body {
     white-space: nowrap;
     position: relative;
     font-weight: bold;
+    text-align: center;
 }
 
 .marquee-content {
@@ -41,17 +42,16 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
+    justify-content: space-between;
 }
 
 .menu .logo img {
     height: 50px;
-    margin-right: 30px;
 }
 
 .menu .menu-toggle {
     display: none;
     cursor: pointer;
-    margin-left: auto;
 }
 
 .menu .menu-links {
@@ -60,7 +60,6 @@ body {
     padding: 0;
     display: flex;
     align-items: center;
-    flex-grow: 1;
 }
 
 .menu .menu-links li {
@@ -81,11 +80,41 @@ body {
     background-color: #d21026;
 }
 
+/* ====== Submenús ====== */
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #2c2c2c;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.submenu li {
+    width: 100%;
+}
+
+.submenu a {
+    padding: 10px 20px;
+    color: #fff;
+    font-weight: normal;
+    display: block;
+}
+
+.submenu a:hover {
+    background-color: #ff6b6b;
+}
+
+.menu-links .dropdown:hover .submenu {
+    display: block;
+}
+
 /* ====== Barra de Búsqueda ====== */
 .menu .search-bar {
     display: flex;
     align-items: center;
-    margin-left: auto;
 }
 
 .menu .search-bar input {
