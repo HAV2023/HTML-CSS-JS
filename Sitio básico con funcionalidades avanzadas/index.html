@@ -3,59 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sitio de Tecnología Mejorado</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Mi Sitio Web</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 </head>
 <body>
-    
-    <!-- ====== Marquesina ====== -->
     <div class="marquee-container">
         <div class="marquee-content">
             <p>🚀 ¡Bienvenido a nuestro sitio de tecnología! 🎉 | 🌟 Últimas noticias y tendencias en tecnología aquí. 📡 | 💻 Explora nuestra selección de productos y servicios.</p>
         </div>
     </div>
 
-    <!-- ====== Menú de navegación ====== -->
+    <!-- ====== Menú de Navegación ====== -->
     <nav class="menu">
         <div class="logo">
-            <img src="logo.png" alt="TechLogo">
-        </div>
-        <div class="menu-toggle">
-            <i class="fas fa-bars"></i>
+            <img src="logo.png" alt="Logo" width="100" height="80">
         </div>
         <ul class="menu-links">
-            <li><a href="#" class="active">Inicio</a></li>
+            <li><a href="#">Inicio</a></li>
             <li class="dropdown">
-                <a href="#">Productos <i class="fas fa-angle-down"></i></a>
-                <ul class="submenu">
-                    <li><a href="#">Software</a></li>
-                    <li><a href="#">Hardware</a></li>
-                    <li><a href="#">Accesorios</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#">Servicios <i class="fas fa-angle-down"></i></a>
+                <a href="#">Servicios</i></a>
                 <ul class="submenu">
                     <li><a href="#">Consultoría</a></li>
-                    <li><a href="#">Soporte</a></li>
+                    <li><a href="#">Soporte Técnico</a></li>
+                    <li><a href="#">Desarrollo Web</a></li>
                 </ul>
             </li>
-            <li><a href="#">Noticias</a></li>
+            <li class="dropdown">
+                <a href="#">Productos</i></a>
+                <ul class="submenu">
+                    <li><a href="#">Producto 1</a></li>
+                    <li><a href="#">Producto 2</a></li>
+                    <li><a href="#">Producto 3</a></li>
+                </ul>
+            </li>
             <li><a href="#">Contacto</a></li>
         </ul>
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Buscar...">
-            <button type="button" id="searchButton"><i class="fas fa-search"></i></button>
+            <button id="searchButton">🔍</button>
         </div>
     </nav>
 
-    <!-- ====== Contenido principal ====== -->
+    <!-- ====== Contenido Principal ====== -->
     <div class="container" id="content">
-        <h1>Bienvenidos al Sitio de Tecnología</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis viverra est ac consectetur tincidunt...</p>
-        <p>En nuestro sitio, encontrarás las últimas novedades en <strong>Tecnología</strong>, artículos interesantes y mucho más.</p>
+        <h1>Bienvenido a Nuestro Sitio Web</h1>
+        <p>Este es el contenido de nuestra página principal. Aquí puedes encontrar información relevante sobre nuestros servicios y productos.</p>
+        <p>Explora nuestras secciones para conocer más sobre lo que ofrecemos.</p>
     </div>
 
     <script src="script.js"></script>
