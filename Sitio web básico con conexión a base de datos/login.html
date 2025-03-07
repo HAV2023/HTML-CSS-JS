@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="menu">
+        <ul class="menu-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="register.html">Registro</a></li>
+            <li id="restricted-menu" style="display: none;"><a href="intranet.php">Intranet</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Iniciar Sesión</h2>
+        <form action="login.php" method="post">
+            <input type="text" name="username" placeholder="Nombre de usuario" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
