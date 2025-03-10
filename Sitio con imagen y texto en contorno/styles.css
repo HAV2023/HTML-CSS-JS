@@ -4,16 +4,18 @@ body {
     margin: 40px;
 }
 .container {
-    display: flex;
-    align-items: flex-start;
+    display: block;
+    max-width: 800px;
 }
 .image-container {
-    shape-outside: circle();
     float: left;
-    margin: 10px 20px 10px 0;
-}
-img {
-    max-width: 300px;
+    shape-outside: url("hacker.webp");
+    shape-margin: 20px;
+    width: 300px;
     height: auto;
     border-radius: 10px;
+    margin-right: 20px;
+}
+.text-content {
+    text-align: justify;
 }
