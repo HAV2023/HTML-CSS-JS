@@ -1,34 +1,35 @@
-<!DOCTYPE html>
-<html lang="es">
+<!-- index.html -->
+<!DOCTYPE html> <!-- Define el tipo de documento como HTML5 -->
+<html lang="es"> <!-- Indica que el idioma del documento es español -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encuesta sobre Cambio Climático</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8"> <!-- Define la codificación de caracteres para soportar caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Permite la adaptación a dispositivos móviles -->
+    <title>Encuesta sobre Cambio Climático</title> <!-- Título de la página que aparece en la pestaña del navegador -->
+    <link rel="stylesheet" href="styles.css"> <!-- Enlace al archivo de estilos CSS -->
 </head>
 <body>
-    <h2>¿Cuál es la principal causa del cambio climático?</h2>
-    <form id="survey-form">
-        <div class="options-container">
-            <label class="option"><input type="radio" name="vote" value="1"> Emisión de gases industriales</label>
-            <label class="option"><input type="radio" name="vote" value="2"> Deforestación</label>
-            <label class="option"><input type="radio" name="vote" value="3"> Uso excesivo de combustibles fósiles</label>
-            <label class="option"><input type="radio" name="vote" value="4"> Actividades agrícolas</label>
+    <h2>¿Cuál es la principal causa del cambio climático?</h2> <!-- Pregunta de la encuesta -->
+    <form id="survey-form"> <!-- Formulario de la encuesta con un identificador único -->
+        <div class="options-container"> <!-- Contenedor para organizar las opciones -->
+            <label class="option"><input type="radio" name="vote" value="1"> Emisión de gases industriales</label> <!-- Opción 1 -->
+            <label class="option"><input type="radio" name="vote" value="2"> Deforestación</label> <!-- Opción 2 -->
+            <label class="option"><input type="radio" name="vote" value="3"> Uso excesivo de combustibles fósiles</label> <!-- Opción 3 -->
+            <label class="option"><input type="radio" name="vote" value="4"> Actividades agrícolas</label> <!-- Opción 4 -->
         </div>
-        <button type="button" onclick="submitVote()">Votar</button>
+        <button type="button" onclick="submitVote()">Votar</button> <!-- Botón que ejecuta la función 'submitVote()' al hacer clic -->
     </form>
     
-    <button type="button" onclick="showResults()">Ver Resultados</button>
+    <button type="button" onclick="showResults()">Ver Resultados</button> <!-- Botón que muestra los resultados llamando a 'showResults()' -->
     
-    <div id="results" class="hidden">
-        <h3>Resultados de la Encuesta</h3>
-        <div class="bar-container"><div id="bar1" class="bar" style="width: 0%">0%</div></div>
-        <div class="bar-container"><div id="bar2" class="bar" style="width: 0%">0%</div></div>
-        <div class="bar-container"><div id="bar3" class="bar" style="width: 0%">0%</div></div>
-        <div class="bar-container"><div id="bar4" class="bar" style="width: 0%">0%</div></div>
-        <button type="button" onclick="hideResults()">Ocultar Resultados</button>
+    <div id="results" class="hidden"> <!-- Contenedor de resultados, oculto inicialmente -->
+        <h3>Resultados de la Encuesta</h3> <!-- Título de la sección de resultados -->
+        <div class="bar-container"><div id="bar1" class="bar" style="width: 0%">0%</div></div> <!-- Barra para la opción 1 -->
+        <div class="bar-container"><div id="bar2" class="bar" style="width: 0%">0%</div></div> <!-- Barra para la opción 2 -->
+        <div class="bar-container"><div id="bar3" class="bar" style="width: 0%">0%</div></div> <!-- Barra para la opción 3 -->
+        <div class="bar-container"><div id="bar4" class="bar" style="width: 0%">0%</div></div> <!-- Barra para la opción 4 -->
+        <button type="button" onclick="hideResults()">Ocultar Resultados</button> <!-- Botón para ocultar los resultados llamando a 'hideResults()' -->
     </div>
     
-    <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Enlace al archivo de JavaScript que maneja la lógica de la encuesta -->
 </body>
 </html>
