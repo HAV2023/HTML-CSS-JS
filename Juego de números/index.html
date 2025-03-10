@@ -7,6 +7,12 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Marcador de aciertos y errores -->
+  <div id="scoreboard">
+    <span id="correct-count">Aciertos: 0</span> | 
+    <span id="incorrect-count">Errores: 0</span>
+  </div>
+  
   <!-- Contenedor del juego -->
   <div id="game-container">
     <!-- Panel izquierdo con botones del 1 al 9 -->
@@ -33,7 +39,10 @@
     <button id="stop-btn">Finalizar</button>
   </div>
   
+  <!-- Elementos de audio para efectos sonoros -->
+  <audio id="audio-correct" src="correct.mp3" preload="auto"></audio>
+  <audio id="audio-incorrect" src="incorrect.mp3" preload="auto"></audio>
+  
   <script src="script.js"></script>
 </body>
 </html>
-
