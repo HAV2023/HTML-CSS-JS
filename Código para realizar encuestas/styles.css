@@ -2,11 +2,14 @@ body {
     font-family: Arial, sans-serif;
     max-width: 500px;
     margin: auto;
-    text-align: center;
+}
+.options-container {
+    text-align: left;
+    margin-bottom: 10px;
 }
 .option {
     display: block;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 .hidden {
     display: none;
