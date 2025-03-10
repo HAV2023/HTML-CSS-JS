@@ -1,6 +1,14 @@
 // Variables globales
 let currentNumber = 0;
 let gameActive = false;
+let scoreCorrect = 0;
+let scoreIncorrect = 0;
+
+// Función para actualizar el marcador
+function updateScoreboard() {
+  document.getElementById("correct-count").textContent = "Aciertos: " + scoreCorrect;
+  document.getElementById("incorrect-count").textContent = "Errores: " + scoreIncorrect;
+}
 
 // Función para generar un número aleatorio entre 1 y 9
 function generateRandomNumber() {
@@ -18,6 +26,9 @@ function generateAndDisplayNumber() {
 // Función para iniciar el juego
 function startGame() {
   gameActive = true;
+  scoreCorrect = 0;
+  scoreIncorrect = 0;
+  updateScoreboard();
   generateAndDisplayNumber();
 }
 
@@ -33,11 +44,16 @@ document.querySelectorAll('.number-button').forEach(button => {
     if (!gameActive) return; // Si el juego no está activo, no hace nada
     const chosenNumber = parseInt(this.getAttribute('data-number'));
     if (chosenNumber === currentNumber) {
-      // Si el número es correcto, se muestra uno nuevo
+      // Acertó: reproducir sonido y actualizar marcador
+      scoreCorrect++;
+      updateScoreboard();
+      document.getElementById("audio-correct").play();
       generateAndDisplayNumber();
     } else {
-      // Si es incorrecto, se muestra una alerta (se puede personalizar o quitar)
-      alert("Incorrecto. ¡Inténtalo de nuevo!");
+      // Error: reproducir sonido y actualizar marcador
+      scoreIncorrect++;
+      updateScoreboard();
+      document.getElementById("audio-incorrect").play();
     }
   });
 });
@@ -45,4 +61,3 @@ document.querySelectorAll('.number-button').forEach(button => {
 // Eventos para los botones de control
 document.getElementById('start-btn').addEventListener('click', startGame);
 document.getElementById('stop-btn').addEventListener('click', stopGame);
-
