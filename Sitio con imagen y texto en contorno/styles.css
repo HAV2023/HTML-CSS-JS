@@ -1,21 +1,28 @@
+/* Estilos generales para el elemento body */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 40px;
+    font-family: Arial, sans-serif; /* Define la fuente principal como Arial; si no está disponible, usará cualquier fuente sans-serif */
+    line-height: 1.6;              /* Establece una altura de línea de 1.6 para mejorar la legibilidad del texto */
+    margin: 40px;                 /* Aplica un margen de 40px alrededor de todo el contenido del body */
 }
+
+/* Estilos para el contenedor principal */
 .container {
-    display: block;
-    max-width: 1920px;
+    display: block;              /* Asegura que el contenedor se muestre como un bloque, ocupando el ancho completo disponible */
+    max-width: 1920px;           /* Limita el ancho máximo del contenedor a 1920px para controlar el diseño en pantallas grandes */
 }
+
+/* Estilos para el contenedor de la imagen */
 .image-container {
-    float: left;
-    shape-outside: url("hacker.webp");
-    shape-margin: 20px;
-    width: 300px;
-    height: auto;
-    border-radius: 10px;
-    margin-right: 20px;
+    float: left;                 /* Hace que la imagen flote a la izquierda, permitiendo que el texto se ajuste a su alrededor */
+    shape-outside: url("hacker.webp"); /* Define la forma alrededor de la cual se envuelve el contenido usando la imagen especificada */
+    shape-margin: 20px;           /* Agrega un margen de 20px entre la forma de la imagen y el contenido circundante */
+    width: 300px;                /* Establece el ancho de la imagen en 300px */
+    height: auto;                /* La altura se ajusta automáticamente para mantener la proporción original de la imagen */
+    border-radius: 10px;         /* Redondea las esquinas de la imagen con un radio de 10px */
+    margin-right: 20px;          /* Aplica un margen de 20px a la derecha para separar la imagen del texto */
 }
+
+/* Estilos para el contenido de texto */
 .text-content {
-    text-align: justify;
+    text-align: justify;         /* Justifica el texto para que se alinee uniformemente a ambos lados, dando un aspecto más ordenado */
 }
