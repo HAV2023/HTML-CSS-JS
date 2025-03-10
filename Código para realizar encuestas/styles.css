@@ -1,31 +1,38 @@
+/* styles.css */
+
 body {
-    font-family: Arial, sans-serif;
-    max-width: 500px;
-    margin: auto;
+    font-family: Arial, sans-serif; /* Define la fuente del texto como Arial o sans-serif si no está disponible */
+    max-width: 500px; /* Establece el ancho máximo del contenido en 500px */
+    margin: auto; /* Centra el contenido horizontalmente en la página */
 }
+
 .options-container {
-    text-align: left;
-    margin-bottom: 10px;
+    text-align: left; /* Alinea el texto de las opciones a la izquierda */
+    margin-bottom: 10px; /* Agrega un margen inferior de 10px para separar las opciones del botón */
 }
+
 .option {
-    display: block;
-    margin: 5px 0;
+    display: block; /* Hace que cada opción de la encuesta se muestre en una nueva línea */
+    margin: 5px 0; /* Agrega un pequeño margen entre cada opción */
 }
+
 .hidden {
-    display: none;
+    display: none; /* Oculta elementos cuando se aplica esta clase (usado para ocultar los resultados inicialmente) */
 }
+
 .bar-container {
-    width: 100%;
-    background-color: #f3f3f3;
-    border-radius: 5px;
-    margin: 5px 0;
+    width: 100%; /* Asegura que las barras de resultados ocupen todo el ancho disponible */
+    background-color: #f3f3f3; /* Define un color de fondo gris claro para las barras */
+    border-radius: 5px; /* Agrega bordes redondeados a las barras */
+    margin: 5px 0; /* Agrega un pequeño margen entre cada barra */
 }
+
 .bar {
-    height: 20px;
-    background-color: #4caf50;
-    text-align: right;
-    padding-right: 5px;
-    color: white;
-    line-height: 20px;
-    border-radius: 5px;
+    height: 20px; /* Define la altura de cada barra de resultados */
+    background-color: #4caf50; /* Usa un color verde para representar los votos */
+    text-align: right; /* Alinea el texto de porcentaje dentro de la barra a la derecha */
+    padding-right: 5px; /* Agrega un pequeño espacio a la derecha dentro de la barra para el texto */
+    color: white; /* Define el color del texto dentro de la barra como blanco para mejor visibilidad */
+    line-height: 20px; /* Asegura que el texto dentro de la barra esté centrado verticalmente */
+    border-radius: 5px; /* Aplica bordes redondeados a cada barra */
 }
