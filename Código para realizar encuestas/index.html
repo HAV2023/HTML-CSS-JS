@@ -9,10 +9,12 @@
 <body>
     <h2>¿Cuál es la principal causa del cambio climático?</h2>
     <form id="survey-form">
-        <label class="option"><input type="radio" name="vote" value="1"> Emisión de gases industriales</label>
-        <label class="option"><input type="radio" name="vote" value="2"> Deforestación</label>
-        <label class="option"><input type="radio" name="vote" value="3"> Uso excesivo de combustibles fósiles</label>
-        <label class="option"><input type="radio" name="vote" value="4"> Actividades agrícolas</label>
+        <div class="options-container">
+            <label class="option"><input type="radio" name="vote" value="1"> Emisión de gases industriales</label>
+            <label class="option"><input type="radio" name="vote" value="2"> Deforestación</label>
+            <label class="option"><input type="radio" name="vote" value="3"> Uso excesivo de combustibles fósiles</label>
+            <label class="option"><input type="radio" name="vote" value="4"> Actividades agrícolas</label>
+        </div>
         <button type="button" onclick="submitVote()">Votar</button>
     </form>
     
