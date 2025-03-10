@@ -38,3 +38,6 @@ function showResults() {
     }
 }
 
+function hideResults() {
+    document.getElementById("results").classList.add("hidden");
+}
