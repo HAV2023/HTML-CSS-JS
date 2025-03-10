@@ -1,1 +1,19 @@
-
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 40px;
+}
+.container {
+    display: flex;
+    align-items: flex-start;
+}
+.image-container {
+    shape-outside: circle();
+    float: left;
+    margin: 10px 20px 10px 0;
+}
+img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
