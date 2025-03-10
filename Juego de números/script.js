@@ -4,7 +4,7 @@ let gameActive = false;
 let scoreCorrect = 0;
 let scoreIncorrect = 0;
 
-// Función para actualizar el marcador
+// Función para actualizar el marcador en tiempo real
 function updateScoreboard() {
   document.getElementById("correct-count").textContent = "Aciertos: " + scoreCorrect;
   document.getElementById("incorrect-count").textContent = "Errores: " + scoreIncorrect;
@@ -32,10 +32,16 @@ function startGame() {
   generateAndDisplayNumber();
 }
 
-// Función para finalizar el juego
+// Función para finalizar el juego y mostrar un resumen
 function stopGame() {
   gameActive = false;
   document.getElementById('display-number').textContent = "-";
+  const totalPlays = scoreCorrect + scoreIncorrect;
+  const summaryMessage = `Resumen del juego:
+Total de jugadas: ${totalPlays}
+Aciertos: ${scoreCorrect}
+Errores: ${scoreIncorrect}`;
+  alert(summaryMessage);
 }
 
 // Agregar evento a cada botón numérico
@@ -44,7 +50,7 @@ document.querySelectorAll('.number-button').forEach(button => {
     if (!gameActive) return; // Si el juego no está activo, no hace nada
     const chosenNumber = parseInt(this.getAttribute('data-number'));
     if (chosenNumber === currentNumber) {
-      // Acertó: reproducir sonido y actualizar marcador
+      // Acertó: reproducir sonido, actualizar marcador y mostrar un nuevo número
       scoreCorrect++;
       updateScoreboard();
       document.getElementById("audio-correct").play();
