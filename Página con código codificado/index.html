@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento Base64</title>
 </head>
 <body>
-    <p>RXN0YW1vcyBoYWNpZW5kbyBwcnVlYmFzIGRlIGPDs2RpZ28gY29kaWZpY2Fkbywgbm8gZXMgYWxnbyBjb21wbGljYWRvIG5pIG11eSBzZWd1cm8sIHBlcm8gYWwgbWVub3Mgbm8gc2Vyw6EgdmlzaWJsZSBwYXJhIGFxdWVsbGFzIHBlcnNvbmFzIHF1ZSBubyBjb21wcmVuZGVuIGVsIG3DqXRvZG8u</p>
+    <p id="contenido">Cargando...</p>
+
+    <script>
+        // Contenido en Base64
+        const contenidoBase64 = "RXN0YW1vcyBoYWNpZW5kbyBwcnVlYmFzIGRlIGPDs2RpZ28gY29kaWZpY2Fkbywgbm8gZXMgYWxnbyBjb21wbGljYWRvIG5pIG11eSBzZWd1cm8sIHBlcm8gYWwgbWVub3Mgbm8gc2Vyw6EgdmlzaWJsZSBwYXJhIGFxdWVsbGFzIHBlcnNvbmFzIHF1ZSBubyBjb21wcmVuZGVuIGVsIG3DqXRvZG8u";
+
+        // Función para decodificar Base64
+        function decodeBase64(str) {
+            return decodeURIComponent(escape(atob(str)));
+        }
+
+        // Mostrar contenido decodificado
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("contenido").innerText = decodeBase64(contenidoBase64);
+        });
+    </script>
 </body>
 </html>
+
