@@ -1,1 +1,100 @@
+/* Estilos generales */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #f4f4f4;
+  color: #2c3e50;
+}
+
+/* Contenedor principal del juego */
+#game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+  max-width: 800px;
+  background: #fff;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Panel izquierdo: botones de números */
+#left-panel {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-right: 1px solid #ecf0f1;
+  background: #fafafa;
+}
+
+.number-button {
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  border: 2px solid #3498db;
+  border-radius: 50%;
+  font-size: 24px;
+  background: #fff;
+  color: #3498db;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.number-button:hover {
+  background: #3498db;
+  color: #fff;
+}
+
+/* Panel derecho: muestra el número grande */
+#right-panel {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #ecf0f1;
+}
+
+#display-number {
+  font-size: 80px;
+  font-weight: bold;
+}
+
+/* Controles del juego */
+#controls {
+  text-align: center;
+  margin: 20px auto;
+}
+
+#controls button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#start-btn {
+  background: #27ae60;
+  color: #fff;
+}
+
+#start-btn:hover {
+  background: #1e8449;
+}
+
+#stop-btn {
+  background: #e74c3c;
+  color: #fff;
+}
+
+#stop-btn:hover {
+  background: #c0392b;
+}
 
