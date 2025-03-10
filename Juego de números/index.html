@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Juego de Números</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Contenedor del juego -->
+  <div id="game-container">
+    <!-- Panel izquierdo con botones del 1 al 9 -->
+    <div id="left-panel">
+      <button class="number-button" data-number="1">1</button>
+      <button class="number-button" data-number="2">2</button>
+      <button class="number-button" data-number="3">3</button>
+      <button class="number-button" data-number="4">4</button>
+      <button class="number-button" data-number="5">5</button>
+      <button class="number-button" data-number="6">6</button>
+      <button class="number-button" data-number="7">7</button>
+      <button class="number-button" data-number="8">8</button>
+      <button class="number-button" data-number="9">9</button>
+    </div>
+    <!-- Panel derecho que muestra el número a adivinar -->
+    <div id="right-panel">
+      <div id="display-number">0</div>
+    </div>
+  </div>
+  
+  <!-- Botones de control para iniciar y detener el juego -->
+  <div id="controls">
+    <button id="start-btn">Comenzar</button>
+    <button id="stop-btn">Finalizar</button>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
 
