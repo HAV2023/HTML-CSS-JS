@@ -1,42 +1,38 @@
-/* Reiniciamos márgenes y padding en todos los elementos */
+/* Reiniciamos márgenes y padding para todos los elementos */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Fuente base para el documento */
 body {
   font-family: Arial, sans-serif;
 }
 
-/* Contenedor central que ocupa el 80% de la pantalla y se centra */
+/* Contenedor central: ocupa el 80% de la pantalla, centrado y con padding */
 .container {
   width: 80%;
-  margin: 0 auto; /* Deja automáticamente un 10% a cada lado */
-  padding: 20px;
+  margin: 0 auto;       /* Centrado: deja 10% de margen a cada lado */
+  padding: 20px;        /* Padding interno del contenedor */
+  position: relative;
 }
 
-/* Estructura de dos columnas usando Flexbox */
-.content-wrapper {
-  display: flex;
-}
-
-/* Columna de la imagen fija */
+/* Div que contendrá la imagen fija */
 .fixed-img {
-  /* La usamos sticky para que se quede pegada en la parte superior cuando se haga scroll */
-  position: sticky;
-  top: 0; /* Se pega a la parte superior del contenedor */
-  margin-right: 20px; /* Espacio entre la imagen y el texto */
+  position: fixed;       /* Se posiciona de forma fija respecto a la ventana */
+  top: 20px;             /* Alineado con el padding superior del contenedor */
+  left: calc(10% + 20px); /* El borde izquierdo del contenedor está a 10% del ancho del viewport, más 20px de padding */
 }
 
-/* La imagen se muestra en su tamaño natural */
+/* La imagen respeta su tamaño natural */
 .fixed-img img {
-  display: block;
-  /* No definimos ancho ni alto para respetar sus dimensiones originales */
+  display: block;  /* Se elimina el espacio inferior como elemento inline */
+  /* No se definen ancho/alto para respetar las dimensiones originales */
 }
 
-/* Columna del texto desplazable */
+/* Div del texto desplazable */
 .scroll-text {
-  flex: 1; /* Ocupa el espacio restante del contenedor */
+  /* El margen izquierdo se ajustará dinámicamente vía JavaScript para evitar superposición con la imagen */
+  margin-left: 0;
+  padding-top: 20px; /* Para alinear el texto con el contenido del contenedor */
 }
