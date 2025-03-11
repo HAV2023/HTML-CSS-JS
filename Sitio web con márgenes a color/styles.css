@@ -1,39 +1,41 @@
-/* Reiniciamos márgenes y padding */
+/* Reiniciamos márgenes y padding para todos los elementos */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0;              /* Elimina los márgenes por defecto en cada elemento */
+  padding: 0;             /* Elimina los rellenos (padding) por defecto en cada elemento */
+  box-sizing: border-box; /* Incluye el padding y el borde en el ancho y alto total del elemento */
 }
 
+/* Establece que el html y el body ocupen el 100% de la altura de la ventana */
 html, body {
-  height: 100%;
+  height: 100%;           /* Garantiza que tanto el html como el body tengan altura completa */
 }
 
 /* Barras laterales fijas con fondo de color */
 .sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 10%;
+  position: fixed;        /* Fija la posición del elemento respecto a la ventana; permanece al hacer scroll */
+  top: 0;                 /* Coloca la parte superior del elemento en la parte superior de la ventana */
+  bottom: 0;              /* Coloca la parte inferior del elemento en la parte inferior de la ventana */
+  width: 10%;             /* Define que el ancho de la barra lateral será el 10% del ancho total de la pantalla */
   /* Se establece un color, por ejemplo, azul */
-  background-color: #3498db;
-  z-index: 1;
+  background-color: #3498db; /* Asigna el color azul (#3498db) como fondo de la barra lateral */
+  z-index: 1;             /* Define el orden de apilamiento; elementos con mayor z-index se muestran sobre estos */
 }
 
+/* Clase para la barra lateral izquierda */
 .left-sidebar {
-  left: 0;
+  left: 0;                /* Posiciona la barra lateral a la izquierda de la ventana */
 }
 
+/* Clase para la barra lateral derecha */
 .right-sidebar {
-  right: 0;
+  right: 0;               /* Posiciona la barra lateral a la derecha de la ventana */
 }
 
 /* Área central de contenido */
 .content {
-  margin: 0 10%;
-  padding: 20px;
-  background-color: #fff;
-  position: relative;
-  z-index: 2;
+  margin: 0 10%;          /* Aplica un margen de 10% en ambos lados para dejar espacio a las barras laterales */
+  padding: 20px;          /* Añade un relleno interno de 20px en todos los lados del contenedor de contenido */
+  background-color: #fff; /* Establece el color de fondo blanco para el área de contenido */
+  position: relative;     /* Permite posicionar el contenido en relación a su posición normal; facilita el uso de z-index */
+  z-index: 2;             /* Asegura que el área de contenido se muestre por encima de las barras laterales (z-index mayor) */
 }
-
