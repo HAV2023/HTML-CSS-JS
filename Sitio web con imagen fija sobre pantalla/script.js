@@ -14,4 +14,3 @@ function adjustMargin() {
 document.addEventListener("DOMContentLoaded", adjustMargin);
 // También reajustamos en cada cambio de tamaño de la ventana
 window.addEventListener("resize", adjustMargin);
-
