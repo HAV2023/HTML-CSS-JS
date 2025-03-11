@@ -3,30 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Imagen Fija y Contenido Desplazable</title>
+  <title>Imagen Fija en Contenedor Central</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Contenedor de la imagen fija -->
-  <div class="fixed-image">
-    <!-- Cambia 'ruta-de-tu-imagen.jpg' por la ruta de la imagen que desees usar -->
-    <img src="ruta-de-tu-imagen.jpg" alt="Imagen fija">
-  </div>
-
-  <!-- Contenedor del contenido desplazable -->
-  <div class="content">
-    <h1>Contenido Desplazable</h1>
-    <p>
-      Este es el contenido de la página. Puedes agregar aquí todo el texto o elementos que necesites.
-      Al hacer scroll, notarás que la imagen del lado izquierdo permanece fija.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.
-      Sed cursus ante dapibus diam.
-    </p>
-    <!-- Contenido adicional para probar el scroll -->
-    <p style="margin-bottom: 1000px;">Más contenido para ver el efecto del scroll.</p>
+  <!-- Contenedor central: ocupa el 80% de la pantalla y se centra, dejando márgenes laterales de 10% -->
+  <div class="container">
+    <!-- Estructura en dos columnas: a la izquierda, la imagen fija; a la derecha, el texto desplazable -->
+    <div class="content-wrapper">
+      <!-- Columna de la imagen fija -->
+      <div class="fixed-img">
+        <!-- Se respeta el tamaño natural de la imagen (cámbiale la ruta según corresponda) -->
+        <img src="ruta-de-tu-imagen.jpg" alt="Imagen Fija">
+      </div>
+      <!-- Columna del texto desplazable -->
+      <div class="scroll-text">
+        <h1>Título del Contenido</h1>
+        <p>
+          Este es un párrafo de ejemplo. El texto puede ser muy extenso y al hacer scroll verás cómo el contenido se mueve, mientras que la imagen permanece en la parte superior izquierda del contenedor.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus laoreet justo non urna fermentum, in vestibulum sapien ultrices.
+        </p>
+        <!-- Más párrafos para generar scroll -->
+        <p>Contenido adicional que permite ver el efecto del scroll en el texto.</p>
+        <p>Más contenido aquí...</p>
+        <p style="margin-bottom: 1000px;">Contenido suficiente para probar el scroll vertical.</p>
+      </div>
+    </div>
   </div>
 </body>
 </html>
-
