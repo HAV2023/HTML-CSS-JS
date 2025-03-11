@@ -1,26 +1,27 @@
-/* Reset de márgenes y padding */
+/* Reset de márgenes y padding: elimina los márgenes y rellenos por defecto en todos los elementos */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0;              /* Elimina el margen por defecto en cada elemento */
+  padding: 0;             /* Elimina el relleno (padding) por defecto en cada elemento */
+  box-sizing: border-box; /* Incluye el padding y el borde en el ancho y alto total del elemento */
 }
 
+/* Establece que tanto html como body tengan una altura del 100% de la ventana */
 html, body {
-  height: 100%;
+  height: 100%;           /* Hace que el html y body ocupen el 100% de la altura de la ventana */
 }
 
 /* Fondo con patrón en todo el body */
 body {
   /* Puedes cambiar 'greybkg.jpg' por la ruta de tu imagen o patrón */
-  background: url('greybkg.jpg') repeat;
-  background-attachment: fixed;
+  background: url('greybkg.jpg') repeat;  /* Define un fondo con la imagen 'greybkg.jpg' que se repite para cubrir todo el espacio */
+  background-attachment: fixed;           /* Fija el fondo para que no se mueva al hacer scroll */
 }
 
 /* Área central de contenido */
 .content {
-  width: 80%;
-  margin: 0 auto; /* Centra el contenedor, dejando 10% de margen a cada lado */
-  padding: 20px;
-  background-color: #fff;
-  min-height: 100%;
+  width: 80%;             /* Define que el contenedor central ocupe el 80% del ancho disponible */
+  margin: 0 auto;         /* Centra el contenedor horizontalmente dejando márgenes automáticos a ambos lados */
+  padding: 20px;          /* Añade un espacio interno de 20px en todos los lados dentro del contenedor */
+  background-color: #fff; /* Establece el color de fondo blanco para el contenedor central */
+  min-height: 100%;       /* Asegura que el contenedor tenga al menos la altura total de la ventana */
 }
