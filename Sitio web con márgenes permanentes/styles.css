@@ -12,7 +12,7 @@ html, body {
 /* Fondo con patrón en todo el body */
 body {
   /* Puedes cambiar 'tu-patron.jpg' por la ruta de tu imagen o patrón */
-  background: url('greypattern.jpg') repeat;
+  background: url('greybkg.jpg') repeat;
   background-attachment: fixed;
 }
 
