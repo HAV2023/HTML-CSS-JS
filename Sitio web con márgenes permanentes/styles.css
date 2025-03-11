@@ -12,7 +12,7 @@ html, body {
 
 /* Fondo con patrón en todo el body */
 body {
-  /* Puedes cambiar 'greybkg.jpg' por la ruta de tu imagen o patrón */
+  /* Pueden cambiar 'greybkg.jpg' por el archivo de imagen o patrón que quieran */
   background: url('greybkg.jpg') repeat;  /* Define un fondo con la imagen 'greybkg.jpg' que se repite para cubrir todo el espacio */
   background-attachment: fixed;           /* Fija el fondo para que no se mueva al hacer scroll */
 }
