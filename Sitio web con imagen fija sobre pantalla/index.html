@@ -3,34 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Imagen Fija en Contenedor Central</title>
+  <title>Imagen Fija y Texto Desplazable</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Contenedor central: ocupa el 80% de la pantalla y se centra, dejando márgenes laterales de 10% -->
+  <!-- Contenedor central: ocupa el 80% de la pantalla y se centra (márgenes laterales de 10%) -->
   <div class="container">
-    <!-- Estructura en dos columnas: a la izquierda, la imagen fija; a la derecha, el texto desplazable -->
-    <div class="content-wrapper">
-      <!-- Columna de la imagen fija -->
-      <div class="fixed-img">
-        <!-- Se respeta el tamaño natural de la imagen (cámbiale la ruta según corresponda) -->
-        <img src="ruta-de-tu-imagen.jpg" alt="Imagen Fija">
-      </div>
-      <!-- Columna del texto desplazable -->
-      <div class="scroll-text">
-        <h1>Título del Contenido</h1>
-        <p>
-          Este es un párrafo de ejemplo. El texto puede ser muy extenso y al hacer scroll verás cómo el contenido se mueve, mientras que la imagen permanece en la parte superior izquierda del contenedor.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus laoreet justo non urna fermentum, in vestibulum sapien ultrices.
-        </p>
-        <!-- Más párrafos para generar scroll -->
-        <p>Contenido adicional que permite ver el efecto del scroll en el texto.</p>
-        <p>Más contenido aquí...</p>
-        <p style="margin-bottom: 1000px;">Contenido suficiente para probar el scroll vertical.</p>
-      </div>
+    <!-- Div de la imagen fija: se posiciona en la parte superior izquierda del contenedor -->
+    <div class="fixed-img">
+      <!-- Cambia "ruta-de-la-imagen.jpg" por la ruta de tu imagen -->
+      <img src="ruta-de-la-imagen.jpg" alt="Imagen Fija">
+    </div>
+    <!-- Div del texto desplazable -->
+    <div class="scroll-text">
+      <h1>Título del Contenido</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in urna vel lorem malesuada ultricies.
+      </p>
+      <p>
+        Proin tincidunt, nulla ac placerat ultrices, est metus dignissim leo, non sollicitudin nibh tortor non quam.
+      </p>
+      <p>
+        Sed at metus et velit tempor hendrerit. Fusce elementum tortor sit amet risus sodales, at bibendum nulla commodo.
+      </p>
+      <p>
+        Integer vehicula velit ut sapien sollicitudin, nec ullamcorper justo mattis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
+      </p>
+      <p>
+        Mauris nec eros ut dolor scelerisque condimentum. Praesent a urna quis lacus elementum faucibus.
+      </p>
+      <p>
+        Curabitur rutrum, nunc a ultrices tempus, diam massa vestibulum nibh, a congue mauris risus in dolor.
+      </p>
+      <p>
+        Vestibulum volutpat turpis at nibh ultrices, at dictum dolor faucibus. Duis ut nisl consequat, interdum lectus a, tincidunt nibh.
+      </p>
+      <p>
+        Morbi malesuada, nunc nec tempus dignissim, lacus urna consectetur neque, non convallis justo lorem ac turpis.
+      </p>
+      <p>
+        Aliquam erat volutpat. Nullam vel nulla ut justo dignissim scelerisque.
+      </p>
+      <p>
+        Aenean at magna vitae nisl interdum varius. Nam fermentum, leo sit amet tincidunt dictum, quam justo lobortis urna, in facilisis libero mi ac odio.
+      </p>
+      <!-- Se agregan más párrafos para forzar el scroll -->
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum finibus massa vel eros commodo, sed malesuada ex sagittis.
+      </p>
+      <p>
+        Sed lacinia ipsum quis diam placerat, ac facilisis felis congue. Cras nec augue sed nunc bibendum interdum.
+      </p>
+      <p>
+        Fusce non magna sed sapien fermentum porttitor. Curabitur dictum, dui ut lacinia sollicitudin, erat justo ultricies nibh, ut fermentum purus erat a odio.
+      </p>
+      <p>
+        Donec at urna sed risus varius tincidunt. Maecenas euismod nisi vitae arcu varius, ac dictum nisl tincidunt.
+      </p>
+      <p>
+        Etiam id tortor id metus blandit vestibulum. Vivamus vulputate ligula quis leo porttitor, non porta erat elementum.
+      </p>
     </div>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
