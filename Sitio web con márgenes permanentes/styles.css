@@ -1,4 +1,4 @@
-/* Reiniciamos márgenes y padding */
+/* Reset de márgenes y padding */
 * {
   margin: 0;
   padding: 0;
@@ -9,38 +9,18 @@ html, body {
   height: 100%;
 }
 
-/* Barras laterales fijas */
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 10%;
-  /* Puedes usar un color o un fondo con patrón.
-     Ejemplo con color:
-     background-color: #f0f0f0;
-     Ejemplo con imagen:
-     background: url('tu-patron.jpg') no-repeat center center;
-  */
-  background: url('tu-patron.jpg') no-repeat center center;
-  background-size: cover;
+/* Fondo con patrón en todo el body */
+body {
+  /* Puedes cambiar 'tu-patron.jpg' por la ruta de tu imagen o patrón */
+  background: url('greypattern.jpg') repeat;
   background-attachment: fixed;
-  z-index: 1;
-}
-
-.left-sidebar {
-  left: 0;
-}
-
-.right-sidebar {
-  right: 0;
 }
 
 /* Área central de contenido */
 .content {
-  margin: 0 10%;
+  width: 80%;
+  margin: 0 auto; /* Centra el contenedor, dejando 10% de margen a cada lado */
   padding: 20px;
   background-color: #fff;
-  position: relative;
-  z-index: 2;
+  min-height: 100%;
 }
-
