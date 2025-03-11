@@ -1,33 +1,42 @@
-/* Reiniciamos márgenes y padding */
+/* Reiniciamos márgenes y padding en todos los elementos */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Fuente base para el documento */
 body {
   font-family: Arial, sans-serif;
 }
 
-/* Contenedor de la imagen fija */
-.fixed-image {
-  position: fixed; /* La posición fija mantiene este contenedor en el mismo lugar durante el scroll */
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 30%;    /* Define el ancho que ocupará la imagen (puedes ajustar este valor según tus necesidades) */
-  overflow: hidden; /* Oculta cualquier parte de la imagen que se salga del contenedor */
+/* Contenedor central que ocupa el 80% de la pantalla y se centra */
+.container {
+  width: 80%;
+  margin: 0 auto; /* Deja automáticamente un 10% a cada lado */
+  padding: 20px;
 }
 
-.fixed-image img {
-  width: 100%;   /* La imagen ocupa el 100% del ancho del contenedor */
-  height: 100%;  /* La imagen ocupa el 100% de la altura del contenedor */
-  object-fit: cover; /* La imagen se ajusta para cubrir todo el contenedor sin perder la proporción */
+/* Estructura de dos columnas usando Flexbox */
+.content-wrapper {
+  display: flex;
 }
 
-/* Contenedor del contenido desplazable */
-.content {
-  margin-left: 30%; /* El contenido se desplaza a la derecha, dejando espacio para la imagen fija */
-  padding: 20px;    /* Espacio interno para que el contenido no toque el borde */
+/* Columna de la imagen fija */
+.fixed-img {
+  /* La usamos sticky para que se quede pegada en la parte superior cuando se haga scroll */
+  position: sticky;
+  top: 0; /* Se pega a la parte superior del contenedor */
+  margin-right: 20px; /* Espacio entre la imagen y el texto */
 }
 
+/* La imagen se muestra en su tamaño natural */
+.fixed-img img {
+  display: block;
+  /* No definimos ancho ni alto para respetar sus dimensiones originales */
+}
+
+/* Columna del texto desplazable */
+.scroll-text {
+  flex: 1; /* Ocupa el espacio restante del contenedor */
+}
