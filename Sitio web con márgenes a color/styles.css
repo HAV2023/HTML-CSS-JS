@@ -1,1 +1,39 @@
+/* Reiniciamos márgenes y padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Barras laterales fijas con fondo de color */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 10%;
+  /* Se establece un color, por ejemplo, azul */
+  background-color: #3498db;
+  z-index: 1;
+}
+
+.left-sidebar {
+  left: 0;
+}
+
+.right-sidebar {
+  right: 0;
+}
+
+/* Área central de contenido */
+.content {
+  margin: 0 10%;
+  padding: 20px;
+  background-color: #fff;
+  position: relative;
+  z-index: 2;
+}
 
