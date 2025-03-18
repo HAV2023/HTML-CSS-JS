@@ -2,50 +2,49 @@
    Estilos para el juego "Adivina el Número"
    ============================= */
 
-/* Estilo global para el body */
+/* Aplica estilos globales al elemento <body> */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
+  font-family: Arial, sans-serif; /* Define la fuente principal para todo el documento */
+  background-color: #f0f0f0; /* Establece un fondo gris claro para la página */
+  display: flex; /* Utiliza Flexbox para centrar el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
+  height: 100vh; /* Ocupa el 100% de la altura de la ventana del navegador */
+  margin: 0; /* Elimina los márgenes por defecto */
 }
 
-/* Estilo para el contenedor principal del juego */
+/* Estilos para el contenedor principal del juego */
 #game-container {
-  background-color: #fff;
-  padding: 20px 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  background-color: #fff; /* Fondo blanco para el contenedor del juego */
+  padding: 20px 30px; /* Espaciado interno: 20px en vertical y 30px en horizontal */
+  border-radius: 8px; /* Bordes redondeados para dar un aspecto suave */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidad al contenedor */
+  text-align: center; /* Centra el texto dentro del contenedor */
 }
 
-/* Estilo para el input de número */
+/* Estilos para el campo de entrada numérica */
 input[type="number"] {
-  padding: 8px;
-  width: 60%;
-  margin-bottom: 10px;
+  padding: 8px; /* Espaciado interno del input */
+  width: 60%; /* Ancho del 60% del contenedor, permitiendo una buena visibilidad */
+  margin-bottom: 10px; /* Espacio inferior para separar el input de otros elementos */
 }
 
-/* Estilo para el botón */
+/* Estilos para el botón */
 button {
-  padding: 8px 15px;
-  cursor: pointer;
-  border: none;
-  background-color: #28a745;
-  color: white;
-  border-radius: 4px;
+  padding: 8px 15px; /* Espaciado interno: 8px arriba y abajo, 15px a los lados */
+  cursor: pointer; /* Cambia el cursor a una mano cuando se pasa sobre el botón, indicando que es interactivo */
+  border: none; /* Elimina el borde por defecto del botón */
+  background-color: #28a745; /* Color de fondo verde para el botón */
+  color: white; /* Color de texto blanco para un buen contraste */
+  border-radius: 4px; /* Bordes redondeados para un estilo moderno */
 }
 
-/* Efecto hover para el botón */
+/* Cambia el color del botón al pasar el cursor sobre él */
 button:hover {
-  background-color: #218838;
+  background-color: #218838; /* Un tono de verde más oscuro al hacer hover */
 }
 
-/* Estilo para párrafos de mensajes */
+/* Estilos para todos los párrafos (<p>) */
 p {
-  margin: 10px 0;
+  margin: 10px 0; /* Margen superior e inferior de 10px para separar visualmente cada párrafo */
 }
-
