@@ -1,25 +1,25 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adivina el Número</title>
-  <!-- Vincula el archivo CSS -->
+<!DOCTYPE html> <!-- Declara que el documento es HTML5 -->
+<html lang="es"> <!-- Elemento raíz del documento y se especifica que el idioma es español -->
+<head> <!-- Contenedor de metadatos e información que no se muestra directamente en la página -->
+  <meta charset="UTF-8"> <!-- Define la codificación de caracteres a UTF-8 para soportar acentos y caracteres especiales -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Hace que el diseño sea adaptable ajustándose al ancho del dispositivo -->
+  <title>Adivina el Número</title> <!-- Título que se muestra en la pestaña del navegador -->
+  <!-- Vincula el archivo CSS externo para los estilos -->
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body> <!-- Contenedor principal del contenido visible en la página -->
   <!-- Contenedor principal del juego -->
   <div id="game-container">
-    <h1>Adivina el Número</h1>
-    <p>Se ha generado un número aleatorio entre 1 y 100. ¡Intenta adivinarlo!</p>
+    <h1>Adivina el Número</h1> <!-- Título principal del juego -->
+    <p>Se ha generado un número aleatorio entre 1 y 100. ¡Intenta adivinarlo!</p> <!-- Instrucciones para el usuario -->
+    <!-- Campo de entrada para que el usuario ingrese su número; se usa "type='number'" para permitir solo números -->
     <input type="number" id="guessInput" placeholder="Ingresa tu número">
-    <br>
-    <button id="guessButton">Adivinar</button>
-    <p id="feedback"></p>
-    <p id="attempts"></p>
+    <br> <!-- Salto de línea para separar visualmente los elementos -->
+    <button id="guessButton">Adivinar</button> <!-- Botón para enviar el intento del usuario -->
+    <p id="feedback"></p> <!-- Párrafo donde se mostrará la retroalimentación (mayor, menor o acierto) -->
+    <p id="attempts"></p> <!-- Párrafo donde se mostrará la cantidad de intentos realizados -->
   </div>
-  <!-- Vincula el archivo JavaScript -->
+  <!-- Vincula el archivo JavaScript que contiene la lógica del juego -->
   <script src="script.js"></script>
 </body>
 </html>
-
