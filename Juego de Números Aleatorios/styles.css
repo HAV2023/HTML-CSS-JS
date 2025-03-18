@@ -1,1 +1,51 @@
+/* =============================
+   Estilos para el juego "Adivina el Número"
+   ============================= */
+
+/* Estilo global para el body */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Estilo para el contenedor principal del juego */
+#game-container {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Estilo para el input de número */
+input[type="number"] {
+  padding: 8px;
+  width: 60%;
+  margin-bottom: 10px;
+}
+
+/* Estilo para el botón */
+button {
+  padding: 8px 15px;
+  cursor: pointer;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 4px;
+}
+
+/* Efecto hover para el botón */
+button:hover {
+  background-color: #218838;
+}
+
+/* Estilo para párrafos de mensajes */
+p {
+  margin: 10px 0;
+}
 
