@@ -1,1 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo de Realidad Aumentada con AR.js</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Librería A-Frame -->
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <!-- Librería AR.js para A-Frame -->
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+</head>
+<body>
+  <!-- Escena AR de A-Frame con AR.js -->
+  <a-scene embedded arjs='trackingMethod: best; sourceType: webcam;'>
+    <!-- Marker predeterminado "hiro" -->
+    <a-marker preset="hiro">
+      <!-- Un cubo 3D que se mostrará sobre el marcador -->
+      <a-box position="0 0.5 0" material="color: blue;"></a-box>
+    </a-marker>
+    <!-- Cámara de la escena -->
+    <a-entity camera></a-entity>
+  </a-scene>
+  
+  <script src="script.js"></script>
+</body>
+</html>
 
