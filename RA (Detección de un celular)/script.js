@@ -1,17 +1,20 @@
 // script.js
 
-// Espera a que la ventana se cargue completamente antes de iniciar el proceso.
+// Espera a que la ventana cargue por completo antes de ejecutar el código.
 window.addEventListener('load', () => {
-  let model; // Variable para almacenar el modelo COCO-SSD
+  let model; // Variable para almacenar el modelo COCO-SSD.
+  
+  // Umbral mínimo de confianza para considerar una detección válida.
+  const CONFIDENCE_THRESHOLD = 0.5;
 
   /**
-   * Carga el modelo COCO-SSD de TensorFlow.js de forma asíncrona.
+   * Carga el modelo COCO-SSD de TensorFlow.js de manera asíncrona.
    */
   async function loadModel() {
     try {
       model = await cocoSsd.load();
       console.log("Modelo COCO-SSD cargado correctamente.");
-      // Una vez cargado el modelo, se inicia el ciclo de detección.
+      // Inicia el bucle de detección una vez que el modelo esté listo.
       detectFrame();
     } catch (error) {
       console.error("Error al cargar el modelo:", error);
@@ -20,41 +23,38 @@ window.addEventListener('load', () => {
 
   /**
    * Función que procesa cada frame del video para detectar objetos.
-   * Utiliza requestAnimationFrame para crear un bucle de detección en tiempo real.
+   * Utiliza requestAnimationFrame para crear un ciclo de detección en tiempo real.
    */
   async function detectFrame() {
-    // Selecciona el elemento <video> que utiliza AR.js (normalmente es el primero en el documento).
+    // Selecciona el elemento <video> que AR.js utiliza para mostrar la cámara.
     const video = document.querySelector('video');
 
-    // Comprueba que el elemento de video existe y que el modelo ya está cargado.
+    // Verifica que el elemento de video exista y que el modelo esté cargado.
     if (video && model) {
-      // Ejecuta la detección de objetos en el frame actual del video.
-      model.detect(video).then(predictions => {
-        // Muestra en consola todas las predicciones obtenidas para fines de depuración.
+      try {
+        // Realiza la detección en el frame actual del video.
+        const predictions = await model.detect(video);
+
+        // Muestra todas las predicciones en la consola para depuración.
         console.log("Predicciones:", predictions);
 
-        // Busca en las predicciones un objeto clasificado como "cell phone".
-        const cellPhonePrediction = predictions.find(pred => pred.class === 'cell phone');
+        // Busca una predicción que corresponda a 'cell phone' con suficiente confianza.
+        const cellPhonePrediction = predictions.find(pred => 
+          pred.class === 'cell phone' && pred.score >= CONFIDENCE_THRESHOLD
+        );
 
         if (cellPhonePrediction) {
           console.log("Celular detectado:", cellPhonePrediction);
-          // Aquí puedes agregar la lógica adicional para mostrar información en la escena AR.
-          // Por ejemplo, actualizar un panel informativo o activar una animación.
+          // Aquí puedes agregar lógica adicional (por ejemplo, actualizar un panel en la escena AR).
         } else {
-          console.log("Celular no detectado");
+          console.log("Celular no detectado. Ajusta posición, tamaño o ángulo del objeto.");
         }
-
-        // Solicita el siguiente frame para continuar la detección.
-        requestAnimationFrame(detectFrame);
-      }).catch(error => {
-        // En caso de error durante la detección, se muestra en consola y se continúa con el siguiente frame.
+      } catch (error) {
         console.error("Error durante la detección:", error);
-        requestAnimationFrame(detectFrame);
-      });
-    } else {
-      // Si el video aún no está listo o el modelo no se ha cargado, se espera el siguiente frame.
-      requestAnimationFrame(detectFrame);
+      }
     }
+    // Solicita el siguiente frame para continuar el ciclo de detección.
+    requestAnimationFrame(detectFrame);
   }
 
   // Inicia la carga del modelo al cargar la ventana.
