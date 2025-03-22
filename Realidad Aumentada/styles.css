@@ -1,10 +1,22 @@
 /* styles.css */
+
+/* 
+  Resetea los márgenes y el padding de los elementos <body> y <html> 
+  para eliminar espacios por defecto en la página.
+  Además, se oculta el desbordamiento (overflow) para evitar que aparezcan barras de desplazamiento.
+*/
 body, html {
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 
+/*
+  Estilos para el elemento <a-scene> de A-Frame:
+  Se posiciona de forma absoluta para ocupar toda la ventana del navegador.
+  - top: 0 y left: 0 ubican el elemento en la esquina superior izquierda.
+  - width: 100% y height: 100% aseguran que la escena cubra el 100% del ancho y alto de la pantalla.
+*/
 a-scene {
   position: absolute;
   top: 0;
