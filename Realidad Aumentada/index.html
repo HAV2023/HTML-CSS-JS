@@ -1,27 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!--
+    Definición del documento HTML y configuración de idioma.
+    Este archivo establece una escena de realidad aumentada utilizando AR.js y A-Frame.
+  -->
   <meta charset="UTF-8">
   <title>Ejemplo de Realidad Aumentada con AR.js</title>
+  
+  <!-- Enlace a la hoja de estilos para personalizar la apariencia de la página -->
   <link rel="stylesheet" href="styles.css">
-  <!-- Librería A-Frame -->
+  
+  <!--
+    Carga de la librería A-Frame, la cual facilita la creación de escenas 3D usando una sintaxis basada en HTML.
+    Versión utilizada: 1.2.0
+  -->
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <!-- Librería AR.js para A-Frame -->
+  
+  <!--
+    Carga de la librería AR.js para A-Frame, que añade capacidades de realidad aumentada (AR) a la escena.
+    AR.js permite utilizar la cámara web y detectar marcadores para superponer objetos 3D en tiempo real.
+  -->
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 </head>
 <body>
-  <!-- Escena AR de A-Frame con AR.js -->
+  <!--
+    Escena principal de A-Frame con integración AR mediante AR.js.
+    Atributos:
+      - embedded: hace que la escena se ajuste al tamaño del contenedor.
+      - arjs: configura AR.js.
+          * trackingMethod: define el método de seguimiento ('best' elige el óptimo según el dispositivo).
+          * sourceType: especifica la fuente de video (en este caso, 'webcam').
+  -->
   <a-scene embedded arjs='trackingMethod: best; sourceType: webcam;'>
-    <!-- Marker predeterminado "hiro" -->
+  
+    <!--
+      Definición del marcador AR a utilizar.
+      Utiliza el marcador predefinido "hiro", ampliamente empleado en ejemplos y pruebas de AR.js.
+    -->
     <a-marker preset="hiro">
-      <!-- Un cubo 3D que se mostrará sobre el marcador -->
+      <!--
+        Objeto 3D que se renderiza sobre el marcador.
+        En este ejemplo, se muestra un cubo azul.
+        Atributos:
+          - position: define la posición del cubo respecto al marcador (x, y, z).
+          - material: configura el color y otros atributos visuales del objeto.
+      -->
       <a-box position="0 0.5 0" material="color: blue;"></a-box>
     </a-marker>
-    <!-- Cámara de la escena -->
+    
+    <!--
+      Definición de la cámara de la escena.
+      Es necesaria para que el usuario pueda ver la escena 3D y la superposición de objetos en AR.
+    -->
     <a-entity camera></a-entity>
   </a-scene>
   
+  <!--
+    Enlace al archivo JavaScript con funcionalidad adicional.
+    Este script se carga después de la escena para asegurar que todos los elementos están listos.
+  -->
   <script src="script.js"></script>
 </body>
 </html>
-
