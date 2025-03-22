@@ -1,10 +1,24 @@
 /* styles.css */
+
+/* 
+  Se eliminan los márgenes y el padding por defecto de los elementos <body> y <html>.
+  Esto ayuda a que no existan espacios extra alrededor del contenido de la página.
+  Además, se establece 'overflow: hidden' para evitar que aparezcan barras de desplazamiento
+  si el contenido se desborda, lo que es útil para una aplicación de realidad aumentada en pantalla completa.
+*/
 body, html {
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 
+/* 
+  Se define el estilo para el elemento <a-scene> de A-Frame, que contiene la escena 3D o de realidad aumentada.
+  - position: absolute; Permite posicionar la escena de forma absoluta respecto al elemento contenedor.
+  - top: 0; y left: 0; Ubican el elemento en la esquina superior izquierda de la pantalla.
+  - width: 100%; y height: 100%; Hacen que la escena ocupe el 100% del ancho y alto de la ventana del navegador,
+  asegurando una experiencia a pantalla completa.
+*/
 a-scene {
   position: absolute;
   top: 0;
@@ -12,4 +26,3 @@ a-scene {
   width: 100%;
   height: 100%;
 }
-
