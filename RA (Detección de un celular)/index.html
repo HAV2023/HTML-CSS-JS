@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>AR con Detección de Lentes</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <!-- AR.js para A-Frame -->
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <!-- TensorFlow.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+  <!-- Modelo de detección, por ejemplo COCO-SSD -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+</head>
+<body>
+  <!-- Escena AR -->
+  <a-scene embedded arjs='trackingMethod: best; sourceType: webcam;'>
+    <!-- Usamos un marcador hiro para mantener la referencia en AR -->
+    <a-marker preset="hiro" id="marker">
+      <!-- Elemento informativo oculto inicialmente -->
+      <a-entity id="infoPanel" position="0 0.5 0" visible="false">
+        <a-plane color="#FFF" width="1" height="0.5"></a-plane>
+        <a-text value="Información de un celular" align="center" position="0 0 0.01" color="#000"></a-text>
+      </a-entity>
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
