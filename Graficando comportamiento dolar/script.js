@@ -27,43 +27,48 @@ document.addEventListener('DOMContentLoaded', function () {
 
     Highcharts.chart('container', {
         chart: {
-            type: 'line',
-            animation: Highcharts.svg,
-            zoomType: 'x'
+            type: 'spline',
+            backgroundColor: '#1e1e1e',
+            animation: true,
+            margin: [20, 20, 30, 50],
         },
         title: {
-            text: 'Comportamiento del USD/MXN - Marzo 2025'
-        },
-        subtitle: {
-            text: 'Fuente: exchange-rates.org'
+            text: 'USD/MXN - Marzo 2025',
+            style: {
+                color: '#ffffff',
+                fontSize: '20px'
+            }
         },
         xAxis: {
             type: 'datetime',
-            title: {
-                text: 'Fecha'
-            }
+            labels: { style: { color: '#cccccc' } },
+            lineColor: '#444',
+            tickColor: '#444'
         },
         yAxis: {
-            title: {
-                text: 'Tipo de Cambio (MXN por USD)'
-            }
+            title: { text: null },
+            labels: { style: { color: '#cccccc' } },
+            gridLineColor: '#333'
         },
         tooltip: {
-            headerFormat: '<b>{point.x:%e %b %Y}</b><br>',
-            pointFormat: 'Tipo de cambio: {point.y:.3f} MXN/USD'
+            backgroundColor: '#333',
+            style: { color: '#fff' },
+            headerFormat: '<b>{point.x:%e %b}</b><br>',
+            pointFormat: '{point.y:.3f} MXN/USD'
         },
+        legend: { enabled: false },
         plotOptions: {
-            line: {
-                dataLabels: {
-                    enabled: true
-                },
+            spline: {
+                lineWidth: 2,
+                marker: { enabled: false },
                 enableMouseTracking: true
             }
         },
         series: [{
-            name: 'USD a MXN',
-            data: processedData
-        }]
+            name: 'USD/MXN',
+            data: processedData,
+            color: '#00e6e6'
+        }],
+        credits: { enabled: false }
     });
 });
-
