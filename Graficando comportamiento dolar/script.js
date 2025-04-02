@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Datos de USD/MXN por día en marzo 2025
-  const rawData = [
+  // Datos para USD/MXN (valores reales de ejemplo)
+  const rawDataUsd = [
     ['2025-03-03', 20.708],
     ['2025-03-04', 20.543],
     ['2025-03-05', 20.408],
@@ -24,13 +24,65 @@ document.addEventListener('DOMContentLoaded', function () {
     ['2025-03-31', 20.480]
   ];
 
-  // Convertir fechas a timestamp
-  const processedData = rawData.map(([date, value]) => [new Date(date).getTime(), value]);
+  // Datos ficticios para EUR/MXN
+  const rawDataEur = [
+    ['2025-03-03', 22.100],
+    ['2025-03-04', 22.050],
+    ['2025-03-05', 21.980],
+    ['2025-03-06', 21.950],
+    ['2025-03-07', 21.930],
+    ['2025-03-10', 21.970],
+    ['2025-03-11', 21.960],
+    ['2025-03-12', 21.940],
+    ['2025-03-13', 21.920],
+    ['2025-03-14', 21.880],
+    ['2025-03-17', 21.900],
+    ['2025-03-18', 21.890],
+    ['2025-03-19', 21.910],
+    ['2025-03-20', 21.930],
+    ['2025-03-21', 21.950],
+    ['2025-03-24', 21.880],
+    ['2025-03-25', 21.870],
+    ['2025-03-26', 21.890],
+    ['2025-03-27', 21.910],
+    ['2025-03-28', 21.940],
+    ['2025-03-31', 21.980]
+  ];
+
+  // Datos ficticios para GBP/MXN
+  const rawDataGbp = [
+    ['2025-03-03', 25.300],
+    ['2025-03-04', 25.250],
+    ['2025-03-05', 25.200],
+    ['2025-03-06', 25.170],
+    ['2025-03-07', 25.160],
+    ['2025-03-10', 25.190],
+    ['2025-03-11', 25.180],
+    ['2025-03-12', 25.150],
+    ['2025-03-13', 25.130],
+    ['2025-03-14', 25.100],
+    ['2025-03-17', 25.120],
+    ['2025-03-18', 25.110],
+    ['2025-03-19', 25.130],
+    ['2025-03-20', 25.150],
+    ['2025-03-21', 25.170],
+    ['2025-03-24', 25.120],
+    ['2025-03-25', 25.110],
+    ['2025-03-26', 25.130],
+    ['2025-03-27', 25.140],
+    ['2025-03-28', 25.160],
+    ['2025-03-31', 25.200]
+  ];
+
+  // Convertir fechas a timestamp para cada conjunto
+  const processedDataUsd = rawDataUsd.map(([date, value]) => [new Date(date).getTime(), value]);
+  const processedDataEur = rawDataEur.map(([date, value]) => [new Date(date).getTime(), value]);
+  const processedDataGbp = rawDataGbp.map(([date, value]) => [new Date(date).getTime(), value]);
 
   let chart;
   let intervalId;
 
-  // Función para crear el gráfico vacío
+  // Función para crear el gráfico con las tres series
   function createChart() {
     return Highcharts.chart('container', {
       chart: {
@@ -39,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
         animation: false
       },
       title: {
-        text: 'USD/MXN - Marzo 2025 (Animación por Día)',
+        text: 'Comportamiento de USD, EUR y GBP en MXN - Marzo 2025 (Animación por Día)',
         style: { color: '#ffffff' }
       },
       xAxis: {
@@ -49,17 +101,18 @@ document.addEventListener('DOMContentLoaded', function () {
         tickColor: '#444'
       },
       yAxis: {
-        title: { text: null },
+        title: { text: 'Tipo de Cambio' },
         labels: { style: { color: '#cccccc' } },
         gridLineColor: '#333'
       },
       tooltip: {
+        shared: true,
         backgroundColor: '#333',
         style: { color: '#fff' },
         headerFormat: '<b>{point.x:%e %b}</b><br>',
-        pointFormat: '{point.y:.3f} MXN/USD'
+        pointFormat: '{series.name}: {point.y:.3f}'
       },
-      legend: { enabled: false },
+      legend: { enabled: true, itemStyle: { color: '#ffffff' } },
       plotOptions: {
         spline: {
           lineWidth: 2,
@@ -67,37 +120,63 @@ document.addEventListener('DOMContentLoaded', function () {
           enableMouseTracking: true
         },
         series: {
-          animation: { duration: 300 }
+          animation: { duration: 400, easing: 'linear' }
         }
       },
-      series: [{
-        name: 'USD/MXN',
-        data: [],
-        color: '#00e6e6'
-      }],
+      series: [
+        {
+          name: 'USD/MXN',
+          data: [],
+          color: '#00e6e6'
+        },
+        {
+          name: 'EUR/MXN',
+          data: [],
+          color: '#ffcc00'
+        },
+        {
+          name: 'GBP/MXN',
+          data: [],
+          color: '#ff6600'
+        }
+      ],
       credits: { enabled: false }
     });
   }
 
-  // Función para iniciar la animación agregando puntos uno a uno
+  // Función para iniciar la animación agregando puntos uno a uno en cada serie
   function startAnimation() {
     if (intervalId) clearInterval(intervalId);
-    chart.series[0].setData([]); // Reiniciar la serie
+    // Reiniciar datos de las series
+    chart.series[0].setData([]);
+    chart.series[1].setData([]);
+    chart.series[2].setData([]);
     let i = 0;
     intervalId = setInterval(() => {
-      if (i < processedData.length) {
-        chart.series[0].addPoint(processedData[i], true, false);
+      if (i < processedDataUsd.length) {
+        chart.series[0].addPoint(processedDataUsd[i], false, false, {
+          duration: 400,
+          easing: 'linear'
+        });
+        chart.series[1].addPoint(processedDataEur[i], false, false, {
+          duration: 400,
+          easing: 'linear'
+        });
+        chart.series[2].addPoint(processedDataGbp[i], true, false, {
+          duration: 400,
+          easing: 'linear'
+        });
         i++;
       } else {
         clearInterval(intervalId);
       }
-    }, 500); // Intervalo de 500 ms entre puntos
+    }, 500);
   }
 
   // Crear el gráfico al cargar el DOM
   chart = createChart();
 
-  // Enlazar el botón para iniciar la animación
+  // Asignar el evento al botón para iniciar la animación
   const button = document.getElementById('play-btn');
   button.addEventListener('click', startAnimation);
 });
