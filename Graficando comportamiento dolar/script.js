@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Datos de tipo de cambio por día
     const rawData = [
         ['2025-03-03', 20.708],
         ['2025-03-04', 20.543],
@@ -26,63 +25,75 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const processedData = rawData.map(([date, value]) => [new Date(date).getTime(), value]);
 
-    // Crear gráfico vacío
-    const chart = Highcharts.chart('container', {
-        chart: {
-            type: 'spline',
-            backgroundColor: '#1e1e1e',
-            animation: false // desactivar animación general
-        },
-        title: {
-            text: 'USD/MXN - Marzo 2025 (Animación por Día)',
-            style: { color: '#ffffff' }
-        },
-        xAxis: {
-            type: 'datetime',
-            labels: { style: { color: '#cccccc' } },
-            lineColor: '#444',
-            tickColor: '#444'
-        },
-        yAxis: {
-            title: { text: null },
-            labels: { style: { color: '#cccccc' } },
-            gridLineColor: '#333'
-        },
-        tooltip: {
-            backgroundColor: '#333',
-            style: { color: '#fff' },
-            headerFormat: '<b>{point.x:%e %b}</b><br>',
-            pointFormat: '{point.y:.3f} MXN/USD'
-        },
-        legend: { enabled: false },
-        plotOptions: {
-            spline: {
-                lineWidth: 2,
-                marker: { enabled: false },
-                enableMouseTracking: true
-            },
-            series: {
-                animation: {
-                    duration: 300
-                }
-            }
-        },
-        series: [{
-            name: 'USD/MXN',
-            data: [],
-            color: '#00e6e6'
-        }],
-        credits: { enabled: false }
-    });
+    let chart;
+    let intervalId;
 
-    // Agregar puntos uno a uno
-    let index = 0;
-    const interval = setInterval(() => {
-        if (index < processedData.length) {
-            chart.series[0].addPoint(processedData[index], true, false);
-            index++;
-        } else {
-            clearInterval(interval); // Termina cuando ya no hay más puntos
-        }
-    }, 500); // tiempo entre cada punto (en ms)
+    function createEmptyChart() {
+        return Highcharts.chart('container', {
+            chart: {
+                type: 'spline',
+                backgroundColor: '#1e1e1e',
+                animation: false
+            },
+            title: {
+                text: 'USD/MXN - Marzo 2025 (Animación por Día)',
+                style: { color: '#ffffff' }
+            },
+            xAxis: {
+                type: 'datetime',
+                labels: { style: { color: '#cccccc' } },
+                lineColor: '#444',
+                tickColor: '#444'
+            },
+            yAxis: {
+                title: { text: null },
+                labels: { style: { color: '#cccccc' } },
+                gridLineColor: '#333'
+            },
+            tooltip: {
+                backgroundColor: '#333',
+                style: { color: '#fff' },
+                headerFormat: '<b>{point.x:%e %b}</b><br>',
+                pointFormat: '{point.y:.3f} MXN/USD'
+            },
+            legend: { enabled: false },
+            plotOptions: {
+                spline: {
+                    lineWidth: 2,
+                    marker: { enabled: false },
+                    enableMouseTracking: true
+                },
+                series: {
+                    animation: {
+                        duration: 300
+                    }
+                }
+            },
+            series: [{
+                name: 'USD/MXN',
+                data: [],
+                color: '#00e6e6'
+            }],
+            credits: { enabled: false }
+        });
+    }
+
+    function animateChart() {
+        if (intervalId) clearInterval(intervalId);
+        chart.series[0].setData([]); // Reinicia serie
+
+        let index = 0;
+        intervalId = setInterval(() => {
+            if (index < processedData.length) {
+                chart.series[0].addPoint(processedData[index], true, false);
+                index++;
+            } else {
+                clearInterval(intervalId);
+            }
+        }, 500);
+    }
+
+    chart = createEmptyChart();
+
+    document.getElementById('play-btn').addEventListener('click', animateChart);
 });
