@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const data = [
+    const rawData = [
         ['2025-03-03', 20.708],
         ['2025-03-04', 20.543],
         ['2025-03-05', 20.408],
@@ -23,21 +23,17 @@ document.addEventListener('DOMContentLoaded', function () {
         ['2025-03-31', 20.480]
     ];
 
-    const processedData = data.map(point => [new Date(point[0]).getTime(), point[1]]);
+    const processedData = rawData.map(([date, value]) => [new Date(date).getTime(), value]);
 
-    Highcharts.chart('container', {
+    const chart = Highcharts.chart('container', {
         chart: {
             type: 'spline',
             backgroundColor: '#1e1e1e',
-            animation: true,
-            margin: [20, 20, 30, 50],
+            animation: Highcharts.svg,
         },
         title: {
-            text: 'USD/MXN - Marzo 2025',
-            style: {
-                color: '#ffffff',
-                fontSize: '20px'
-            }
+            text: 'USD/MXN - Marzo 2025 (Animación Diaria)',
+            style: { color: '#ffffff' }
         },
         xAxis: {
             type: 'datetime',
@@ -66,9 +62,20 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         series: [{
             name: 'USD/MXN',
-            data: processedData,
+            data: [],
             color: '#00e6e6'
         }],
         credits: { enabled: false }
     });
+
+    // Animar punto por punto
+    let index = 0;
+    const interval = setInterval(() => {
+        if (index < processedData.length) {
+            chart.series[0].addPoint(processedData[index], true, false);
+            index++;
+        } else {
+            clearInterval(interval); // detener cuando se termina
+        }
+    }, 500); // Velocidad de animación: un punto cada 500ms
 });
