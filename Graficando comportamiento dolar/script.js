@@ -1,29 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Datos para USD/MXN (10 puntos por mes)
+  // Datos para USD/MXN en marzo 2025 (10 puntos)
   const rawDataUsd = [
-    // Enero 2025
-    ['2025-01-02', 20.500],
-    ['2025-01-06', 20.520],
-    ['2025-01-08', 20.510],
-    ['2025-01-10', 20.530],
-    ['2025-01-15', 20.540],
-    ['2025-01-20', 20.550],
-    ['2025-01-23', 20.540],
-    ['2025-01-28', 20.560],
-    ['2025-01-30', 20.570],
-    ['2025-01-31', 20.580],
-    // Febrero 2025
-    ['2025-02-03', 20.600],
-    ['2025-02-05', 20.610],
-    ['2025-02-07', 20.620],
-    ['2025-02-10', 20.630],
-    ['2025-02-14', 20.640],
-    ['2025-02-17', 20.650],
-    ['2025-02-20', 20.660],
-    ['2025-02-24', 20.670],
-    ['2025-02-26', 20.680],
-    ['2025-02-28', 20.690],
-    // Marzo 2025
     ['2025-03-03', 20.700],
     ['2025-03-06', 20.710],
     ['2025-03-10', 20.720],
@@ -36,31 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
     ['2025-03-31', 20.790]
   ];
 
-  // Datos para EUR/MXN (10 puntos por mes)
+  // Datos para EUR/MXN en marzo 2025 (10 puntos)
   const rawDataEur = [
-    // Enero 2025
-    ['2025-01-02', 21.900],
-    ['2025-01-06', 21.910],
-    ['2025-01-08', 21.905],
-    ['2025-01-10', 21.915],
-    ['2025-01-15', 21.920],
-    ['2025-01-20', 21.930],
-    ['2025-01-23', 21.925],
-    ['2025-01-28', 21.935],
-    ['2025-01-30', 21.940],
-    ['2025-01-31', 21.945],
-    // Febrero 2025
-    ['2025-02-03', 21.950],
-    ['2025-02-05', 21.955],
-    ['2025-02-07', 21.960],
-    ['2025-02-10', 21.965],
-    ['2025-02-14', 21.970],
-    ['2025-02-17', 21.975],
-    ['2025-02-20', 21.980],
-    ['2025-02-24', 21.985],
-    ['2025-02-26', 21.990],
-    ['2025-02-28', 21.995],
-    // Marzo 2025
     ['2025-03-03', 22.000],
     ['2025-03-06', 22.005],
     ['2025-03-10', 22.010],
@@ -80,26 +34,26 @@ document.addEventListener('DOMContentLoaded', function () {
   let chart;
   let intervalId;
 
-  // Crear el gráfico con apariencia de sismógrafo
+  // Crear la gráfica con apariencia elegante y curvas suaves
   function createChart() {
     return Highcharts.chart('container', {
       chart: {
-        type: 'line', // Efecto sismógrafo
+        type: 'spline',
         backgroundColor: '#1e1e1e',
         animation: false
       },
       title: {
-        text: 'Comportamiento de USD y EUR en MXN (Ene - Mar 2025)',
-        style: { color: '#ffffff' }
+        text: 'Comportamiento de USD y EUR en MXN - Marzo 2025',
+        style: { color: '#ffffff', fontSize: '20px' }
       },
       xAxis: {
         type: 'datetime',
-        labels: { style: { color: '#cccccc' } },
+        labels: { style: { color: '#cccccc', fontSize: '12px' } },
         lineColor: '#444',
         tickColor: '#444'
       },
       yAxis: {
-        title: { text: 'Tipo de Cambio' },
+        title: { text: 'Tipo de Cambio', style: { color: '#cccccc' } },
         labels: { style: { color: '#cccccc' } },
         gridLineColor: '#333'
       },
@@ -112,16 +66,16 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       legend: {
         enabled: true,
-        itemStyle: { color: '#ffffff' }
+        itemStyle: { color: '#ffffff', fontSize: '12px' }
       },
       plotOptions: {
-        line: {
-          lineWidth: 1, // Línea delgada para efecto sismógrafo
+        spline: {
+          lineWidth: 3,
           marker: { enabled: false },
           enableMouseTracking: true
         },
         series: {
-          animation: { duration: 300, easing: 'linear' }
+          animation: { duration: 400, easing: 'linear' }
         }
       },
       series: [
@@ -143,31 +97,28 @@ document.addEventListener('DOMContentLoaded', function () {
   // Función para iniciar la animación agregando puntos progresivamente
   function startAnimation() {
     if (intervalId) clearInterval(intervalId);
-    // Reiniciamos los datos de ambas series
+    // Reiniciar los datos de ambas series
     chart.series[0].setData([]);
     chart.series[1].setData([]);
     let i = 0;
     intervalId = setInterval(() => {
       if (i < processedDataUsd.length) {
         chart.series[0].addPoint(processedDataUsd[i], false, false, {
-          duration: 300,
+          duration: 400,
           easing: 'linear'
         });
         chart.series[1].addPoint(processedDataEur[i], true, false, {
-          duration: 300,
+          duration: 400,
           easing: 'linear'
         });
         i++;
       } else {
         clearInterval(intervalId);
       }
-    }, 300); // Intervalo de 300 ms para efecto dinámico
+    }, 600); // Intervalo ligeramente superior a la duración de la animación
   }
 
-  // Crear el gráfico al cargar el DOM
   chart = createChart();
-
-  // Asignar el evento al botón de reproducción
   const button = document.getElementById('play-btn');
   button.addEventListener('click', startAnimation);
 });
