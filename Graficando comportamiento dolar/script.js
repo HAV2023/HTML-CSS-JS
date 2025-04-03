@@ -34,17 +34,17 @@ document.addEventListener('DOMContentLoaded', function () {
     ['2025-03-31', 20.780]
   ];
 
-  // Convertir las fechas a timestamp para Highcharts
+  // Convertir fechas a timestamp para Highcharts
   const processedDataUsd = rawDataUsd.map(([date, value]) => [new Date(date).getTime(), value]);
 
   let chart;
   let intervalId;
 
-  // Crear el gráfico con animación personalizada
+  // Crear el gráfico tipo "area" con degradado
   function createChart() {
     return Highcharts.chart('container', {
       chart: {
-        type: 'line',
+        type: 'area',
         animation: false,
         backgroundColor: '#fff'
       },
@@ -68,12 +68,17 @@ document.addEventListener('DOMContentLoaded', function () {
         pointFormat: 'USD/MXN: {point.y:.3f}'
       },
       plotOptions: {
-        line: {
+        area: {
           lineWidth: 2,
           marker: { enabled: true },
-          enableMouseTracking: true
-        },
-        series: {
+          // Definir color degradado en el área
+          fillColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+            stops: [
+              [0, 'rgba(0,122,204,0.5)'],
+              [1, 'rgba(0,122,204,0)']
+            ]
+          },
           animation: { duration: 400, easing: 'easeOutBounce' }
         }
       },
@@ -86,10 +91,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Función para iniciar la animación personalizada: agrega cada punto diario
+  // Función para iniciar la animación agregando cada punto diario
   function startAnimation() {
     if (intervalId) clearInterval(intervalId);
-    chart.series[0].setData([]); // Reiniciar la serie
+    // Reiniciar la serie
+    chart.series[0].setData([]);
     let i = 0;
     intervalId = setInterval(() => {
       if (i < processedDataUsd.length) {
@@ -104,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 500);
   }
 
+  // Crear el gráfico y asignar el evento al botón
   chart = createChart();
   document.getElementById('play-btn').addEventListener('click', startAnimation);
 });
