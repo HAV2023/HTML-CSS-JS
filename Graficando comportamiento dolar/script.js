@@ -1,16 +1,37 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Datos de USD/MXN en marzo 2025 (10 puntos de ejemplo)
+  // Datos diarios de USD/MXN para marzo 2025 (31 puntos)
   const rawDataUsd = [
-    ['2025-03-03', 20.700],
-    ['2025-03-06', 20.710],
-    ['2025-03-10', 20.720],
-    ['2025-03-13', 20.730],
-    ['2025-03-17', 20.740],
+    ['2025-03-01', 20.700],
+    ['2025-03-02', 20.705],
+    ['2025-03-03', 20.710],
+    ['2025-03-04', 20.708],
+    ['2025-03-05', 20.712],
+    ['2025-03-06', 20.715],
+    ['2025-03-07', 20.717],
+    ['2025-03-08', 20.720],
+    ['2025-03-09', 20.722],
+    ['2025-03-10', 20.725],
+    ['2025-03-11', 20.728],
+    ['2025-03-12', 20.730],
+    ['2025-03-13', 20.732],
+    ['2025-03-14', 20.735],
+    ['2025-03-15', 20.737],
+    ['2025-03-16', 20.740],
+    ['2025-03-17', 20.742],
+    ['2025-03-18', 20.745],
+    ['2025-03-19', 20.747],
     ['2025-03-20', 20.750],
-    ['2025-03-23', 20.760],
-    ['2025-03-26', 20.770],
-    ['2025-03-28', 20.780],
-    ['2025-03-31', 20.790]
+    ['2025-03-21', 20.752],
+    ['2025-03-22', 20.755],
+    ['2025-03-23', 20.757],
+    ['2025-03-24', 20.760],
+    ['2025-03-25', 20.762],
+    ['2025-03-26', 20.765],
+    ['2025-03-27', 20.767],
+    ['2025-03-28', 20.770],
+    ['2025-03-29', 20.772],
+    ['2025-03-30', 20.775],
+    ['2025-03-31', 20.780]
   ];
 
   // Convertir las fechas a timestamp para Highcharts
@@ -19,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let chart;
   let intervalId;
 
-  // Crear el gráfico vacío
+  // Crear el gráfico con animación personalizada
   function createChart() {
     return Highcharts.chart('container', {
       chart: {
@@ -65,11 +86,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Función para la animación de entrada personalizada: agrega puntos uno a uno
+  // Función para iniciar la animación personalizada: agrega cada punto diario
   function startAnimation() {
     if (intervalId) clearInterval(intervalId);
-    // Reiniciar la serie a vacío
-    chart.series[0].setData([]);
+    chart.series[0].setData([]); // Reiniciar la serie
     let i = 0;
     intervalId = setInterval(() => {
       if (i < processedDataUsd.length) {
@@ -81,10 +101,9 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         clearInterval(intervalId);
       }
-    }, 500); // Intervalo entre cada punto
+    }, 500);
   }
 
-  // Crear el gráfico y asignar el evento al botón
   chart = createChart();
   document.getElementById('play-btn').addEventListener('click', startAnimation);
 });
