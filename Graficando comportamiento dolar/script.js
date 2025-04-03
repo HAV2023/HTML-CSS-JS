@@ -1,8 +1,14 @@
-// Esperar a que todo el contenido del DOM esté cargado antes de ejecutar el script
+<script>
 document.addEventListener('DOMContentLoaded', function () {
-  
-  // Definir los datos diarios de USD/MXN para marzo 2025.
-  // Cada sub-arreglo contiene: [fecha (en formato 'YYYY-MM-DD'), valor del tipo de cambio]
+
+  // Configurar Highcharts para usar punto como separador decimal globalmente
+  Highcharts.setOptions({
+    lang: {
+      decimalPoint: '.',
+      thousandsSep: ''
+    }
+  });
+
   const rawDataUsd = [
     ['2025-03-01', 20.700],
     ['2025-03-02', 20.705],
@@ -37,91 +43,82 @@ document.addEventListener('DOMContentLoaded', function () {
     ['2025-03-31', 20.780]
   ];
 
-  // Convertir las fechas de los datos a formato timestamp (número de milisegundos)
-  // Esto es requerido por Highcharts para manejar correctamente las fechas en el eje X
   const processedDataUsd = rawDataUsd.map(([date, value]) => [new Date(date).getTime(), value]);
 
-  // Variables globales para almacenar el objeto del gráfico y el identificador del intervalo de animación
   let chart;
   let intervalId;
 
-  // Función para crear y configurar el gráfico estilo "sismógrafo"
   function createChart() {
     return Highcharts.chart('container', {
       chart: {
-        type: 'line',                // Tipo de gráfico: línea
-        backgroundColor: '#000',       // Fondo negro para simular un sismógrafo
-        animation: false               // Se desactiva la animación global, controlaremos la animación al agregar puntos
+        type: 'line',
+        backgroundColor: '#000',
+        animation: false
       },
       title: {
-        text: 'Sismógrafo del Dólar - Marzo 2025', // Título del gráfico
-        style: { color: '#00ff00', fontSize: '18px' } // Estilo: color neón verde y tamaño de fuente
+        text: 'Sismógrafo del Dólar - Marzo 2025',
+        style: { color: '#00ff00', fontSize: '18px' }
       },
       xAxis: {
-        type: 'datetime',            // Eje X basado en fechas
-        labels: { style: { color: '#fff' } }, // Etiquetas en blanco para buena visibilidad en fondo negro
-        lineColor: '#444',           // Color de la línea del eje X
-        tickColor: '#444'            // Color de los ticks del eje X
+        type: 'datetime',
+        labels: { style: { color: '#fff' } },
+        lineColor: '#444',
+        tickColor: '#444'
       },
       yAxis: {
-        title: { text: 'Tipo de Cambio', style: { color: '#fff' } }, // Título del eje Y
-        labels: { style: { color: '#fff' } }, // Etiquetas en blanco
-        gridLineColor: '#444'        // Color de las líneas de la cuadrícula
+        title: { text: 'Tipo de Cambio', style: { color: '#fff' } },
+        labels: {
+          style: { color: '#fff' },
+          formatter: function () {
+            return this.value.toFixed(3); // Asegura punto decimal
+          }
+        },
+        gridLineColor: '#444'
       },
       tooltip: {
-        backgroundColor: '#333',     // Fondo del tooltip (caja de información)
-        style: { color: '#fff' },      // Texto en blanco en el tooltip
-        headerFormat: '<b>{point.x:%e %b %Y}</b><br>', // Formato de la fecha en el tooltip
-        pointFormat: 'USD/MXN: {point.y:.3f}' // Formato del valor mostrado en el tooltip
+        backgroundColor: '#333',
+        style: { color: '#fff' },
+        headerFormat: '<b>{point.x:%e %b %Y}</b><br>',
+        pointFormat: 'USD/MXN: {point.y:.3f}' // Usa punto decimal
       },
       plotOptions: {
         line: {
-          lineWidth: 1,              // Grosor de la línea (efecto sismógrafo: línea fina)
-          marker: { enabled: false }, // Se deshabilitan los marcadores para una apariencia continua
-          enableMouseTracking: true   // Permite la interacción con el mouse
+          lineWidth: 1,
+          marker: { enabled: false },
+          enableMouseTracking: true
         },
         series: {
-          animation: { duration: 400, easing: 'easeOutBounce' } // Configuración de animación para la serie
+          animation: { duration: 400, easing: 'easeOutBounce' }
         }
       },
       series: [{
-        name: 'USD/MXN',             // Nombre de la serie
-        data: [],                    // La serie se inicializa vacía; los puntos se agregarán progresivamente
-        color: '#00ff00'             // Color de la línea en neón verde
+        name: 'USD/MXN',
+        data: [],
+        color: '#00ff00'
       }],
-      credits: { enabled: false }    // Se deshabilitan los créditos de Highcharts
+      credits: { enabled: false }
     });
   }
 
-  // Función para iniciar la animación: agrega cada punto de los datos de forma progresiva
   function startAnimation() {
-    // Si ya existe un intervalo de animación, se limpia para evitar duplicados
     if (intervalId) clearInterval(intervalId);
-    
-    // Reinicia la serie del gráfico para que comience vacía
     chart.series[0].setData([]);
-    
-    let i = 0; // Índice para recorrer los puntos de datos
+    let i = 0;
     intervalId = setInterval(() => {
-      // Si aún quedan puntos por agregar...
       if (i < processedDataUsd.length) {
-        // Agrega el siguiente punto a la serie; se actualiza el gráfico automáticamente (true)
-        // No se elimina el primer punto (false) y se especifica la configuración de animación personalizada
         chart.series[0].addPoint(processedDataUsd[i], true, false, {
-          duration: 400,             // Duración de la animación de este punto en milisegundos
-          easing: 'easeOutBounce'    // Efecto de animación: rebote al finalizar
+          duration: 400,
+          easing: 'easeOutBounce'
         });
-        i++; // Incrementar el índice para el siguiente punto
+        i++;
       } else {
-        // Cuando se han agregado todos los puntos, se limpia el intervalo para detener la animación
         clearInterval(intervalId);
       }
-    }, 500); // Intervalo de 500 ms entre la adición de cada punto
+    }, 500);
   }
 
-  // Crear el gráfico y almacenarlo en la variable global "chart"
   chart = createChart();
 
-  // Asignar el evento 'click' del botón con id 'play-btn' para iniciar la animación
   document.getElementById('play-btn').addEventListener('click', startAnimation);
 });
+</script>
