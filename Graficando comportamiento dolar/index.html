@@ -1,15 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!--
+    Metaetiquetas:
+      - charset: define la codificación de caracteres como UTF-8.
+      - viewport: establece el ancho del viewport a 600px (ideal para este ejercicio) y escala inicial.
+  -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=600, initial-scale=1.0">
+  
+  <!-- Título de la página -->
   <title>Sismógrafo del Dólar - Marzo 2025</title>
+  
+  <!-- Enlace al archivo de estilos CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!--
+    Contenedor principal para el gráfico.
+    Se usará para renderizar la gráfica de Highcharts.
+  -->
   <div id="container"></div>
+  
+  <!--
+    Botón para reproducir la animación del gráfico.
+    Al hacer clic se ejecuta una función (definida en script.js) que inicia la animación.
+  -->
   <button id="play-btn">▶ Reproducir Animación</button>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+  
+  <!--
+    Inclusión de la biblioteca Highcharts desde su CDN.
+    Highcharts se usará para generar y animar el gráfico.
+  -->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  
+  <!--
+    Inclusión del archivo JavaScript propio que contiene la lógica para:
+      - Configurar y crear el gráfico (modo sismógrafo)
+      - Procesar los datos (por ejemplo, fechas y valores)
+      - Definir la animación (agregar puntos uno a uno)
+      - Manejar la interacción del botón "Reproducir Animación"
+  -->
   <script src="script.js"></script>
 </body>
 </html>
