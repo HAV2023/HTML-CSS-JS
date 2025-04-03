@@ -1,33 +1,50 @@
+/* 
+  Estilos generales para el cuerpo del documento.
+  Se define un fondo negro, tipografía sans-serif, color de texto blanco,
+  y se utiliza flexbox para centrar el contenido en una columna.
+*/
 body {
-  background-color: #000;
-  font-family: sans-serif;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  margin: 0;
+  background-color: #000;         /* Fondo negro */
+  font-family: sans-serif;        /* Tipografía sans-serif */
+  color: #fff;                    /* Texto en blanco */
+  display: flex;                  /* Utiliza flexbox para el layout */
+  flex-direction: column;         /* Los elementos se disponen verticalmente */
+  align-items: center;            /* Centra horizontalmente los elementos hijos */
+  padding: 20px;                  /* Espacio interno de 20px */
+  margin: 0;                      /* Elimina márgenes predeterminados */
 }
 
+/* 
+  Estilos para el contenedor que alberga la gráfica.
+  Se fija un tamaño de 600px x 600px, con fondo negro y un borde gris oscuro.
+*/
 #container {
-  width: 600px;
-  height: 600px;
-  background-color: #000;
-  border: 1px solid #444;
-  margin-bottom: 20px;
+  width: 600px;                   /* Ancho fijo de 600px */
+  height: 600px;                  /* Alto fijo de 600px */
+  background-color: #000;         /* Fondo negro */
+  border: 1px solid #444;         /* Borde de 1px, color gris oscuro */
+  margin-bottom: 20px;            /* Espacio inferior de 20px */
 }
 
+/* 
+  Estilos para el botón de reproducción de la animación.
+  Se configura el tamaño, colores, bordes redondeados y transición para un efecto suave.
+*/
 #play-btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  background-color: #00ff00;
-  color: #000;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  padding: 10px 20px;             /* Espaciado interno: 10px vertical y 20px horizontal */
+  font-size: 16px;                /* Tamaño de fuente de 16px */
+  border: none;                   /* Sin borde predeterminado */
+  background-color: #00ff00;      /* Fondo verde brillante */
+  color: #000;                    /* Texto en negro para buen contraste */
+  border-radius: 4px;             /* Bordes redondeados de 4px */
+  cursor: pointer;                /* Cursor en forma de mano al pasar el mouse */
+  transition: background-color 0.3s; /* Transición suave de 0.3s para el cambio de color */
 }
 
+/* 
+  Estilos para el estado hover del botón.
+  Se cambia el color de fondo a un tono de verde más oscuro al pasar el mouse.
+*/
 #play-btn:hover {
-  background-color: #00cc00;
+  background-color: #00cc00;      /* Fondo verde un poco más oscuro al hacer hover */
 }
