@@ -40,11 +40,11 @@ document.addEventListener('DOMContentLoaded', function () {
   let chart;
   let intervalId;
 
-  // Crear el gráfico tipo "area" con degradado
+  // Crear el gráfico de tipo "areaspline" con degradado azul
   function createChart() {
     return Highcharts.chart('container', {
       chart: {
-        type: 'area',
+        type: 'areaspline',
         animation: false,
         backgroundColor: '#fff'
       },
@@ -68,17 +68,20 @@ document.addEventListener('DOMContentLoaded', function () {
         pointFormat: 'USD/MXN: {point.y:.3f}'
       },
       plotOptions: {
-        area: {
+        areaspline: {
           lineWidth: 2,
           marker: { enabled: true },
-          // Definir color degradado en el área
+          animation: { duration: 400, easing: 'easeOutBounce' },
+          // Definir el degradado azul en el área
           fillColor: {
             linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
             stops: [
-              [0, 'rgba(0,122,204,0.5)'],
-              [1, 'rgba(0,122,204,0)']
+              [0, Highcharts.color('#007acc').setOpacity(0.5).get('rgba')],
+              [1, Highcharts.color('#007acc').setOpacity(0).get('rgba')]
             ]
-          },
+          }
+        },
+        series: {
           animation: { duration: 400, easing: 'easeOutBounce' }
         }
       },
@@ -91,11 +94,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Función para iniciar la animación agregando cada punto diario
+  // Función para iniciar la animación: agrega cada punto diario uno a uno
   function startAnimation() {
     if (intervalId) clearInterval(intervalId);
-    // Reiniciar la serie
-    chart.series[0].setData([]);
+    chart.series[0].setData([]); // Reiniciar la serie
     let i = 0;
     intervalId = setInterval(() => {
       if (i < processedDataUsd.length) {
@@ -110,7 +112,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 500);
   }
 
-  // Crear el gráfico y asignar el evento al botón
   chart = createChart();
   document.getElementById('play-btn').addEventListener('click', startAnimation);
 });
