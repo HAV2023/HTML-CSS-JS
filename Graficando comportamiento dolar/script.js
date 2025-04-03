@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Datos para USD/MXN en marzo 2025 (10 puntos)
+  // Datos de USD/MXN en marzo 2025 (10 puntos de ejemplo)
   const rawDataUsd = [
     ['2025-03-03', 20.700],
     ['2025-03-06', 20.710],
@@ -13,112 +13,78 @@ document.addEventListener('DOMContentLoaded', function () {
     ['2025-03-31', 20.790]
   ];
 
-  // Datos para EUR/MXN en marzo 2025 (10 puntos)
-  const rawDataEur = [
-    ['2025-03-03', 22.000],
-    ['2025-03-06', 22.005],
-    ['2025-03-10', 22.010],
-    ['2025-03-13', 22.015],
-    ['2025-03-17', 22.020],
-    ['2025-03-20', 22.025],
-    ['2025-03-23', 22.030],
-    ['2025-03-26', 22.035],
-    ['2025-03-28', 22.040],
-    ['2025-03-31', 22.045]
-  ];
-
-  // Convertir las fechas a timestamp
+  // Convertir las fechas a timestamp para Highcharts
   const processedDataUsd = rawDataUsd.map(([date, value]) => [new Date(date).getTime(), value]);
-  const processedDataEur = rawDataEur.map(([date, value]) => [new Date(date).getTime(), value]);
 
   let chart;
   let intervalId;
 
-  // Crear la gráfica con apariencia elegante y curvas suaves
+  // Crear el gráfico vacío
   function createChart() {
     return Highcharts.chart('container', {
       chart: {
-        type: 'spline',
-        backgroundColor: '#1e1e1e',
-        animation: false
+        type: 'line',
+        animation: false,
+        backgroundColor: '#fff'
       },
       title: {
-        text: 'Comportamiento de USD y EUR en MXN - Marzo 2025',
-        style: { color: '#ffffff', fontSize: '20px' }
+        text: 'Comportamiento del Dólar (USD/MXN) - Marzo 2025',
+        style: { color: '#333', fontSize: '18px' }
       },
       xAxis: {
         type: 'datetime',
-        labels: { style: { color: '#cccccc', fontSize: '12px' } },
-        lineColor: '#444',
-        tickColor: '#444'
+        labels: { style: { color: '#333' } },
+        lineColor: '#ccc',
+        tickColor: '#ccc'
       },
       yAxis: {
-        title: { text: 'Tipo de Cambio', style: { color: '#cccccc' } },
-        labels: { style: { color: '#cccccc' } },
-        gridLineColor: '#333'
+        title: { text: 'Tipo de Cambio', style: { color: '#333' } },
+        labels: { style: { color: '#333' } },
+        gridLineColor: '#eee'
       },
       tooltip: {
-        shared: true,
-        backgroundColor: '#333',
-        style: { color: '#fff' },
         headerFormat: '<b>{point.x:%e %b %Y}</b><br>',
-        pointFormat: '{series.name}: {point.y:.3f}'
-      },
-      legend: {
-        enabled: true,
-        itemStyle: { color: '#ffffff', fontSize: '12px' }
+        pointFormat: 'USD/MXN: {point.y:.3f}'
       },
       plotOptions: {
-        spline: {
-          lineWidth: 3,
-          marker: { enabled: false },
+        line: {
+          lineWidth: 2,
+          marker: { enabled: true },
           enableMouseTracking: true
         },
         series: {
-          animation: { duration: 400, easing: 'linear' }
+          animation: { duration: 400, easing: 'easeOutBounce' }
         }
       },
-      series: [
-        {
-          name: 'USD/MXN',
-          data: [],
-          color: '#00e6e6'
-        },
-        {
-          name: 'EUR/MXN',
-          data: [],
-          color: '#ffcc00'
-        }
-      ],
+      series: [{
+        name: 'USD/MXN',
+        data: [],
+        color: '#007acc'
+      }],
       credits: { enabled: false }
     });
   }
 
-  // Función para iniciar la animación agregando puntos progresivamente
+  // Función para la animación de entrada personalizada: agrega puntos uno a uno
   function startAnimation() {
     if (intervalId) clearInterval(intervalId);
-    // Reiniciar los datos de ambas series
+    // Reiniciar la serie a vacío
     chart.series[0].setData([]);
-    chart.series[1].setData([]);
     let i = 0;
     intervalId = setInterval(() => {
       if (i < processedDataUsd.length) {
-        chart.series[0].addPoint(processedDataUsd[i], false, false, {
+        chart.series[0].addPoint(processedDataUsd[i], true, false, {
           duration: 400,
-          easing: 'linear'
-        });
-        chart.series[1].addPoint(processedDataEur[i], true, false, {
-          duration: 400,
-          easing: 'linear'
+          easing: 'easeOutBounce'
         });
         i++;
       } else {
         clearInterval(intervalId);
       }
-    }, 600); // Intervalo ligeramente superior a la duración de la animación
+    }, 500); // Intervalo entre cada punto
   }
 
+  // Crear el gráfico y asignar el evento al botón
   chart = createChart();
-  const button = document.getElementById('play-btn');
-  button.addEventListener('click', startAnimation);
+  document.getElementById('play-btn').addEventListener('click', startAnimation);
 });
