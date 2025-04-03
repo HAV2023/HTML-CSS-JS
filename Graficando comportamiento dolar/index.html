@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Define la codificación de caracteres como UTF-8 -->
   <meta charset="UTF-8">
+  <!-- Configura el viewport para dispositivos, con un ancho de 600px y escala inicial -->
   <meta name="viewport" content="width=600, initial-scale=1.0">
+  <!-- Título de la página que se mostrará en la pestaña del navegador -->
   <title>USD vs MXN - Marzo 2025</title>
+  <!-- Enlaza el archivo de estilos CSS externo para aplicar el diseño a la página -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+  <!-- Contenedor principal donde se renderizará la gráfica de Highcharts -->
   <div id="container"></div>
+  <!-- Botón que al hacer clic inicia la animación del gráfico -->
   <button id="play-btn">▶ Reproducir Animación</button>
 
+  <!-- Carga la biblioteca Highcharts desde su CDN para poder generar gráficos interactivos -->
   <script src="https://code.highcharts.com/highcharts.js"></script>
+  <!-- Carga el archivo JavaScript que contiene la lógica para procesar datos y animar el gráfico -->
   <script src="script.js"></script>
 
 </body>
