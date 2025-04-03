@@ -40,46 +40,40 @@ document.addEventListener('DOMContentLoaded', function () {
   let chart;
   let intervalId;
 
-  // Crear el gráfico de tipo "areaspline" con degradado azul
+  // Crear el gráfico estilo sismógrafo
   function createChart() {
     return Highcharts.chart('container', {
       chart: {
-        type: 'areaspline',
-        animation: false,
-        backgroundColor: '#fff'
+        type: 'line',
+        backgroundColor: '#000',
+        animation: false
       },
       title: {
-        text: 'Comportamiento del Dólar (USD/MXN) - Marzo 2025',
-        style: { color: '#333', fontSize: '18px' }
+        text: 'Sismógrafo del Dólar - Marzo 2025',
+        style: { color: '#00ff00', fontSize: '18px' }
       },
       xAxis: {
         type: 'datetime',
-        labels: { style: { color: '#333' } },
-        lineColor: '#ccc',
-        tickColor: '#ccc'
+        labels: { style: { color: '#fff' } },
+        lineColor: '#444',
+        tickColor: '#444'
       },
       yAxis: {
-        title: { text: 'Tipo de Cambio', style: { color: '#333' } },
-        labels: { style: { color: '#333' } },
-        gridLineColor: '#eee'
+        title: { text: 'Tipo de Cambio', style: { color: '#fff' } },
+        labels: { style: { color: '#fff' } },
+        gridLineColor: '#444'
       },
       tooltip: {
+        backgroundColor: '#333',
+        style: { color: '#fff' },
         headerFormat: '<b>{point.x:%e %b %Y}</b><br>',
         pointFormat: 'USD/MXN: {point.y:.3f}'
       },
       plotOptions: {
-        areaspline: {
-          lineWidth: 2,
-          marker: { enabled: true },
-          animation: { duration: 400, easing: 'easeOutBounce' },
-          // Definir el degradado azul en el área
-          fillColor: {
-            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-            stops: [
-              [0, Highcharts.color('#007acc').setOpacity(0.5).get('rgba')],
-              [1, Highcharts.color('#007acc').setOpacity(0).get('rgba')]
-            ]
-          }
+        line: {
+          lineWidth: 1,
+          marker: { enabled: false },
+          enableMouseTracking: true
         },
         series: {
           animation: { duration: 400, easing: 'easeOutBounce' }
@@ -88,16 +82,16 @@ document.addEventListener('DOMContentLoaded', function () {
       series: [{
         name: 'USD/MXN',
         data: [],
-        color: '#007acc'
+        color: '#00ff00'
       }],
       credits: { enabled: false }
     });
   }
 
-  // Función para iniciar la animación: agrega cada punto diario uno a uno
+  // Función para iniciar la animación (añade cada punto de forma progresiva)
   function startAnimation() {
     if (intervalId) clearInterval(intervalId);
-    chart.series[0].setData([]); // Reiniciar la serie
+    chart.series[0].setData([]); // Reinicia la serie
     let i = 0;
     intervalId = setInterval(() => {
       if (i < processedDataUsd.length) {
