@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
         animation: false
       },
       title: {
-        text: 'Sismógrafo del Dólar - Marzo 2025',
+        text: 'Dólar Norteamericano vs Peso mexicano - Marzo 2025',
         style: { color: '#00ff00', fontSize: '18px' }
       },
       xAxis: {
