@@ -1,7 +1,5 @@
-<script>
 document.addEventListener('DOMContentLoaded', function () {
 
-  // Configurar Highcharts para usar punto como separador decimal globalmente
   Highcharts.setOptions({
     lang: {
       decimalPoint: '.',
@@ -79,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
         backgroundColor: '#333',
         style: { color: '#fff' },
         headerFormat: '<b>{point.x:%e %b %Y}</b><br>',
-        pointFormat: 'USD/MXN: {point.y:.3f}' // Usa punto decimal
+        pointFormat: 'USD/MXN: {point.y:.3f}'
       },
       plotOptions: {
         line: {
@@ -118,7 +116,5 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   chart = createChart();
-
   document.getElementById('play-btn').addEventListener('click', startAnimation);
 });
-</script>
