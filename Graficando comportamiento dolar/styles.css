@@ -1,33 +1,58 @@
+/* 
+  Estilos generales para el body:
+  - Se establece un fondo negro.
+  - Se utiliza la fuente sans-serif.
+  - El color del texto es blanco para un buen contraste.
+  - Se emplea flexbox para centrar el contenido verticalmente y horizontalmente.
+  - Se elimina el margen por defecto y se añade un padding de 20px.
+*/
 body {
-  background-color: #000;
-  font-family: sans-serif;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  margin: 0;
+  background-color: #000;         /* Fondo negro */
+  font-family: sans-serif;        /* Fuente sans-serif para una apariencia moderna y limpia */
+  color: #fff;                    /* Texto en blanco */
+  display: flex;                  /* Uso de Flexbox para organizar el layout */
+  flex-direction: column;         /* Organiza los elementos en columna (uno debajo del otro) */
+  align-items: center;            /* Centra horizontalmente los elementos dentro del body */
+  padding: 20px;                  /* Espacio interno de 20px alrededor del contenido */
+  margin: 0;                      /* Elimina los márgenes predeterminados del navegador */
 }
 
+/* 
+  Estilos para el contenedor del gráfico:
+  - Se define un ancho y alto fijos de 600px para mantener proporciones.
+  - El fondo se mantiene negro y se añade un borde gris oscuro.
+  - Se agrega un margen inferior para separar este contenedor del botón.
+*/
 #container {
-  width: 600px;
-  height: 600px;
-  background-color: #000;
-  border: 1px solid #444;
-  margin-bottom: 20px;
+  width: 600px;                   /* Ancho fijo de 600px */
+  height: 600px;                  /* Alto fijo de 600px */
+  background-color: #000;         /* Fondo negro para el contenedor */
+  border: 1px solid #444;         /* Borde de 1px con color gris oscuro */
+  margin-bottom: 20px;            /* Espacio inferior de 20px para separar del botón */
 }
 
+/* 
+  Estilos para el botón de reproducción de la animación:
+  - Se define un padding interno para aumentar el área clicable.
+  - Se especifica el tamaño de fuente, se elimina el borde y se establece un fondo verde brillante.
+  - El texto es de color negro para un buen contraste.
+  - Se aplican bordes redondeados y se añade una transición para un efecto suave al cambiar de color.
+*/
 #play-btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  background-color: #00ff00;
-  color: #000;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  padding: 10px 20px;             /* Espaciado interno: 10px vertical, 20px horizontal */
+  font-size: 16px;                /* Tamaño de fuente de 16px */
+  border: none;                   /* Sin borde */
+  background-color: #00ff00;      /* Fondo verde brillante */
+  color: #000;                    /* Texto en negro */
+  border-radius: 4px;             /* Bordes redondeados de 4px */
+  cursor: pointer;                /* Cursor en forma de mano al pasar por el botón */
+  transition: background-color 0.3s; /* Transición suave para el cambio de color en hover */
 }
 
+/* 
+  Estado hover para el botón:
+  - Cambia el color de fondo a un verde un poco más oscuro cuando el usuario pasa el mouse.
+*/
 #play-btn:hover {
-  background-color: #00cc00;
+  background-color: #00cc00;      /* Fondo verde un poco más oscuro en estado hover */
 }
