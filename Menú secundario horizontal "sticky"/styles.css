@@ -1,68 +1,79 @@
 /* Reiniciamos márgenes y padding a cero en html y body */
+/* Esto elimina los márgenes y padding predeterminados para que no interfieran con nuestro diseño */
 html, body {
   margin: 0;
   padding: 0;
 }
 
 /* Reset global para asegurar que nada agregue márgenes extra */
+/* Se aplica box-sizing: border-box a todos los elementos para que el padding y el borde se incluyan en el ancho y alto del elemento */
 * {
   box-sizing: border-box;
 }
 
 /* Estilos generales */
+/* Definición de estilos básicos para el cuerpo del documento */
 body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
+  font-family: Arial, sans-serif; /* Fuente principal del sitio */
+  line-height: 1.6; /* Altura de línea para mejorar la legibilidad del texto */
 }
 
 /* Menú primario */
+/* Estilos para el menú de navegación principal que se mostrará en la parte superior */
 .primary-menu ul {
-  display: flex;
-  list-style: none;
-  background-color: #333;
+  display: flex;         /* Utiliza flexbox para que los elementos de la lista se muestren en línea */
+  list-style: none;      /* Elimina los puntos de las listas */
+  background-color: #333; /* Color de fondo oscuro para el menú primario */
 }
 
+/* Estilos para los enlaces del menú primario */
 .primary-menu a {
-  display: block;
-  padding: 15px 20px;
-  color: #fff;
-  text-decoration: none;
+  display: block;            /* Permite que el enlace ocupe todo el espacio de su contenedor */
+  padding: 15px 20px;        /* Espaciado interno para aumentar el área clickeable y mejorar la estética */
+  color: #fff;               /* Color de texto blanco */
+  text-decoration: none;     /* Elimina el subrayado predeterminado de los enlaces */
 }
 
+/* Efecto hover para los enlaces del menú primario */
 .primary-menu a:hover {
-  background-color: #555;
+  background-color: #555;    /* Cambia el color de fondo al pasar el cursor para dar feedback visual */
 }
 
 /* Menú secundario */
+/* Estilos para el menú secundario, que se comporta de forma sticky (pegajosa) */
 .secondary-menu {
-  position: -webkit-sticky; /* Para Safari */
-  position: sticky;
-  top: 0;
-  margin: 0;
-  padding: 0;
-  z-index: 1000; /* Para estar sobre el contenido */
-  background-color: #444; /* Fondo para que se note bien el menú */
+  position: -webkit-sticky;  /* Soporte para navegadores basados en WebKit, como Safari */
+  position: sticky;          /* Hace que el elemento se fije en la parte superior del viewport cuando se hace scroll */
+  top: 0;                    /* Posición desde la parte superior, en este caso 0 para que quede justo pegado */
+  margin: 0;                 /* Elimina márgenes para evitar espacios indeseados */
+  padding: 0;                /* Elimina padding */
+  z-index: 1000;             /* Asigna una alta prioridad para que el menú se muestre por encima de otros elementos */
+  background-color: #444;    /* Color de fondo para que se destaque y sea consistente con el diseño */
 }
 
+/* Estilos para la lista dentro del menú secundario */
 .secondary-menu ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  display: flex;       /* Utiliza flexbox para distribuir horizontalmente los elementos */
+  list-style: none;    /* Elimina los puntos de la lista */
+  margin: 0;           /* Elimina márgenes */
+  padding: 0;          /* Elimina padding */
 }
 
+/* Estilos para los enlaces del menú secundario */
 .secondary-menu a {
-  display: block;
-  padding: 15px 20px;
-  color: #fff;
-  text-decoration: none;
+  display: block;            /* Permite que el enlace ocupe su contenedor completo */
+  padding: 15px 20px;        /* Espaciado interno para mejorar la usabilidad y estética */
+  color: #fff;               /* Color de texto blanco */
+  text-decoration: none;     /* Elimina subrayado del enlace */
 }
 
+/* Efecto hover para los enlaces del menú secundario */
 .secondary-menu a:hover {
-  background-color: #666;
+  background-color: #666;    /* Cambia el color de fondo al pasar el cursor para un feedback visual */
 }
 
 /* Contenido principal */
+/* Estilos para el área donde se muestra el contenido principal de la página */
 .contenido {
-  padding: 20px;
+  padding: 20px; /* Añade padding para dar espacio alrededor del contenido y mejorar la lectura */
 }
