@@ -4,4 +4,3 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Aquí se pueden agregar funcionalidades adicionales si es necesario.
 });
-
