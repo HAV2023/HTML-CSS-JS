@@ -1,16 +1,21 @@
-/* Reset básico y estilos globales */
-* {
-  box-sizing: border-box;
+/* Reiniciamos márgenes y padding a cero en html y body */
+html, body {
   margin: 0;
   padding: 0;
 }
 
+/* Reset global para asegurar que nada agregue márgenes extra */
+* {
+  box-sizing: border-box;
+}
+
+/* Estilos generales */
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
 }
 
-/* Estilos para el menú primario */
+/* Menú primario */
 .primary-menu ul {
   display: flex;
   list-style: none;
@@ -28,11 +33,22 @@ body {
   background-color: #555;
 }
 
-/* Estilos para el menú secundario */
+/* Menú secundario */
+.secondary-menu {
+  position: -webkit-sticky; /* Para Safari */
+  position: sticky;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 1000; /* Para estar sobre el contenido */
+  background-color: #444; /* Fondo para que se note bien el menú */
+}
+
 .secondary-menu ul {
   display: flex;
   list-style: none;
-  background-color: #444;
+  margin: 0;
+  padding: 0;
 }
 
 .secondary-menu a {
@@ -46,15 +62,7 @@ body {
   background-color: #666;
 }
 
-/* Hacemos que el menú secundario sea sticky */
-.secondary-menu {
-  position: -webkit-sticky; /* Compatibilidad con Safari */
-  position: sticky;
-  top: 0;
-  z-index: 1000; /* Para que se muestre sobre el contenido */
-}
-
-/* Estilos para el contenido principal */
+/* Contenido principal */
 .contenido {
   padding: 20px;
 }
