@@ -10,21 +10,11 @@ body {
   line-height: 1.6;
 }
 
-/* Estilos para los menús */
-header {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Menú primario */
+/* Estilos para el menú primario */
 .primary-menu ul {
   display: flex;
   list-style: none;
   background-color: #333;
-}
-
-.primary-menu li {
-  /* Opcional: puedes ajustar el espaciado */
 }
 
 .primary-menu a {
@@ -38,7 +28,7 @@ header {
   background-color: #555;
 }
 
-/* Menú secundario - se queda fijo al hacer scroll */
+/* Estilos para el menú secundario */
 .secondary-menu ul {
   display: flex;
   list-style: none;
@@ -61,11 +51,10 @@ header {
   position: -webkit-sticky; /* Compatibilidad con Safari */
   position: sticky;
   top: 0;
-  z-index: 1000; /* Para que se muestre por encima del resto del contenido */
+  z-index: 1000; /* Para que se muestre sobre el contenido */
 }
 
-/* Estilos para el contenido */
+/* Estilos para el contenido principal */
 .contenido {
   padding: 20px;
 }
-
