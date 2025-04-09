@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página con Menús</title>
+  <title>Página con Menús Sticky</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Menú primario dentro del header -->
   <header>
-    <!-- Menú primario -->
     <nav class="primary-menu">
       <ul>
         <li><a href="#">Inicio</a></li>
@@ -17,15 +17,16 @@
         <li><a href="#">Contacto</a></li>
       </ul>
     </nav>
-    <!-- Menú secundario (sticky) -->
-    <nav class="secondary-menu">
-      <ul>
-        <li><a href="#">Submenú 1</a></li>
-        <li><a href="#">Submenú 2</a></li>
-        <li><a href="#">Submenú 3</a></li>
-      </ul>
-    </nav>
   </header>
+
+  <!-- Menú secundario fuera del header para que sea sticky al hacer scroll -->
+  <nav class="secondary-menu">
+    <ul>
+      <li><a href="#">Submenú 1</a></li>
+      <li><a href="#">Submenú 2</a></li>
+      <li><a href="#">Submenú 3</a></li>
+    </ul>
+  </nav>
 
   <main>
     <section class="contenido">
@@ -38,15 +39,11 @@
       </p>
       <p>
         Curabitur dictum, dui in lobortis tincidunt, odio dui blandit neque, sit amet ornare 
-        velit ligula nec est. Proin ac metus eget nibh condimentum luctus. Praesent consectetur 
-        massa in nunc viverra, vitae convallis ex malesuada. Vestibulum in risus sed dui bibendum 
-        pulvinar.
+        velit ligula nec est. Proin ac metus eget nibh condimentum luctus.
       </p>
-      <!-- Se agregan más párrafos para permitir desplazamiento vertical -->
       <p>
         Phasellus dictum, justo ut sodales finibus, ligula turpis tincidunt massa, id 
-        sagittis lorem nulla non elit. Suspendisse potenti. Nunc ut eros at mi mattis 
-        condimentum.
+        sagittis lorem nulla non elit.
       </p>
       <p>
         Integer tristique dapibus ante ac pellentesque. Suspendisse suscipit eget quam in 
@@ -72,10 +69,31 @@
         Integer tristique dapibus ante ac pellentesque. Suspendisse suscipit eget quam in 
         vehicula. Duis vitae odio id urna ultricies fringilla vel sed nisl.
       </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed iaculis urna. Phasellus ornare malesuada erat, sed semper tortor porttitor ac. Aenean scelerisque sodales vulputate. Phasellus ex magna, dictum eu dui nec, maximus aliquam dui. Phasellus fringilla faucibus dui, non iaculis tortor convallis id. Morbi rutrum ultricies arcu. Quisque imperdiet venenatis purus, nec tincidunt magna ullamcorper ac. Aenean at dictum sapien. Pellentesque in pulvinar quam. Ut facilisis velit sodales nibh ultricies vestibulum.
+
+        Nam placerat urna id pellentesque efficitur. Duis lobortis congue purus, at ullamcorper massa cursus eu. Aliquam sit amet eleifend justo. Aliquam rutrum leo tellus, quis tempus diam dictum nec. Vestibulum mollis varius nisl et pellentesque. Duis eget fringilla enim. Morbi consectetur lectus ut arcu varius semper. Maecenas consequat metus eu ex laoreet vulputate. Proin ac arcu ipsum.
+
+        In faucibus et orci sed congue. Curabitur lobortis elit orci. Aliquam ac dolor dapibus, accumsan quam eget, tempor ex. Quisque tempor urna et erat blandit, quis egestas lacus malesuada. Maecenas dui neque, bibendum non neque non, dapibus tristique nisl. In sit amet sem vel mauris rhoncus tristique. Vestibulum lobortis varius turpis, id ornare quam euismod quis. Morbi porta eleifend tellus non mattis. Fusce eu lorem sed eros viverra viverra. Etiam eget turpis at nulla commodo porta.
+
+        Sed dapibus erat et nulla lobortis fringilla. Proin imperdiet augue at tellus tempus, ac maximus nulla posuere. Phasellus leo mi, dictum pretium sodales ac, dapibus id velit. Aliquam libero augue, luctus sit amet odio vel, rhoncus consequat ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus non dui non lorem mollis tempor. Suspendisse varius id odio quis condimentum. Proin egestas nec felis in blandit. Nulla non mauris est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec pellentesque sapien bibendum, ornare ligula ac, pulvinar tellus. Pellentesque cursus tempus turpis eget vestibulum. Maecenas congue lacus sed accumsan aliquam. Integer eu consectetur dolor, a tincidunt mi. Mauris at enim nisi. Sed rutrum metus quis diam pellentesque posuere.
+
+        Sed quis dolor velit. Donec varius ligula sed enim luctus varius. Donec congue fringilla lectus, ac imperdiet felis consequat in. Proin eget nunc condimentum, gravida dolor ut, imperdiet justo. Proin lacinia accumsan velit. Duis ut nibh quam. Duis sit amet lectus hendrerit, sagittis lacus sed, elementum nisl. Nullam sodales, felis at sollicitudin ultrices, nulla velit condimentum eros, ut egestas lectus dui a nisi. Nullam nec nibh elementum, egestas nibh sit amet, accumsan elit. Ut feugiat, dolor et condimentum laoreet, augue dolor auctor tortor, non placerat risus velit quis nisi. Quisque in malesuada neque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed efficitur, ipsum non dignissim consequat, felis risus vehicula massa, nec molestie turpis lacus ut odio. Maecenas ultricies elit eu nibh imperdiet volutpat. Sed volutpat mi nec ultricies consectetur. 
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed iaculis urna. Phasellus ornare malesuada erat, sed semper tortor porttitor ac. Aenean scelerisque sodales vulputate. Phasellus ex magna, dictum eu dui nec, maximus aliquam dui. Phasellus fringilla faucibus dui, non iaculis tortor convallis id. Morbi rutrum ultricies arcu. Quisque imperdiet venenatis purus, nec tincidunt magna ullamcorper ac. Aenean at dictum sapien. Pellentesque in pulvinar quam. Ut facilisis velit sodales nibh ultricies vestibulum.
+
+        Nam placerat urna id pellentesque efficitur. Duis lobortis congue purus, at ullamcorper massa cursus eu. Aliquam sit amet eleifend justo. Aliquam rutrum leo tellus, quis tempus diam dictum nec. Vestibulum mollis varius nisl et pellentesque. Duis eget fringilla enim. Morbi consectetur lectus ut arcu varius semper. Maecenas consequat metus eu ex laoreet vulputate. Proin ac arcu ipsum.
+
+        In faucibus et orci sed congue. Curabitur lobortis elit orci. Aliquam ac dolor dapibus, accumsan quam eget, tempor ex. Quisque tempor urna et erat blandit, quis egestas lacus malesuada. Maecenas dui neque, bibendum non neque non, dapibus tristique nisl. In sit amet sem vel mauris rhoncus tristique. Vestibulum lobortis varius turpis, id ornare quam euismod quis. Morbi porta eleifend tellus non mattis. Fusce eu lorem sed eros viverra viverra. Etiam eget turpis at nulla commodo porta.
+
+        Sed dapibus erat et nulla lobortis fringilla. Proin imperdiet augue at tellus tempus, ac maximus nulla posuere. Phasellus leo mi, dictum pretium sodales ac, dapibus id velit. Aliquam libero augue, luctus sit amet odio vel, rhoncus consequat ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus non dui non lorem mollis tempor. Suspendisse varius id odio quis condimentum. Proin egestas nec felis in blandit. Nulla non mauris est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec pellentesque sapien bibendum, ornare ligula ac, pulvinar tellus. Pellentesque cursus tempus turpis eget vestibulum. Maecenas congue lacus sed accumsan aliquam. Integer eu consectetur dolor, a tincidunt mi. Mauris at enim nisi. Sed rutrum metus quis diam pellentesque posuere.
+
+        Sed quis dolor velit. Donec varius ligula sed enim luctus varius. Donec congue fringilla lectus, ac imperdiet felis consequat in. Proin eget nunc condimentum, gravida dolor ut, imperdiet justo. Proin lacinia accumsan velit. Duis ut nibh quam. Duis sit amet lectus hendrerit, sagittis lacus sed, elementum nisl. Nullam sodales, felis at sollicitudin ultrices, nulla velit condimentum eros, ut egestas lectus dui a nisi. Nullam nec nibh elementum, egestas nibh sit amet, accumsan elit. Ut feugiat, dolor et condimentum laoreet, augue dolor auctor tortor, non placerat risus velit quis nisi. Quisque in malesuada neque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed efficitur, ipsum non dignissim consequat, felis risus vehicula massa, nec molestie turpis lacus ut odio. Maecenas ultricies elit eu nibh imperdiet volutpat. Sed volutpat mi nec ultricies consectetur. 
+      </p>
     </section>
   </main>
 
   <script src="script.js"></script>
 </body>
 </html>
-
