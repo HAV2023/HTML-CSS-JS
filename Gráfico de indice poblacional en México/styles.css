@@ -1,11 +1,16 @@
+/* =============================
+   Estilos generales del cuerpo de la página
+   ============================= */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
+    font-family: Arial, sans-serif; /* Fuente legible y sin serifas para una mejor lectura */
+    text-align: center;             /* Centra el contenido horizontalmente */
+    background-color: #f4f4f4;      /* Color de fondo gris claro para una apariencia suave */
 }
 
+/* =============================
+   Estilos del contenedor del gráfico
+   ============================= */
 #chart-container {
-    width: 80%;
-    margin: auto;
+    width: 80%;     /* El contenedor ocupará el 80% del ancho de la ventana */
+    margin: auto;   /* Centra el contenedor horizontalmente dentro del body */
 }
-
