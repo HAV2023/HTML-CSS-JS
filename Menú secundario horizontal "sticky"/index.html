@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
+  <!-- Inicio del documento HTML en español -->
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página con Menús Sticky sin Espacios</title>
-  <link rel="stylesheet" href="styles.css">
+  <!-- Metadatos del documento -->
+  <meta charset="UTF-8"> <!-- Define la codificación de caracteres del documento -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura el viewport para dispositivos móviles -->
+  <title>Página con Menús Sticky sin Espacios</title> <!-- Título de la página que se mostrará en la pestaña del navegador -->
+  <link rel="stylesheet" href="styles.css"> <!-- Vincula el archivo de estilos CSS externo -->
 </head>
 <body>
-  <!-- Menú primario dentro del header -->
+  <!-- Inicio del cuerpo del documento -->
+
+  <!-- Cabecera del sitio que contiene el menú primario -->
   <header>
+    <!-- Menú primario ubicado dentro del header -->
     <nav class="primary-menu">
       <ul>
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Servicios</a></li>
-        <li><a href="#">Acerca de</a></li>
-        <li><a href="#">Contacto</a></li>
+        <li><a href="#">Inicio</a></li>      <!-- Enlace a la sección de Inicio -->
+        <li><a href="#">Servicios</a></li>    <!-- Enlace a la sección de Servicios -->
+        <li><a href="#">Acerca de</a></li>     <!-- Enlace a la sección Acerca de -->
+        <li><a href="#">Contacto</a></li>      <!-- Enlace a la sección de Contacto -->
       </ul>
     </nav>
   </header>
 
-  <!-- Menú secundario sticky fuera del header -->
+  <!-- Menú secundario sticky (pegajoso) ubicado fuera del header -->
+  <!-- Se coloca fuera del header para que permanezca visible en la parte superior al hacer scroll -->
   <nav class="secondary-menu">
     <ul>
-      <li><a href="#">Submenú 1</a></li>
-      <li><a href="#">Submenú 2</a></li>
-      <li><a href="#">Submenú 3</a></li>
+      <li><a href="#">Submenú 1</a></li>  <!-- Enlace del submenú 1 -->
+      <li><a href="#">Submenú 2</a></li>  <!-- Enlace del submenú 2 -->
+      <li><a href="#">Submenú 3</a></li>  <!-- Enlace del submenú 3 -->
     </ul>
   </nav>
 
+  <!-- Contenido principal de la página -->
   <main>
+    <!-- Sección que contiene el contenido textual de la página -->
     <section class="contenido">
-      <h1>Bienvenidos a nuestra página</h1>
+      <h1>Bienvenidos a nuestra página</h1> <!-- Título principal del contenido -->
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac ex nec justo 
         congue fermentum. Sed vitae ipsum metus. Vivamus consequat urna non blandit varius. 
@@ -72,6 +80,7 @@
     </section>
   </main>
 
+  <!-- Inclusión del archivo JavaScript externo -->
   <script src="script.js"></script>
 </body>
 </html>
