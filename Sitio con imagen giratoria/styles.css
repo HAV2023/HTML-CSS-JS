@@ -1,1 +1,36 @@
+/* Reinicio de márgenes y padding para html y body */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Reset global: Se utiliza box-sizing border-box para que el padding y borde se incluyan en el ancho y alto del elemento */
+* {
+  box-sizing: border-box;
+}
+
+/* Estilos generales: Definición de fuente y visualización centralizada */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;              /* Altura completa de la ventana */
+  background-color: #f0f0f0;   /* Color de fondo claro para contrastar el contenido */
+  font-family: Arial, sans-serif;
+}
+
+/* Estilos para el contenedor del visor 360 */
+.viewer {
+  width: 500px;       /* Ancho fijo del visor (puedes ajustarlo según necesites) */
+  height: 500px;      /* Altura fija del visor */
+  overflow: hidden;   /* Oculta cualquier contenido que exceda el contenedor */
+  position: relative;
+}
+
+/* Estilos para la imagen del tenis */
+.viewer img {
+  width: 100%;                /* La imagen ocupa el ancho completo del contenedor */
+  height: 100%;               /* La imagen ocupa la altura completa del contenedor */
+  object-fit: contain;        /* La imagen se ajusta de forma proporcional sin recortar */
+}
 
