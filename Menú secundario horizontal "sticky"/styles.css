@@ -1,1 +1,71 @@
+/* Reset básico y estilos globales */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Estilos para los menús */
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Menú primario */
+.primary-menu ul {
+  display: flex;
+  list-style: none;
+  background-color: #333;
+}
+
+.primary-menu li {
+  /* Opcional: puedes ajustar el espaciado */
+}
+
+.primary-menu a {
+  display: block;
+  padding: 15px 20px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.primary-menu a:hover {
+  background-color: #555;
+}
+
+/* Menú secundario - se queda fijo al hacer scroll */
+.secondary-menu ul {
+  display: flex;
+  list-style: none;
+  background-color: #444;
+}
+
+.secondary-menu a {
+  display: block;
+  padding: 15px 20px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.secondary-menu a:hover {
+  background-color: #666;
+}
+
+/* Hacemos que el menú secundario sea sticky */
+.secondary-menu {
+  position: -webkit-sticky; /* Compatibilidad con Safari */
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Para que se muestre por encima del resto del contenido */
+}
+
+/* Estilos para el contenido */
+.contenido {
+  padding: 20px;
+}
 
