@@ -2,5 +2,5 @@
 document.addEventListener('DOMContentLoaded', function() {
   console.log("La página se ha cargado correctamente.");
   
-  // Aquí se pueden agregar funcionalidades adicionales si es necesario.
+  // Puedes agregar funcionalidades adicionales aquí si es necesario.
 });
