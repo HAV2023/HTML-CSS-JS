@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Declaración del conjunto de caracteres del documento -->
     <meta charset="UTF-8">
+
+    <!-- Configuración para que el sitio sea responsive (se adapte a dispositivos móviles) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de la página que aparece en la pestaña del navegador -->
     <title>Comportamiento Poblacional de México</title>
+
+    <!-- Vinculación a la hoja de estilos externa para aplicar formato visual -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Encabezado principal que describe el propósito del gráfico -->
     <h1>Comportamiento Poblacional de México en el Siglo XXI</h1>
+
+    <!-- Contenedor del gráfico para estilos personalizados -->
     <div id="chart-container">
+        <!-- Elemento canvas donde se dibujará el gráfico de población con Chart.js -->
         <canvas id="populationChart"></canvas>
     </div>
+
+    <!-- Inclusión de la librería Chart.js desde un CDN para generar gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Inclusión del archivo JavaScript personalizado que configura y muestra el gráfico -->
     <script src="script.js"></script>
 </body>
 </html>
-
