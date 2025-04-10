@@ -33,4 +33,3 @@ body {
   height: 100%;               /* La imagen ocupa la altura completa del contenedor */
   object-fit: contain;        /* La imagen se ajusta de forma proporcional sin recortar */
 }
-
