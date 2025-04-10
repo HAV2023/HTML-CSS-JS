@@ -1,7 +1,7 @@
 // Configuración para la vista 360 del tenis deportivo
 
 // Número total de imágenes que conforman la rotación completa
-const totalImages = 36;
+const totalImages = 2;
 
 // Variable para llevar el índice de la imagen actual (se inicia en 1)
 let currentImage = 1;
@@ -19,7 +19,7 @@ function updateImage() {
   }
   
   // Construimos la ruta de la imagen asumiendo la nomenclatura 'tenis-N.jpg'
-  const imagePath = `images/tenis-${currentImage}.jpg`;
+  const imagePath = `images/t${currentImage}.png`;
   
   // Actualizamos el atributo 'src' del elemento de imagen para mostrar la nueva imagen
   shoeImage.src = imagePath;
@@ -29,3 +29,7 @@ function updateImage() {
 // Puedes ajustar este valor para controlar la velocidad de rotación
 setInterval(updateImage, 100);
 
+
+// Establecemos un intervalo para actualizar la imagen cada 100 milisegundos
+// Puedes ajustar este valor para controlar la velocidad de rotación
+setInterval(updateImage, 100);
