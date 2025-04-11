@@ -12,11 +12,19 @@ html, body {
 /* Estilos generales: Definición de fuente y visualización centralizada */
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;              /* Altura completa de la ventana */
   background-color: #f0f0f0;   /* Color de fondo claro para contrastar el contenido */
   font-family: Arial, sans-serif;
+}
+
+/* Estilo para el párrafo superior */
+.header-text {
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 20px;
 }
 
 /* Estilos para el contenedor del visor 360 */
