@@ -18,7 +18,7 @@ function updateImage() {
     currentImage = 1;
   }
   
-  // Construimos la ruta de la imagen asumiendo la nomenclatura 'tenis-N.jpg'
+  // Construimos la ruta de la imagen asumiendo la nomenclatura 'tN.png'
   const imagePath = `images/t${currentImage}.png`;
   
   // Actualizamos el atributo 'src' del elemento de imagen para mostrar la nueva imagen
@@ -26,10 +26,4 @@ function updateImage() {
 }
 
 // Establecemos un intervalo para actualizar la imagen cada 100 milisegundos
-// Puedes ajustar este valor para controlar la velocidad de rotación
-setInterval(updateImage, 100);
-
-
-// Establecemos un intervalo para actualizar la imagen cada 100 milisegundos
-// Puedes ajustar este valor para controlar la velocidad de rotación
 setInterval(updateImage, 100);
