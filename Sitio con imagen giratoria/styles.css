@@ -1,44 +1,76 @@
-/* Reinicio de márgenes y padding para html y body */
+/* 
+  Reinicio de márgenes y padding para los elementos 'html' y 'body'.
+  Esto elimina los espacios predeterminados, garantizando que no haya 
+  márgenes o relleno adicionales fuera de lo definido.
+*/
 html, body {
   margin: 0;
   padding: 0;
 }
 
-/* Reset global: Incluye padding y borde en el ancho y alto del elemento */
+/* 
+  Reset global:
+  Se establece 'box-sizing: border-box' para que el padding y el borde se 
+  incluyan en el cálculo del ancho y alto total de los elementos, facilitando 
+  la gestión de layouts y evitando sorpresas en dimensiones.
+*/
 * {
   box-sizing: border-box;
 }
 
-/* Estilos generales: Definición de fuente y visualización centralizada */
+/* 
+  Estilos generales para el 'body':
+  - Se utiliza Flexbox para centrar el contenido tanto vertical como horizontalmente.
+  - 'flex-direction: column' coloca los elementos en una columna.
+  - 'height: 100vh' asegura que el body tenga la altura completa de la ventana.
+  - Se establece un color de fondo claro y se define la tipografía base para el sitio.
+*/
 body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;              /* Altura completa de la ventana */
-  background-color: #f0f0f0;   /* Fondo claro */
-  font-family: Arial, sans-serif;
+  height: 100vh;              /* Altura completa de la ventana del navegador */
+  background-color: #f0f0f0;   /* Fondo claro para un buen contraste */
+  font-family: Arial, sans-serif;  /* Fuente principal del sitio */
 }
 
-/* Estilo para el párrafo superior */
+/* 
+  Estilo para el párrafo de cabecera (.header-text):
+  - Centra el texto.
+  - Define un tamaño de fuente mayor para resaltar el mensaje.
+  - Agrega margen inferior para separar visualmente del visor.
+  - Especifica el color negro para asegurar la visibilidad del texto.
+*/
 .header-text {
   text-align: center;
   font-size: 1.5em;
   margin-bottom: 20px;
-  color: #000;  /* Color negro para asegurar visibilidad */
+  color: #000;  /* Color negro para garantizar la legibilidad */
 }
 
-/* Estilos para el contenedor del visor 360 */
+/* 
+  Estilos para el contenedor del visor 360° (.viewer):
+  - Se fija el ancho y alto en 500px para definir un área específica.
+  - Se utiliza 'overflow: hidden' para ocultar cualquier contenido que se
+    desborde del contenedor.
+  - 'position: relative' permite posicionar elementos internos de forma relativa.
+*/
 .viewer {
   width: 500px;       /* Ancho fijo del visor */
   height: 500px;      /* Altura fija del visor */
-  overflow: hidden;   /* Oculta contenido que exceda el contenedor */
+  overflow: hidden;   /* Oculta contenido que exceda las dimensiones establecidas */
   position: relative;
 }
 
-/* Estilos para la imagen del tenis */
+/*
+  Estilos para la imagen dentro del visor (.viewer img):
+  - La imagen ocupa el 100% del ancho y la altura del contenedor.
+  - 'object-fit: contain' se asegura de que la imagen se ajuste manteniendo 
+    su proporción, sin recortarse, adaptándose al contenedor.
+*/
 .viewer img {
-  width: 100%;                /* La imagen ocupa todo el ancho del visor */
-  height: 100%;               /* La imagen ocupa toda la altura del visor */
-  object-fit: contain;        /* Ajuste proporcional sin recortar */
+  width: 100%;                /* La imagen se extiende al 100% del ancho del contenedor */
+  height: 100%;               /* La imagen se extiende al 100% de la altura del contenedor */
+  object-fit: contain;        /* Mantiene la relación de aspecto de la imagen sin recortarla */
 }
