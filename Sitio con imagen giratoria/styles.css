@@ -4,7 +4,7 @@ html, body {
   padding: 0;
 }
 
-/* Reset global: Se utiliza box-sizing border-box para que el padding y borde se incluyan en el ancho y alto del elemento */
+/* Reset global: Incluye padding y borde en el ancho y alto del elemento */
 * {
   box-sizing: border-box;
 }
@@ -16,7 +16,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;              /* Altura completa de la ventana */
-  background-color: #f0f0f0;   /* Color de fondo claro para contrastar el contenido */
+  background-color: #f0f0f0;   /* Fondo claro */
   font-family: Arial, sans-serif;
 }
 
@@ -25,19 +25,20 @@ body {
   text-align: center;
   font-size: 1.5em;
   margin-bottom: 20px;
+  color: #000;  /* Color negro para asegurar visibilidad */
 }
 
 /* Estilos para el contenedor del visor 360 */
 .viewer {
-  width: 500px;       /* Ancho fijo del visor (puedes ajustarlo según necesites) */
+  width: 500px;       /* Ancho fijo del visor */
   height: 500px;      /* Altura fija del visor */
-  overflow: hidden;   /* Oculta cualquier contenido que exceda el contenedor */
+  overflow: hidden;   /* Oculta contenido que exceda el contenedor */
   position: relative;
 }
 
 /* Estilos para la imagen del tenis */
 .viewer img {
-  width: 100%;                /* La imagen ocupa el ancho completo del contenedor */
-  height: 100%;               /* La imagen ocupa la altura completa del contenedor */
-  object-fit: contain;        /* La imagen se ajusta de forma proporcional sin recortar */
+  width: 100%;                /* La imagen ocupa todo el ancho del visor */
+  height: 100%;               /* La imagen ocupa toda la altura del visor */
+  object-fit: contain;        /* Ajuste proporcional sin recortar */
 }
