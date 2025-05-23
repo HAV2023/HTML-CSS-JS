@@ -1,48 +1,58 @@
+/* Estilos generales para el cuerpo de la página */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 20px;
+    font-family: Arial, sans-serif;   /* Fuente legible y estándar */
+    line-height: 1.6;                 /* Espaciado cómodo entre líneas */
+    margin: 20px;                    /* Margen para que el contenido no esté pegado a los bordes */
 }
 
+/* Estilo para los párrafos dentro del contenedor .content */
 .content p {
-    margin-bottom: 15px;
+    margin-bottom: 15px;             /* Espacio debajo de cada párrafo para separación visual */
 }
 
-/* Botón Ir Arriba */
+/* 
+    Estilos para el botón "Ir arriba" (#toTop)
+    Este botón está fijo en la esquina inferior derecha, inicialmente oculto y con estilo visible al mostrarse 
+*/
 #toTop {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none; /* Oculto inicialmente */
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 1000;
-    transition: background-color 0.3s ease;
+    position: fixed;                 /* Fija el botón en pantalla aunque se haga scroll */
+    bottom: 20px;                   /* Separación desde el borde inferior de la ventana */
+    right: 20px;                    /* Separación desde el borde derecho de la ventana */
+    display: none;                  /* Oculto inicialmente, se muestra al hacer scroll */
+    background-color: #333;         /* Fondo oscuro para visibilidad */
+    color: white;                   /* Texto blanco para contraste */
+    border: none;                   /* Sin borde */
+    padding: 10px 15px;             /* Espacio interno para tamaño adecuado */
+    font-size: 20px;                /* Tamaño de fuente suficientemente grande para ser visible */
+    border-radius: 5px;             /* Bordes redondeados para diseño moderno */
+    cursor: pointer;                /* Cambia el cursor al pasar sobre el botón */
+    z-index: 1000;                  /* Asegura que el botón esté sobre otros elementos */
+    transition: background-color 0.3s ease;  /* Suaviza el cambio de color al hacer hover */
 }
 
+/* Cambio de color de fondo al pasar el cursor sobre el botón "Ir arriba" */
 #toTop:hover {
-    background-color: #555;
+    background-color: #555;         /* Fondo más claro para feedback visual */
 }
 
-/* Botón Más... */
+/* 
+    Estilos para el botón "Más..." (#loadMore)
+    Botón centrado con estilo llamativo para invitar a cargar más contenido 
+*/
 #loadMore {
-    display: block;
-    margin: 30px auto 0;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    background-color: #007BFF;
-    color: white;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+    display: block;                 /* Ocupa todo el ancho disponible (centrado con margin auto) */
+    margin: 30px auto 0;            /* Margen arriba para separación, auto horizontal para centrar */
+    padding: 10px 20px;             /* Espacio interno amplio para comodidad */
+    font-size: 16px;                /* Tamaño de texto estándar legible */
+    cursor: pointer;                /* Cursor puntero para indicar clicable */
+    border: none;                   /* Sin borde */
+    background-color: #007BFF;     /* Fondo azul llamativo (color estándar bootstrap primary) */
+    color: white;                   /* Texto blanco para contraste */
+    border-radius: 4px;             /* Bordes ligeramente redondeados */
+    transition: background-color 0.3s ease;  /* Transición suave para hover */
 }
 
+/* Cambio de color de fondo al pasar el cursor sobre el botón "Más..." */
 #loadMore:hover {
-    background-color: #0056b3;
+    background-color: #0056b3;     /* Azul más oscuro para indicar interacción */
 }
