@@ -5,6 +5,25 @@ birthdate.max = new Date().toISOString().split('T')[0];
 const form = document.getElementById('professionalForm');
 const successMessage = document.getElementById('successMessage');
 
+// Restringir solo números en campo Edad
+const ageInput = document.getElementById('age');
+
+ageInput.addEventListener('keydown', (e) => {
+  // Permitir: backspace, tab, flechas, delete y números (fila superior y numpad)
+  const allowedKeys = [
+    "Backspace", "Tab", "ArrowLeft", "ArrowRight", "Delete", 
+    "Home", "End"
+  ];
+  if (
+    allowedKeys.includes(e.key) ||
+    (e.key >= '0' && e.key <= '9') ||
+    (e.key >= 'Numpad0' && e.key <= 'Numpad9')
+  ) {
+    return; // Permitir tecla
+  }
+  e.preventDefault(); // Bloquear otras teclas
+});
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   successMessage.style.display = 'none';
@@ -24,9 +43,8 @@ form.addEventListener('submit', (e) => {
   }
 
   // Validar Edad (1-120)
-  const ageInput = form.age;
-  const ageError = document.getElementById('error-age');
   const ageVal = Number(ageInput.value);
+  const ageError = document.getElementById('error-age');
   if (!ageInput.value || isNaN(ageVal) || ageVal < 1 || ageVal > 120) {
     valid = false;
     ageError.style.display = 'block';
@@ -85,4 +103,3 @@ form.querySelectorAll('input').forEach(input => {
     input.removeAttribute('aria-invalid');
   });
 });
-
