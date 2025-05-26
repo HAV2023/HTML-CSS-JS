@@ -1,30 +1,57 @@
+/* Estilos generales para el cuerpo de la página */
 body {
-  font-family: Arial, sans-serif;
-  max-width: 480px;
-  margin: 40px auto;
-  padding: 20px;
+  font-family: Arial, sans-serif; 
+  /* Define la tipografía: Arial, o sans-serif como respaldo */
+
+  max-width: 480px; 
+  /* Limita el ancho máximo del contenido a 480 píxeles para mejor legibilidad */
+
+  margin: 40px auto; 
+  /* Margen superior e inferior de 40px, centrado horizontalmente con auto */
+
+  padding: 20px; 
+  /* Espacio interno alrededor del contenido de 20px */
 }
 
+/* Estilos para el encabezado principal <h2> */
 h2 {
-  margin-bottom: 12px;
+  margin-bottom: 12px; 
+  /* Espacio inferior de 12px para separar del contenido siguiente */
 }
 
+/* Estilos para las etiquetas que contienen las opciones */
 .option {
-  margin: 8px 0;
+  margin: 8px 0; 
+  /* Margen vertical (arriba y abajo) de 8px para separar las opciones */
 }
 
+/* Estilos para el botón de envío */
 button {
-  margin-top: 20px;
-  padding: 10px 16px;
-  font-size: 1rem;
-  cursor: pointer;
+  margin-top: 20px; 
+  /* Espacio superior para separar del último elemento anterior */
+
+  padding: 10px 16px; 
+  /* Relleno interno para aumentar área clicable y apariencia */
+
+  font-size: 1rem; 
+  /* Tamaño de fuente relativo a la raíz, 1rem equivale normalmente a 16px */
+
+  cursor: pointer; 
+  /* Cambia el cursor a puntero al pasar sobre el botón indicando que es clicable */
 }
 
+/* Estilos para el contenedor de la gráfica */
 #chartContainer {
-  margin-top: 30px;
+  margin-top: 30px; 
+  /* Separa la gráfica del contenido anterior con margen superior */
 }
 
+/* Estilos para el canvas donde se dibuja la gráfica */
 canvas {
-  width: 100% !important;
-  height: 300px !important;
+  width: 100% !important; 
+  /* Hace que el canvas ocupe todo el ancho disponible de su contenedor */
+  /* !important fuerza que este estilo prevalezca sobre otros */
+
+  height: 300px !important; 
+  /* Fija la altura del canvas en 300px */
 }
