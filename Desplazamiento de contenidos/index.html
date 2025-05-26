@@ -1,22 +1,87 @@
 <!DOCTYPE html>
+<!--
+  Indica que el documento está escrito en HTML5,
+  lo cual es fundamental para navegadores modernos.
+-->
+
 <html lang="es">
+<!--
+  Elemento raíz del documento HTML.
+  El atributo 'lang="es"' especifica que el contenido está en español,
+  ayudando a navegadores, lectores de pantalla y motores de búsqueda.
+-->
+
 <head>
+  <!--
+    El bloque <head> contiene metadatos y enlaces a recursos externos.
+    Nada de lo aquí definido se muestra directamente en la página.
+  -->
+
   <meta charset="UTF-8" />
+  <!--
+    Define el set de caracteres como UTF-8,
+    permitiendo representar correctamente la mayoría de los caracteres internacionales.
+  -->
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--
+    Asegura un diseño responsivo:
+    - 'width=device-width' hace que el ancho de la página coincida con el dispositivo.
+    - 'initial-scale=1' establece el nivel de zoom inicial.
+  -->
+
   <title>Scroll fade efecto por párrafo</title>
+  <!--
+    Título que aparece en la pestaña del navegador.
+  -->
+
   <link rel="stylesheet" href="styles.css" />
+  <!--
+    Enlaza un archivo externo de CSS ('styles.css')
+    donde se encuentran los estilos visuales del documento.
+  -->
 </head>
+
 <body>
+  <!--
+    Todo el contenido visible va aquí.
+  -->
 
   <div id="content">
+    <!--
+      Contenedor principal para el contenido de la página.
+      Tiene el id 'content' para poder aplicar estilos y seleccionar desde JS.
+    -->
+
     <h1>Contenido dinámico por párrafo</h1>
+    <!--
+      Título principal que describe la función de la página.
+    -->
+
     <p>Este párrafo se desvanecerá cuando bajes la página, y reaparecerá cuando subas.</p>
     <p>Prueba hacer scroll y verás el efecto aplicado a cada párrafo.</p>
+    <!--
+      Párrafos descriptivos iniciales, visibles al cargar la página.
+    -->
 
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vitae libero ac purus cursus cursus.</p>
     <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
     <p>Praesent congue, velit a cursus euismod, justo purus accumsan sapien, at feugiat sapien leo et urna.</p>
     <p>Quisque id sapien ac tortor imperdiet placerat. Suspendisse potenti.</p>
+    <p>Donec fermentum massa nec erat rhoncus, non luctus turpis varius.</p>
+    <p>Phasellus convallis urna nec justo blandit facilisis.</p>
+    <p>Morbi rhoncus eros in magna aliquet, at pretium velit condimentum.</p>
+    <p>Sed vitae mauris lacinia, scelerisque purus sed, lacinia neque.</p>
+    <p>Donec non nulla dictum, dignissim nunc quis, lacinia sem.</p>
+    <!--
+      Varios párrafos repetidos con contenido ficticio.
+      Su función es permitir suficiente espacio para hacer scroll y
+      ver claramente el efecto de fade-in/fade-out en cada uno.
+    -->
+
+    <!--
+      (Se incluyen más párrafos para ampliar la zona de scroll y el efecto visual)
+    -->
     <p>Donec fermentum massa nec erat rhoncus, non luctus turpis varius.</p>
     <p>Phasellus convallis urna nec justo blandit facilisis.</p>
     <p>Morbi rhoncus eros in magna aliquet, at pretium velit condimentum.</p>
@@ -42,8 +107,16 @@
     <p>Morbi rhoncus eros in magna aliquet, at pretium velit condimentum.</p>
     <p>Sed vitae mauris lacinia, scelerisque purus sed, lacinia neque.</p>
     <p>Donec non nulla dictum, dignissim nunc quis, lacinia sem.</p>     
+    <!--
+      Puedes añadir o quitar párrafos para probar el efecto con diferente cantidad de contenido.
+    -->
   </div>
 
   <script src="script.js"></script>
+  <!--
+    Enlace a un archivo JavaScript externo ('script.js')
+    que controla el efecto fade-in/fade-out de cada párrafo
+    usando Intersection Observer o el método que elijas.
+  -->
 </body>
 </html>
