@@ -7,24 +7,38 @@ const successMessage = document.getElementById('successMessage');
 
 const ageInput = document.getElementById('age');
 
-// Bloquear letras al tipear en edad
+// Bloquear entrada no numérica antes de que se inserte (teclas, mantenimiento, autocompletar)
+ageInput.addEventListener('beforeinput', (e) => {
+  if (e.data && /\D/.test(e.data)) {
+    e.preventDefault();
+  }
+});
+
+// Bloquear teclas no numéricas en keydown (controles permitidos)
 ageInput.addEventListener('keydown', (e) => {
   const allowedKeys = [
     "Backspace", "Tab", "ArrowLeft", "ArrowRight", "Delete", "Home", "End"
   ];
   if (
     allowedKeys.includes(e.key) ||
-    (e.key >= '0' && e.key <= '9') ||
-    (e.key >= 'Numpad0' && e.key <= 'Numpad9')
+    (e.key >= '0' && e.key <= '9')
   ) {
     return;
   }
   e.preventDefault();
 });
 
-// Limpiar todo lo que no sea número (ej. pegado)
+// Limpiar cualquier carácter no numérico en input (por si acaso)
 ageInput.addEventListener('input', () => {
   ageInput.value = ageInput.value.replace(/\D/g, '');
+});
+
+// Bloquear pegar texto no numérico
+ageInput.addEventListener('paste', (e) => {
+  const paste = (e.clipboardData || window.clipboardData).getData('text');
+  if (!/^\d*$/.test(paste)) {
+    e.preventDefault();
+  }
 });
 
 form.addEventListener('submit', (e) => {
