@@ -2,112 +2,232 @@
 * {
   box-sizing: border-box;
 }
+/* Aplica box-sizing:border-box a todos los elementos,
+   para que padding y border se incluyan dentro del ancho y alto especificados,
+   facilitando el control del tamaño y diseño */
+
+/* Estilos para el body (cuerpo de la página) */
 body {
   font-family: 'Lato', sans-serif;
+  /* Fuente principal para texto general: Lato, con sans-serif como fallback */
+
   background: #f0f2f5;
+  /* Color de fondo claro, muy suave */
+
   margin: 0;
+  /* Elimina márgenes predeterminados del navegador */
+
   padding: 40px 20px;
+  /* Espaciado interno arriba/abajo 40px y a los lados 20px */
+
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  /* Usa flexbox para centrar horizontalmente el contenido
+     y alinearlo al inicio verticalmente */
+
   min-height: 100vh;
+  /* Altura mínima igual a la ventana gráfica para que ocupe toda la pantalla */
 }
 
+/* Contenedor principal del formulario */
 .container {
   background: #fff;
+  /* Fondo blanco */
+
   padding: 32px 36px;
+  /* Espaciado interno amplio para separar contenido de bordes */
+
   border-radius: 12px;
+  /* Bordes redondeados para suavizar esquinas */
+
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  /* Sombra sutil para dar profundidad y elevar visualmente */
+
   max-width: 480px;
+  /* Ancho máximo para que no se extienda demasiado en pantallas grandes */
+
   width: 100%;
+  /* Ancho adaptable al contenedor padre */
 }
 
+/* Estilos para título principal */
 h1 {
   font-family: 'Roboto', sans-serif;
+  /* Fuente Roboto para título, más moderno y fuerte */
+
   font-weight: 700;
+  /* Negrita */
+
   color: #222;
+  /* Color gris muy oscuro */
+
   margin-bottom: 24px;
+  /* Espacio debajo para separar del contenido siguiente */
+
   text-align: center;
+  /* Centrar texto */
 }
 
+/* Estilos para el formulario */
 form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  /* Distribuye los elementos del formulario en columna con espacio vertical entre ellos */
 }
 
+/* Estilos para etiquetas de formulario */
 label {
   font-weight: 700;
+  /* Negrita para destacarlas */
+
   margin-bottom: 6px;
+  /* Margen inferior para separar del input */
+
   display: inline-block;
+  /* Para que el margen y padding funcionen correctamente */
+
   color: #444;
+  /* Gris oscuro para buena legibilidad */
 }
 
-/* Indicar obligatorios con asterisco rojo */
+/* Indicador de campos obligatorios con asterisco rojo */
 label.required::after {
   content: " *";
+  /* Añade un asterisco tras el texto de la etiqueta */
+
   color: #d93025;
+  /* Color rojo vibrante */
+
   font-weight: 700;
+  /* Negrita para el asterisco */
 }
 
+/* Estilos generales para inputs de texto, número y fecha */
 input[type="text"],
 input[type="number"],
 input[type="date"] {
   width: 100%;
+  /* Ocupan todo el ancho disponible del contenedor */
+
   padding: 12px 14px;
+  /* Espaciado interno para hacer inputs cómodos */
+
   border: 2px solid #ccc;
+  /* Borde gris claro */
+
   border-radius: 10px;
+  /* Bordes redondeados */
+
   font-size: 1rem;
+  /* Tamaño de fuente legible */
+
   font-family: 'Roboto', sans-serif;
+  /* Fuente Roboto para inputs, consistente con el título */
+
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  /* Transición suave para cambios de borde y sombra al enfocar */
+
   outline-offset: 2px;
+  /* Desplazamiento del contorno para mejor visibilidad */
+
   /* Convertir a mayúsculas visualmente */
   text-transform: uppercase;
+  /* Hace que el texto se muestre siempre en mayúsculas */
 }
 
+/* Estilos para inputs cuando reciben foco */
 input[type="text"]:focus,
 input[type="number"]:focus,
 input[type="date"]:focus {
   border-color: #3a86ff;
+  /* Borde azul intenso */
+
   box-shadow: 0 0 8px rgba(58,134,255,0.4);
+  /* Sombra azul translúcida alrededor para destacar */
 }
 
-/* Mensajes de error */
+/* Estilos para mensajes de error */
 .error-message {
   color: #d93025;
+  /* Rojo para indicar error */
+
   font-size: 0.875rem;
+  /* Tamaño de fuente más pequeño */
+
   margin-top: 4px;
+  /* Separación del input hacia abajo */
+
   display: none;
+  /* Oculto por defecto, se muestra solo cuando hay error */
 }
 
-/* Botón */
+/* Estilos para botón */
 button {
   background-color: #3a86ff;
+  /* Fondo azul vibrante */
+
   color: white;
+  /* Texto blanco */
+
   border: none;
+  /* Sin borde */
+
   border-radius: 10px;
+  /* Bordes redondeados */
+
   padding: 14px 20px;
+  /* Espaciado cómodo */
+
   font-size: 1.1rem;
+  /* Tamaño de fuente un poco mayor */
+
   font-weight: 700;
+  /* Negrita */
+
   font-family: 'Roboto', sans-serif;
+  /* Fuente consistente con inputs y títulos */
+
   cursor: pointer;
+  /* Cambia cursor para indicar clickeable */
+
   transition: background-color 0.25s ease;
+  /* Transición suave para cambio de color en hover */
 }
 
+/* Estado hover del botón */
 button:hover {
   background-color: #265dcc;
+  /* Azul más oscuro al pasar mouse */
 }
 
-/* Success message */
+/* Estilos para mensaje de éxito */
 .success-message {
   background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-  padding: 14px 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-  display: none;
-  font-weight: 700;
-  text-align: center;
-}
+  /* Fondo verde muy claro */
 
+  color: #155724;
+  /* Texto verde oscuro */
+
+  border: 1px solid #c3e6cb;
+  /* Borde verde suave */
+
+  padding: 14px 20px;
+  /* Espaciado cómodo */
+
+  border-radius: 10px;
+  /* Bordes redondeados */
+
+  margin-top: 20px;
+  /* Separación arriba para separar del formulario */
+
+  display: none;
+  /* Oculto por defecto, visible solo tras envío exitoso */
+
+  font-weight: 700;
+  /* Negrita */
+
+  text-align: center;
+  /* Texto centrado */
+}
