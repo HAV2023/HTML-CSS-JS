@@ -1,143 +1,179 @@
+<!--
+  Documento: index.html
+  Descripción: Formulario profesional con validaciones y toggle de contraseña
+  Cada sección está comentada para facilitar comprensión.
+-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Metadatos importantes para la página -->
+  <!-- Metadatos de codificación y viewport -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Título de la página que aparece en la pestaña del navegador -->
   <title>Formulario Profesional</title>
 
-  <!-- Carga fuentes Google Fonts: Lato y Roboto -->
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Importación de las fuentes Lato y Roboto desde Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
 
-  <!-- Vincula archivo externo CSS con estilos -->
+  <!-- Enlace al archivo CSS externo que contiene los estilos del formulario -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Contenedor principal del formulario para centrar y limitar ancho -->
+  <div class="container">
+    <!-- Título principal de la sección -->
+    <h1>Formulario de Registro</h1>
 
-<!-- Contenedor principal para centralizar y dar formato -->
-<div class="container">
-  <!-- Título principal del formulario -->
-  <h1>Formulario de Registro</h1>
+    <!-- Inicio del formulario, con id para manejarlo desde JavaScript y novalidate para desactivar validación nativa -->
+    <form id="professionalForm" novalidate>
 
-  <!-- Formulario con id para JS, sin validación nativa -->
-  <form id="professionalForm" novalidate>
+      <!-- Campo: Nombre completo -->
+      <div>
+        <!-- Label vinculado al input por su atributo for=id -->
+        <label for="name" class="required">Nombre completo</label>
+        <!-- Input texto con validaciones HTML (required, pattern) y placeholder descriptivo -->
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Escribe tu nombre completo"
+          required
+          pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
+        />
+        <!-- Div para mostrar mensaje de error específico bajo el input -->
+        <div class="error-message" id="error-name" aria-live="polite"></div>
+      </div>
 
-    <!-- Campo para Nombre completo -->
-    <div>
-      <!-- Etiqueta con "for" que enlaza al input por id -->
-      <label for="name" class="required">Nombre completo</label>
-      <!-- Input texto, obligatorio, con patrón para solo letras y espacios -->
-      <input
-        type="text"
-        id="name"
-        name="name"
-        placeholder="Escribe tu nombre completo"
-        required
-        pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
-      />
-      <!-- Mensaje error oculto inicialmente, se muestra si valida mal -->
-      <div class="error-message" id="error-name">Por favor ingresa solo letras y espacios.</div>
+      <!-- Campo: Correo electrónico -->
+      <div>
+        <label for="email" class="required">Correo electrónico</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="ejemplo@dominio.com"
+          required
+        />
+        <div class="error-message" id="error-email" aria-live="polite"></div>
+      </div>
+
+      <!-- Campo: Confirmar correo electrónico -->
+      <div>
+        <label for="emailConfirm" class="required">Confirmar correo electrónico</label>
+        <input
+          type="email"
+          id="emailConfirm"
+          name="emailConfirm"
+          placeholder="Repite tu correo electrónico"
+          required
+        />
+        <div class="error-message" id="error-emailConfirm" aria-live="polite"></div>
+      </div>
+
+      <!-- Campo: Contraseña con botón para mostrar/ocultar -->
+      <div>
+        <label for="password" class="required">Contraseña</label>
+        <!-- Contenedor relativo para posicionar el botón dentro del input -->
+        <div class="input-password">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Ingresa tu contraseña"
+            required
+            minlength="8"
+          />
+          <!-- Botón que alterna icono y visibilidad de contraseña -->
+          <button
+            type="button"
+            id="togglePassword"
+            aria-label="Mostrar/ocultar contraseña"
+          >👁️</button>
+        </div>
+        <div class="error-message" id="error-password" aria-live="polite"></div>
+      </div>
+
+      <!-- Campo: Confirmar contraseña, mismo patrón que el anterior -->
+      <div>
+        <label for="passwordConfirm" class="required">Confirmar contraseña</label>
+        <div class="input-password">
+          <input
+            type="password"
+            id="passwordConfirm"
+            name="passwordConfirm"
+            placeholder="Repite tu contraseña"
+            required
+            minlength="8"
+          />
+          <button
+            type="button"
+            id="togglePasswordConfirm"
+            aria-label="Mostrar/ocultar contraseña"
+          >👁️</button>
+        </div>
+        <div class="error-message" id="error-passwordConfirm" aria-live="polite"></div>
+      </div>
+
+      <!-- Campo: Edad, con inputmode y pattern para solo números -->
+      <div>
+        <label for="age" class="required">Edad</label>
+        <input
+          type="text"
+          id="age"
+          name="age"
+          placeholder="Ejemplo: 35"
+          required
+          inputmode="numeric"
+          pattern="\d*"
+          maxlength="3"
+        />
+        <div class="error-message" id="error-age" aria-live="polite"></div>
+      </div>
+
+      <!-- Campo: Fecha de nacimiento, el max será establecido por JS a la fecha actual -->
+      <div>
+        <label for="birthdate" class="required">Fecha de nacimiento</label>
+        <input type="date" id="birthdate" name="birthdate" required max="" />
+        <div class="error-message" id="error-birthdate" aria-live="polite"></div>
+      </div>
+
+      <!-- Campo: Comentarios opcional, con contador de caracteres -->
+      <div>
+        <label for="comments">Comentarios (opcional)</label>
+        <textarea
+          id="comments"
+          name="comments"
+          placeholder="Escribe aquí tus comentarios"
+          rows="5"
+          cols="40"
+          maxlength="2000"
+          pattern="^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,!?-]*$"
+        ></textarea>
+        <div class="char-counter" id="commentsCounter">0 / 2000 caracteres</div>
+        <div class="error-message" id="error-comments" aria-live="polite"></div>
+      </div>
+
+      <!-- Botón de envío principal -->
+      <button type="submit">Enviar información</button>
+    </form>
+
+    <!-- Mensaje de éxito que se muestra tras un envío válido -->
+    <div
+      class="success-message"
+      id="successMessage"
+      style="display:none;"
+      aria-live="polite"
+      role="alert"
+    >
+      Formulario enviado con éxito. ¡Gracias!
     </div>
+  </div>
 
-    <!-- Campo para Correo electrónico -->
-    <div>
-      <label for="email" class="required">Correo electrónico</label>
-      <!-- Input tipo email, obligatorio, navegador valida formato básico -->
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="ejemplo@dominio.com"
-        required
-      />
-      <div class="error-message" id="error-email">Por favor ingresa un correo electrónico válido.</div>
-    </div>
-
-    <!-- Campo para Confirmar correo electrónico -->
-    <div>
-      <label for="emailConfirm" class="required">Confirmar correo electrónico</label>
-      <!-- Mismo tipo y atributos que el email para validación -->
-      <input
-        type="email"
-        id="emailConfirm"
-        name="emailConfirm"
-        placeholder="Repite tu correo electrónico"
-        required
-      />
-      <!-- Mensaje personalizado para correos que no coinciden -->
-      <div class="error-message" id="error-emailConfirm">Los correos electrónicos no coinciden.</div>
-    </div>
-
-    <!-- Campo para Contraseña -->
-    <div>
-      <label for="password" class="required">Contraseña</label>
-      <!-- Input password para ocultar texto, mínimo 8 caracteres -->
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Ingresa tu contraseña"
-        required
-        minlength="8"
-      />
-      <div class="error-message" id="error-password">La contraseña debe tener al menos 8 caracteres.</div>
-    </div>
-
-    <!-- Campo para Edad -->
-    <div>
-      <label for="age" class="required">Edad</label>
-      <!-- Input texto con limitación a números (validación JS) -->
-      <input
-        type="text"
-        id="age"
-        name="age"
-        placeholder="Ejemplo: 35"
-        required
-        inputmode="numeric"  <!-- Sugerencia teclado numérico en móviles -->
-        pattern="\d*"        <!-- Patrón para solo dígitos -->
-        maxlength="3"        <!-- Máximo 3 caracteres -->
-      />
-      <div class="error-message" id="error-age">Por favor ingresa una edad válida entre 1 y 120.</div>
-    </div>
-
-    <!-- Campo para Fecha de nacimiento -->
-    <div>
-      <label for="birthdate" class="required">Fecha de nacimiento</label>
-      <!-- Input date, obligatorio, atributo max será dinámico en JS -->
-      <input type="date" id="birthdate" name="birthdate" required max="" />
-      <div class="error-message" id="error-birthdate">Por favor selecciona una fecha válida.</div>
-    </div>
-
-    <!-- Campo para Comentarios -->
-    <div>
-      <label for="comments">Comentarios (opcional)</label>
-      <!-- Textarea multilinea con máximo 2000 caracteres y patrón validación -->
-      <textarea
-        id="comments"                  <!-- Identificador único del elemento textarea en el documento HTML -->
-        name="comments"                <!-- Nombre del campo que se enviará al servidor cuando se envíe el formulario -->
-        placeholder="Escribe aquí tus comentarios"  <!-- Texto de ayuda que aparece dentro del textarea cuando está vacío -->
-        rows="5"                      <!-- Número visible de filas (altura) que ocupará el área de texto -->
-        cols="40"                     <!-- Número visible de columnas (ancho) que ocupará el área de texto -->
-        maxlength="2000"              <!-- Limita la cantidad máxima de caracteres que se pueden ingresar (máximo 2000) -->
-        pattern="^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,!?-]*$"  <!-- Expresión regular que restringe los caracteres permitidos para validar el texto -->
-      ></textarea>
-
-      <!-- Contador dinámico de caracteres escritos -->
-      <div class="char-counter" id="commentsCounter">0 / 2000 caracteres</div>
-      <!-- Mensaje de error para validación de texto -->
-      <div class="error-message" id="error-comments">Sólo se permiten letras, números y signos básicos.</div>
-    </div>
-
-    <!-- Botón para enviar formulario -->
-    <button type="submit">Enviar información</button>
-  </form>
-
-  <!-- Mensaje que se muestra cuando formulario se envía con éxito -->
-  <div class="success-message" id="successMessage">Formulario enviado con éxito. ¡Gracias!</div>
-</div>
-
-<!-- Vincula archivo externo JS con lógica de validación y comportamiento -->
-<script src="script.js"></script>
-
+  <!-- Referencia al script JS que contiene toda la lógica de validación y toggles -->
+  <script src="script.js"></script>
 </body>
 </html>
