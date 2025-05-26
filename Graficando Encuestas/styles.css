@@ -1,1 +1,30 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 20px;
+}
 
+h2 {
+  margin-bottom: 12px;
+}
+
+.option {
+  margin: 8px 0;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#chartContainer {
+  margin-top: 30px;
+}
+
+canvas {
+  width: 100% !important;
+  height: 300px !important;
+}
