@@ -1,31 +1,67 @@
+/* Estilos generales para el cuerpo de la página */
 body {
   font-family: Arial, sans-serif;
+  /* Define la tipografía base: Arial, y sans-serif como respaldo */
+
   margin: 0;
+  /* Elimina márgenes por defecto del navegador */
+
   padding: 20px;
+  /* Añade espacio interno alrededor del contenido */
+
   background: #f5f5f5;
+  /* Color de fondo gris claro */
+
   max-width: 600px;
+  /* Limita el ancho máximo para mejor legibilidad en pantallas grandes */
+
   margin-left: auto;
   margin-right: auto;
+  /* Centra horizontalmente el contenido dentro del viewport */
 }
 
+/* Estilos para el contenedor principal con id "content" */
 #content {
   background: white;
+  /* Fondo blanco para resaltar el contenido */
+
   padding: 20px;
+  /* Espacio interno alrededor del texto */
+
   border-radius: 8px;
+  /* Bordes redondeados para suavizar la caja */
+
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  /* Sombra suave alrededor para dar profundidad */
 }
 
-/* Todos los párrafos inician ocultos */
+/* Estilos para todos los párrafos dentro de #content */
+/* Inicialmente están ocultos y desplazados hacia abajo */
 #content p {
   opacity: 0;
+  /* Transparencia total, párrafos invisibles inicialmente */
+
   transform: translateY(30px);
-  transition: opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
+  /* Desplaza los párrafos 30px hacia abajo */
+
+  transition: 
+    opacity 0.6s cubic-bezier(.4,0,.2,1),
+    transform 0.6s cubic-bezier(.4,0,.2,1);
+  /* Transiciones suaves para opacidad y posición con curva de animación personalizada */
+
   will-change: opacity, transform;
+  /* Optimiza el rendimiento indicando que estos dos estilos cambiarán */
+
   margin-bottom: 1em;
+  /* Margen inferior para separar los párrafos */
 }
 
-/* Cuando el párrafo está visible en el viewport, aparece */
+/* Estilos para párrafos que tienen la clase 'visible' */
+/* Aquí están completamente visibles y en posición original */
 #content p.visible {
   opacity: 1;
+  /* Opacidad total, párrafo visible */
+
   transform: translateY(0);
+  /* Sin desplazamiento vertical, posición natural */
 }
