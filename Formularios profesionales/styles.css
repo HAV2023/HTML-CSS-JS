@@ -1,1 +1,113 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Lato', sans-serif;
+  background: #f0f2f5;
+  margin: 0;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.container {
+  background: #fff;
+  padding: 32px 36px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  max-width: 480px;
+  width: 100%;
+}
+
+h1 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+label {
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: inline-block;
+  color: #444;
+}
+
+/* Indicar obligatorios con asterisco rojo */
+label.required::after {
+  content: " *";
+  color: #d93025;
+  font-weight: 700;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline-offset: 2px;
+  /* Convertir a mayúsculas visualmente */
+  text-transform: uppercase;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus {
+  border-color: #3a86ff;
+  box-shadow: 0 0 8px rgba(58,134,255,0.4);
+}
+
+/* Mensajes de error */
+.error-message {
+  color: #d93025;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  display: none;
+}
+
+/* Botón */
+button {
+  background-color: #3a86ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+button:hover {
+  background-color: #265dcc;
+}
+
+/* Success message */
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 14px 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  display: none;
+  font-weight: 700;
+  text-align: center;
+}
 
