@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Metadatos importantes para la página -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Formulario Profesional</title>
 
-  <!-- Google Fonts -->
+  <!-- Carga fuentes Google Fonts: Lato y Roboto -->
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- CSS externo -->
+  <!-- Vincula archivo externo CSS con estilos -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
+<!-- Contenedor principal para centralizar y dar formato -->
 <div class="container">
+  <!-- Título principal del formulario -->
   <h1>Formulario de Registro</h1>
+
+  <!-- Formulario con id para JS, sin validación nativa -->
   <form id="professionalForm" novalidate>
 
+    <!-- Campo para Nombre completo -->
     <div>
+      <!-- Etiqueta con "for" que enlaza al input por id -->
       <label for="name" class="required">Nombre completo</label>
+      <!-- Input texto, obligatorio, con patrón para solo letras y espacios -->
       <input
         type="text"
         id="name"
@@ -27,11 +35,14 @@
         required
         pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
       />
+      <!-- Mensaje error oculto inicialmente, se muestra si valida mal -->
       <div class="error-message" id="error-name">Por favor ingresa solo letras y espacios.</div>
     </div>
 
+    <!-- Campo para Correo electrónico -->
     <div>
       <label for="email" class="required">Correo electrónico</label>
+      <!-- Input tipo email, obligatorio, navegador valida formato básico -->
       <input
         type="email"
         id="email"
@@ -42,8 +53,25 @@
       <div class="error-message" id="error-email">Por favor ingresa un correo electrónico válido.</div>
     </div>
 
+    <!-- Campo para Confirmar correo electrónico -->
+    <div>
+      <label for="emailConfirm" class="required">Confirmar correo electrónico</label>
+      <!-- Mismo tipo y atributos que el email para validación -->
+      <input
+        type="email"
+        id="emailConfirm"
+        name="emailConfirm"
+        placeholder="Repite tu correo electrónico"
+        required
+      />
+      <!-- Mensaje personalizado para correos que no coinciden -->
+      <div class="error-message" id="error-emailConfirm">Los correos electrónicos no coinciden.</div>
+    </div>
+
+    <!-- Campo para Contraseña -->
     <div>
       <label for="password" class="required">Contraseña</label>
+      <!-- Input password para ocultar texto, mínimo 8 caracteres -->
       <input
         type="password"
         id="password"
@@ -55,45 +83,59 @@
       <div class="error-message" id="error-password">La contraseña debe tener al menos 8 caracteres.</div>
     </div>
 
+    <!-- Campo para Edad -->
     <div>
       <label for="age" class="required">Edad</label>
+      <!-- Input texto con limitación a números (validación JS) -->
       <input
         type="text"
         id="age"
         name="age"
         placeholder="Ejemplo: 35"
         required
-        inputmode="numeric"
-        pattern="\d*"
-        maxlength="3"
+        inputmode="numeric"  <!-- Sugerencia teclado numérico en móviles -->
+        pattern="\d*"        <!-- Patrón para solo dígitos -->
+        maxlength="3"        <!-- Máximo 3 caracteres -->
       />
       <div class="error-message" id="error-age">Por favor ingresa una edad válida entre 1 y 120.</div>
     </div>
 
+    <!-- Campo para Fecha de nacimiento -->
     <div>
       <label for="birthdate" class="required">Fecha de nacimiento</label>
+      <!-- Input date, obligatorio, atributo max será dinámico en JS -->
       <input type="date" id="birthdate" name="birthdate" required max="" />
       <div class="error-message" id="error-birthdate">Por favor selecciona una fecha válida.</div>
     </div>
 
+    <!-- Campo para Comentarios -->
     <div>
       <label for="comments">Comentarios (opcional)</label>
-      <input
-        type="text"
+      <!-- Textarea multilinea con máximo 2000 caracteres y patrón validación -->
+      <textarea
         id="comments"
         name="comments"
         placeholder="Escribe aquí tus comentarios"
+        rows="5"
+        cols="40"
+        maxlength="2000"
         pattern="^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,!?-]*$"
-      />
+      ></textarea>
+      <!-- Contador dinámico de caracteres escritos -->
+      <div class="char-counter" id="commentsCounter">0 / 2000 caracteres</div>
+      <!-- Mensaje de error para validación de texto -->
       <div class="error-message" id="error-comments">Sólo se permiten letras, números y signos básicos.</div>
     </div>
 
+    <!-- Botón para enviar formulario -->
     <button type="submit">Enviar información</button>
   </form>
 
+  <!-- Mensaje que se muestra cuando formulario se envía con éxito -->
   <div class="success-message" id="successMessage">Formulario enviado con éxito. ¡Gracias!</div>
 </div>
 
+<!-- Vincula archivo externo JS con lógica de validación y comportamiento -->
 <script src="script.js"></script>
 
 </body>
