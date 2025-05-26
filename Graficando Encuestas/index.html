@@ -1,29 +1,86 @@
 <!DOCTYPE html>
+<!-- Define el tipo de documento como HTML5 -->
+
 <html lang="es">
+<!-- Elemento raíz del documento HTML -->
+<!-- Atributo lang="es" indica que el idioma principal es español -->
+
 <head>
+  <!-- Contiene metadatos y enlaces a recursos externos -->
+
   <meta charset="UTF-8" />
+  <!-- Define la codificación de caracteres para la página (UTF-8 es estándar universal) -->
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Meta para asegurar que la página sea responsiva en dispositivos móviles -->
+  <!-- width=device-width: ancho de la pantalla del dispositivo -->
+  <!-- initial-scale=1: escala inicial sin zoom -->
+
   <title>Encuesta con gráfica</title>
+  <!-- Título que aparece en la pestaña del navegador -->
+
   <link rel="stylesheet" href="styles.css" />
+  <!-- Enlace al archivo externo CSS que contiene los estilos visuales -->
 </head>
+
 <body>
+  <!-- Contenido visible de la página -->
 
   <h2>¿Cuál es tu lenguaje de programación favorito?</h2>
+  <!-- Título principal de la encuesta -->
 
   <form id="pollForm">
-    <label class="option"><input type="radio" name="language" value="JavaScript" /> JavaScript</label><br/>
-    <label class="option"><input type="radio" name="language" value="Python" /> Python</label><br/>
-    <label class="option"><input type="radio" name="language" value="Java" /> Java</label><br/>
-    <label class="option"><input type="radio" name="language" value="C++" /> C++</label><br/>
+    <!-- Formulario con id único 'pollForm' para identificarlo desde JavaScript -->
+
+    <label class="option">
+      <input type="radio" name="language" value="JavaScript" />
+      JavaScript
+    </label>
+    <br/>
+    <!-- Opción 1: botón radio para seleccionar JavaScript -->
+    <!-- name="language": grupo de opciones donde solo una puede estar seleccionada -->
+    <!-- value="JavaScript": valor enviado al seleccionar esta opción -->
+
+    <label class="option">
+      <input type="radio" name="language" value="Python" />
+      Python
+    </label>
+    <br/>
+    <!-- Opción 2: Python -->
+
+    <label class="option">
+      <input type="radio" name="language" value="Java" />
+      Java
+    </label>
+    <br/>
+    <!-- Opción 3: Java -->
+
+    <label class="option">
+      <input type="radio" name="language" value="C++" />
+      C++
+    </label>
+    <br/>
+    <!-- Opción 4: C++ -->
+
     <button type="submit">Enviar</button>
+    <!-- Botón para enviar el formulario -->
+    <!-- type="submit" activa el evento submit del formulario -->
   </form>
 
   <div id="chartContainer" style="display:none;">
+    <!-- Contenedor para la gráfica de resultados -->
+    <!-- Inicialmente oculto (display:none) hasta que se envía la respuesta -->
+
     <h3>Resultados de la encuesta</h3>
+    <!-- Subtítulo para la sección de resultados -->
+
     <canvas id="resultsChart" width="400" height="300"></canvas>
+    <!-- Elemento canvas donde se dibuja la gráfica -->
+    <!-- width y height definen el tamaño del área de dibujo -->
   </div>
 
   <script src="script.js"></script>
+  <!-- Archivo externo de JavaScript que contiene la lógica del formulario y la gráfica -->
+
 </body>
 </html>
-
