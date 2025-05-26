@@ -1,30 +1,21 @@
-(() => {
-  const paragraphs = document.querySelectorAll('#content p');
-  let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+// Seleccionamos todos los <p> dentro de #content
+const paragraphs = document.querySelectorAll('#content p');
 
-  // Guardamos opacidad individual para cada párrafo (inicial 1)
-  const opacities = Array(paragraphs.length).fill(1);
-
-  window.addEventListener('scroll', () => {
-    let st = window.pageYOffset || document.documentElement.scrollTop;
-    const delta = st - lastScrollTop;
-
-    // Ajuste fijo para la opacidad por scroll (ajustable)
-    const opacityStep = 0.03;
-
-    paragraphs.forEach((p, i) => {
-      if(delta > 0) {
-        // Scroll hacia abajo: reduce opacidad escalonadamente
-        opacities[i] -= opacityStep * (i + 1);
-        if(opacities[i] < 0) opacities[i] = 0;
-      } else if(delta < 0) {
-        // Scroll hacia arriba: aumenta opacidad escalonadamente
-        opacities[i] += opacityStep * (i + 1);
-        if(opacities[i] > 1) opacities[i] = 1;
+// Usamos IntersectionObserver para detectar si cada párrafo entra o sale del viewport
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('visible'); // Aplica fade-in
+      } else {
+        entry.target.classList.remove('visible'); // Aplica fade-out
       }
-      p.style.opacity = opacities[i].toFixed(2);
     });
+  }, 
+  {
+    threshold: 0.1 // Cuando el 10% del párrafo es visible, activa el efecto
+  }
+);
 
-    lastScrollTop = st <= 0 ? 0 : st; // evitar negativos
-  });
-})();
+// Observa cada párrafo individualmente
+paragraphs.forEach(p => observer.observe(p));
