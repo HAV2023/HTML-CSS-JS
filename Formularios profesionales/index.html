@@ -1,149 +1,100 @@
 <!DOCTYPE html>
-<!-- Define que el documento es HTML5 -->
-
 <html lang="es">
-<!-- Inicio del documento HTML, con atributo lang="es" que indica que el idioma principal es español -->
-
 <head>
-  <!-- Contiene metadatos, enlaces a estilos y configuración del documento -->
-
   <meta charset="UTF-8" />
-  <!-- Define la codificación de caracteres como UTF-8 para soportar caracteres especiales y acentos -->
-
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Configura la ventana gráfica para dispositivos móviles:
-       - width=device-width: el ancho del viewport será igual al ancho del dispositivo
-       - initial-scale=1: escala inicial del zoom es 100% -->
-
   <title>Formulario Profesional</title>
-  <!-- Título que aparecerá en la pestaña o barra del navegador -->
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <!-- Importa las fuentes "Lato" y "Roboto" en pesos 400 (normal) y 700 (negrita) desde Google Fonts,
-       para usarlas en los estilos CSS -->
 
   <!-- CSS externo -->
   <link rel="stylesheet" href="styles.css" />
-  <!-- Enlace al archivo externo de estilos CSS que da formato y diseño al formulario -->
 </head>
-
 <body>
-  <!-- Contenido visible de la página -->
 
-  <div class="container">
-    <!-- Contenedor principal del formulario con clase para estilos CSS -->
+<div class="container">
+  <h1>Formulario de Registro</h1>
+  <form id="professionalForm" novalidate>
 
-    <h1>Formulario de Registro</h1>
-    <!-- Título principal del formulario -->
+    <div>
+      <label for="name" class="required">Nombre completo</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Escribe tu nombre completo"
+        required
+        pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
+      />
+      <div class="error-message" id="error-name">Por favor ingresa solo letras y espacios.</div>
+    </div>
 
-    <form id="professionalForm" novalidate>
-      <!-- Inicio del formulario
-           - id="professionalForm": identificador único para manipulación con JavaScript
-           - novalidate: desactiva la validación nativa del navegador para controlarla manualmente -->
+    <div>
+      <label for="email" class="required">Correo electrónico</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="ejemplo@dominio.com"
+        required
+      />
+      <div class="error-message" id="error-email">Por favor ingresa un correo electrónico válido.</div>
+    </div>
 
-      <div>
-        <!-- Contenedor para el campo Nombre completo -->
+    <div>
+      <label for="password" class="required">Contraseña</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Ingresa tu contraseña"
+        required
+        minlength="8"
+      />
+      <div class="error-message" id="error-password">La contraseña debe tener al menos 8 caracteres.</div>
+    </div>
 
-        <label for="name" class="required">Nombre completo</label>
-        <!-- Etiqueta para el campo nombre
-             - for="name": asocia esta etiqueta con el input cuyo id es "name"
-             - class="required": indica que es campo obligatorio (para estilos y mensajes visuales) -->
+    <div>
+      <label for="age" class="required">Edad</label>
+      <input
+        type="text"
+        id="age"
+        name="age"
+        placeholder="Ejemplo: 35"
+        required
+        inputmode="numeric"
+        pattern="\d*"
+        maxlength="3"
+      />
+      <div class="error-message" id="error-age">Por favor ingresa una edad válida entre 1 y 120.</div>
+    </div>
 
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Escribe tu nombre completo"
-          required
-          pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
-        />
-        <!-- Campo de texto para ingresar el nombre
-             - type="text": campo de texto simple
-             - id y name: identificadores para relacionar con label y envío del formulario
-             - placeholder: texto gris dentro del campo como guía
-             - required: campo obligatorio
-             - pattern: expresión regular que solo permite letras (mayúsculas/minúsculas), acentos, ñ y espacios -->
+    <div>
+      <label for="birthdate" class="required">Fecha de nacimiento</label>
+      <input type="date" id="birthdate" name="birthdate" required max="" />
+      <div class="error-message" id="error-birthdate">Por favor selecciona una fecha válida.</div>
+    </div>
 
-        <div class="error-message" id="error-name">Por favor ingresa solo letras y espacios.</div>
-        <!-- Mensaje de error que aparece si la validación falla
-             - inicialmente oculto y mostrado solo si hay error -->
-      </div>
+    <div>
+      <label for="comments">Comentarios (opcional)</label>
+      <input
+        type="text"
+        id="comments"
+        name="comments"
+        placeholder="Escribe aquí tus comentarios"
+        pattern="^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,!?-]*$"
+      />
+      <div class="error-message" id="error-comments">Sólo se permiten letras, números y signos básicos.</div>
+    </div>
 
-      <div>
-        <!-- Contenedor para el campo Edad -->
+    <button type="submit">Enviar información</button>
+  </form>
 
-        <label for="age" class="required">Edad</label>
-        <!-- Etiqueta para el campo edad, con atributo required -->
+  <div class="success-message" id="successMessage">Formulario enviado con éxito. ¡Gracias!</div>
+</div>
 
-        <input
-          type="text"
-          id="age"
-          name="age"
-          placeholder="Ejemplo: 35"
-          required
-          inputmode="numeric"
-          pattern="\d*"
-          maxlength="3"
-        />
-        <!-- Campo para ingresar la edad
-             - type="text" en lugar de "number" para mejor control con JavaScript
-             - inputmode="numeric": sugiere teclado numérico en móviles
-             - pattern="\d*": permite solo dígitos
-             - maxlength="3": limita la entrada a 3 caracteres (máx 999)
-             - required: obligatorio -->
+<script src="script.js"></script>
 
-        <div class="error-message" id="error-age">Por favor ingresa una edad válida entre 1 y 120.</div>
-        <!-- Mensaje de error específico para edad -->
-      </div>
-
-      <div>
-        <!-- Contenedor para el campo Fecha de nacimiento -->
-
-        <label for="birthdate" class="required">Fecha de nacimiento</label>
-        <!-- Etiqueta para el campo fecha -->
-
-        <input type="date" id="birthdate" name="birthdate" required max="" />
-        <!-- Campo tipo fecha
-             - type="date": selector de fecha nativo
-             - required: obligatorio
-             - max="": atributo será dinámicamente configurado por JavaScript para no permitir fechas futuras -->
-
-        <div class="error-message" id="error-birthdate">Por favor selecciona una fecha válida.</div>
-        <!-- Mensaje de error para fecha inválida o vacía -->
-      </div>
-
-      <div>
-        <!-- Contenedor para el campo Comentarios -->
-
-        <label for="comments">Comentarios (opcional)</label>
-        <!-- Etiqueta para comentarios, campo no obligatorio -->
-
-        <input
-          type="text"
-          id="comments"
-          name="comments"
-          placeholder="Escribe aquí tus comentarios"
-          pattern="^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,!?-]*$"
-        />
-        <!-- Campo texto para comentarios
-             - pattern: permite letras, números, espacios y signos básicos
-             - no es required, por lo tanto opcional -->
-
-        <div class="error-message" id="error-comments">Sólo se permiten letras, números y signos básicos.</div>
-        <!-- Mensaje de error para texto inválido -->
-      </div>
-
-      <button type="submit">Enviar información</button>
-      <!-- Botón para enviar el formulario -->
-    </form>
-
-    <div class="success-message" id="successMessage">Formulario enviado con éxito. ¡Gracias!</div>
-    <!-- Mensaje que se muestra tras envío exitoso del formulario -->
-  </div>
-
-  <!-- JS externo -->
-  <script src="script.js"></script>
-  <!-- Carga el archivo JavaScript externo que controla validaciones y comportamiento del formulario -->
 </body>
 </html>
