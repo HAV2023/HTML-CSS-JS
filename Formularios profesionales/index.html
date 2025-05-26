@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formulario Profesional</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS externo -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="container">
+  <h1>Formulario de Registro</h1>
+  <form id="professionalForm" novalidate>
+    <div>
+      <label for="name" class="required">Nombre completo</label>
+      <input type="text" id="name" name="name" placeholder="Escribe tu nombre completo" required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" />
+      <div class="error-message" id="error-name">Por favor ingresa solo letras y espacios.</div>
+    </div>
+
+    <div>
+      <label for="age" class="required">Edad</label>
+      <input type="number" id="age" name="age" placeholder="Ejemplo: 35" min="1" max="120" required />
+      <div class="error-message" id="error-age">Por favor ingresa una edad válida entre 1 y 120.</div>
+    </div>
+
+    <div>
+      <label for="birthdate" class="required">Fecha de nacimiento</label>
+      <input type="date" id="birthdate" name="birthdate" required max="" />
+      <div class="error-message" id="error-birthdate">Por favor selecciona una fecha válida.</div>
+    </div>
+
+    <div>
+      <label for="comments">Comentarios (opcional)</label>
+      <input type="text" id="comments" name="comments" placeholder="Escribe aquí tus comentarios" pattern="^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,!?-]*$" />
+      <div class="error-message" id="error-comments">Sólo se permiten letras, números y signos básicos.</div>
+    </div>
+
+    <button type="submit">Enviar información</button>
+  </form>
+
+  <div class="success-message" id="successMessage">Formulario enviado con éxito. ¡Gracias!</div>
+</div>
+
+<!-- JS externo -->
+<script src="script.js"></script>
+
+</body>
+</html>
 
