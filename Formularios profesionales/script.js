@@ -1,71 +1,106 @@
-// script.js
-// Documentación granular de la lógica JavaScript para el Formulario Profesional
+/**
+ * script.js — Validación avanzada de formulario profesional
+ * 
+ * Autor: Hector Arciniega
+ * Proyecto: Formulario de Registro Profesional
+ * Descripción:
+ *   Este script implementa validaciones, restricciones y mejoras de experiencia
+ *   de usuario en un formulario profesional hecho en HTML5 + CSS3.
+ *   - Convierte a mayúsculas los campos de texto.
+ *   - Impide números en el campo "Nombre" (ni al escribir, ni al pegar).
+ *   - Restringe la edad a valores numéricos y rango válido.
+ *   - Valida contraseñas, correos, fechas y comentarios.
+ *   - Incluye contador de caracteres, toggles de visibilidad de contraseñas
+ *   - Muestra mensajes de error y éxito según los criterios definidos.
+ * 
+ * Fecha última actualización: 26/05/2025
+ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Referencias a elementos del DOM ---
-  const form            = document.getElementById('professionalForm');      // Formulario principal
-  const success         = document.getElementById('successMessage');       // Contenedor de mensaje de éxito
 
-  const nameIn          = document.getElementById('name');                 // Input de nombre
-  const emailIn         = document.getElementById('email');                // Input de correo
-  const emailC          = document.getElementById('emailConfirm');         // Input de confirmación de correo
-  const passIn          = document.getElementById('password');             // Input de contraseña
-  const passC           = document.getElementById('passwordConfirm');      // Input de confirmación de contraseña
-  const ageIn           = document.getElementById('age');                  // Input de edad
-  const birthIn         = document.getElementById('birthdate');            // Input de fecha de nacimiento
-  const commIn          = document.getElementById('comments');             // Textarea de comentarios
-  const commCnt         = document.getElementById('commentsCounter');      // Contador de comentarios
+  // ===================
+  // Referencias a elementos del formulario y sus campos
+  // ===================
+  const form    = document.getElementById('professionalForm');
+  const success = document.getElementById('successMessage');
 
-  const togP            = document.getElementById('togglePassword');       // Botón para toggle password
-  const togPC           = document.getElementById('togglePasswordConfirm');// Botón para toggle passwordConfirm
+  const nameIn  = document.getElementById('name');
+  const emailIn = document.getElementById('email');
+  const emailC  = document.getElementById('emailConfirm');
+  const passIn  = document.getElementById('password');
+  const passC   = document.getElementById('passwordConfirm');
+  const ageIn   = document.getElementById('age');
+  const birthIn = document.getElementById('birthdate');
+  const commIn  = document.getElementById('comments');
+  const commCnt = document.getElementById('commentsCounter');
 
-  // --- Ajuste dinámico de la fecha máxima de nacimiento ---
-  // Evita seleccionar una fecha futura estableciendo 'max' al día de hoy
+  const togP    = document.getElementById('togglePassword');
+  const togPC   = document.getElementById('togglePasswordConfirm');
+
+  // ===================
+  // Lógica de interfaz y restricciones
+  // ===================
+
+  // --- Fecha de nacimiento: Establecer como máximo la fecha actual ---
   if (birthIn) birthIn.max = new Date().toISOString().split('T')[0];
 
-  // --- Conversión a mayúsculas sólo en inputs de tipo texto ---
+  // --- Inputs de texto: convertir automáticamente a mayúsculas mientras se escribe ---
   form.querySelectorAll('input[type="text"]').forEach(inp => {
-    // Al modificar el valor, lo convertimos a mayúsculas
     inp.addEventListener('input', () => { inp.value = inp.value.toUpperCase(); });
   });
 
   // --- Contador de caracteres en el textarea de comentarios ---
   if (commIn && commCnt) {
     commIn.addEventListener('input', () => {
-      // Muestra "número de caracteres / 2000"
       commCnt.textContent = `${commIn.value.length} / 2000 caracteres`;
     });
   }
 
-  // --- Función de mostrar/ocultar contraseña ---
-  // Alterna el atributo 'type' y el icono del botón
+  // --- Botones de mostrar/ocultar contraseña (cambia el tipo del input) ---
   function toggleVisibility(inputField, button) {
     if (inputField.type === 'password') {
-      inputField.type = 'text';   // Mostrar texto
-      button.textContent = '🙈';   // Cambiar icono a cara tapándose los ojos
+      inputField.type = 'text';
+      button.textContent = '🙈'; // Cambia el ícono al mostrar la contraseña
     } else {
       inputField.type = 'password';
-      button.textContent = '👁️';   // Icono de ojito
+      button.textContent = '👁️'; // Cambia el ícono al ocultar la contraseña
     }
   }
-  // Asociar toggle con cada botón correspondiente
   togP.addEventListener('click', () => toggleVisibility(passIn, togP));
   togPC.addEventListener('click', () => toggleVisibility(passC, togPC));
 
-  // --- Validación de sólo números en edad ---
+  // --- Restringe el campo de Edad para aceptar solo números ---
   if (ageIn) {
     ageIn.addEventListener('input', () => {
-      // Elimina caracteres no numéricos
-      ageIn.value = ageIn.value.replace(/\D/g, '');
+      ageIn.value = ageIn.value.replace(/\D/g, ''); // Elimina todo lo que no sea dígito
     });
   }
 
-  // --- Validación de formulario y envío ---
-  form.addEventListener('submit', e => {
-    e.preventDefault(); // Evita envío nativo
-    let valid = true;    // Bandera de estado general
+  // --- Restringe el campo Nombre para NO permitir números ni al escribir ni al pegar ---
+  if (nameIn) {
+    // Al escribir, elimina cualquier número
+    nameIn.addEventListener('input', () => {
+      nameIn.value = nameIn.value.replace(/[0-9]/g, '');
+    });
 
-    // Funciones auxiliares para mostrar u ocultar errores
+    // Al pegar, elimina los números del texto pegado
+    nameIn.addEventListener('paste', (e) => {
+      const pasted = e.clipboardData.getData('text');
+      if (/\d/.test(pasted)) {
+        e.preventDefault();
+        nameIn.value += pasted.replace(/[0-9]/g, '');
+      }
+    });
+  }
+
+  // ===================
+  // Validación y envío del formulario
+  // ===================
+  form.addEventListener('submit', e => {
+    e.preventDefault(); // Previene el envío por defecto
+    let valid = true;   // Bandera de validez
+
+    // Funciones auxiliares para mostrar u ocultar mensajes de error
     const showErr = (id, msg) => {
       const el = document.getElementById(id);
       el.textContent = msg;
@@ -77,7 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
       el.textContent = '';
     };
 
-    // -- Validar nombre: sólo letras y espacios en mayúsculas --
+    // --- Validación de campos ---
+
+    // Validar Nombre: Solo letras mayúsculas (incluye acentos y Ñ), sin números
     if (!/^[A-ZÁÉÍÓÚÑ\s]+$/.test(nameIn.value.trim())) {
       valid = false;
       showErr('error-name', 'Sólo letras y espacios.');
@@ -87,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
       nameIn.removeAttribute('aria-invalid');
     }
 
-    // -- Validar correo electrónico con validación HTML5 --
+    // Validar correo electrónico (formato correcto)
     if (!emailIn.value || !emailIn.checkValidity()) {
       valid = false;
       showErr('error-email', 'Correo inválido.');
@@ -97,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
       emailIn.removeAttribute('aria-invalid');
     }
 
-    // -- Validar confirmación de correo --
+    // Validar confirmación de correo (debe coincidir)
     if (emailC.value !== emailIn.value) {
       valid = false;
       showErr('error-emailConfirm', 'Los correos no coinciden.');
@@ -107,8 +144,11 @@ document.addEventListener('DOMContentLoaded', () => {
       emailC.removeAttribute('aria-invalid');
     }
 
-    // -- Validar contraseña: al menos 8 caracteres, mayúsculas y minúsculas --
-    const passOK = passIn.value.length >= 8 && /[a-z]/.test(passIn.value) && /[A-Z]/.test(passIn.value);
+    // Validar contraseña: mínimo 8 caracteres, al menos una mayúscula y una minúscula
+    const passOK =
+      passIn.value.length >= 8 &&
+      /[a-z]/.test(passIn.value) &&
+      /[A-Z]/.test(passIn.value);
     if (!passOK) {
       valid = false;
       showErr('error-password', 'Mín. 8 caracteres, mayúsculas y minúsculas.');
@@ -118,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
       passIn.removeAttribute('aria-invalid');
     }
 
-    // -- Validar confirmación de contraseña --
+    // Validar confirmación de contraseña (debe coincidir)
     if (passC.value !== passIn.value) {
       valid = false;
       showErr('error-passwordConfirm', 'Las contraseñas no coinciden.');
@@ -128,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
       passC.removeAttribute('aria-invalid');
     }
 
-    // -- Validar edad: número entre 1 y 120 --
+    // Validar Edad: Debe ser un número entre 1 y 120
     const ageVal = Number(ageIn.value);
     if (!ageVal || ageVal < 1 || ageVal > 120) {
       valid = false;
@@ -139,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ageIn.removeAttribute('aria-invalid');
     }
 
-    // -- Validar fecha de nacimiento: no futura --
+    // Validar fecha de nacimiento: No puede ser futura ni estar vacía
     if (!birthIn.value || new Date(birthIn.value) > new Date()) {
       valid = false;
       showErr('error-birthdate', 'Fecha inválida.');
@@ -149,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
       birthIn.removeAttribute('aria-invalid');
     }
 
-    // -- Validar comentarios: hasta 2000 caracteres --
+    // Validar comentarios: máximo 2000 caracteres
     if (commIn.value.length > 2000) {
       valid = false;
       showErr('error-comments', 'Máx. 2000 caracteres.');
@@ -159,13 +199,13 @@ document.addEventListener('DOMContentLoaded', () => {
       commIn.removeAttribute('aria-invalid');
     }
 
-    // Mostrar mensaje de éxito si todo es válido
+    // --- Resultado final: mostrar mensaje de éxito o dejar errores visibles ---
     if (valid) {
-      success.style.display = 'block';
-      form.reset();
-      if (commCnt) commCnt.textContent = '0 / 2000 caracteres';
+      success.style.display = 'block';   // Muestra mensaje de éxito
+      form.reset();                      // Limpia formulario
+      if (commCnt) commCnt.textContent = '0 / 2000 caracteres'; // Reinicia contador
     } else {
-      success.style.display = 'none';
+      success.style.display = 'none';    // Oculta mensaje de éxito si hay errores
     }
   });
 });
