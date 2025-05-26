@@ -113,14 +113,15 @@
       <label for="comments">Comentarios (opcional)</label>
       <!-- Textarea multilinea con máximo 2000 caracteres y patrón validación -->
       <textarea
-        id="comments"
-        name="comments"
-        placeholder="Escribe aquí tus comentarios"
-        rows="5"
-        cols="40"
-        maxlength="2000"
-        pattern="^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,!?-]*$"
+        id="comments"                  <!-- Identificador único del elemento textarea en el documento HTML -->
+        name="comments"                <!-- Nombre del campo que se enviará al servidor cuando se envíe el formulario -->
+        placeholder="Escribe aquí tus comentarios"  <!-- Texto de ayuda que aparece dentro del textarea cuando está vacío -->
+        rows="5"                      <!-- Número visible de filas (altura) que ocupará el área de texto -->
+        cols="40"                     <!-- Número visible de columnas (ancho) que ocupará el área de texto -->
+        maxlength="2000"              <!-- Limita la cantidad máxima de caracteres que se pueden ingresar (máximo 2000) -->
+        pattern="^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,!?-]*$"  <!-- Expresión regular que restringe los caracteres permitidos para validar el texto -->
       ></textarea>
+
       <!-- Contador dinámico de caracteres escritos -->
       <div class="char-counter" id="commentsCounter">0 / 2000 caracteres</div>
       <!-- Mensaje de error para validación de texto -->
