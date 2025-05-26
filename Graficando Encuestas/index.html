@@ -1,1 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Encuesta con gráfica</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <h2>¿Cuál es tu lenguaje de programación favorito?</h2>
+
+  <form id="pollForm">
+    <label class="option"><input type="radio" name="language" value="JavaScript" /> JavaScript</label><br/>
+    <label class="option"><input type="radio" name="language" value="Python" /> Python</label><br/>
+    <label class="option"><input type="radio" name="language" value="Java" /> Java</label><br/>
+    <label class="option"><input type="radio" name="language" value="C++" /> C++</label><br/>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <div id="chartContainer" style="display:none;">
+    <h3>Resultados de la encuesta</h3>
+    <canvas id="resultsChart" width="400" height="300"></canvas>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
