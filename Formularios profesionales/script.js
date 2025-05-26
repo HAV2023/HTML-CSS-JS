@@ -5,23 +5,26 @@ birthdate.max = new Date().toISOString().split('T')[0];
 const form = document.getElementById('professionalForm');
 const successMessage = document.getElementById('successMessage');
 
-// Restringir solo números en campo Edad
 const ageInput = document.getElementById('age');
 
+// Bloquear letras al tipear en edad
 ageInput.addEventListener('keydown', (e) => {
-  // Permitir: backspace, tab, flechas, delete y números (fila superior y numpad)
   const allowedKeys = [
-    "Backspace", "Tab", "ArrowLeft", "ArrowRight", "Delete", 
-    "Home", "End"
+    "Backspace", "Tab", "ArrowLeft", "ArrowRight", "Delete", "Home", "End"
   ];
   if (
     allowedKeys.includes(e.key) ||
     (e.key >= '0' && e.key <= '9') ||
     (e.key >= 'Numpad0' && e.key <= 'Numpad9')
   ) {
-    return; // Permitir tecla
+    return;
   }
-  e.preventDefault(); // Bloquear otras teclas
+  e.preventDefault();
+});
+
+// Limpiar todo lo que no sea número (ej. pegado)
+ageInput.addEventListener('input', () => {
+  ageInput.value = ageInput.value.replace(/\D/g, '');
 });
 
 form.addEventListener('submit', (e) => {
