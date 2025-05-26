@@ -24,7 +24,16 @@
 
     <div>
       <label for="age" class="required">Edad</label>
-      <input type="number" id="age" name="age" placeholder="Ejemplo: 35" min="1" max="120" required />
+      <input 
+        type="text" 
+        id="age" 
+        name="age" 
+        placeholder="Ejemplo: 35" 
+        required 
+        inputmode="numeric" 
+        pattern="\d*" 
+        maxlength="3" 
+      />
       <div class="error-message" id="error-age">Por favor ingresa una edad válida entre 1 y 120.</div>
     </div>
 
@@ -51,4 +60,3 @@
 
 </body>
 </html>
-
