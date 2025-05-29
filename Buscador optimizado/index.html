@@ -1,29 +1,99 @@
 <!DOCTYPE html>
+<!--
+  Declaración del tipo de documento.
+  Indica que este archivo es un documento HTML5, 
+  lo que permite al navegador renderizarlo con el estándar HTML5.
+-->
 <html lang="es">
+<!--
+  Elemento raíz del documento HTML.
+  Atributo lang="es" indica que el contenido está en español,
+  importante para accesibilidad y SEO.
+-->
 <head>
+  <!--
+    Contiene metadatos e instrucciones para el navegador,
+    no se muestra en el cuerpo visible.
+  -->
   <meta charset="UTF-8" />
+  <!--
+    Define la codificación de caracteres a UTF-8,
+    asegurando que se muestren correctamente caracteres especiales como acentos y eñes.
+  -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--
+    Configura el viewport para dispositivos móviles,
+    estableciendo que el ancho de la ventana debe ser igual al ancho del dispositivo
+    y el zoom inicial es 1,
+    para asegurar diseño responsivo y buena visualización en móviles.
+  -->
   <title>Buscador con Preview</title>
+  <!--
+    Título que aparecerá en la pestaña del navegador.
+  -->
   <link rel="stylesheet" href="styles.css" />
+  <!--
+    Enlace al archivo externo de estilos CSS llamado styles.css,
+    que contiene la definición visual (colores, márgenes, tipografía, etc).
+  -->
 </head>
+
 <body>
+  <!--
+    Contenido visible de la página.
+  -->
 
   <h1>Buscador con Preview en Página</h1>
+  <!--
+    Encabezado principal, indica el título visible en la página.
+  -->
 
   <div id="search-container">
-    <input type="search" id="search-input" placeholder="Escribe para buscar..." autocomplete="off" />
+    <!--
+      Contenedor para el campo de búsqueda.
+      Facilita el posicionamiento y el estilo del buscador.
+    -->
+    <input 
+      type="search" 
+      id="search-input" 
+      placeholder="Escribe para buscar..." 
+      autocomplete="off" 
+    />
+    <!--
+      Campo de entrada para texto de búsqueda:
+      - type="search": indica que es un campo para búsqueda, aporta mejoras semánticas y visuales.
+      - id="search-input": identificador único para manipulación vía JS y CSS.
+      - placeholder="Escribe para buscar...": texto gris que guía al usuario sobre qué hacer.
+      - autocomplete="off": desactiva autocompletado del navegador para no interferir con la experiencia.
+    -->
   </div>
 
   <div id="results"></div>
+  <!--
+    Contenedor donde se mostrarán los resultados de la búsqueda.
+    Inicialmente vacío, el JavaScript llenará este div dinámicamente.
+  -->
 
   <!-- Contenido extenso para búsqueda (ahora visible) -->
   <div id="content" style="margin-top: 40px;">
+    <!--
+      Contenedor con contenido real para búsqueda.
+      Se usa para extraer texto y títulos para el buscador.
+      Está visible (no oculto), con margen superior para separar visualmente del buscador.
+    -->
+
     <h2>Historia de la Tecnología</h2>
+    <!--
+      Título de sección usado para identificar bloques temáticos del contenido.
+    -->
     <p>
       La historia de la tecnología se remonta a las primeras herramientas utilizadas por los humanos prehistóricos.  
       Desde entonces, la innovación ha avanzado rápidamente, transformando la manera en que vivimos, trabajamos y nos comunicamos.  
       Las revoluciones industriales marcaron hitos importantes en el desarrollo tecnológico.  
     </p>
+    <!--
+      Párrafo con contenido textual de la sección.
+    -->
 
     <h2>Innovaciones Modernas</h2>
     <p>
@@ -56,5 +126,13 @@
   </div>
 
   <script src="search.js"></script>
+  <!--
+    Inclusión del archivo externo search.js,
+    donde está el código JavaScript que hace funcionar la búsqueda:
+    - Detecta entrada en el input,
+    - Busca en el contenido,
+    - Muestra resultados con previews resaltando coincidencias.
+  -->
+
 </body>
 </html>
