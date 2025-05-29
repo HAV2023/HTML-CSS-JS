@@ -1,3 +1,4 @@
+/* Autor: Héctor Arciniega */
 (function(){
   // Declaración de función anónima autoejecutable (IIFE)
   // Esto crea un ámbito local para evitar contaminar el ámbito global
