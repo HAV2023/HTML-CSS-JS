@@ -1,43 +1,76 @@
 body {
   font-family: Arial, sans-serif;
+  /* Define la tipografía general del cuerpo del documento, 
+     con Arial como fuente principal y sans-serif como respaldo */
   margin: 30px;
+  /* Añade un margen de 30 píxeles alrededor de todo el contenido para evitar que toque los bordes */
   line-height: 1.6;
-}
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
-}
-#search-container {
-  max-width: 600px;
-  margin: 0 auto 40px auto;
-  position: relative;
-}
-input[type="search"] {
-  width: 100%;
-  padding: 12px 18px;
-  font-size: 18px;
-  border: 2px solid #333;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-#results {
-  max-width: 600px;
-  margin: 0 auto;
-}
-.result-item {
-  border-bottom: 1px solid #ccc;
-  padding: 12px 0;
-}
-.result-title {
-  font-weight: bold;
-  margin-bottom: 6px;
-  color: #222;
-}
-.result-preview {
-  color: #555;
-}
-mark {
-  background-color: yellow;
-  font-weight: bold;
+  /* Establece la altura de línea para mejorar la legibilidad del texto */
 }
 
+h1 {
+  text-align: center;
+  /* Centra horizontalmente el texto del encabezado principal */
+  margin-bottom: 30px;
+  /* Añade espacio debajo del h1 para separar visualmente del contenido siguiente */
+}
+
+#search-container {
+  max-width: 600px;
+  /* Limita el ancho máximo del contenedor del buscador para mantener una línea legible */
+  margin: 0 auto 40px auto;
+  /* Centra el contenedor horizontalmente con márgenes automáticos a izquierda y derecha,
+     y añade un margen inferior de 40px para separar del contenido siguiente */
+  position: relative;
+  /* Posicionamiento relativo, útil para posicionar elementos hijos de forma absoluta si se requiere */
+}
+
+input[type="search"] {
+  width: 100%;
+  /* Hace que el campo de búsqueda ocupe todo el ancho del contenedor padre */
+  padding: 12px 18px;
+  /* Añade espacio interno: 12px arriba y abajo, 18px a izquierda y derecha para comodidad al escribir */
+  font-size: 18px;
+  /* Tamaño de letra cómodo y legible */
+  border: 2px solid #333;
+  /* Borde oscuro de 2 píxeles alrededor del input para definición visual */
+  border-radius: 5px;
+  /* Bordes ligeramente redondeados para un aspecto moderno y amigable */
+  box-sizing: border-box;
+  /* Incluye el padding y borde dentro del ancho total para evitar que el input desborde */
+}
+
+#results {
+  max-width: 600px;
+  /* Limita el ancho máximo para mantener coherencia con el buscador */
+  margin: 0 auto;
+  /* Centra horizontalmente el contenedor de resultados */
+}
+
+.result-item {
+  border-bottom: 1px solid #ccc;
+  /* Línea separadora gris claro debajo de cada resultado para delimitar visualmente */
+  padding: 12px 0;
+  /* Espacio vertical interno para separar cada resultado */
+}
+
+.result-title {
+  font-weight: bold;
+  /* Texto en negrita para destacar el título de cada resultado */
+  margin-bottom: 6px;
+  /* Espacio inferior para separar título del texto de preview */
+  color: #222;
+  /* Color de texto oscuro, casi negro, para legibilidad */
+}
+
+.result-preview {
+  color: #555;
+  /* Color gris medio para el texto de preview, para que no compita visualmente con el título */
+}
+
+mark {
+  background-color: yellow;
+  /* Resalta el texto marcado con un fondo amarillo */
+  font-weight: bold;
+  /* Negrita para enfatizar aún más el texto resaltado */
+}
