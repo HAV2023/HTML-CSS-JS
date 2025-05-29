@@ -32,7 +32,7 @@
     let sibling = h2.nextElementSibling;
     while(sibling && sibling.tagName !== 'H2'){
       if(sibling.tagName === 'P'){
-        // Si el hermano es un párrafo, añadimos su texto al bloque
+        // Si el objeto hermano es un párrafo, añadimos su texto al bloque
         textBlocks += sibling.textContent + ' ';
       }
       sibling = sibling.nextElementSibling;
