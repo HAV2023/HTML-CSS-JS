@@ -1,183 +1,360 @@
-/* ====== Importar Fuente Personalizada ====== */
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'); /* Importamos FontAwesome */
+/* ===============================================
+   IMPORTACIÓN DE FUENTES Y LIBRERÍAS EXTERNAS
+   =============================================== */
 
-/* ====== Estilos Generales ====== */
+/* Importa la fuente Montserrat de Google Fonts con pesos 400 (normal) y 700 (bold) */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+/* Importa la librería de iconos Font Awesome 6 desde CDN */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+/* ===============================================
+   ESTILOS GENERALES DEL DOCUMENTO
+   =============================================== */
+
 body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    background-color: #f0f2f5;
+    margin: 0;                              /* Elimina márgenes por defecto del navegador */
+    font-family: 'Montserrat', sans-serif;  /* Aplica la fuente Montserrat como principal */
+    background-color: #f0f2f5;             /* Color de fondo gris claro para toda la página */
 }
 
-/* ====== Marquesina ====== */
+/* ===============================================
+   MARQUESINA - BANNER SUPERIOR ANIMADO
+   =============================================== */
+
 .marquee-container {
-    width: 100%;
-    background-color: #d21026;
-    color: white;
-    overflow: hidden;
-    padding: 10px 0;
-    white-space: nowrap;
-    position: relative;
-    font-weight: bold;
-    text-align: center;
+    width: 100%;                    /* Ocupa todo el ancho de la pantalla */
+    background-color: #d21026;      /* Color de fondo rojo corporativo */
+    color: white;                   /* Texto en color blanco para contraste */
+    overflow: hidden;               /* Oculta el contenido que se sale del contenedor */
+    padding: 10px 0;               /* Espaciado vertical interno de 10px arriba y abajo */
+    white-space: nowrap;           /* Evita que el texto se divida en múltiples líneas */
+    position: relative;            /* Posicionamiento relativo para elementos hijos absolutos */
+    font-weight: bold;             /* Texto en negrita para mayor visibilidad */
+    text-align: center;            /* Centra el texto horizontalmente */
 }
 
 .marquee-content {
-    display: inline-block;
-    white-space: nowrap;
-    animation: marquee 15s linear infinite;
+    display: inline-block;         /* Permite que el contenido fluya horizontalmente */
+    white-space: nowrap;          /* Mantiene todo el texto en una sola línea */
+    animation: marquee 15s linear infinite; /* Aplica animación de desplazamiento continuo */
 }
 
+/* Animación keyframes para el efecto de marquesina */
 @keyframes marquee {
-    from { transform: translateX(100%); }
-    to { transform: translateX(-100%); }
+    from { 
+        transform: translateX(100%);    /* Inicia desde fuera del lado derecho */
+    }
+    to { 
+        transform: translateX(-100%);   /* Termina fuera del lado izquierdo */
+    }
 }
 
-/* ====== Menú de Navegación ====== */
+/* ===============================================
+   MENÚ DE NAVEGACIÓN PRINCIPAL
+   =============================================== */
+
 .menu {
-    background-color: #1b1b1b;
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    justify-content: space-between;
+    background-color: #1b1b1b;      /* Fondo oscuro para el menú */
+    display: flex;                  /* Layout flexbox para alineación horizontal */
+    align-items: center;            /* Centra verticalmente todos los elementos */
+    padding: 10px 20px;            /* Espaciado interno: 10px vertical, 20px horizontal */
+    flex-wrap: wrap;               /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    position: sticky;              /* Hace que el menú se mantenga fijo al hacer scroll */
+    top: 0;                        /* Posición fija en la parte superior */
+    z-index: 1000;                 /* Índice alto para que aparezca sobre otros elementos */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
 }
 
+/* Contenedor del logotipo */
 .menu .logo {
-    margin-right: 10px;
+    margin-right: 10px;            /* Espacio de 10px a la derecha del logo */
 }
 
+/* Botón hamburguesa para menú móvil */
 .menu .menu-toggle {
-    display: none;
-    cursor: pointer;
+    display: none;                 /* Oculto por defecto (solo visible en móvil) */
+    cursor: pointer;               /* Cambia el cursor a puntero al pasar por encima */
 }
 
+/* Lista principal de enlaces del menú */
 .menu .menu-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
+    list-style: none;              /* Elimina las viñetas de la lista */
+    margin: 0;                     /* Sin márgenes externos */
+    padding: 0;                    /* Sin espaciado interno */
+    display: flex;                 /* Layout flexbox horizontal */
+    align-items: center;           /* Centra verticalmente los elementos */
+    flex-grow: 1;                  /* Ocupa el espacio disponible restante */
 }
 
+/* Elementos individuales de la lista del menú */
 .menu .menu-links li {
-    position: relative;
+    position: relative;            /* Posicionamiento relativo para submenús absolutos */
 }
 
+/* Estilos para los enlaces del menú */
 .menu .menu-links a {
-    display: flex;
-    align-items: center;
-    color: #fff;
-    padding: 14px 20px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-    font-weight: 500;
+    display: flex;                 /* Layout flexbox para alinear contenido interno */
+    align-items: center;           /* Centra verticalmente el contenido del enlace */
+    color: #fff;                   /* Texto en color blanco */
+    padding: 14px 20px;           /* Espaciado interno: 14px vertical, 20px horizontal */
+    text-decoration: none;         /* Elimina el subrayado por defecto de los enlaces */
+    transition: background-color 0.3s; /* Transición suave para cambios de color de fondo */
+    font-weight: 500;              /* Peso de fuente medio para mejor legibilidad */
 }
 
+/* Estados hover y focus para los enlaces del menú */
 .menu .menu-links a:hover,
 .menu .menu-links a:focus {
-    background-color: #d21026;
+    background-color: #d21026;     /* Cambia a color rojo al pasar el mouse o enfocar */
 }
 
-/* Agregar flechita a los elementos con submenú */
+/* Flecha indicadora para elementos con submenú */
 .menu-links .dropdown > a::after {
-    content: '\f078'; /* Icono de flecha hacia abajo */
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    margin-left: 8px;
-    transition: transform 0.3s ease-in-out;
+    content: '\f078';              /* Código Unicode de Font Awesome para flecha hacia abajo */
+    font-family: 'Font Awesome 6 Free'; /* Especifica la familia de fuente de Font Awesome */
+    font-weight: 900;              /* Peso máximo para iconos sólidos */
+    margin-left: 8px;              /* Espacio de 8px a la izquierda del icono */
+    transition: transform 0.3s ease-in-out; /* Transición suave para rotación */
 }
 
-/* Efecto de rotación al pasar el mouse */
+/* Efecto de rotación de la flecha al hacer hover */
 .menu-links .dropdown:hover > a::after {
-    transform: rotate(180deg);
+    transform: rotate(180deg);     /* Rota 180 grados para indicar menú abierto */
 }
 
-/* ====== Submenús ====== */
+/* ===============================================
+   SUBMENÚS DESPLEGABLES
+   =============================================== */
+
 .submenu {
-    display: none;
-    position: absolute;
-    background-color: #2c2c2c;
-    top: 100%;
-    left: 0;
-    min-width: 180px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    list-style: none;
-    padding-left: 0;
+    display: none;                 /* Oculto por defecto */
+    position: absolute;            /* Posicionamiento absoluto respecto al elemento padre */
+    background-color: #2c2c2c;     /* Fondo más claro que el menú principal */
+    top: 100%;                     /* Posicionado justo debajo del elemento padre */
+    left: 0;                       /* Alineado a la izquierda del elemento padre */
+    min-width: 180px;              /* Ancho mínimo de 180px */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sombra sutil para profundidad */
+    z-index: 1000;                 /* Índice alto para aparecer sobre otros elementos */
+    opacity: 0;                    /* Inicialmente transparente */
+    transform: translateY(-10px);  /* Desplazado 10px hacia arriba inicialmente */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Transiciones suaves */
+    list-style: none;              /* Sin viñetas */
+    padding-left: 0;               /* Sin espaciado interno izquierdo */
 }
 
+/* Elementos individuales del submenú */
 .submenu li {
-    width: 100%;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    width: 100%;                   /* Ocupa todo el ancho disponible */
+    list-style: none;              /* Sin viñetas */
+    padding: 0;                    /* Sin espaciado interno */
+    margin: 0;                     /* Sin márgenes */
 }
 
+/* Enlaces dentro de los submenús */
 .submenu a {
-    padding: 10px 20px;
-    color: #fff;
-    font-weight: normal;
-    display: block;
+    padding: 10px 20px;           /* Espaciado interno menor que el menú principal */
+    color: #fff;                   /* Texto en blanco */
+    font-weight: normal;           /* Peso de fuente normal (no bold) */
+    display: block;                /* Ocupa todo el ancho disponible */
 }
 
+/* Estado hover para enlaces de submenú */
 .submenu a:hover {
-    background-color: #ff6b6b;
+    background-color: #ff6b6b;     /* Color de fondo coral al hacer hover */
 }
 
+/* Mostrar submenú al hacer hover o focus en el elemento padre */
 .menu-links .dropdown:hover > .submenu,
 .menu-links .dropdown:focus-within > .submenu {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
+    display: block;                /* Hace visible el submenú */
+    opacity: 1;                    /* Totalmente opaco */
+    transform: translateY(0);      /* Posición normal (sin desplazamiento) */
 }
 
-/* ====== Barra de Búsqueda ====== */
+/* ===============================================
+   BARRA DE BÚSQUEDA
+   =============================================== */
+
+/* Contenedor principal de la barra de búsqueda */
 .menu .search-bar {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
+    display: flex;                 /* Layout flexbox */
+    align-items: center;           /* Centra verticalmente los elementos */
+    margin-left: auto;             /* Empuja la barra hacia la derecha */
+    position: relative;            /* Para posicionamiento de elementos hijos */
 }
 
+/* Contenedor específico para input y sugerencias */
+.search-container {
+    position: relative;            /* Contexto de posicionamiento para dropdown */
+    display: flex;                 /* Layout flexbox */
+    align-items: center;           /* Centra verticalmente */
+}
+
+/* Campo de entrada de texto */
 .menu .search-bar input {
-    padding: 8px 10px;
-    border: none;
-    border-radius: 20px 0 0 20px;
-    outline: none;
-    width: 150px;
-    transition: width 0.4s ease-in-out;
+    padding: 8px 10px;            /* Espaciado interno cómodo */
+    border: none;                  /* Sin borde */
+    border-radius: 20px 0 0 20px;  /* Esquinas redondeadas solo en el lado izquierdo */
+    outline: none;                 /* Elimina el outline por defecto del navegador */
+    width: 150px;                  /* Ancho inicial */
+    transition: width 0.4s ease-in-out; /* Transición suave para cambio de ancho */
 }
 
+/* Expansión del campo de búsqueda al enfocarse */
 .menu .search-bar input:focus {
-    width: 250px;
+    width: 250px;                  /* Se expande a 250px cuando tiene foco */
 }
 
+/* Botón de búsqueda */
 .menu .search-bar button {
-    padding: 8px 10px;
-    border: none;
-    background-color: #ff6b6b;
-    color: white;
-    border-radius: 0 20px 20px 0;
-    cursor: pointer;
-    outline: none;
+    padding: 8px 10px;            /* Espaciado interno igual al input */
+    border: none;                  /* Sin borde */
+    background-color: #ff6b6b;     /* Color de fondo coral */
+    color: white;                  /* Texto/icono en blanco */
+    border-radius: 0 20px 20px 0;  /* Esquinas redondeadas solo en el lado derecho */
+    cursor: pointer;               /* Cursor de puntero */
+    outline: none;                 /* Sin outline */
 }
 
+/* Estado hover del botón de búsqueda */
 .menu .search-bar button:hover {
-    background-color: #e55b5b;
+    background-color: #e55b5b;     /* Color más oscuro al hacer hover */
 }
 
-/* ====== Contenido Principal ====== */
+/* ===============================================
+   DROPDOWN DE SUGERENCIAS DE BÚSQUEDA
+   =============================================== */
+
+/* Contenedor principal de las sugerencias */
+.search-suggestions {
+    position: absolute;            /* Posicionamiento absoluto respecto al contenedor padre */
+    top: 100%;                     /* Posicionado justo debajo del campo de búsqueda */
+    left: 0;                       /* Alineado a la izquierda */
+    right: 0;                      /* Se extiende hasta la derecha */
+    background-color: white;       /* Fondo blanco */
+    border: 1px solid #ddd;        /* Borde gris claro */
+    border-radius: 8px;            /* Esquinas redondeadas */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra suave para profundidad */
+    max-height: 300px;             /* Altura máxima de 300px */
+    overflow-y: auto;              /* Scroll vertical si el contenido excede la altura */
+    z-index: 2000;                 /* Índice muy alto para aparecer sobre todo */
+    display: none;                 /* Oculto por defecto */
+    margin-top: 5px;               /* Pequeño espacio entre input y dropdown */
+}
+
+/* Clase para mostrar las sugerencias con animación */
+.search-suggestions.show {
+    display: block;                /* Hace visible el dropdown */
+    animation: fadeInDown 0.3s ease-out; /* Aplica animación de entrada */
+}
+
+/* Animación de entrada para el dropdown */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;                /* Inicia transparente */
+        transform: translateY(-10px); /* Inicia desplazado hacia arriba */
+    }
+    to {
+        opacity: 1;                /* Termina opaco */
+        transform: translateY(0);   /* Termina en posición normal */
+    }
+}
+
+/* Elementos individuales de sugerencia */
+.suggestion-item {
+    padding: 12px 15px;           /* Espaciado interno generoso */
+    cursor: pointer;               /* Cursor de puntero */
+    border-bottom: 1px solid #f0f0f0; /* Línea separadora sutil */
+    color: #333;                   /* Texto en gris oscuro */
+    transition: background-color 0.2s ease; /* Transición suave para hover */
+    display: flex;                 /* Layout flexbox para alinear contenido */
+    align-items: center;           /* Centra verticalmente el contenido */
+}
+
+/* Elimina el borde del último elemento */
+.suggestion-item:last-child {
+    border-bottom: none;           /* Sin borde en el último elemento */
+}
+
+/* Estados hover y selected para sugerencias */
+.suggestion-item:hover,
+.suggestion-item.selected {
+    background-color: #f8f9fa;     /* Fondo gris muy claro */
+    color: #d21026;                /* Texto en color rojo corporativo */
+}
+
+/* Iconos dentro de las sugerencias */
+.suggestion-item i {
+    margin-right: 10px;            /* Espacio de 10px a la derecha del icono */
+    color: #666;                   /* Color gris medio para los iconos */
+    width: 16px;                   /* Ancho fijo para alineación consistente */
+}
+
+/* Texto principal de la sugerencia */
+.suggestion-text {
+    flex: 1;                       /* Ocupa el espacio disponible restante */
+}
+
+/* Categoría de la sugerencia */
+.suggestion-category {
+    font-size: 0.8em;             /* Tamaño de fuente más pequeño */
+    color: #888;                   /* Color gris claro */
+    margin-left: auto;             /* Empuja hacia la derecha */
+}
+
+/* Mensaje cuando no hay sugerencias */
+.no-suggestions {
+    padding: 15px;                 /* Espaciado interno */
+    text-align: center;            /* Texto centrado */
+    color: #666;                   /* Color gris medio */
+    font-style: italic;            /* Texto en cursiva */
+}
+
+/* ===============================================
+   CONTENIDO PRINCIPAL DE LA PÁGINA
+   =============================================== */
+
 .container {
-    width: 80%;
-    margin: 20px auto;
-    padding: 30px;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 80%;                    /* Ocupa el 80% del ancho de la pantalla */
+    margin: 20px auto;             /* Margen superior/inferior de 20px, centrado horizontalmente */
+    padding: 30px;                 /* Espaciado interno de 30px en todos los lados */
+    background-color: #fff;        /* Fondo blanco */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
+}
+
+/* ===============================================
+   DESTACADO DE TEXTO EN BÚSQUEDAS
+   =============================================== */
+
+/* Estilos para texto resaltado en resultados de búsqueda */
+.highlight mark {
+    background-color: #ffeb3b;     /* Fondo amarillo brillante para resaltar */
+    padding: 2px 4px;             /* Pequeño espaciado interno */
+    border-radius: 2px;            /* Esquinas ligeramente redondeadas */
+    font-weight: bold;             /* Texto en negrita para mayor énfasis */
+}
+
+/* ===============================================
+   ESTILOS RESPONSIVE PARA DISPOSITIVOS MÓVILES
+   =============================================== */
+
+/* Reglas CSS para pantallas de 768px o menos (tablets y móviles) */
+@media (max-width: 768px) {
+    
+    /* Ajustes para el campo de búsqueda en móviles */
+    .menu .search-bar input {
+        width: 120px;              /* Ancho inicial más pequeño en móviles */
+    }
+    
+    /* Expansión reducida en móviles */
+    .menu .search-bar input:focus {
+        width: 180px;              /* Expansión menor que en desktop */
+    }
+    
+    /* Ajustes para el dropdown de sugerencias en móviles */
+    .search-suggestions {
+        left: -20px;               /* Se extiende más allá del contenedor a la izquierda */
+        right: -20px;              /* Se extiende más allá del contenedor a la derecha */
+    }
 }
