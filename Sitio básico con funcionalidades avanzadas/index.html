@@ -1,63 +1,408 @@
 <!DOCTYPE html>
+<!-- 
+    Declaración DOCTYPE HTML5 - Define que este documento usa la versión más reciente de HTML
+    Garantiza que el navegador interprete el código en modo estándar
+-->
+
 <html lang="es">
+<!-- 
+    Elemento raíz del documento HTML
+    lang="es": Especifica que el idioma principal del contenido es español
+    - Mejora la accesibilidad para lectores de pantalla
+    - Ayuda a los motores de búsqueda con la indexación
+    - Influye en la corrección ortográfica del navegador
+-->
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sitio de Tecnología Mejorado</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <!-- 
+        SECCIÓN HEAD: Contiene metadatos y recursos del documento
+        No es visible para el usuario, pero esencial para el funcionamiento
+    -->
     
-    <!-- ====== Marquesina ====== -->
+    <meta charset="UTF-8">
+    <!-- 
+        Codificación de caracteres UTF-8
+        - Soporta caracteres especiales en español (ñ, acentos, etc.)
+        - Estándar internacional para páginas web modernas
+        - Debe ser la primera etiqueta meta para evitar problemas de codificación
+    -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+        Configuración del viewport para diseño responsive
+        - width=device-width: El ancho de la página coincide con el ancho del dispositivo
+        - initial-scale=1.0: Zoom inicial al 100% (sin amplificación)
+        - Esencial para que el sitio se vea correctamente en móviles y tablets
+    -->
+    
+    <title>Sitio de Tecnología Mejorado</title>
+    <!-- 
+        Título de la página que aparece en:
+        - La pestaña del navegador
+        - Los resultados de búsqueda de Google
+        - Al compartir en redes sociales
+        - Marcadores/favoritos del navegador
+    -->
+    
+    <!-- ===============================================
+         IMPORTACIÓN DE RECURSOS EXTERNOS
+         =============================================== -->
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
+    <!-- 
+        Importación de la fuente Montserrat desde Google Fonts
+        - family=Montserrat: Nombre de la fuente tipográfica
+        - 400,700: Pesos de fuente (normal y bold)
+        - display=swap: Optimización de carga (muestra fuente de respaldo primero)
+        - Mejora la estética y legibilidad del sitio
+    -->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 
+        Librería de iconos Font Awesome 6.0.0
+        - Proporciona iconos vectoriales escalables
+        - Usados en menú, búsqueda y sugerencias
+        - CDN de Cloudflare para carga rápida y confiable
+    -->
+    
+    <link rel="stylesheet" href="styles.css">
+    <!-- 
+        Hoja de estilos CSS local personalizada
+        - Contiene todos los estilos específicos del sitio
+        - Se carga después de las librerías externas
+        - Permite sobrescribir estilos si es necesario
+    -->
+</head>
+
+<body>
+    <!-- 
+        CUERPO DEL DOCUMENTO: Contiene todo el contenido visible
+        Estructura organizada en componentes funcionales
+    -->
+    
+    <!-- ===============================================
+         MARQUESINA - BANNER SUPERIOR ANIMADO
+         =============================================== -->
     <div class="marquee-container">
+        <!-- 
+            Contenedor principal de la marquesina
+            - Ocupa todo el ancho de la pantalla
+            - Fondo rojo corporativo para llamar la atención
+            - Posicionamiento que permite el scroll continuo
+        -->
+        
         <div class="marquee-content">
+            <!-- 
+                Contenido interno de la marquesina
+                - Se desplaza horizontalmente con animación CSS
+                - Configurado para bucle infinito
+                - Contiene el mensaje promocional
+            -->
+            
             <p>🚀 ¡Bienvenido a nuestro sitio de tecnología! 🎉 | 🌟 Últimas noticias y tendencias en tecnología aquí. 📡 | 💻 Explora nuestra selección de productos y servicios.</p>
+            <!-- 
+                Mensaje promocional con emojis
+                - Separado por pipes (|) para crear secciones visuales
+                - Emojis para mayor atractivo visual
+                - Texto promocional que destaca los puntos fuertes del sitio
+            -->
         </div>
     </div>
 
-    <!-- ====== Menú de navegación ====== -->
+    <!-- ===============================================
+         MENÚ DE NAVEGACIÓN PRINCIPAL
+         =============================================== -->
     <nav class="menu">
+        <!-- 
+            Elemento semántico <nav> para navegación principal
+            - Mejora la accesibilidad y SEO
+            - Sticky positioning para mantenerse visible al hacer scroll
+            - Layout flexbox para alineación responsive
+        -->
+        
+        <!-- LOGOTIPO DE LA EMPRESA -->
         <div class="logo">
+            <!-- 
+                Contenedor del logotipo
+                - Posicionado a la izquierda del menú
+                - Tamaño fijo para consistencia visual
+            -->
+            
             <img src="logo.png" alt="TechLogo" width="100" height="80">
+            <!-- 
+                Imagen del logotipo
+                - src="logo.png": Ruta al archivo de imagen (debe existir en el proyecto)
+                - alt="TechLogo": Texto alternativo para accesibilidad
+                - width/height: Dimensiones específicas para evitar layout shift
+                - Importante: La imagen debe estar en la carpeta raíz del proyecto
+            -->
         </div>
+        
+        <!-- BOTÓN HAMBURGUESA PARA MENÚ MÓVIL -->
         <div class="menu-toggle">
+            <!-- 
+                Botón hamburguesa para dispositivos móviles
+                - Oculto por defecto en desktop (CSS display: none)
+                - Visible solo en pantallas pequeñas
+                - Controla la visibilidad del menú en móviles
+            -->
+            
             <i class="fas fa-bars"></i>
+            <!-- 
+                Icono de hamburguesa de Font Awesome
+                - fas: Font Awesome Solid (estilo sólido)
+                - fa-bars: Icono específico de tres líneas horizontales
+                - Se transforma en X cuando el menú está abierto (vía JavaScript)
+            -->
         </div>
+        
+        <!-- LISTA PRINCIPAL DE NAVEGACIÓN -->
         <ul class="menu-links">
+            <!-- 
+                Lista no ordenada que contiene los enlaces principales
+                - Estructura semántica correcta para navegación
+                - Layout flexbox horizontal en desktop
+                - Se convierte en menú vertical en móviles
+            -->
+            
+            <!-- ENLACE: INICIO -->
             <li><a href="#" class="active">Inicio</a></li>
+            <!-- 
+                Elemento de lista para la página de inicio
+                - class="active": Indica la página actual
+                - href="#": Enlace placeholder (debería apuntar a index.html)
+                - Primer elemento del menú, comúnmente "Inicio" o "Home"
+            -->
+            
+            <!-- MENÚ DESPLEGABLE: PRODUCTOS -->
             <li class="dropdown">
-                <a href="#">Productos</i></a>
+                <!-- 
+                    Elemento con submenú desplegable
+                    - class="dropdown": Identifica elementos con submenús
+                    - Activación por hover en desktop, click en móviles
+                -->
+                
+                <a href="#">Productos</a>
+                <!-- 
+                    Enlace principal del dropdown
+                    - No tiene href específico porque despliega submenú
+                    - El CSS agrega automáticamente un icono de flecha
+                -->
+                
                 <ul class="submenu">
+                    <!-- 
+                        Submenú que contiene las opciones de productos
+                        - Oculto por defecto (CSS display: none)
+                        - Se muestra al hacer hover sobre el elemento padre
+                        - Posicionamiento absoluto para aparecer sobre el contenido
+                    -->
+                    
                     <li><a href="#">Software</a></li>
+                    <!-- Enlace a sección de productos de software -->
+                    
                     <li><a href="#">Hardware</a></li>
+                    <!-- Enlace a sección de productos de hardware -->
+                    
                     <li><a href="#">Accesorios</a></li>
+                    <!-- Enlace a sección de accesorios tecnológicos -->
                 </ul>
             </li>
+            
+            <!-- MENÚ DESPLEGABLE: SERVICIOS -->
             <li class="dropdown">
-                <a href="#">Servicios</i></a>
+                <!-- 
+                    Segundo dropdown para servicios
+                    - Misma estructura que el dropdown de productos
+                    - Funcionalidad idéntica pero contenido diferente
+                -->
+                
+                <a href="#">Servicios</a>
+                <!-- Enlace principal para servicios -->
+                
                 <ul class="submenu">
+                    <!-- Submenú de servicios -->
+                    
                     <li><a href="#">Consultoría</a></li>
+                    <!-- Enlace a servicios de consultoría tecnológica -->
+                    
                     <li><a href="#">Soporte</a></li>
+                    <!-- Enlace a servicios de soporte técnico -->
                 </ul>
             </li>
+            
+            <!-- ENLACES DIRECTOS SIN SUBMENÚ -->
             <li><a href="#">Noticias</a></li>
+            <!-- 
+                Enlace directo a sección de noticias
+                - No tiene submenú, navegación directa
+                - Comúnmente lleva a un blog o sección de artículos
+            -->
+            
             <li><a href="#">Contacto</a></li>
+            <!-- 
+                Enlace directo a página de contacto
+                - Información de contacto, formularios, ubicación
+                - Elemento importante para conversiones
+            -->
         </ul>
+        
+        <!-- ===============================================
+             COMPONENTE DE BÚSQUEDA AVANZADA
+             =============================================== -->
         <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Buscar...">
-            <button type="button" id="searchButton"><i class="fas fa-search"></i></button>
+            <!-- 
+                Contenedor principal de la barra de búsqueda
+                - Posicionado a la derecha del menú (margin-left: auto)
+                - Contiene el input, botón y dropdown de sugerencias
+            -->
+            
+            <div class="search-container">
+                <!-- 
+                    Contenedor específico para el sistema de búsqueda
+                    - position: relative para el posicionamiento del dropdown
+                    - Agrupa todos los elementos relacionados con la búsqueda
+                    - Necesario para el correcto funcionamiento de las sugerencias
+                -->
+                
+                <input type="text" id="searchInput" placeholder="Buscar...">
+                <!-- 
+                    Campo de entrada de texto para búsquedas
+                    - type="text": Tipo de input para texto libre
+                    - id="searchInput": Identificador único para JavaScript
+                    - placeholder: Texto de ayuda que desaparece al escribir
+                    - Se expande al recibir foco (CSS focus)
+                -->
+                
+                <button type="button" id="searchButton"><i class="fas fa-search"></i></button>
+                <!-- 
+                    Botón para ejecutar búsqueda
+                    - type="button": Evita envío de formulario
+                    - id="searchButton": Identificador para JavaScript
+                    - Contiene icono de lupa de Font Awesome
+                    - Diseño que encaja con el input (border-radius complementario)
+                -->
+                
+                <div class="search-suggestions" id="searchSuggestions"></div>
+                <!-- 
+                    Contenedor para el dropdown de sugerencias
+                    - Inicialmente vacío, se llena dinámicamente con JavaScript
+                    - id="searchSuggestions": Identificador para manipulación DOM
+                    - Posicionamiento absoluto debajo del input
+                    - Incluye scroll si las sugerencias exceden la altura máxima
+                -->
+            </div>
         </div>
     </nav>
 
-    <!-- ====== Contenido principal ====== -->
+    <!-- ===============================================
+         CONTENIDO PRINCIPAL DE LA PÁGINA
+         =============================================== -->
     <div class="container" id="content">
+        <!-- 
+            Contenedor principal del contenido
+            - id="content": Identificador para funcionalidad de búsqueda
+            - Área donde se aplica el resaltado de texto
+            - Centrado con márgenes automáticos
+            - Fondo blanco con sombra para separación visual
+        -->
+        
+        <!-- ENCABEZADO PRINCIPAL -->
         <h1>Bienvenidos al Sitio de Tecnología</h1>
+        <!-- 
+            Título principal de la página (H1)
+            - Solo debe haber un H1 por página para SEO
+            - Texto descriptivo del propósito del sitio
+            - Importante para posicionamiento en buscadores
+        -->
+        
+        <!-- PÁRRAFO INTRODUCTORIO -->
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis viverra est ac consectetur tincidunt...</p>
+        <!-- 
+            Texto introductorio placeholder
+            - Lorem ipsum es texto de relleno estándar
+            - En producción debería reemplazarse con contenido real
+            - Proporciona contexto sobre el sitio web
+        -->
+        
         <p>En nuestro sitio, encontrarás las últimas novedades en <strong>Tecnología</strong>, artículos interesantes y mucho más.</p>
+        <!-- 
+            Párrafo descriptivo con palabra clave resaltada
+            - <strong>: Enfatiza semánticamente la palabra "Tecnología"
+            - Mejora SEO al destacar términos importantes
+            - Texto buscable para demostrar funcionalidad de búsqueda
+        -->
+        
+        <!-- SECCIÓN: PRODUCTOS DESTACADOS -->
+        <h2>Productos Destacados</h2>
+        <!-- 
+            Subtítulo de sección (H2)
+            - Jerarquía correcta: H1 > H2 > H3...
+            - Organiza el contenido en secciones lógicas
+            - Facilita la navegación y comprensión
+        -->
+        
+        <p>Explora nuestra amplia gama de <strong>software</strong> especializado, <strong>hardware</strong> de última generación y <strong>accesorios</strong> tecnológicos.</p>
+        <!-- 
+            Descripción de productos con palabras clave resaltadas
+            - Múltiples términos en <strong> para demostrar búsqueda
+            - Palabras clave que coinciden con el menú de navegación
+            - Contenido descriptivo y promocional
+        -->
+        
+        <!-- SECCIÓN: SERVICIOS PROFESIONALES -->
+        <h2>Servicios Profesionales</h2>
+        <!-- Subtítulo para sección de servicios -->
+        
+        <p>Ofrecemos servicios de <strong>consultoría</strong> tecnológica y <strong>soporte</strong> técnico especializado para empresas y particulares.</p>
+        <!-- 
+            Descripción de servicios con términos buscables
+            - "consultoría" y "soporte" coinciden con opciones del menú
+            - Texto que puede encontrarse con la funcionalidad de búsqueda
+            - Dirigido tanto a empresas como particulares
+        -->
+        
+        <!-- SECCIÓN: NOTICIAS TECNOLÓGICAS -->
+        <h2>Noticias Tecnológicas</h2>
+        <!-- Subtítulo para sección de noticias -->
+        
+        <p>Mantente al día con las últimas <strong>noticias</strong> del mundo de la tecnología, innovaciones y tendencias del mercado.</p>
+        <!-- 
+            Descripción de contenido de noticias
+            - Palabra "noticias" resaltada y buscable
+            - Enfoque en actualidad y tendencias
+            - Valor agregado para visitantes del sitio
+        -->
+        
+        <!-- SECCIÓN: CONTACTO -->
+        <h2>Contacto</h2>
+        <!-- Subtítulo para información de contacto -->
+        
+        <p>¿Necesitas más información? No dudes en <strong>contactar</strong> con nuestro equipo de expertos.</p>
+        <!-- 
+            Call-to-action para contacto
+            - Invitación directa a la comunicación
+            - Palabra "contactar" coincide con menú de navegación
+            - Enfatiza la disponibilidad del equipo
+        -->
     </div>
 
+    <!-- ===============================================
+         IMPORTACIÓN DE JAVASCRIPT
+         =============================================== -->
     <script src="script.js"></script>
+    <!-- 
+        Importación del archivo JavaScript personalizado
+        - Colocado al final del body para mejor rendimiento
+        - Garantiza que el DOM esté cargado antes de ejecutar scripts
+        - Contiene toda la funcionalidad interactiva del sitio:
+          * Toggle del menú móvil
+          * Sistema de búsqueda con sugerencias
+          * Navegación por teclado
+          * Resaltado de texto
+          * Event listeners para interactividad
+    -->
 </body>
+<!-- Fin del cuerpo del documento -->
+
 </html>
+<!-- Fin del documento HTML -->
