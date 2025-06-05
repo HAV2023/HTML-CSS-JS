@@ -24,9 +24,9 @@
  * @property {string} TEMPLATE_ID - Identificador de la plantilla de correo a utilizar
  */
 const EMAILJS_CONFIG = {
-  PUBLIC_KEY: "poner public_key",    // Clave pública para autenticación
-  SERVICE_ID: "poner service_id",       // Servicio de correo (Gmail, Outlook, etc.)
-  TEMPLATE_ID: "poner template_id"      // Plantilla con formato del correo
+  PUBLIC_KEY: "escribir public_key",    // Clave pública para autenticación
+  SERVICE_ID: "escribir service_id",       // Servicio de correo (Gmail, Outlook, etc.)
+  TEMPLATE_ID: "escribir template_id"      // Plantilla con formato del correo
 };
 
 /**
