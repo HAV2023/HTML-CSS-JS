@@ -1,6 +1,6 @@
 <!--
   Documento: index.html
-  Descripción: Formulario profesional con validaciones y toggle de contraseña
+  Descripción: Formulario profesional con envío por email usando FormSubmit
   Cada sección está comentada para facilitar comprensión.
 -->
 <!DOCTYPE html>
@@ -28,8 +28,26 @@
     <!-- Título principal de la sección -->
     <h1>Formulario de Registro</h1>
 
-    <!-- Inicio del formulario, con id para manejarlo desde JavaScript y novalidate para desactivar validación nativa -->
-    <form id="professionalForm" novalidate>
+    <!-- 
+      FORMULARIO CON ENVÍO POR EMAIL
+      - action: URL de FormSubmit con tu email (CAMBIAR POR TU EMAIL REAL)
+      - method: POST para enviar datos
+      - Se mantiene novalidate para usar validación personalizada
+    -->
+    <form id="professionalForm" action="https://formsubmit.co/tu-email@gmail.com" method="POST" novalidate>
+      
+      <!-- CAMPOS OCULTOS PARA CONFIGURAR FORMSUBMIT -->
+      <!-- Página de redirección después del envío (opcional) -->
+      <input type="hidden" name="_next" value="https://tu-sitio.com/gracias.html">
+      
+      <!-- Asunto del email que recibirás -->
+      <input type="hidden" name="_subject" value="Nuevo registro desde formulario profesional">
+      
+      <!-- Desactivar CAPTCHA (opcional, pero recomendado para formularios internos) -->
+      <input type="hidden" name="_captcha" value="false">
+      
+      <!-- Plantilla de email (opcional - mejora el formato) -->
+      <input type="hidden" name="_template" value="table">
 
       <!-- Campo: Nombre completo -->
       <div>
@@ -39,7 +57,7 @@
         <input
           type="text"
           id="name"
-          name="name"
+          name="Nombre_Completo"
           placeholder="Escribe tu nombre completo"
           required
           pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
@@ -54,7 +72,7 @@
         <input
           type="email"
           id="email"
-          name="email"
+          name="Correo_Electronico"
           placeholder="ejemplo@dominio.com"
           required
         />
@@ -67,7 +85,7 @@
         <input
           type="email"
           id="emailConfirm"
-          name="emailConfirm"
+          name="Confirmacion_Correo"
           placeholder="Repite tu correo electrónico"
           required
         />
@@ -82,7 +100,7 @@
           <input
             type="password"
             id="password"
-            name="password"
+            name="Contrasena"
             placeholder="Ingresa tu contraseña"
             required
             minlength="8"
@@ -104,7 +122,7 @@
           <input
             type="password"
             id="passwordConfirm"
-            name="passwordConfirm"
+            name="Confirmacion_Contrasena"
             placeholder="Repite tu contraseña"
             required
             minlength="8"
@@ -124,7 +142,7 @@
         <input
           type="text"
           id="age"
-          name="age"
+          name="Edad"
           placeholder="Ejemplo: 35"
           required
           inputmode="numeric"
@@ -137,7 +155,7 @@
       <!-- Campo: Fecha de nacimiento, el max será establecido por JS a la fecha actual -->
       <div>
         <label for="birthdate" class="required">Fecha de nacimiento</label>
-        <input type="date" id="birthdate" name="birthdate" required max="" />
+        <input type="date" id="birthdate" name="Fecha_Nacimiento" required max="" />
         <div class="error-message" id="error-birthdate" aria-live="polite"></div>
       </div>
 
@@ -146,7 +164,7 @@
         <label for="comments">Comentarios (opcional)</label>
         <textarea
           id="comments"
-          name="comments"
+          name="Comentarios"
           placeholder="Escribe aquí tus comentarios"
           rows="5"
           cols="40"
