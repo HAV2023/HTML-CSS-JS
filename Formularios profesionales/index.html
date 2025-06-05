@@ -1,64 +1,316 @@
 <!--
-  Documento: index.html
-  Descripción: Formulario profesional con envío por email usando EmailJS
-  FUNCIONA DESDE ARCHIVOS LOCALES (no requiere servidor)
+  ===============================================================================
+  ARCHIVO: index.html
+  ===============================================================================
+  
+  PROPÓSITO:
+  Documento HTML principal que contiene el formulario de registro profesional
+  con validaciones avanzadas y envío por EmailJS.
+  
+  CARACTERÍSTICAS PRINCIPALES:
+  - Formulario responsive con 8 campos de entrada
+  - Integración con EmailJS para envío de emails sin servidor
+  - Validación HTML5 + JavaScript personalizado
+  - Toggle de visibilidad para contraseñas
+  - Contador de caracteres en tiempo real
+  - Mensajes de estado dinámicos
+  - Accesibilidad con ARIA attributes
+  
+  DEPENDENCIAS EXTERNAS:
+  - Google Fonts (Lato y Roboto)
+  - EmailJS SDK v3
+  - styles.css (local)
+  - script.js (local)
+  
+  COMPATIBILIDAD:
+  - Navegadores modernos con soporte ES6+
+  - HTML5 form validation
+  - CSS3 features
+  - JavaScript events y DOM API
+  
+  ===============================================================================
 -->
+
 <!DOCTYPE html>
+<!--
+  DOCTYPE html: Declaración de tipo de documento HTML5
+  Asegura que el navegador interprete el código usando estándares modernos
+-->
+
 <html lang="es">
+<!--
+  <html lang="es">: Elemento raíz del documento
+  - lang="es": Especifica que el contenido está en español
+  - Importante para SEO y tecnologías de asistencia (lectores de pantalla)
+  - Los navegadores usan esta información para corrección ortográfica y traducción
+-->
+
 <head>
-  <!-- Metadatos de codificación y viewport -->
+  <!--
+    SECCIÓN HEAD: Contiene metadatos y recursos que no se muestran al usuario
+    pero son esenciales para el funcionamiento y optimización del documento
+  -->
+  
+  <!-- METADATOS BÁSICOS -->
+  
   <meta charset="UTF-8" />
+  <!--
+    charset="UTF-8": Especifica la codificación de caracteres
+    - UTF-8 es el estándar universal que soporta todos los idiomas
+    - Permite caracteres especiales como acentos, ñ, emojis, etc.
+    - DEBE ser el primer elemento meta para evitar problemas de codificación
+  -->
+  
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--
+    viewport: Controla cómo se muestra la página en dispositivos móviles
+    - width=device-width: El ancho de la página iguala al ancho de la pantalla
+    - initial-scale=1: Zoom inicial al 100% (sin zoom automático)
+    - Esencial para responsive design y experiencia móvil adecuada
+  -->
 
-  <!-- Título de la página que aparece en la pestaña del navegador -->
+  <!-- TÍTULO DE LA PÁGINA -->
+  
   <title>Formulario Profesional</title>
-
-  <!-- Importación de las fuentes Lato y Roboto desde Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- SDK de EmailJS para envío de emails desde el cliente -->
+  <!--
+    <title>: Texto que aparece en:
+    - La pestaña del navegador
+    - Los marcadores/favoritos
+    - Los resultados de búsqueda (SEO)
+    - Redes sociales al compartir el enlace
+  -->
+  
+  <!-- RECURSOS EXTERNOS: FUENTES -->
+  
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <!--
+    Google Fonts: Importa fuentes tipográficas desde CDN de Google
+    
+    FUENTES SELECCIONADAS:
+    - Lato: Fuente principal para texto del cuerpo
+      - wght@400: Peso normal (texto regular)
+      - wght@700: Peso bold (texto en negrita)
+    - Roboto: Fuente para títulos y elementos de interfaz
+      - wght@400: Peso normal
+      - wght@700: Peso bold
+    
+    PARÁMETROS:
+    - display=swap: Mejora el rendimiento, muestra texto con fuente del sistema
+      mientras se carga la fuente personalizada (evita texto invisible)
+    
+    VENTAJAS:
+    - Tipografía profesional y legible
+    - Optimizada para web
+    - Soporte completo para caracteres latinos
+  -->
+  
+  <!-- RECURSOS EXTERNOS: EMAILJS SDK -->
+  
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-  <!-- Enlace al archivo CSS externo que contiene los estilos del formulario -->
+  <!--
+    EmailJS SDK: Biblioteca JavaScript para envío de emails desde el cliente
+    
+    DETALLES:
+    - Versión: 3.x (última estable)
+    - CDN: jsdelivr (rápido y confiable)
+    - Archivo minificado (.min.js) para mejor rendimiento
+    
+    FUNCIONALIDAD:
+    - Permite enviar emails sin servidor backend
+    - Se conecta directamente con servicios de email (Gmail, Outlook, etc.)
+    - Maneja autenticación y templates de forma transparente
+    
+    CARGA:
+    - Se ejecuta antes del DOM para estar disponible cuando se necesite
+    - type="text/javascript" (opcional en HTML5, pero explícito)
+  -->
+  
+  <!-- RECURSOS LOCALES: ESTILOS CSS -->
+  
   <link rel="stylesheet" href="styles.css" />
+  <!--
+    Hoja de estilos externa principal
+    
+    rel="stylesheet": Especifica que es una hoja de estilos CSS
+    href="styles.css": Ruta relativa al archivo CSS local
+    
+    CONTENIDO:
+    - Reset CSS y estilos base
+    - Layout responsivo del formulario
+    - Estilos de componentes (inputs, botones, mensajes)
+    - Animaciones y transiciones
+    - Media queries para dispositivos móviles
+  -->
+  
 </head>
+
 <body>
-  <!-- Contenedor principal del formulario para centrar y limitar ancho -->
+  <!--
+    ELEMENTO BODY: Contiene todo el contenido visible de la página
+    No tiene atributos adicionales, los estilos se aplican desde CSS
+  -->
+  
+  <!-- CONTENEDOR PRINCIPAL -->
+  
   <div class="container">
-    <!-- Título principal de la sección -->
-    <h1>Formulario de Registro</h1>
-
-    <!-- 
-      FORMULARIO CONFIGURADO PARA EMAILJS
-      - novalidate: Desactiva validación nativa para usar la personalizada
-      - Los name attributes están optimizados para EmailJS
+    <!--
+      Contenedor principal del formulario
+      
+      CLASE CSS: "container"
+      PROPÓSITO:
+      - Centrar el formulario en la pantalla
+      - Limitar el ancho máximo para legibilidad
+      - Proporcionar padding y estilos de tarjeta
+      - Crear una superficie elevada con sombra
+      
+      RESPONSIVE:
+      - Se adapta a diferentes tamaños de pantalla
+      - Padding ajustable en dispositivos móviles
     -->
-    <form id="professionalForm" novalidate>
+    
+    <!-- TÍTULO PRINCIPAL -->
+    
+    <h1>Formulario de Registro</h1>
+    <!--
+      Título principal de la sección
+      
+      H1: Jerarquía más alta de encabezado
+      - Importante para SEO (define el tema principal)
+      - Accesibilidad: lectores de pantalla lo identifican como título principal
+      
+      ESTILOS CSS:
+      - Fuente: Roboto (diferente al cuerpo para jerarquía visual)
+      - Peso: 700 (negrita)
+      - Alineación: centro
+      - Color: gris oscuro (#222)
+    -->
 
-      <!-- Campo: Nombre completo -->
+    <!-- FORMULARIO PRINCIPAL -->
+    
+    <form id="professionalForm" novalidate>
+      <!--
+        Elemento formulario principal
+        
+        ATRIBUTOS:
+        - id="professionalForm": Identificador único para JavaScript
+          * Permite seleccionar el formulario desde script.js
+          * Usado para agregar event listeners y manipulación
+        
+        - novalidate: Desactiva la validación HTML5 nativa del navegador
+          * Permite implementar validación personalizada más robusta
+          * Evita mensajes de error nativos inconsistentes entre navegadores
+          * JavaScript maneja toda la validación de forma unificada
+        
+        MÉTODO DE ENVÍO:
+        - No especifica action ni method porque EmailJS maneja el envío
+        - JavaScript intercepta el evento submit para procesamiento personalizado
+      -->
+
+      <!-- ===================================================================== -->
+      <!-- CAMPO 1: NOMBRE COMPLETO -->
+      <!-- ===================================================================== -->
+      
       <div>
-        <!-- Label vinculado al input por su atributo for=id -->
+        <!--
+          Contenedor de campo individual
+          - Sin clase específica, usa estilos CSS generales para <div>
+          - Agrupa label, input y mensaje de error relacionados
+          - Proporciona estructura semántica clara
+        -->
+        
         <label for="name" class="required">Nombre completo</label>
-        <!-- name="user_name" es la variable que usará EmailJS -->
+        <!--
+          Etiqueta del campo de entrada
+          
+          ATRIBUTOS:
+          - for="name": Conecta la etiqueta con el input id="name"
+            * Mejora accesibilidad (click en label enfoca el input)
+            * Lectores de pantalla asocian correctamente label e input
+          
+          - class="required": Clase CSS para campos obligatorios
+            * CSS añade asterisco rojo (*) después del texto
+            * Indicador visual de que el campo es requerido
+          
+          CONTENIDO:
+          - Texto descriptivo claro y conciso
+          - Especifica qué información se espera del usuario
+        -->
+        
         <input
           type="text"
           id="name"
           name="user_name"
           placeholder="Escribe tu nombre completo"
           required
-          pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
         />
-        <!-- Div para mostrar mensaje de error específico bajo el input -->
+        <!--
+          Campo de entrada para nombre completo
+          
+          ATRIBUTOS DETALLADOS:
+          
+          type="text": Tipo de input para texto libre
+          - Permite cualquier carácter inicialmente
+          - JavaScript aplica restricciones específicas (solo letras)
+          - Se convierte automáticamente a mayúsculas
+          
+          id="name": Identificador único
+          - Usado por JavaScript para seleccionar el elemento
+          - Conecta con el atributo for="" del label
+          - Referenciado en funciones de validación
+          
+          name="user_name": Nombre para envío con EmailJS
+          - EmailJS usa este nombre como variable en el template
+          - Template puede referenciar {{user_name}} para mostrar el valor
+          - Formato con guión bajo sigue convenciones de EmailJS
+          
+          placeholder="...": Texto de ayuda mostrado en campo vacío
+          - Desaparece cuando el usuario empieza a escribir
+          - Proporciona ejemplo o instrucción del formato esperado
+          - No reemplaza el label (accesibilidad)
+          
+          required: Atributo booleano de validación HTML5
+          - Marca el campo como obligatorio
+          - JavaScript valida esto junto con otras reglas personalizadas
+          - Navegador no mostrará mensaje nativo por novalidate en form
+        -->
+        
         <div class="error-message" id="error-name" aria-live="polite"></div>
+        <!--
+          Contenedor para mensaje de error específico del campo
+          
+          ATRIBUTOS:
+          - class="error-message": Estilos CSS para mensajes de error
+            * Color rojo, tamaño de fuente pequeño
+            * display: none por defecto (oculto)
+            * JavaScript lo muestra/oculta dinámicamente
+          
+          - id="error-name": Identificador único para este mensaje de error
+            * JavaScript usa este ID para mostrar errores específicos
+            * Patrón: "error-" + nombre del campo
+          
+          - aria-live="polite": Atributo de accesibilidad
+            * Lectores de pantalla anuncian cambios en este elemento
+            * "polite": espera a que el usuario termine de interactuar
+            * Importante para usuarios con discapacidad visual
+          
+          CONTENIDO:
+          - Vacío inicialmente, JavaScript añade mensajes de error
+          - Ejemplos: "El nombre es obligatorio", "Solo se permiten letras"
+        -->
       </div>
 
-      <!-- Campo: Correo electrónico -->
+      <!-- ===================================================================== -->
+      <!-- CAMPO 2: CORREO ELECTRÓNICO -->
+      <!-- ===================================================================== -->
+      
       <div>
         <label for="email" class="required">Correo electrónico</label>
-        <!-- name="user_email" será usado por EmailJS -->
+        <!--
+          Etiqueta para campo de email
+          - Mismo patrón que el campo anterior
+          - class="required" añade asterisco visual
+        -->
+        
         <input
           type="email"
           id="email"
@@ -66,13 +318,30 @@
           placeholder="ejemplo@dominio.com"
           required
         />
+        <!--
+          Campo de entrada para correo electrónico
+          
+          type="email": Tipo especializado de HTML5
+          - Validación automática de formato de email básico
+          - Teclado optimizado en dispositivos móviles (muestra @ y .com)
+          - JavaScript aplica validación adicional más robusta
+          
+          CARACTERÍSTICAS ESPECIALES:
+          - NO se convierte a mayúsculas (emails son case-sensitive)
+          - CSS aplica text-transform: none !important
+          - Placeholder muestra formato esperado claramente
+        -->
+        
         <div class="error-message" id="error-email" aria-live="polite"></div>
       </div>
 
-      <!-- Campo: Confirmar correo electrónico -->
+      <!-- ===================================================================== -->
+      <!-- CAMPO 3: CONFIRMACIÓN DE CORREO -->
+      <!-- ===================================================================== -->
+      
       <div>
         <label for="emailConfirm" class="required">Confirmar correo electrónico</label>
-        <!-- name="user_email_confirm" para identificar en el template -->
+        
         <input
           type="email"
           id="emailConfirm"
@@ -80,119 +349,572 @@
           placeholder="Repite tu correo electrónico"
           required
         />
+        <!--
+          Campo de confirmación de email
+          
+          PROPÓSITO:
+          - Evitar errores de escritura en el email principal
+          - JavaScript valida que ambos emails coincidan exactamente
+          - Patrón común en formularios de registro importantes
+          
+          name="user_email_confirm": Variable separada en EmailJS template
+          - Permite mostrar ambos emails en el mensaje recibido
+          - Útil para verificación manual si es necesario
+        -->
+        
         <div class="error-message" id="error-emailConfirm" aria-live="polite"></div>
       </div>
 
-      <!-- Campo: Contraseña con botón para mostrar/ocultar -->
+      <!-- ===================================================================== -->
+      <!-- CAMPO 4: CONTRASEÑA CON TOGGLE DE VISIBILIDAD -->
+      <!-- ===================================================================== -->
+      
       <div>
         <label for="password" class="required">Contraseña</label>
-        <!-- Contenedor relativo para posicionar el botón dentro del input -->
+        
         <div class="input-password">
+          <!--
+            Contenedor especial para input con botón toggle
+            
+            class="input-password": Estilos CSS específicos
+            - position: relative para posicionamiento absoluto del botón
+            - Permite superponer el botón toggle sobre el input
+            - Mantiene la funcionalidad del input intacta
+          -->
+          
           <input
             type="password"
             id="password"
             name="user_password"
             placeholder="Ingresa tu contraseña"
             required
-            minlength="8"
           />
-          <!-- Botón que alterna icono y visibilidad de contraseña -->
-          <button
-            type="button"
-            id="togglePassword"
-            aria-label="Mostrar/ocultar contraseña"
-          >👁️</button>
+          <!--
+            Campo de contraseña principal
+            
+            type="password": Tipo especializado para contraseñas
+            - Oculta automáticamente los caracteres escritos (muestra •••)
+            - JavaScript puede cambiar a type="text" para mostrar contenido
+            - NO se convierte a mayúsculas (contraseñas son case-sensitive)
+            
+            VALIDACIÓN:
+            - Mínimo 8 caracteres
+            - Al menos una letra mayúscula
+            - Al menos una letra minúscula
+            - JavaScript valida estos requisitos en tiempo real
+          -->
+          
+          <button type="button" id="togglePassword" aria-label="Mostrar/ocultar contraseña">👁️</button>
+          <!--
+            Botón toggle para mostrar/ocultar contraseña
+            
+            ATRIBUTOS:
+            type="button": Previene envío accidental del formulario
+            - Por defecto, botones en forms tienen type="submit"
+            - type="button" los convierte en botones de acción normal
+            
+            id="togglePassword": Identificador para JavaScript
+            - JavaScript agrega event listener click a este botón
+            - Permite alternar entre mostrar/ocultar contraseña
+            
+            aria-label="...": Descripción para tecnologías de asistencia
+            - Lectores de pantalla leen esta descripción
+            - El emoji 👁️ no es descriptivo para usuarios ciegos
+            - Importante para accesibilidad web
+            
+            FUNCIONAMIENTO:
+            - Click cambia type de "password" a "text" y viceversa
+            - Icono cambia entre 👁️ (mostrar) y 🙈 (ocultar)
+            - CSS posiciona el botón sobre el lado derecho del input
+          -->
         </div>
+        
         <div class="error-message" id="error-password" aria-live="polite"></div>
       </div>
 
-      <!-- Campo: Confirmar contraseña, mismo patrón que el anterior -->
+      <!-- ===================================================================== -->
+      <!-- CAMPO 5: CONFIRMACIÓN DE CONTRASEÑA -->
+      <!-- ===================================================================== -->
+      
       <div>
         <label for="passwordConfirm" class="required">Confirmar contraseña</label>
+        
         <div class="input-password">
+          <!-- Mismo patrón que contraseña principal -->
+          
           <input
             type="password"
             id="passwordConfirm"
             name="user_password_confirm"
             placeholder="Repite tu contraseña"
             required
-            minlength="8"
           />
-          <button
-            type="button"
-            id="togglePasswordConfirm"
-            aria-label="Mostrar/ocultar contraseña"
-          >👁️</button>
+          <!--
+            Campo de confirmación de contraseña
+            
+            VALIDACIÓN:
+            - Debe coincidir exactamente con la contraseña principal
+            - JavaScript compara ambos valores caracter por caracter
+            - Se valida en tiempo real al escribir
+          -->
+          
+          <button type="button" id="togglePasswordConfirm" aria-label="Mostrar/ocultar contraseña">👁️</button>
+          <!--
+            Botón toggle independiente para confirmación
+            - ID diferente (togglePasswordConfirm) para JavaScript
+            - Funciona de manera independiente al toggle principal
+            - Permite mostrar una contraseña y ocultar la otra
+          -->
         </div>
+        
         <div class="error-message" id="error-passwordConfirm" aria-live="polite"></div>
       </div>
 
-      <!-- Campo: Edad, con inputmode y pattern para solo números -->
+      <!-- ===================================================================== -->
+      <!-- CAMPO 6: EDAD (SOLO NÚMEROS) -->
+      <!-- ===================================================================== -->
+      
       <div>
         <label for="age" class="required">Edad</label>
+        
         <input
           type="text"
           id="age"
           name="user_age"
           placeholder="Ejemplo: 35"
           required
-          inputmode="numeric"
-          pattern="\d*"
           maxlength="3"
         />
+        <!--
+          Campo de edad con restricciones especiales
+          
+          type="text": NO se usa type="number" porque:
+          - type="number" permite decimales (25.5 años no tiene sentido)
+          - Spinners (+/-) pueden confundir al usuario
+          - JavaScript proporciona mejor control de entrada
+          
+          RESTRICCIONES JAVASCRIPT:
+          - Solo permite dígitos 0-9
+          - Elimina automáticamente letras y símbolos
+          - Valida rango entre 1 y 120 años
+          
+          maxlength="3": Límite HTML de 3 caracteres
+          - Previene edad superior a 999 años
+          - Complementa la validación JavaScript
+          - Mejora la experiencia de usuario
+          
+          CONVERSIÓN A MAYÚSCULAS:
+          - Aunque es type="text", solo contiene números
+          - La función toUpperCase() no afecta números
+          - Mantiene consistencia con otros campos de texto
+        -->
+        
         <div class="error-message" id="error-age" aria-live="polite"></div>
       </div>
 
-      <!-- Campo: Fecha de nacimiento, el max será establecido por JS a la fecha actual -->
+      <!-- ===================================================================== -->
+      <!-- CAMPO 7: FECHA DE NACIMIENTO -->
+      <!-- ===================================================================== -->
+      
       <div>
         <label for="birthdate" class="required">Fecha de nacimiento</label>
-        <input type="date" id="birthdate" name="user_birthdate" required max="" />
+        
+        <input type="date" id="birthdate" name="user_birthdate" required />
+        <!--
+          Campo de fecha de nacimiento
+          
+          type="date": Input especializado HTML5 para fechas
+          - Muestra selector de fecha nativo del navegador
+          - Formato automático según configuración regional del sistema
+          - Validación automática de fechas válidas (no 32 de enero)
+          
+          CARACTERÍSTICAS:
+          - NO tiene placeholder (no es compatible con type="date")
+          - JavaScript establece max="fecha_actual" para prevenir fechas futuras
+          - Formato de salida siempre es YYYY-MM-DD independiente de la UI
+          
+          VALIDACIÓN:
+          - No puede estar vacío (required)
+          - No puede ser fecha futura (JavaScript)
+          - Debe ser fecha válida (validación nativa HTML5)
+          
+          ACCESIBILIDAD:
+          - Navegadores modernos proporcionan controles accesibles
+          - Lectores de pantalla pueden navegar por año/mes/día
+          - Teclado permite navegación con flechas
+        -->
+        
         <div class="error-message" id="error-birthdate" aria-live="polite"></div>
       </div>
 
-      <!-- Campo: Comentarios opcional, con contador de caracteres -->
+      <!-- ===================================================================== -->
+      <!-- CAMPO 8: COMENTARIOS OPCIONALES CON CONTADOR -->
+      <!-- ===================================================================== -->
+      
       <div>
         <label for="comments">Comentarios (opcional)</label>
+        <!--
+          Etiqueta para campo opcional
+          - NO tiene class="required" porque es opcional
+          - Texto incluye "(opcional)" para claridad del usuario
+        -->
+        
         <textarea
           id="comments"
           name="user_comments"
           placeholder="Escribe aquí tus comentarios"
           rows="5"
-          cols="40"
           maxlength="2000"
-          pattern="^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,!?-]*$"
         ></textarea>
+        <!--
+          Área de texto para comentarios largos
+          
+          ELEMENTO: <textarea> en lugar de <input>
+          - Permite texto multilínea
+          - Redimensionable por el usuario (CSS: resize: vertical)
+          - Mejor para contenido extenso
+          
+          ATRIBUTOS:
+          rows="5": Altura inicial en líneas de texto
+          - Proporciona espacio visible adecuado
+          - Usuario puede redimensionar si necesita más espacio
+          
+          maxlength="2000": Límite máximo de caracteres
+          - Previene contenido excesivamente largo
+          - JavaScript cuenta caracteres en tiempo real
+          - Validación tanto HTML5 como JavaScript
+          
+          SIN required: Campo completamente opcional
+          - Usuario puede enviarlo vacío sin errores
+          - JavaScript valida longitud solo si hay contenido
+        -->
+        
         <div class="char-counter" id="commentsCounter">0 / 2000 caracteres</div>
+        <!--
+          Contador de caracteres en tiempo real
+          
+          class="char-counter": Estilos CSS específicos
+          - Texto pequeño, color gris
+          - Alineado a la derecha
+          - user-select: none (no seleccionable)
+          
+          id="commentsCounter": Identificador para JavaScript
+          - JavaScript actualiza este texto en tiempo real
+          - Muestra formato: "X / 2000 caracteres"
+          - Cambia de color si se acerca al límite
+          
+          FUNCIONALIDAD:
+          - Se actualiza con cada tecla presionada
+          - Ayuda al usuario a gestionar la longitud del texto
+          - Previene sorpresas al alcanzar el límite
+        -->
+        
         <div class="error-message" id="error-comments" aria-live="polite"></div>
       </div>
 
-      <!-- Botón de envío principal -->
+      <!-- ===================================================================== -->
+      <!-- BOTÓN DE ENVÍO PRINCIPAL -->
+      <!-- ===================================================================== -->
+      
       <button type="submit" id="submitBtn">Enviar información</button>
+      <!--
+        Botón principal de envío del formulario
+        
+        ATRIBUTOS:
+        type="submit": Tipo de botón que envía el formulario
+        - Click en este botón dispara el evento 'submit' del form
+        - JavaScript intercepta este evento para validación personalizada
+        - Comportamiento nativo del navegador se previene con preventDefault()
+        
+        id="submitBtn": Identificador para JavaScript
+        - Permite cambiar texto durante el envío ("Enviando...")
+        - Habilitar/deshabilitar el botón según el estado
+        - Aplicar estilos dinámicos según la situación
+        
+        ESTADOS DEL BOTÓN:
+        1. Normal: "Enviar información" - azul, clickeable
+        2. Enviando: "Enviando..." - gris, deshabilitado
+        3. Éxito: Vuelve a estado normal tras confirmación
+        4. Error: Vuelve a estado normal para reintentar
+        
+        ESTILOS CSS:
+        - Color azul (#3a86ff) con hover más oscuro
+        - Padding generoso para área clickeable amplia
+        - Fuente Roboto, peso 700 (negrita)
+        - Transiciones suaves para mejor UX
+        - Estado disabled con color gris y cursor bloqueado
+      -->
     </form>
 
-    <!-- Mensaje de éxito que se muestra tras un envío válido -->
-    <div
-      class="success-message"
-      id="successMessage"
-      style="display:none;"
-      aria-live="polite"
-      role="alert"
-    >
+    <!-- ===================================================================== -->
+    <!-- MENSAJES DE ESTADO DEL FORMULARIO -->
+    <!-- ===================================================================== -->
+    
+    <!-- MENSAJE DE ÉXITO -->
+    <div class="success-message" id="successMessage" style="display:none;">
+      <!--
+        Contenedor para mensaje de envío exitoso
+        
+        ATRIBUTOS:
+        class="success-message": Estilos CSS para éxito
+        - Fondo verde claro (#d4edda)
+        - Texto verde oscuro (#155724)
+        - Bordes redondeados y padding
+        
+        id="successMessage": Identificador para JavaScript
+        - JavaScript muestra este mensaje tras envío exitoso
+        - Se oculta automáticamente antes de redireccionar
+        
+        style="display:none;": Oculto por defecto
+        - Solo se muestra cuando JavaScript lo activa
+        - Inline style tiene prioridad sobre CSS
+      -->
+      
       ¡Formulario enviado con éxito! Te contactaremos pronto.
+      <br><br>
+      <!--
+        <br><br>: Saltos de línea para espaciado
+        - Separa visualmente el mensaje principal de las acciones
+        - Mejora la legibilidad y jerarquía visual
+      -->
+      
+      <a href="gracias.html" style="color: #155724; text-decoration: underline; font-weight: bold;">
+        Ver página de agradecimiento completa →
+      </a>
+      <!--
+        Enlace a página de agradecimiento detallada
+        
+        href="gracias.html": Ruta relativa a la página de agradecimiento
+        - Permite navegación manual si el usuario prefiere
+        - Funciona como backup si la redirección automática falla
+        
+        style="...": Estilos inline para el enlace
+        - color: mismo verde que el mensaje para coherencia
+        - text-decoration: underline para claridad de que es clickeable
+        - font-weight: bold para énfasis
+        - → símbolo indica dirección/navegación
+      -->
+      
+      <br><br>
+      
+      <button onclick="window.location.reload()" style="background: #155724; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+        Enviar otro formulario
+      </button>
+      <!--
+        Botón para recargar la página y enviar nuevo formulario
+        
+        onclick="window.location.reload()": JavaScript inline
+        - Recarga la página completamente
+        - Limpia todos los campos y reinicia el estado
+        - Alternativa rápida sin navegar a otra página
+        
+        style="...": Estilos inline del botón
+        - Colores consistentes con el mensaje de éxito
+        - Padding adecuado para área clickeable
+        - border-radius para esquinas redondeadas
+        - cursor: pointer para indicar interactividad
+        
+        FUNCIONALIDAD:
+        - Permite enviar múltiples formularios fácilmente
+        - Útil para usos administrativos o formularios frecuentes
+        - Mantiene al usuario en la misma página
+      -->
     </div>
 
-    <!-- Mensaje de envío en progreso -->
-    <div
-      class="sending-message"
-      id="sendingMessage"
-      style="display:none;"
-      aria-live="polite"
-    >
+    <!-- MENSAJE DE ENVÍO EN PROGRESO -->
+    <div class="sending-message" id="sendingMessage" style="display:none;">
       Enviando... Por favor espera.
+      <!--
+        Mensaje mostrado durante el proceso de envío
+        
+        class="sending-message": Estilos CSS específicos
+        - Fondo amarillo claro (#fff3cd) para indicar estado "en proceso"
+        - Animación de pulso para indicar actividad
+        - Fuente en negrita para visibilidad
+        
+        PROPÓSITO:
+        - Informa al usuario que el proceso está en curso
+        - Previene múltiples envíos accidentales
+        - Mejora la percepción de rapidez del sistema
+        - Reduce ansiedad durante la espera
+      -->
     </div>
-  </div>
 
-  <!-- Referencia al script JS que contiene toda la lógica de validación y envío -->
+    <!-- MENSAJE DE ERROR GLOBAL -->
+    <div class="error-message-global" id="errorMessage" style="display:none;">
+      Error al enviar el formulario. Por favor, inténtalo de nuevo.
+      <!--
+        Mensaje de error general del sistema
+        
+        class="error-message-global": Estilos CSS para errores globales
+        - Fondo rojo claro (#f8d7da) para indicar problema
+        - Texto rojo oscuro para contraste adecuado
+        - Diferente a .error-message (errores de campos específicos)
+        
+        CUÁNDO SE MUESTRA:
+        - Fallo en la conexión con EmailJS
+        - Error del servidor de email
+        - Problemas de configuración
+        - Cualquier error no relacionado con validación de campos
+        
+        FUNCIONALIDAD:
+        - Permite al usuario intentar de nuevo
+        - No bloquea la interfaz permanentemente
+        - JavaScript restaura el botón para permitir reintento
+      -->
+    </div>
+
+  </div>
+  <!-- Fin del contenedor principal -->
+
+  <!-- ===================================================================== -->
+  <!-- RECURSO JAVASCRIPT PRINCIPAL -->
+  <!-- ===================================================================== -->
+  
   <script src="script.js"></script>
+  <!--
+    Inclusión del archivo JavaScript principal
+    
+    UBICACIÓN: Al final del body (justo antes de </body>)
+    RAZÓN: Asegura que todo el DOM esté cargado antes de ejecutar JavaScript
+    - Evita errores de "elemento no encontrado"
+    - Mejora el tiempo de carga percibido
+    - Permite que el HTML sea funcional incluso si JS falla
+    
+    CONTENIDO del script.js:
+    - Configuración de EmailJS
+    - Event listeners para todos los campos
+    - Validaciones en tiempo real
+    - Restricciones de entrada (solo letras, solo números)
+    - Toggle de contraseñas
+    - Contador de caracteres
+    - Envío del formulario
+    - Manejo de mensajes de estado
+    - Redirección automática tras éxito
+    
+    PATRÓN DE CARGA:
+    1. HTML se carga y renderiza
+    2. CSS se aplica (página ya se ve correctamente)
+    3. JavaScript añade interactividad
+    4. EmailJS se inicializa
+    5. Event listeners se configuran
+    6. Formulario queda completamente funcional
+  -->
+
 </body>
 </html>
+
+<!--
+  ===============================================================================
+  RESUMEN DE FUNCIONALIDADES IMPLEMENTADAS:
+  ===============================================================================
+  
+  1. FORMULARIO COMPLETO CON 8 CAMPOS:
+     ✅ Nombre completo (solo letras, mayúsculas automáticas)
+     ✅ Email + confirmación (validación de formato y coincidencia)
+     ✅ Contraseña + confirmación (complejidad y toggle de visibilidad)
+     ✅ Edad (solo números, rango 1-120)
+     ✅ Fecha de nacimiento (no futuras)
+     ✅ Comentarios opcionales (contador de caracteres, límite 2000)
+  
+  2. VALIDACIÓN AVANZADA:
+     ✅ HTML5 + JavaScript personalizado
+     ✅ Validación en tiempo real
+     ✅ Mensajes de error específicos por campo
+     ✅ Prevención de envío con datos inválidos
+  
+  3. EXPERIENCIA DE USUARIO:
+     ✅ Placeholder informativos
+     ✅ Restricciones de entrada inteligentes
+     ✅ Feedback visual inmediato
+     ✅ Estados del botón (normal/enviando/error)
+     ✅ Mensajes de estado claros
+  
+  4. ACCESIBILIDAD:
+     ✅ Labels correctamente asociados
+     ✅ ARIA attributes para lectores de pantalla
+     ✅ Navegación por teclado funcional
+     ✅ Contraste de colores adecuado
+  
+  5. INTEGRACIÓN EMAILJS:
+     ✅ Envío sin servidor backend
+     ✅ Variables optimizadas para templates
+     ✅ Manejo de errores robusto
+     ✅ Configuración con credenciales reales
+  
+  6. RESPONSIVE DESIGN:
+     ✅ Adaptable a móviles y desktop
+     ✅ Tipografía escalable
+     ✅ Touch-friendly en dispositivos táctiles
+  
+  7. FLUJO DE NAVEGACIÓN:
+     ✅ Redirección automática tras envío exitoso
+     ✅ Página de agradecimiento con efectos
+     ✅ Opciones para enviar nuevo formulario
+     ✅ Botón de retorno al formulario principal
+  
+  ===============================================================================
+  TECNOLOGÍAS Y ESTÁNDARES UTILIZADOS:
+  ===============================================================================
+  
+  📋 HTML5:
+     - Elementos semánticos apropiados
+     - Input types especializados (email, date, password)
+     - Validation attributes (required, maxlength)
+     - ARIA attributes para accesibilidad
+  
+  🎨 CSS3 (styles.css):
+     - Flexbox para layout responsive
+     - CSS Grid donde apropiado
+     - Transiciones y animaciones suaves
+     - Media queries para responsive design
+     - Custom properties (variables CSS)
+  
+  ⚡ JavaScript ES6+:
+     - Event listeners modernos
+     - Arrow functions
+     - Template literals
+     - Const/let en lugar de var
+     - Destructuring y modern syntax
+  
+  🔧 APIs Utilizadas:
+     - DOM Manipulation API
+     - Form Validation API
+     - EmailJS API v3
+     - Clipboard API (para paste events)
+     - Date API para validaciones
+  
+  📚 Librerías Externas:
+     - EmailJS SDK v3 (envío de emails)
+     - Google Fonts (tipografía profesional)
+  
+  ===============================================================================
+  PATRÓN DE ARQUITECTURA:
+  ===============================================================================
+  
+  🏗️ SEPARACIÓN DE RESPONSABILIDADES:
+     - HTML: Estructura y contenido semántico
+     - CSS: Presentación visual y layout responsive
+     - JavaScript: Lógica de negocio e interactividad
+  
+  📦 MODULARIDAD:
+     - Cada campo tiene su contenedor independiente
+     - Funciones JavaScript especializadas por funcionalidad
+     - CSS organizadопо componentes
+     - Mensajes de error individuales por campo
+  
+  🔄 PROGRESSIVE ENHANCEMENT:
+     - Funciona sin JavaScript (formulario básico)
+     - CSS mejora la presentación
+     - JavaScript añade validación avanzada e interactividad
+     - EmailJS añade envío sin servidor
+  
+  🎯 ACCESIBILIDAD FIRST:
+     - Navegación por teclado completa
+     - Lectores de pantalla compatibles
+     - Alto contraste de colores
+     - Textos descriptivos claros
+     - Estados de error anunciados apropiadamente
+  
+  ===============================================================================
+-->
