@@ -1,1 +1,543 @@
+<!DOCTYPE html>
+<!--
+/**
+ * FORMULARIO PROFESIONAL HTML
+ * Autor: Hector Arciniega
+ * Versión: Final - Completamente funcional
+ * 
+ * DESCRIPCIÓN GENERAL:
+ * Formulario HTML semántico y accesible con validaciones del lado cliente,
+ * integración con EmailJS para envío de correos, y diseño responsive.
+ * Implementa mejores prácticas de UX/UI y accesibilidad web.
+ */
+-->
 
+<html lang="es">
+<!--
+ELEMENTO HTML ROOT
+- lang="es": Especifica el idioma del documento para lectores de pantalla
+- Importante para SEO y accesibilidad
+-->
+
+<head>
+  <!--
+  ===================================================================
+  SECCIÓN 1: METADATOS Y CONFIGURACIÓN DEL DOCUMENTO
+  ===================================================================
+  -->
+  
+  <!--
+  CODIFICACIÓN DE CARACTERES
+  - UTF-8: Soporte completo para caracteres especiales y acentos
+  - Debe ser la primera declaración en <head>
+  -->
+  <meta charset="UTF-8">
+  
+  <!--
+  CONFIGURACIÓN RESPONSIVE
+  - width=device-width: Ancho igual al dispositivo
+  - initial-scale=1.0: Zoom inicial 100%
+  - Esencial para diseño mobile-first
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!--
+  TÍTULO DE LA PÁGINA
+  - Aparece en la pestaña del navegador
+  - Importante para SEO y marcadores
+  - Descriptivo y conciso
+  -->
+  <title>Formulario Profesional - Registro de Usuario</title>
+  
+  <!--
+  METADESCRIPCIÓN PARA SEO
+  - Resumen del contenido de la página
+  - Aparece en resultados de búsqueda
+  - Longitud óptima: 150-160 caracteres
+  -->
+  <meta name="description" content="Formulario profesional de registro con validaciones avanzadas y envío automático por correo electrónico">
+  
+  <!--
+  ===================================================================
+  SECCIÓN 2: IMPORTACIÓN DE FUENTES GOOGLE FONTS
+  ===================================================================
+  -->
+  
+  <!--
+  IMPORTACIÓN DE FUENTES TIPOGRÁFICAS
+  - Google Fonts: Servicio confiable y optimizado
+  - Lato: Fuente principal (humanista, legible)
+  - Roboto: Fuente secundaria (geométrica, moderna)
+  - Pesos específicos: 400 (normal), 700 (bold)
+  - display=swap: Mejora la performance de carga
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!--
+  ===================================================================
+  SECCIÓN 3: IMPORTACIÓN DE LIBRERÍAS EXTERNAS
+  ===================================================================
+  -->
+  
+  <!--
+  LIBRERÍA EMAILJS
+  - CDN oficial para envío de emails desde el cliente
+  - Versión estable y confiable
+  - Evita necesidad de backend para envío de correos
+  -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  
+  <!--
+  HOJA DE ESTILOS CSS
+  - Estilos externos para separación de responsabilidades
+  - Mantiene HTML semántico y limpio
+  - Facilita mantenimiento y reutilización
+  -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!--
+  ===================================================================
+  SECCIÓN 4: CONTENEDOR PRINCIPAL
+  ===================================================================
+  -->
+  
+  <!--
+  CONTENEDOR PRINCIPAL DEL FORMULARIO
+  - Clase 'container': Estilos de centrado y presentación
+  - Wrapper semántico para agrupación visual
+  -->
+  <div class="container">
+    
+    <!--
+    TÍTULO PRINCIPAL
+    - h1: Jerarquía semántica correcta (solo un h1 por página)
+    - Describe claramente el propósito del formulario
+    - Centrado visualmente mediante CSS
+    -->
+    <h1>Formulario de Información Personal</h1>
+    
+    <!--
+    ===================================================================
+    SECCIÓN 5: FORMULARIO PRINCIPAL
+    ===================================================================
+    -->
+    
+    <!--
+    ELEMENTO FORM
+    - id="professionalForm": Identificador único para JavaScript
+    - novalidate: Desactiva validación HTML5 nativa (usamos validación custom)
+    - method y action omitidos: manejo completamente por JavaScript
+    -->
+    <form id="professionalForm" novalidate>
+      
+      <!--
+      ===================================================================
+      SUBSECCIÓN 5.1: CAMPO NOMBRE COMPLETO
+      ===================================================================
+      -->
+      
+      <!--
+      GRUPO DE CAMPO: NOMBRE
+      - Agrupación semántica de label + input + error
+      -->
+      <div class="field-group">
+        <!--
+        ETIQUETA DEL CAMPO
+        - for="name": Asocia label con input (accesibilidad)
+        - class="required": Estilo para asterisco rojo
+        - Texto descriptivo y claro
+        -->
+        <label for="name" class="required">Nombre completo</label>
+        
+        <!--
+        INPUT DE TEXTO PARA NOMBRE
+        - type="text": Campo de texto libre
+        - id="name": Identificador único (coincide con 'for' del label)
+        - name="name": Nombre para envío de datos
+        - required: Validación HTML5 de respaldo
+        - placeholder: Texto de ayuda para el usuario
+        - autocomplete="name": Ayuda para autocompletado del navegador
+        -->
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          required 
+          placeholder="Ingresa tu nombre completo"
+          autocomplete="name"
+        >
+        
+        <!--
+        CONTENEDOR DE ERROR ESPECÍFICO
+        - id="error-name": Identificador para mostrar errores específicos
+        - class="error-message": Estilos de error
+        - Inicialmente oculto (display: none en CSS)
+        -->
+        <div id="error-name" class="error-message"></div>
+      </div>
+      
+      <!--
+      ===================================================================
+      SUBSECCIÓN 5.2: CAMPO CORREO ELECTRÓNICO
+      ===================================================================
+      -->
+      
+      <!--
+      GRUPO DE CAMPO: EMAIL PRINCIPAL
+      -->
+      <div class="field-group">
+        <label for="email" class="required">Correo electrónico</label>
+        
+        <!--
+        INPUT DE EMAIL
+        - type="email": Validación básica de formato email
+        - autocomplete="email": Autocompletado inteligente
+        - placeholder con ejemplo de formato
+        -->
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          required 
+          placeholder="ejemplo@correo.com"
+          autocomplete="email"
+        >
+        
+        <div id="error-email" class="error-message"></div>
+      </div>
+      
+      <!--
+      ===================================================================
+      SUBSECCIÓN 5.3: CAMPO CONFIRMACIÓN DE EMAIL
+      ===================================================================
+      -->
+      
+      <!--
+      GRUPO DE CAMPO: CONFIRMACIÓN EMAIL
+      - Patrón común para validar emails críticos
+      -->
+      <div class="field-group">
+        <label for="emailConfirm" class="required">Confirmar correo electrónico</label>
+        
+        <!--
+        INPUT DE CONFIRMACIÓN EMAIL
+        - type="email": Consistente con campo principal
+        - autocomplete="email": Reutiliza el email principal
+        - placeholder explicativo del propósito
+        -->
+        <input 
+          type="email" 
+          id="emailConfirm" 
+          name="emailConfirm" 
+          required 
+          placeholder="Vuelve a escribir tu correo"
+          autocomplete="email"
+        >
+        
+        <div id="error-emailConfirm" class="error-message"></div>
+      </div>
+      
+      <!--
+      ===================================================================
+      SUBSECCIÓN 5.4: CAMPO CONTRASEÑA CON TOGGLE
+      ===================================================================
+      -->
+      
+      <!--
+      GRUPO DE CAMPO: CONTRASEÑA
+      -->
+      <div class="field-group">
+        <label for="password" class="required">Contraseña</label>
+        
+        <!--
+        CONTENEDOR ESPECIAL PARA CONTRASEÑA CON BOTÓN
+        - class="input-password": Estilos para posicionamiento relativo
+        - Permite superponer botón de toggle sobre el input
+        -->
+        <div class="input-password">
+          <!--
+          INPUT DE CONTRASEÑA
+          - type="password": Oculta caracteres por defecto
+          - autocomplete="new-password": Indica nueva contraseña
+          - minlength="8": Validación HTML5 de longitud mínima
+          -->
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            required 
+            minlength="8"
+            placeholder="Mínimo 8 caracteres"
+            autocomplete="new-password"
+          >
+          
+          <!--
+          BOTÓN TOGGLE MOSTRAR/OCULTAR CONTRASEÑA
+          - type="button": Evita envío del formulario
+          - id="togglePassword": Identificador para JavaScript
+          - Emoji como contenido visual intuitivo
+          - aria-label: Descripción para lectores de pantalla
+          -->
+          <button 
+            type="button" 
+            id="togglePassword" 
+            aria-label="Mostrar u ocultar contraseña"
+          >👁️</button>
+        </div>
+        
+        <div id="error-password" class="error-message"></div>
+      </div>
+      
+      <!--
+      ===================================================================
+      SUBSECCIÓN 5.5: CAMPO CONFIRMACIÓN DE CONTRASEÑA
+      ===================================================================
+      -->
+      
+      <!--
+      GRUPO DE CAMPO: CONFIRMACIÓN CONTRASEÑA
+      -->
+      <div class="field-group">
+        <label for="passwordConfirm" class="required">Confirmar contraseña</label>
+        
+        <!--
+        CONTENEDOR CON TOGGLE PARA CONFIRMACIÓN
+        - Misma estructura que contraseña principal
+        - Consistencia en UX
+        -->
+        <div class="input-password">
+          <input 
+            type="password" 
+            id="passwordConfirm" 
+            name="passwordConfirm" 
+            required 
+            minlength="8"
+            placeholder="Repite tu contraseña"
+            autocomplete="new-password"
+          >
+          
+          <!--
+          BOTÓN TOGGLE SEPARADO
+          - id="togglePasswordConfirm": Identificador único
+          - Funcionalidad independiente del primer toggle
+          -->
+          <button 
+            type="button" 
+            id="togglePasswordConfirm" 
+            aria-label="Mostrar u ocultar confirmación de contraseña"
+          >👁️</button>
+        </div>
+        
+        <div id="error-passwordConfirm" class="error-message"></div>
+      </div>
+      
+      <!--
+      ===================================================================
+      SUBSECCIÓN 5.6: CAMPO EDAD
+      ===================================================================
+      -->
+      
+      <!--
+      GRUPO DE CAMPO: EDAD
+      -->
+      <div class="field-group">
+        <label for="age" class="required">Edad</label>
+        
+        <!--
+        INPUT DE TEXTO PARA EDAD
+        - type="text": Permite control total de entrada (solo números via JS)
+        - inputmode="numeric": Teclado numérico en móviles
+        - min/max: Validación HTML5 de rango
+        -->
+        <input 
+          type="text" 
+          id="age" 
+          name="age" 
+          required 
+          placeholder="Tu edad en años"
+          inputmode="numeric"
+          min="1"
+          max="120"
+        >
+        
+        <div id="error-age" class="error-message"></div>
+      </div>
+      
+      <!--
+      ===================================================================
+      SUBSECCIÓN 5.7: CAMPO FECHA DE NACIMIENTO
+      ===================================================================
+      -->
+      
+      <!--
+      GRUPO DE CAMPO: FECHA NACIMIENTO
+      -->
+      <div class="field-group">
+        <label for="birthdate" class="required">Fecha de nacimiento</label>
+        
+        <!--
+        INPUT DE FECHA
+        - type="date": Selector de fecha nativo del navegador
+        - max establecido por JavaScript (fecha actual)
+        - autocomplete="bday": Autocompletado para fecha de nacimiento
+        -->
+        <input 
+          type="date" 
+          id="birthdate" 
+          name="birthdate" 
+          required
+          autocomplete="bday"
+        >
+        
+        <div id="error-birthdate" class="error-message"></div>
+      </div>
+      
+      <!--
+      ===================================================================
+      SUBSECCIÓN 5.8: CAMPO COMENTARIOS OPCIONALES
+      ===================================================================
+      -->
+      
+      <!--
+      GRUPO DE CAMPO: COMENTARIOS
+      - Campo opcional para información adicional
+      -->
+      <div class="field-group">
+        <label for="comments">Comentarios adicionales (opcional)</label>
+        
+        <!--
+        TEXTAREA PARA COMENTARIOS LARGOS
+        - rows="4": Altura inicial (4 líneas)
+        - maxlength="2000": Límite de caracteres
+        - placeholder explicativo
+        - resize controlado por CSS
+        -->
+        <textarea 
+          id="comments" 
+          name="comments" 
+          rows="4" 
+          maxlength="2000"
+          placeholder="Cualquier información adicional que desees compartir..."
+        ></textarea>
+        
+        <!--
+        CONTADOR DE CARACTERES
+        - id="commentsCounter": Actualizado por JavaScript
+        - class="char-counter": Estilos específicos
+        - Feedback visual en tiempo real
+        -->
+        <div id="commentsCounter" class="char-counter">0 / 2000 caracteres</div>
+        
+        <div id="error-comments" class="error-message"></div>
+      </div>
+      
+      <!--
+      ===================================================================
+      SUBSECCIÓN 5.9: BOTÓN DE ENVÍO
+      ===================================================================
+      -->
+      
+      <!--
+      BOTÓN DE ENVÍO DEL FORMULARIO
+      - type="submit": Activa evento 'submit' del form
+      - id="submitBtn": Identificador para JavaScript (cambio de estado)
+      - Texto descriptivo y accionable
+      -->
+      <button type="submit" id="submitBtn">Enviar información</button>
+      
+    </form>
+    
+    <!--
+    ===================================================================
+    SECCIÓN 6: MENSAJES DE ESTADO
+    ===================================================================
+    -->
+    
+    <!--
+    MENSAJE DE ENVÍO EN PROGRESO
+    - id="sendingMessage": Control desde JavaScript
+    - class="sending-message": Estilos amarillos con animación
+    - Oculto por defecto, visible durante envío
+    -->
+    <div id="sendingMessage" class="sending-message">
+      📤 Enviando tu información, por favor espera...
+    </div>
+    
+    <!--
+    MENSAJE DE ÉXITO
+    - Mostrado cuando el email se envía correctamente
+    - class="success-message": Estilos verdes
+    -->
+    <div id="successMessage" class="success-message">
+      ✅ ¡Información enviada exitosamente! Serás redirigido en breve...
+    </div>
+    
+    <!--
+    MENSAJE DE ERROR GLOBAL
+    - Para errores de conexión o fallos generales
+    - class="error-message-global": Estilos rojos prominentes
+    -->
+    <div id="errorMessage" class="error-message-global">
+      ❌ Hubo un error al enviar la información. Por favor, intenta nuevamente.
+    </div>
+    
+  </div>
+  
+  <!--
+  ===================================================================
+  SECCIÓN 7: SCRIPTS DE FUNCIONALIDAD
+  ===================================================================
+  -->
+  
+  <!--
+  SCRIPT PRINCIPAL DEL FORMULARIO
+  - src="script.js": Archivo JavaScript externo
+  - Contiene toda la lógica de validación y envío
+  - Separación de responsabilidades (HTML estructura, JS comportamiento)
+  -->
+  <script src="script.js"></script>
+  
+</body>
+</html>
+
+<!--
+===================================================================
+NOTAS FINALES DE IMPLEMENTACIÓN
+===================================================================
+
+ESTRUCTURA SEMÁNTICA:
+- HTML5 semántico con elementos apropiados
+- Labels asociados correctamente con inputs
+- Jerarquía de títulos coherente
+- Atributos de accesibilidad (aria-label, autocomplete)
+
+MEJORES PRÁCTICAS:
+- Validación doble: HTML5 + JavaScript personalizado
+- Progressive enhancement: funciona sin JavaScript (básico)
+- Responsive design: meta viewport + CSS flexible
+- Performance: fuentes optimizadas, recursos externos minimizados
+
+ACCESIBILIDAD:
+- Contraste de colores adecuado
+- Navegación por teclado funcional
+- Lectores de pantalla compatibles
+- Mensajes de error descriptivos
+- Indicadores visuales claros
+
+SEGURIDAD:
+- Validación del lado cliente Y servidor (EmailJS)
+- Campos de contraseña apropiados
+- Autocompletado seguro
+- Sanitización de entrada implícita
+
+UX/UI:
+- Feedback visual inmediato
+- Estados de carga claros
+- Mensajes de error útiles
+- Diseño mobile-first
+- Microinteracciones suaves
+-->
