@@ -1,1151 +1,540 @@
-/*
-  ===============================================================================
-  ARCHIVO: styles.css
-  ===============================================================================
-  
-  PROPÓSITO:
-  Hoja de estilos principal que define la presentación visual completa del
-  formulario profesional, incluyendo layout responsive, componentes UI,
-  animaciones y estados interactivos.
-  
-  METODOLOGÍA CSS:
-  - Enfoque component-based (cada elemento como componente independiente)
-  - Mobile-first responsive design
-  - Progressive enhancement (funciona sin JavaScript)
-  - Accesibilidad integrada (contraste, focus states, etc.)
-  
-  ESTRUCTURA:
-  1. Reset y configuración base
-  2. Layout principal y contenedor
-  3. Tipografía y elementos de texto
-  4. Formulario y campos de entrada
-  5. Botones y elementos interactivos
-  6. Mensajes de estado (éxito, error, carga)
-  7. Componentes especializados (toggle password, contador)
-  8. Responsive design y media queries
-  
-  COMPATIBILIDAD:
-  - Navegadores modernos (últimas 2 versiones)
-  - Internet Explorer 11+ (con graceful degradation)
-  - Devices: móvil, tablet, desktop
-  - Accesibilidad: WCAG 2.1 AA compliance
-  
-  ===============================================================================
-*/
+/**
+ * ESTILOS PARA FORMULARIO PROFESIONAL
+ * Autor: Hector Arciniega
+ * Versión: Final - Completamente funcional
+ * 
+ * DESCRIPCIÓN GENERAL:
+ * Hoja de estilos completa para formulario profesional con diseño moderno,
+ * responsive y accesible. Incluye estados interactivos, animaciones suaves,
+ * mensajes de estado y compatibilidad móvil.
+ */
 
-/* ============================================================================= */
-/* SECCIÓN 1: RESET CSS Y CONFIGURACIÓN BASE */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 1: RESET Y CONFIGURACIÓN BASE
+   =================================================================== */
 
+/**
+ * Reset universal para box-sizing
+ * 
+ * PROPÓSITO: Hace que padding y border se incluyan en el ancho total
+ * del elemento, facilitando el cálculo de dimensiones.
+ * 
+ * APLICACIÓN: Todos los elementos (*) heredan esta propiedad
+ */
 * {
   box-sizing: border-box;
 }
-/*
-  UNIVERSAL BOX-SIZING RESET
-  
-  PROPÓSITO:
-  Cambia el modelo de caja CSS para todos los elementos a border-box
-  
-  ¿QUÉ HACE box-sizing: border-box?
-  - ANTES: width = content only (padding y border se añaden extra)
-    Ejemplo: width: 200px + padding: 20px + border: 2px = 244px total
-  
-  - DESPUÉS: width = content + padding + border (tamaño total predictible)
-    Ejemplo: width: 200px incluye padding y border = 200px total exacto
-  
-  VENTAJAS:
-  ✅ Cálculos de layout más intuitivos y precisos
-  ✅ Responsive design más fácil (% widths funcionan como esperado)
-  ✅ Elimina problemas comunes de overflow inesperado
-  ✅ Estándar moderno de la industria
-  
-  APLICACIÓN:
-  - Se aplica a TODOS los elementos (*) 
-  - Incluye pseudo-elementos (::before, ::after) implícitamente
-  - Hereda a elementos hijos automáticamente
-*/
 
+/**
+ * Estilos base del body (contenedor principal de la página)
+ * 
+ * CARACTERÍSTICAS:
+ * - Tipografía: Lato como fuente principal (elegante y legible)
+ * - Layout: Flexbox centrado vertical y horizontalmente
+ * - Fondo: Color gris suave (#f0f2f5) para contraste visual
+ * - Espaciado: 40px arriba/abajo, 20px izquierda/derecha
+ */
 body {
-  font-family: 'Lato', sans-serif;
-  background: #f0f2f5;
-  margin: 0;
-  padding: 40px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
+  font-family: 'Lato', sans-serif;     /* Fuente principal Google Fonts */
+  background: #f0f2f5;                 /* Gris claro de fondo */
+  margin: 0;                           /* Eliminar márgenes por defecto */
+  padding: 40px 20px;                  /* Espacio alrededor del contenido */
+  display: flex;                       /* Activar flexbox */
+  justify-content: center;             /* Centrar horizontalmente */
+  align-items: flex-start;             /* Alinear arriba (no centro vertical completo) */
+  min-height: 100vh;                   /* Altura mínima: toda la ventana */
 }
-/*
-  CONFIGURACIÓN DEL BODY PRINCIPAL
-  
-  TIPOGRAFÍA:
-  font-family: 'Lato', sans-serif;
-  - Lato: Fuente principal importada desde Google Fonts
-  - sans-serif: Fallback genérico si Lato no carga
-  - Lato es humanista, legible, profesional, optimizada para web
-  
-  BACKGROUND:
-  background: #f0f2f5;
-  - Color gris muy claro, casi blanco
-  - Proporciona contraste sutil con el contenedor blanco
-  - No es blanco puro para reducir fatiga visual
-  - Color neutro que no compite con el contenido
-  
-  RESET DE ESPACIADO:
-  margin: 0;
-  - Elimina margin por defecto del navegador
-  - Los navegadores añaden ~8px margin por defecto
-  - Reset necesario para control total del layout
-  
-  padding: 40px 20px;
-  - padding-top/bottom: 40px = espaciado vertical generoso
-  - padding-left/right: 20px = margen mínimo en móviles
-  - Evita que el formulario toque los bordes de la pantalla
-  - Proporciona "respiro visual" alrededor del contenido
-  
-  FLEXBOX LAYOUT:
-  display: flex;
-  - Convierte body en contenedor flexbox
-  - Permite centrado fácil del contenido principal
-  - Mejor que técnicas legacy (position, float, table-cell)
-  
-  justify-content: center;
-  - Centra horizontalmente el contenido
-  - Funciona en el eje principal (horizontal por defecto)
-  - El formulario aparece centrado en pantallas anchas
-  
-  align-items: flex-start;
-  - Alinea verticalmente al INICIO (top)
-  - flex-start en lugar de center para evitar problemas en móviles
-  - Permite scroll natural cuando el contenido es alto
-  - Mejor UX que centrado vertical estricto
-  
-  min-height: 100vh;
-  - Altura mínima = 100% del viewport height
-  - Asegura que body ocupe toda la pantalla visible
-  - vh = viewport height units (responsive a la pantalla)
-  - min-height permite crecimiento si el contenido es más alto
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 2: CONTENEDOR PRINCIPAL */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 2: CONTENEDOR PRINCIPAL DEL FORMULARIO
+   =================================================================== */
 
+/**
+ * Contenedor principal que envuelve todo el formulario
+ * 
+ * CARACTERÍSTICAS VISUALES:
+ * - Fondo blanco para contraste con el body gris
+ * - Sombra sutil para efecto "elevado"
+ * - Bordes redondeados para diseño moderno
+ * - Padding generoso para respiración visual
+ * 
+ * CARACTERÍSTICAS RESPONSIVAS:
+ * - Ancho máximo de 480px (formulario no muy ancho en pantallas grandes)
+ * - Ancho 100% para adaptarse a pantallas pequeñas
+ */
 .container {
-  background: #fff;
-  padding: 32px 36px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  max-width: 480px;
-  width: 100%;
+  background: #fff;                    /* Fondo blanco sólido */
+  padding: 32px 36px;                  /* Espaciado interno: 32px arriba/abajo, 36px izq/der */
+  border-radius: 12px;                 /* Esquinas redondeadas modernas */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);  /* Sombra sutil: offset-y=4px, blur=15px, opacidad=10% */
+  max-width: 480px;                    /* Ancho máximo para legibilidad */
+  width: 100%;                         /* Ancho completo hasta el máximo */
 }
-/*
-  CONTENEDOR PRINCIPAL DEL FORMULARIO
-  
-  SUPERFICIE VISUAL:
-  background: #fff;
-  - Blanco puro para máximo contraste con el texto
-  - Crea una "tarjeta" elevada sobre el fondo gris
-  - Color neutro que no afecta la percepción de otros colores
-  
-  ESPACIADO INTERNO:
-  padding: 32px 36px;
-  - 32px vertical: espaciado generoso sin ocupar demasiado espacio
-  - 36px horizontal: proporciona margen cómodo para el texto
-  - Asimétrico porque el contenido fluye verticalmente
-  - Números múltiplos de 4 (sistema de spacing consistente)
-  
-  BORDES REDONDEADOS:
-  border-radius: 12px;
-  - Esquinas suavemente redondeadas (no demasiado)
-  - 12px es balance entre moderno y profesional
-  - Evita sensación "cuadrada" pero mantiene seriedad
-  - Consistente con inputs (10px) pero ligeramente mayor para jerarquía
-  
-  ELEVACIÓN VISUAL:
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  - DESGLOSE: offset-x offset-y blur-radius color
-  - offset-x: 0 = sin desplazamiento horizontal
-  - offset-y: 4px = sombra hacia abajo (simula elevación)
-  - blur-radius: 15px = sombra suave y difusa
-  - color: rgba(0,0,0,0.1) = negro con 10% opacidad (muy sutil)
-  
-  EFECTOS VISUALES:
-  - Crea ilusión de que el formulario "flota" sobre el fondo
-  - Añade profundidad sin ser distractor
-  - Sombra estándar de Material Design adaptada
-  
-  DIMENSIONES RESPONSIVAS:
-  max-width: 480px;
-  - Ancho máximo para legibilidad óptima
-  - ~50-75 caracteres por línea (golden ratio de legibilidad)
-  - Evita líneas demasiado largas en pantallas grandes
-  - 480px es sweet spot para formularios (no muy estrecho, no muy ancho)
-  
-  width: 100%;
-  - Ocupa todo el ancho disponible hasta el máximo
-  - En móviles: usa todo el ancho (menos padding del body)
-  - En desktop: se limita a max-width
-  - Comportamiento fluido y adaptativo
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 3: TIPOGRAFÍA Y ELEMENTOS DE TEXTO */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 3: TIPOGRAFÍA DE TÍTULOS
+   =================================================================== */
 
+/**
+ * Estilo del título principal del formulario
+ * 
+ * JERARQUÍA VISUAL:
+ * - Roboto: fuente más robusta para títulos
+ * - Peso 700: negrita para destacar
+ * - Color oscuro: alto contraste para accesibilidad
+ * - Centrado: alineación simétrica
+ */
 h1 {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 24px;
-  text-align: center;
+  font-family: 'Roboto', sans-serif;   /* Fuente específica para títulos */
+  font-weight: 700;                    /* Negrita (700 = bold) */
+  color: #222;                         /* Gris muy oscuro (casi negro) */
+  margin-bottom: 24px;                 /* Espacio debajo del título */
+  text-align: center;                  /* Centrar texto */
 }
-/*
-  TÍTULO PRINCIPAL DEL FORMULARIO
-  
-  JERARQUÍA TIPOGRÁFICA:
-  font-family: 'Roboto', sans-serif;
-  - Roboto en lugar de Lato para diferenciación
-  - Títulos con tipografía diferente crean jerarquía visual clara
-  - Roboto es más geométrica, Lato más humanista
-  - sans-serif como fallback universal
-  
-  PESO TIPOGRÁFICO:
-  font-weight: 700;
-  - Bold/negrita para máximo impacto visual
-  - 700 es "bold" estándar (400=normal, 700=bold, 900=black)
-  - Importado específicamente desde Google Fonts
-  - Asegura que el título destaque sobre el resto del contenido
-  
-  COLOR:
-  color: #222;
-  - Gris muy oscuro, casi negro
-  - Más suave que negro puro (#000) para reducir fatiga visual
-  - Alto contraste sobre fondo blanco (WCAG AAA compliance)
-  - Color neutro que funciona en cualquier contexto
-  
-  ESPACIADO:
-  margin-bottom: 24px;
-  - Separación generosa del formulario
-  - 24px = múltiplo de 8 (sistema de spacing)
-  - Suficiente para separar visualmente pero mantener relación
-  - Sin margin-top porque es el primer elemento del contenedor
-  
-  ALINEACIÓN:
-  text-align: center;
-  - Centrado para dar sensación de equilibrio
-  - Hace que el formulario se sienta simétrico
-  - Enfoque visual inicial antes de empezar a leer campos
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 4: ESTRUCTURA DEL FORMULARIO */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 4: ESTRUCTURA DEL FORMULARIO
+   =================================================================== */
 
+/**
+ * Contenedor form: organización vertical de campos
+ * 
+ * LAYOUT FLEXBOX:
+ * - flex-direction: column = elementos apilados verticalmente
+ * - gap: 20px = espacio uniforme entre campos (sin margin complicados)
+ * 
+ * VENTAJAS:
+ * - Espaciado consistente automático
+ * - Fácil mantenimiento
+ * - Responsive por naturaleza
+ */
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: flex;                       /* Activar flexbox */
+  flex-direction: column;              /* Dirección vertical (apilado) */
+  gap: 20px;                          /* Espacio entre elementos hijos */
 }
-/*
-  LAYOUT DEL FORMULARIO PRINCIPAL
-  
-  FLEXBOX VERTICAL:
-  display: flex;
-  flex-direction: column;
-  - Organiza campos verticalmente (uno debajo del otro)
-  - flex-direction: column cambia el eje principal a vertical
-  - Más confiable que margin/padding para espaciado entre elementos
-  - Permite fácil reorganización y alineación
-  
-  ESPACIADO UNIFORME:
-  gap: 20px;
-  - Espacio consistente entre TODOS los campos del formulario
-  - Reemplaza margin-bottom individuales con solución más limpia
-  - 20px es balance perfecto: no muy apretado, no muy espacioso
-  - Se aplica automáticamente entre elementos adyacentes
-  
-  VENTAJAS DEL FLEXBOX + GAP:
-  ✅ Espaciado automático y consistente
-  ✅ No necesita margin en primer/último elemento
-  ✅ Fácil mantenimiento (cambio global en una sola línea)
-  ✅ Responsive por naturaleza
-  ✅ Elimina problemas de margin collapse
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 5: ETIQUETAS (LABELS) */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 5: ETIQUETAS DE CAMPOS
+   =================================================================== */
 
+/**
+ * Estilos base para todas las etiquetas (labels)
+ * 
+ * CARACTERÍSTICAS:
+ * - Negrita para legibilidad y jerarquía visual
+ * - Color gris medio para suavidad sin perder contraste
+ * - Espaciado inferior para separación del input
+ * - display: inline-block para control de dimensiones
+ */
 label {
-  font-weight: 700;
-  margin-bottom: 6px;
-  display: inline-block;
-  color: #444;
+  font-weight: 700;                    /* Negrita para destacar */
+  margin-bottom: 6px;                  /* Espacio entre label e input */
+  display: inline-block;               /* Permite margin/padding completo */
+  color: #444;                         /* Gris medio oscuro */
 }
-/*
-  ESTILO BASE PARA ETIQUETAS DE CAMPOS
-  
-  ÉNFASIS VISUAL:
-  font-weight: 700;
-  - Negrita para que destaquen sobre el texto del input
-  - Ayuda a crear jerarquía visual clara
-  - Facilita escaneo rápido del formulario
-  - Importante para accesibilidad (usuarios pueden encontrar campos rápido)
-  
-  ESPACIADO:
-  margin-bottom: 6px;
-  - Pequeña separación entre label e input
-  - 6px es suficiente para asociación visual clara
-  - No demasiado que rompa la conexión visual
-  - Múltiplo de 2 (micro-spacing system)
-  
-  DISPLAY:
-  display: inline-block;
-  - Permite que margin-bottom funcione correctamente
-  - Por defecto, labels son inline (margin vertical no aplica)
-  - inline-block mantiene flujo natural pero permite dimensiones
-  - Necesario para el espaciado vertical funcione
-  
-  COLOR:
-  color: #444;
-  - Gris medio-oscuro para excelente legibilidad
-  - Más suave que negro puro pero con contraste suficiente
-  - Jerárquicamente menos importante que el título (#222)
-  - Más importante que texto de ayuda o placeholder
-*/
 
+/**
+ * Indicador visual para campos obligatorios
+ * 
+ * FUNCIONAMIENTO:
+ * - Pseudo-elemento ::after añade contenido después del label
+ * - content: " *" = añade espacio + asterisco
+ * - Color rojo para indicar obligatoriedad
+ * 
+ * USO: <label class="required">Nombre</label> → "Nombre *"
+ */
 label.required::after {
-  content: " *";
-  color: #d93025;
+  content: " *";                       /* Contenido a añadir */
+  color: #d93025;                      /* Rojo de Google para advertencias */
 }
-/*
-  INDICADOR VISUAL PARA CAMPOS OBLIGATORIOS
-  
-  PSEUDO-ELEMENTO:
-  ::after
-  - Añade contenido después del texto del label
-  - No existe en el HTML, generado puramente por CSS
-  - No interfiere con lectores de pantalla (content se lee)
-  - Fácil de mantener (cambio global desde CSS)
-  
-  CONTENIDO:
-  content: " *";
-  - Espacio + asterisco = convención universal para "requerido"
-  - El espacio evita que el asterisco se pegue al texto
-  - Símbolo reconocido internacionalmente
-  - Breve y no intrusivo visualmente
-  
-  COLOR DIFERENCIADO:
-  color: #d93025;
-  - Rojo distintivo que llama la atención
-  - Específicamente el rojo de Google (accesible y familiar)
-  - Contrasta con el gris del texto del label
-  - Asociación visual inmediata: rojo = importante/requerido
-  
-  VENTAJAS DEL APPROACH:
-  ✅ Automático (solo añadir class="required")
-  ✅ Consistente en todo el formulario
-  ✅ Fácil de cambiar globalmente
-  ✅ No require JavaScript
-  ✅ Accesible para lectores de pantalla
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 6: CAMPOS DE ENTRADA (INPUTS) */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 6: CAMPOS DE ENTRADA GENERALES
+   =================================================================== */
 
+/**
+ * Estilos base para todos los campos de entrada
+ * 
+ * APLICADO A:
+ * - input[type="text"] → campos de texto
+ * - input[type="email"] → campos de correo
+ * - input[type="password"] → campos de contraseña
+ * - input[type="date"] → selectores de fecha
+ * - textarea → áreas de texto grandes
+ * 
+ * CARACTERÍSTICAS VISUALES:
+ * - Padding generoso para comodidad de digitación
+ * - Borde sólido con color suave
+ * - Bordes redondeados para consistencia con el diseño
+ * - Transiciones suaves para interactividad
+ */
 input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="date"],
 textarea {
-  width: 100%;
-  padding: 12px 14px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-family: 'Roboto', sans-serif;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;                         /* Ancho completo del contenedor */
+  padding: 12px 14px;                  /* Espaciado interno: 12px arriba/abajo, 14px izq/der */
+  border: 2px solid #ccc;              /* Borde sólido gris claro */
+  border-radius: 10px;                 /* Esquinas redondeadas */
+  font-size: 1rem;                     /* Tamaño de fuente estándar (16px por defecto) */
+  font-family: 'Roboto', sans-serif;   /* Fuente consistente */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;  /* Transiciones suaves para hover/focus */
 }
-/*
-  ESTILOS BASE PARA TODOS LOS CAMPOS DE ENTRADA
-  
-  SELECTOR MÚLTIPLE:
-  input[type="text"], input[type="email"], etc.
-  - Aplica estilos a tipos específicos de input
-  - Evita afectar otros tipos (checkbox, radio, etc.)
-  - Incluye textarea para consistencia visual
-  - Más específico que input genérico
-  
-  DIMENSIONES:
-  width: 100%;
-  - Ocupa todo el ancho del contenedor disponible
-  - Responsive por naturaleza (se adapta al contenedor)
-  - Apariencia consistente en todos los tamaños de pantalla
-  - Maximiza área de click/tap (mejor UX)
-  
-  ESPACIADO INTERNO:
-  padding: 12px 14px;
-  - 12px vertical: suficiente para touch targets (mínimo 44px total)
-  - 14px horizontal: texto no toca los bordes
-  - Área cómoda para escribir en móviles
-  - Números pares para consistencia visual
-  
-  BORDES:
-  border: 2px solid #ccc;
-  - 2px: grosor suficiente para visibilidad sin ser intrusivo
-  - solid: línea sólida (más profesional que dashed/dotted)
-  - #ccc: gris claro que define el campo sin ser dominante
-  - Color neutro que funciona con focus states
-  
-  BORDES REDONDEADOS:
-  border-radius: 10px;
-  - Esquinas suavemente redondeadas (moderno pero profesional)
-  - 10px es menos que el contenedor (12px) para jerarquía visual
-  - Consistente con tendencias de UI modernas
-  - Elimina sensación "boxy" de inputs por defecto
-  
-  TIPOGRAFÍA:
-  font-size: 1rem;
-  - 1rem = 16px en la mayoría de navegadores
-  - Tamaño mínimo recomendado para evitar zoom automático en iOS
-  - Legible en todas las edades y condiciones de luz
-  - Consistente con texto del cuerpo
-  
-  font-family: 'Roboto', sans-serif;
-  - Roboto para inputs (diferente de Lato en body)
-  - Fuente más geométrica/técnica apropiada para campos de entrada
-  - Mejor para texto que será editado (monoespaciado relativo)
-  - Consistencia con otros elementos de UI
-  
-  TRANSICIONES:
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  - Animaciones suaves para cambios de estado (focus/blur)
-  - 0.3s: duración perfecta (no muy rápido, no muy lento)
-  - ease: aceleración natural (rápido al inicio, lento al final)
-  - Mejora percepción de calidad y responsividad
-  - border-color y box-shadow son las propiedades que cambian en :focus
-*/
 
-/* COMPORTAMIENTO ESPECÍFICO POR TIPO DE INPUT */
+/* ===================================================================
+   SECCIÓN 7: TRANSFORMACIONES DE TEXTO ESPECÍFICAS
+   =================================================================== */
 
+/**
+ * Transformación a mayúsculas SOLO para campos de texto
+ * 
+ * APLICACIÓN: Campos como "nombre" y "edad" que se benefician
+ * de consistencia visual en mayúsculas
+ * 
+ * NOTA: Solo input[type="text"], no otros tipos
+ */
 input[type="text"] {
-  text-transform: uppercase;
+  text-transform: uppercase;           /* Convertir texto a mayúsculas automáticamente */
 }
-/*
-  TRANSFORMACIÓN AUTOMÁTICA A MAYÚSCULAS
-  
-  APLICACIÓN:
-  Solo inputs type="text" (nombre y edad)
-  - JavaScript también convierte a mayúsculas al escribir
-  - CSS como backup en caso de que JavaScript falle
-  - Consistencia visual garantizada
-  
-  RAZÓN:
-  - Formularios profesionales suelen usar mayúsculas para nombres
-  - Estandariza formato de datos independiente de cómo el usuario escriba
-  - Mejor para base de datos (consistencia de datos)
-  - Visual más formal y profesional
-*/
 
+/**
+ * Prevención de transformación para campos sensibles
+ * 
+ * PROPÓSITO: Emails, contraseñas, fechas y comentarios deben
+ * mantener su formato original (case-sensitive)
+ * 
+ * IMPORTANTE: !important asegura que esta regla prevalezca
+ * sobre cualquier transformación heredada
+ */
 input[type="email"],
 input[type="password"],
 input[type="date"],
 textarea {
-  text-transform: none !important;
+  text-transform: none !important;     /* Forzar sin transformación */
 }
-/*
-  ANULACIÓN EXPLÍCITA DE TRANSFORMACIÓN
-  
-  !important:
-  - Asegura que estos campos NUNCA se transformen a mayúsculas
-  - Sobrescribe cualquier regla CSS heredada o conflictiva
-  - Emails y contraseñas son case-sensitive (crítico)
-  - Fechas tienen formato específico que no debe alterarse
-  
-  CAMPOS AFECTADOS:
-  - email: usuario@dominio.com (case-sensitive)
-  - password: contraseñas distinguen mayús/minús
-  - date: formato YYYY-MM-DD específico
-  - textarea: comentarios libres (preservar formato original)
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 7: ESTADOS DE INTERACCIÓN */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 8: ESTADOS INTERACTIVOS
+   =================================================================== */
 
+/**
+ * Estilos para estado de foco (cuando el usuario hace clic o tabula)
+ * 
+ * EFECTOS VISUALES:
+ * - Cambio de color del borde a azul (indica actividad)
+ * - Sombra azul suave (glow effect)
+ * - Eliminación del outline por defecto del navegador
+ * 
+ * ACCESIBILIDAD: Mantiene indicación visual clara de qué campo está activo
+ */
 input:focus,
 textarea:focus {
-  border-color: #3a86ff;
-  box-shadow: 0 0 8px rgba(58,134,255,0.4);
-  outline: none;
+  border-color: #3a86ff;               /* Azul brillante para foco */
+  box-shadow: 0 0 8px rgba(58,134,255,0.4);  /* Sombra azul con 40% opacidad */
+  outline: none;                       /* Remover outline por defecto del navegador */
 }
-/*
-  ESTADO DE FOCO (CUANDO EL USUARIO ESTÁ ESCRIBIENDO)
-  
-  CAMBIO DE BORDE:
-  border-color: #3a86ff;
-  - Azul vibrante que indica actividad
-  - Color primario del sistema (consistente con botón submit)
-  - Alto contraste con el gris por defecto (#ccc)
-  - Feedback visual inmediato de que el campo está activo
-  
-  SOMBRA DE ENFOQUE:
-  box-shadow: 0 0 8px rgba(58,134,255,0.4);
-  - DESGLOSE: offset-x offset-y blur-radius color
-  - offset-x/y: 0 = sombra centrada (no desplazada)
-  - blur-radius: 8px = sombra suave que parece "glow"
-  - color: mismo azul con 40% opacidad (sutil pero visible)
-  
-  EFECTO VISUAL:
-  - Simula "brillar" alrededor del campo activo
-  - Atraer atención hacia donde está escribiendo el usuario
-  - Moderno y familiar (usado en muchas apps/sitios)
-  
-  OUTLINE REMOVAL:
-  outline: none;
-  - Elimina el outline por defecto del navegador
-  - Navegadores muestran outline azul/negro (inconsistente y feo)
-  - IMPORTANTE: solo se elimina porque reemplazamos con box-shadow
-  - Mantiene accesibilidad con indicador visual personalizado
-  
-  TRANSICIÓN:
-  - Las transiciones definidas en el selector base hacen que estos
-    cambios sean suaves en lugar de abruptos
-  - Mejora la percepción de calidad del formulario
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 8: TEXTAREA ESPECÍFICO */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 9: TEXTAREA ESPECÍFICO
+   =================================================================== */
 
+/**
+ * Configuración específica para áreas de texto grandes
+ * 
+ * CARACTERÍSTICAS:
+ * - resize: vertical = usuario puede redimensionar solo verticalmente
+ * - min-height = altura mínima garantizada para comodidad
+ * 
+ * UX: Permite al usuario ajustar altura según necesidad pero mantiene anchura fija
+ */
 textarea {
-  resize: vertical;
-  min-height: 100px;
+  resize: vertical;                    /* Solo redimensión vertical */
+  min-height: 100px;                   /* Altura mínima para comodidad */
 }
-/*
-  CONFIGURACIÓN ESPECÍFICA PARA ÁREA DE TEXTO
-  
-  REDIMENSIONAMIENTO:
-  resize: vertical;
-  - Permite al usuario cambiar SOLO la altura del textarea
-  - Previene cambio de ancho (que rompería el layout)
-  - Útil para comentarios largos que necesitan más espacio
-  - Mejor UX que textarea de altura fija
-  
-  ALTURA MÍNIMA:
-  min-height: 100px;
-  - Suficiente para mostrar varias líneas de texto
-  - Indica visualmente que se espera más contenido que un input normal
-  - Evita textarea demasiado pequeño que requiera scroll inmediato
-  - Balance entre espacio ocupado y funcionalidad
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 9: COMPONENTE PASSWORD TOGGLE */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 10: SISTEMA DE CONTRASEÑAS CON TOGGLE
+   =================================================================== */
 
+/**
+ * Contenedor para campos de contraseña con botón de mostrar/ocultar
+ * 
+ * ESTRUCTURA:
+ * <div class="input-password">
+ *   <input type="password">
+ *   <button>👁️</button>
+ * </div>
+ * 
+ * LAYOUT: Posicionamiento relativo para contener el botón absoluto
+ */
 .input-password {
-  position: relative;
+  position: relative;                  /* Contexto para posicionamiento absoluto del botón */
 }
-/*
-  CONTENEDOR PARA INPUT + BOTÓN TOGGLE
-  
-  position: relative;
-  - Crea contexto de posicionamiento para elementos hijos
-  - Permite que el botón toggle use position: absolute
-  - Sin esto, el botón se posicionaría relativo al viewport
-  - Base necesaria para overlay de elementos
-*/
 
+/**
+ * Input de contraseña dentro del contenedor especial
+ * 
+ * MODIFICACIONES:
+ * - Padding derecho aumentado para dar espacio al botón
+ * - Forzar no transformación (contraseñas son case-sensitive)
+ */
 .input-password input {
-  padding-right: 42px;
-  text-transform: none !important;
+  padding-right: 42px;                 /* Espacio extra a la derecha para el botón */
+  text-transform: none !important;     /* Nunca transformar contraseñas */
 }
-/*
-  INPUT DE CONTRASEÑA CON ESPACIO PARA BOTÓN
-  
-  ESPACIADO ESPECIAL:
-  padding-right: 42px;
-  - Hace espacio para el botón toggle en el lado derecho
-  - 42px es suficiente para icono + padding + área clickeable
-  - Previene que el texto se superponga con el botón
-  - Solo se aplica al padding derecho (otros lados normales)
-  
-  TRANSFORMACIÓN:
-  text-transform: none !important;
-  - Asegura que contraseñas NO se conviertan a mayúsculas
-  - !important porque puede heredar de input[type="text"]
-  - Crítico: contraseñas son case-sensitive
-  - Mantiene la contraseña exactamente como la escribió el usuario
-*/
 
+/**
+ * Botón de toggle para mostrar/ocultar contraseña
+ * 
+ * POSICIONAMIENTO:
+ * - Absoluto dentro del contenedor relativo
+ * - Centrado verticalmente con transform
+ * - Ubicado a la derecha del input
+ * 
+ * ESTILOS:
+ * - Fondo transparente para integración visual
+ * - Sin borde para apariencia limpia
+ * - Cursor pointer para indicar interactividad
+ */
 .input-password button {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  color: #666;
-  user-select: none;
-  transition: color 0.3s ease;
-  padding: 4px;
+  position: absolute;                  /* Posicionamiento absoluto */
+  right: 10px;                         /* 10px desde el borde derecho */
+  top: 50%;                           /* 50% desde arriba */
+  transform: translateY(-50%);         /* Centrar verticalmente */
+  background: transparent;             /* Fondo transparente */
+  border: none;                        /* Sin borde */
+  cursor: pointer;                     /* Cursor de mano */
+  font-size: 18px;                     /* Tamaño del emoji */
+  color: #666;                         /* Color gris neutral */
+  user-select: none;                   /* Prevenir selección de texto */
+  transition: color 0.3s ease;        /* Transición suave de color */
+  padding: 4px;                        /* Área de clic más grande */
 }
-/*
-  BOTÓN TOGGLE SUPERPUESTO SOBRE EL INPUT
-  
-  POSICIONAMIENTO ABSOLUTO:
-  position: absolute;
-  - Se posiciona relativo al contenedor .input-password
-  - No afecta el flujo normal de elementos
-  - Permite superposición sobre el input
-  
-  right: 10px;
-  - 10px desde el borde derecho del contenedor
-  - Dentro del padding-right: 42px del input
-  - Suficiente margen para no tocar el borde
-  
-  CENTRADO VERTICAL:
-  top: 50%;
-  transform: translateY(-50%);
-  - top: 50% mueve el botón al 50% de la altura del contenedor
-  - translateY(-50%) mueve el botón hacia arriba por la mitad de su propia altura
-  - Resultado: centrado vertical perfecto independiente del tamaño
-  - Técnica estándar para centrado vertical con position absolute
-  
-  APARIENCIA DEL BOTÓN:
-  background: transparent;
-  border: none;
-  - Elimina apariencia de botón por defecto
-  - Se ve como un simple icono flotante
-  - Integración visual perfecta con el input
-  
-  cursor: pointer;
-  - Cambia cursor a manita cuando se pasa por encima
-  - Indica claramente que es clickeable
-  - UX estándar para elementos interactivos
-  
-  TIPOGRAFÍA:
-  font-size: 18px;
-  - Tamaño suficientemente grande para touch targets
-  - Visible pero no dominante
-  - Proporcional al tamaño del input
-  
-  color: #666;
-  - Gris medio: visible pero no compite con el contenido
-  - Más sutil que el texto principal
-  - Indica funcionalidad secundaria
-  
-  INTERACTIVIDAD:
-  user-select: none;
-  - Previene selección accidental del texto del icono
-  - Mejora UX: no se selecciona el emoji 👁️ al hacer clic
-  - Comportamiento más parecido a un botón real
-  
-  padding: 4px;
-  - Aumenta área clickeable del botón
-  - Importante para UX móvil (touch targets)
-  - 4px + 18px font + 4px = ~26px área total clickeable
-  - Padding transparente: área clickeable invisible pero funcional
-  
-  TRANSICIÓN:
-  transition: color 0.3s ease;
-  - Cambio suave de color en hover
-  - Feedback visual de interactividad
-  - Consistente con transiciones del resto del formulario
-*/
 
+/**
+ * Estado hover del botón de toggle
+ * 
+ * EFECTO: Cambio de color a azul para indicar interactividad
+ */
 .input-password button:hover {
-  color: #3a86ff;
+  color: #3a86ff;                      /* Azul en hover */
 }
-/*
-  ESTADO HOVER DEL BOTÓN TOGGLE
-  
-  CAMBIO DE COLOR:
-  color: #3a86ff;
-  - Cambia a azul principal al pasar el mouse
-  - Mismo color que focus states y botón submit
-  - Indica interactividad y da feedback visual
-  - Transición suave gracias al transition definido arriba
-  
-  EXPERIENCIA:
-  - Usuario sabe inmediatamente que puede hacer clic
-  - Consistencia visual con otros elementos interactivos
-  - Mejora la percepción de calidad del formulario
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 10: BOTONES */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 11: BOTÓN DE ENVÍO
+   =================================================================== */
 
+/**
+ * Estilos del botón principal de envío del formulario
+ * 
+ * DISEÑO:
+ * - Colores de marca (azul consistente con el resto)
+ * - Padding generoso para fácil clic (especialmente móvil)
+ * - Tipografía robusta y legible
+ * - Transiciones para microinteracciones
+ */
 button[type="submit"] {
-  background: #3a86ff;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 14px 20px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  font-family: 'Roboto', sans-serif;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  background: #3a86ff;                 /* Azul de marca */
+  color: #fff;                         /* Texto blanco para contraste */
+  border: none;                        /* Sin borde */
+  border-radius: 10px;                 /* Esquinas redondeadas consistentes */
+  padding: 14px 20px;                  /* Padding generoso para comodidad */
+  font-size: 1.1rem;                   /* Ligeramente más grande que texto normal */
+  font-weight: 700;                    /* Negrita para importancia */
+  font-family: 'Roboto', sans-serif;   /* Fuente consistente */
+  cursor: pointer;                     /* Cursor de mano */
+  transition: all 0.3s ease;          /* Transición suave para todos los cambios */
 }
-/*
-  BOTÓN PRINCIPAL DE ENVÍO DEL FORMULARIO
-  
-  COLOR DE FONDO:
-  background: #3a86ff;
-  - Azul vibrante que denota acción principal
-  - Color primario del sistema (usado en focus states)
-  - Suficientemente contrastante para destacar
-  - Color moderno y profesional
-  
-  TEXTO:
-  color: #fff;
-  - Blanco para máximo contraste sobre fondo azul
-  - Legibilidad perfecta en cualquier condición
-  - Combinación azul/blanco es estándar de accesibilidad
-  
-  ELIMINACIÓN DE ESTILOS POR DEFECTO:
-  border: none;
-  - Elimina borde por defecto del navegador
-  - Apariencia más limpia y moderna
-  - Control total sobre la apariencia visual
-  
-  FORMA:
-  border-radius: 10px;
-  - Consistente con inputs (mismo radio)
-  - Cohesión visual en todo el formulario
-  - Moderno pero no exagerado
-  
-  ÁREA CLICKEABLE:
-  padding: 14px 20px;
-  - 14px vertical: suficiente para touch targets
-  - 20px horizontal: botón se siente sustancial
-  - Área cómoda para hacer clic tanto en desktop como móvil
-  - Más padding que inputs para indicar importancia
-  
-  TIPOGRAFÍA:
-  font-size: 1.1rem;
-  - Ligeramente más grande que inputs (1rem)
-  - Indica importancia y jerarquía
-  - Mantiene legibilidad
-  
-  font-weight: 700;
-  - Negrita para máximo impacto visual
-  - Botón debe destacar como acción principal
-  - Consistente con labels (también bold)
-  
-  font-family: 'Roboto', sans-serif;
-  - Consistente con inputs y elementos de UI
-  - Fuente técnica apropiada para elementos de interfaz
-  
-  INTERACTIVIDAD:
-  cursor: pointer;
-  - Indica claramente que es clickeable
-  - UX estándar para botones
-  - Importante para usuarios de desktop
-  
-  TRANSICIONES:
-  transition: all 0.3s ease;
-  - "all" = transición en todas las propiedades que cambien
-  - Incluye background, transform, box-shadow, etc.
-  - Feedback suave en hover y otros estados
-*/
 
+/**
+ * Estado hover del botón de envío
+ * 
+ * EFECTOS:
+ * - Color más oscuro para feedback visual
+ * - Ligero movimiento hacia arriba (elevación)
+ * - :not(:disabled) = solo si el botón no está deshabilitado
+ */
 button[type="submit"]:hover:not(:disabled) {
-  background: #265dcc;
-  transform: translateY(-1px);
+  background: #265dcc;                 /* Azul más oscuro */
+  transform: translateY(-1px);         /* Mover 1px hacia arriba */
 }
-/*
-  ESTADO HOVER DEL BOTÓN (SOLO SI NO ESTÁ DESHABILITADO)
-  
-  SELECTOR ESPECÍFICO:
-  :hover:not(:disabled)
-  - Solo aplica hover si el botón NO está deshabilitado
-  - Evita efectos hover cuando el botón no es clickeable
-  - UX más consistente y lógica
-  
-  CAMBIO DE COLOR:
-  background: #265dcc;
-  - Azul más oscuro que indica interacción
-  - Feedback visual inmediato
-  - Color más profundo sugiere "presión"
-  
-  ELEVACIÓN SUTIL:
-  transform: translateY(-1px);
-  - Mueve el botón 1px hacia arriba
-  - Simula que el botón se "eleva" al pasar el mouse
-  - Efecto micro-interactivo que mejora percepción de calidad
-  - Muy sutil pero efectivo
-*/
 
+/**
+ * Estado deshabilitado del botón
+ * 
+ * CUÁNDO SE USA: Durante el envío del formulario
+ * EFECTOS:
+ * - Color gris para indicar inactividad
+ * - Cursor "not-allowed" para feedback claro
+ * - Sin transformación (anula el hover)
+ */
 button[type="submit"]:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-  transform: none;
+  background: #ccc;                    /* Gris para estado inactivo */
+  cursor: not-allowed;                 /* Cursor de prohibido */
+  transform: none;                     /* Sin efectos de movimiento */
 }
-/*
-  ESTADO DESHABILITADO DEL BOTÓN
-  
-  APARIENCIA INACTIVA:
-  background: #ccc;
-  - Gris neutral que indica inactividad
-  - Contraste suficiente para legibilidad pero claramente inactivo
-  - Color universalmente reconocido para "deshabilitado"
-  
-  CURSOR:
-  cursor: not-allowed;
-  - Indica al usuario que la acción no está disponible
-  - Cursor con símbolo de "prohibido"
-  - Feedback claro de estado del elemento
-  
-  ANULACIÓN DE EFECTOS:
-  transform: none;
-  - Previene efecto de elevación en hover
-  - Botón deshabilitado no debe "reaccionar" visualmente
-  - Consistencia en el estado inactivo
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 11: MENSAJES DE ERROR */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 12: MENSAJES DE ERROR
+   =================================================================== */
 
+/**
+ * Mensajes de error individuales para cada campo
+ * 
+ * CARACTERÍSTICAS:
+ * - Color rojo estándar de Google para errores
+ * - Tamaño ligeramente menor que el texto normal
+ * - Altura mínima para evitar saltos de layout
+ * - Ocultos por defecto (mostrados por JavaScript)
+ * 
+ * USO: <div class="error-message" id="error-nombre">Error aquí</div>
+ */
 .error-message {
-  color: #d93025;
-  font-size: 0.875rem;
-  margin-top: 4px;
-  display: none;
-  min-height: 20px;
+  color: #d93025;                      /* Rojo de error de Google */
+  font-size: 0.875rem;                 /* 14px (ligeramente más pequeño) */
+  margin-top: 4px;                     /* Pequeño espacio desde el input */
+  display: none;                       /* Oculto por defecto */
+  min-height: 20px;                    /* Altura mínima para evitar saltos */
 }
-/*
-  MENSAJES DE ERROR POR CAMPO
-  
-  COLOR:
-  color: #d93025;
-  - Rojo de Google (estándar de accesibilidad)
-  - Alto contraste para legibilidad
-  - Color universalmente asociado con errores
-  - Consistente con asterisco de campos requeridos
-  
-  TAMAÑO:
-  font-size: 0.875rem;
-  - 14px (0.875 × 16px) = más pequeño que texto normal
-  - Información secundaria que no debe dominar
-  - Legible pero jerárquicamente menor
-  - Estándar para texto de ayuda/error
-  
-  ESPACIADO:
-  margin-top: 4px;
-  - Pequeña separación del input
-  - Asociación visual clara con el campo correspondiente
-  - No demasiado que rompa la conexión
-  
-  VISIBILIDAD:
-  display: none;
-  - Oculto por defecto (no hay errores inicialmente)
-  - JavaScript cambia a 'block' cuando hay error
-  - No ocupa espacio cuando no se usa
-  
-  ALTURA MÍNIMA:
-  min-height: 20px;
-  - Reserva espacio para el mensaje incluso cuando está oculto
-  - Previene "salto" del layout cuando aparece el error
-  - Mantiene espaciado consistente entre campos
-  - Mejor UX: layout estable durante validación
-*/
 
+/**
+ * Mensajes de error globales (afectan todo el formulario)
+ * 
+ * DISEÑO:
+ * - Fondo rosa claro para destacar sin ser agresivo
+ * - Borde rosa para definición
+ * - Texto centrado para importancia
+ * - Estilo "alert" similar a frameworks como Bootstrap
+ * 
+ * USO: Errores de conexión, validación general, etc.
+ */
 .error-message-global {
-  background: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-  padding: 14px 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-  display: none;
-  font-weight: 700;
-  text-align: center;
+  background: #f8d7da;                 /* Rosa claro de fondo */
+  color: #721c24;                      /* Rojo oscuro para legibilidad */
+  border: 1px solid #f5c6cb;           /* Borde rosa */
+  padding: 14px 20px;                  /* Padding generoso */
+  border-radius: 10px;                 /* Consistente con otros elementos */
+  margin-top: 20px;                    /* Espacio desde formulario */
+  display: none;                       /* Oculto por defecto */
+  font-weight: 700;                    /* Negrita para importancia */
+  text-align: center;                  /* Centrado para énfasis */
 }
-/*
-  MENSAJE DE ERROR GLOBAL (ERRORES DEL SISTEMA)
-  
-  DISEÑO DE ALERTA:
-  background: #f8d7da;
-  - Fondo rojo muy claro (tinted background)
-  - Menos agresivo que rojo puro
-  - Crea área claramente definida para el mensaje
-  
-  color: #721c24;
-  - Texto rojo oscuro sobre fondo rojo claro
-  - Alto contraste para legibilidad
-  - Tonos relacionados pero contrastantes
-  
-  border: 1px solid #f5c6cb;
-  - Borde rojo claro que define el área
-  - Separa visualmente del contenido normal
-  - Consistente con el esquema de colores del mensaje
-  
-  ESPACIADO Y FORMA:
-  padding: 14px 20px;
-  - Generoso para que el mensaje respire
-  - Consistente con padding del botón
-  - Área clara y fácil de leer
-  
-  border-radius: 10px;
-  - Consistente con otros elementos del formulario
-  - Apariencia integrada y cohesiva
-  
-  margin-top: 20px;
-  - Separación clara del formulario
-  - Consistente con gap del form
-  
-  TIPOGRAFÍA:
-  font-weight: 700;
-  - Negrita para enfatizar la importancia
-  - Mensajes de error deben llamar la atención
-  - Jerarquía visual clara
-  
-  text-align: center;
-  - Centrado para mayor impacto visual
-  - Simétrico con el diseño general
-  - Fácil de escanear rápidamente
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 12: CONTADOR DE CARACTERES */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 13: CONTADOR DE CARACTERES
+   =================================================================== */
 
+/**
+ * Contador de caracteres para textarea de comentarios
+ * 
+ * CARACTERÍSTICAS:
+ * - Tamaño pequeño para no competir con contenido principal
+ * - Alineado a la derecha para estética
+ * - Color gris neutro (cambia a rojo por JavaScript si excede límite)
+ * - user-select: none = no seleccionable (es solo informativo)
+ * 
+ * FUNCIONALIDAD: Actualizado en tiempo real por JavaScript
+ */
 .char-counter {
-  font-size: 0.85rem;
-  color: #666;
-  margin-top: 4px;
-  text-align: right;
-  user-select: none;
+  font-size: 0.85rem;                  /* Pequeño (13.6px) */
+  color: #666;                         /* Gris neutro */
+  margin-top: 4px;                     /* Pequeño espacio desde textarea */
+  text-align: right;                   /* Alineado a la derecha */
+  user-select: none;                   /* No seleccionable */
 }
-/*
-  CONTADOR DE CARACTERES PARA TEXTAREA
-  
-  TAMAÑO Y COLOR:
-  font-size: 0.85rem;
-  - Más pequeño que error messages (0.875rem)
-  - Información de menos importancia
-  - No debe competir con contenido principal
-  
-  color: #666;
-  - Gris medio: visible pero discreto
-  - Información útil pero no crítica
-  - No distrae del contenido principal
-  
-  POSICIONAMIENTO:
-  margin-top: 4px;
-  - Mismo espaciado que error messages
-  - Consistencia en elementos debajo de inputs
-  
-  text-align: right;
-  - Alineado a la derecha como convención
-  - Fuera del flujo de lectura principal
-  - Estándar en interfaces modernas
-  
-  INTERACCIÓN:
-  user-select: none;
-  - No se puede seleccionar el texto del contador
-  - Evita selección accidental
-  - Se comporta más como elemento de UI que texto
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 13: MENSAJE DE ÉXITO */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 14: MENSAJES DE ESTADO
+   =================================================================== */
 
+/**
+ * Mensaje de éxito mostrado cuando el formulario se envía correctamente
+ * 
+ * COLORES: Esquema verde estándar para éxito
+ * - Fondo: verde muy claro
+ * - Texto: verde oscuro para legibilidad
+ * - Borde: verde medio para definición
+ */
 .success-message {
-  background: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-  padding: 14px 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-  display: none;
-  font-weight: 700;
-  text-align: center;
+  background: #d4edda;                 /* Verde claro de fondo */
+  color: #155724;                      /* Verde oscuro para texto */
+  border: 1px solid #c3e6cb;           /* Borde verde medio */
+  padding: 14px 20px;                  /* Padding consistente */
+  border-radius: 10px;                 /* Esquinas redondeadas */
+  margin-top: 20px;                    /* Espacio desde formulario */
+  display: none;                       /* Oculto por defecto */
+  font-weight: 700;                    /* Negrita para importancia */
+  text-align: center;                  /* Centrado para énfasis */
 }
-/*
-  MENSAJE DE ÉXITO TRAS ENVÍO
-  
-  ESQUEMA DE COLORES VERDE:
-  background: #d4edda;
-  - Verde muy claro para fondo
-  - Color positivo universalmente reconocido
-  - Suave y no agresivo visualmente
-  
-  color: #155724;
-  - Verde oscuro para texto
-  - Alto contraste sobre fondo verde claro
-  - Legibilidad óptima
-  
-  border: 1px solid #c3e6cb;
-  - Borde verde claro que define el área
-  - Consistente con esquema de colores del mensaje
-  - Separación visual clara
-  
-  ESTRUCTURA:
-  - Mismo patrón que .error-message-global
-  - Consistencia visual entre diferentes tipos de mensajes
-  - Padding, margin, border-radius idénticos
-  - Solo cambian los colores según el tipo de mensaje
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 14: MENSAJE DE ENVÍO */
-/* ============================================================================= */
-
+/**
+ * Mensaje mostrado durante el proceso de envío
+ * 
+ * COLORES: Esquema amarillo para "en proceso"
+ * - Fondo: amarillo claro
+ * - Texto: amarillo oscuro
+ * - Borde: amarillo medio
+ * 
+ * ANIMACIÓN: Efecto pulse para indicar actividad
+ */
 .sending-message {
-  background: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeaa7;
-  padding: 14px 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-  display: none;
-  font-weight: 700;
-  text-align: center;
-  animation: pulse 1.5s infinite;
+  background: #fff3cd;                 /* Amarillo claro de fondo */
+  color: #856404;                      /* Amarillo oscuro para texto */
+  border: 1px solid #ffeaa7;           /* Borde amarillo */
+  padding: 14px 20px;                  /* Padding consistente */
+  border-radius: 10px;                 /* Esquinas redondeadas */
+  margin-top: 20px;                    /* Espacio desde formulario */
+  display: none;                       /* Oculto por defecto */
+  font-weight: 700;                    /* Negrita para importancia */
+  text-align: center;                  /* Centrado para énfasis */
+  animation: pulse 1.5s infinite;      /* Animación de pulso infinita */
 }
-/*
-  MENSAJE DURANTE EL PROCESO DE ENVÍO
-  
-  ESQUEMA DE COLORES AMARILLO:
-  background: #fff3cd;
-  - Amarillo claro para "en proceso"
-  - Color de advertencia/atención
-  - Ni positivo (verde) ni negativo (rojo)
-  
-  color: #856404;
-  - Amarillo/marrón oscuro para texto
-  - Contraste adecuado con fondo amarillo
-  - Color cálido que indica actividad
-  
-  ANIMACIÓN:
-  animation: pulse 1.5s infinite;
-  - Indica actividad en curso
-  - 1.5s = ritmo cómodo (no ansioso)
-  - infinite = continúa hasta que se complete el envío
-  - Feedback visual de que algo está sucediendo
-*/
 
+/**
+ * Animación de pulso para el mensaje de envío
+ * 
+ * FUNCIONAMIENTO:
+ * - 0% y 100%: opacidad completa (1)
+ * - 50%: opacidad reducida (0.7)
+ * - Duración: 1.5 segundos
+ * - Repetición: infinita
+ * 
+ * EFECTO: El mensaje "respira" para indicar que algo está pasando
+ */
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  0%, 100% { 
+    opacity: 1;                        /* Opacidad completa al inicio y final */
+  }
+  50% { 
+    opacity: 0.7;                      /* Opacidad reducida en el medio */
+  }
 }
-/*
-  ANIMACIÓN DE PULSO
-  
-  DEFINICIÓN DE KEYFRAMES:
-  0%, 100%: opacity: 1;
-  - Inicio y final completamente opaco
-  - Vuelta al estado original para loop suave
-  
-  50%: opacity: 0.7;
-  - Punto medio más transparente
-  - No completamente transparente (legibilidad)
-  - Efecto sutil de "respiración"
-  
-  EFECTO:
-  - Atrae atención sin ser molesto
-  - Indica proceso activo
-  - Universalmente entendido como "trabajando"
-*/
 
-/* ============================================================================= */
-/* SECCIÓN 15: RESPONSIVE DESIGN */
-/* ============================================================================= */
+/* ===================================================================
+   SECCIÓN 15: DISEÑO RESPONSIVE
+   =================================================================== */
 
+/**
+ * Adaptaciones para pantallas pequeñas (móviles)
+ * 
+ * BREAKPOINT: 600px (típico para transición móvil/tablet)
+ * 
+ * CAMBIOS:
+ * - Reducir padding del contenedor para aprovechar espacio
+ * - Añadir margen para evitar que toque los bordes de la pantalla
+ * - Reducir tamaño del título para mejor proporción
+ * 
+ * FILOSOFÍA: Mobile-friendly sin comprometer la funcionalidad
+ */
 @media (max-width: 600px) {
   .container {
-    padding: 20px;
-    margin: 20px 10px;
+    padding: 20px;                     /* Menos padding interno */
+    margin: 20px 10px;                 /* Margen para separación de bordes */
   }
-  
+ 
   h1 {
-    font-size: 1.5rem;
+    font-size: 1.5rem;                 /* Título más pequeño (24px) */
   }
 }
-/*
-  ADAPTACIONES PARA DISPOSITIVOS MÓVILES
-  
-  MEDIA QUERY:
-  @media (max-width: 600px)
-  - Se aplica en pantallas de 600px o menos
-  - Cubre la mayoría de teléfonos en orientación vertical
-  - Punto de corte práctico para formularios
-  
-  AJUSTES DEL CONTENEDOR:
-  padding: 20px;
-  - Reduce padding interno de 32px/36px a 20px uniforme
-  - Maximiza espacio disponible en pantallas pequeñas
-  - Mantiene respiración visual adecuada
-  
-  margin: 20px 10px;
-  - Añade margin al contenedor que antes no tenía
-  - 20px vertical: separación del borde de la pantalla
-  - 10px horizontal: margen mínimo en los lados
-  - Previene que el formulario toque los bordes
-  
-  AJUSTE TIPOGRÁFICO:
-  font-size: 1.5rem;
-  - Reduce tamaño del título principal
-  - De tamaño por defecto (~2rem) a 1.5rem
-  - Mejor proporción en pantallas pequeñas
-  - Mantiene jerarquía pero optimiza espacio
-  
-  FILOSOFÍA RESPONSIVE:
-  - Mobile-friendly sin ser mobile-first
-  - Ajustes mínimos pero efectivos
-  - Mantiene funcionalidad completa
-  - Optimiza para touch interactions (áreas clickeables ya son adecuadas)
-*/
-
-/*
-  ===============================================================================
-  RESUMEN DE ARQUITECTURA CSS:
-  ===============================================================================
-  
-  🎨 METODOLOGÍA DE DISEÑO:
-  ✅ Component-based styling (cada elemento como componente)
-  ✅ Consistent spacing system (múltiplos de 4/8px)
-  ✅ Semantic color palette (azul=primario, rojo=error, verde=éxito)
-  ✅ Typography hierarchy (Roboto=UI, Lato=content)
-  ✅ Progressive enhancement (funciona sin JS)
-  
-  📱 RESPONSIVE STRATEGY:
-  ✅ Flexible layouts con flexbox
-  ✅ Fluid typography con rem units
-  ✅ Mobile-optimized touch targets
-  ✅ Breakpoint estratégico en 600px
-  ✅ Content-first approach
-  
-  ♿ ACCESIBILIDAD:
-  ✅ Alto contraste de colores (WCAG AA+)
-  ✅ Focus states claros y visibles
-  ✅ Touch targets adecuados (44px+)
-  ✅ No dependencia de color únicamente
-  ✅ Texto escalable sin pérdida de funcionalidad
-  
-  ⚡ PERFORMANCE:
-  ✅ Transiciones eficientes (solo propiedades que requieren)
-  ✅ Selectores específicos (evita recálculos innecesarios)
-  ✅ Animaciones con transform/opacity (GPU acelerated)
-  ✅ Reutilización de patrones comunes
-  
-  🎯 UX PATTERNS:
-  ✅ Feedback inmediato en interacciones
-  ✅ Estados claros (normal/hover/focus/disabled/error)
-  ✅ Espaciado que guía el flujo de lectura
-  ✅ Jerarquía visual que facilita comprensión
-  ✅ Consistencia que reduce carga cognitiva
-  
-  ===============================================================================
-*/
