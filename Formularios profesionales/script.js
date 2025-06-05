@@ -288,3 +288,64 @@ document.addEventListener('DOMContentLoaded', () => {
       showErr('error-birthdate', 'Fecha inválida.');
       birthIn.setAttribute('aria-invalid', 'true');
     } else {
+      hideErr('error-birthdate');
+      birthIn.removeAttribute('aria-invalid');
+    }
+
+    // VALIDACIÓN 8: COMENTARIOS
+    // Máximo 2000 caracteres (campo opcional)
+    if (commIn.value.length > 2000) {
+      valid = false;
+      showErr('error-comments', 'Máx. 2000 caracteres.');
+      commIn.setAttribute('aria-invalid', 'true');
+    } else {
+      hideErr('error-comments');
+      commIn.removeAttribute('aria-invalid');
+    }
+
+    /**
+     * LÓGICA DE ENVÍO CON EMAILJS
+     * Si todas las validaciones pasaron, proceder con el envío
+     */
+    if (valid) {
+      // PASO 1: Mostrar estado de envío
+      sending.style.display = 'block';
+      success.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+
+      // PASO 2: Enviar formulario con EmailJS
+      emailjs.sendForm(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, form)
+        .then(() => {
+          // ÉXITO: Email enviado correctamente
+          sending.style.display = 'none';
+          success.style.display = 'block';
+          
+          // OPCIÓN A: Redirigir a gracias.html después de 2 segundos
+          setTimeout(() => {
+            window.location.href = 'gracias.html';
+          }, 2000);
+          
+          // Limpiar formulario
+          form.reset();
+          if (commCnt) commCnt.textContent = '0 / 2000 caracteres';
+          
+          // Restaurar botón
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Enviar información';
+        })
+        .catch((error) => {
+          // ERROR: Mostrar mensaje de error
+          sending.style.display = 'none';
+          alert('Error al enviar el formulario. Inténtalo de nuevo.');
+          console.error('Error EmailJS:', error);
+          
+          // Restaurar botón
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Enviar información';
+        });
+    } else {
+      // Si hay errores de validación, ocultar mensajes de estado
+      success.style.display = 'none';
+      sending.style.display = 'none';
+    }
