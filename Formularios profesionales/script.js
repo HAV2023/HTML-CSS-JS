@@ -12,8 +12,9 @@
  *   - Valida contraseñas, correos, fechas y comentarios.
  *   - Incluye contador de caracteres, toggles de visibilidad de contraseñas
  *   - Muestra mensajes de error y éxito según los criterios definidos.
+ *   - MODIFICADO para envío por email usando FormSubmit
  * 
- * Fecha última actualización: 26/05/2025
+ * Fecha última actualización: 04/06/2025
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -97,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Validación y envío del formulario
   // ===================
   form.addEventListener('submit', e => {
-    e.preventDefault(); // Previene el envío por defecto
+    e.preventDefault(); // Previene el envío por defecto inicialmente
     let valid = true;   // Bandera de validez
 
     // Funciones auxiliares para mostrar u ocultar mensajes de error
@@ -199,13 +200,20 @@ document.addEventListener('DOMContentLoaded', () => {
       commIn.removeAttribute('aria-invalid');
     }
 
-    // --- Resultado final: mostrar mensaje de éxito o dejar errores visibles ---
+    // --- Resultado final: enviar formulario si es válido ---
     if (valid) {
-      success.style.display = 'block';   // Muestra mensaje de éxito
-      form.reset();                      // Limpia formulario
-      if (commCnt) commCnt.textContent = '0 / 2000 caracteres'; // Reinicia contador
+      // Ocultar el mensaje de éxito local (FormSubmit manejará la confirmación)
+      success.style.display = 'none';
+      
+      // Permitir el envío del formulario a FormSubmit
+      // Remover el event listener para evitar bucle infinito
+      form.removeEventListener('submit', arguments.callee);
+      
+      // Enviar el formulario
+      form.submit();
     } else {
-      success.style.display = 'none';    // Oculta mensaje de éxito si hay errores
+      // Si hay errores, ocultar mensaje de éxito
+      success.style.display = 'none';
     }
   });
 });
