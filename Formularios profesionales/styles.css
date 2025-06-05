@@ -1,6 +1,7 @@
 /*
   styles.css
   Documentación granular de estilos para el Formulario Profesional
+  ACTUALIZADO para incluir estilos del mensaje de envío
 */
 
 /* Reset global de caja y tipografía base */
@@ -120,6 +121,12 @@ button[type="submit"]:hover {
   background: #265dcc;                  /* Azul más oscuro al pasar mouse */
 }
 
+/* Botón deshabilitado durante el envío */
+button[type="submit"]:disabled {
+  background: #ccc;                     /* Gris para estado deshabilitado */
+  cursor: not-allowed;                  /* Cursor de no permitido */
+}
+
 /* Mensajes de error y contador de caracteres */
 .error-message {
   color: #d93025;                       /* Rojo para indicar error */
@@ -134,6 +141,8 @@ button[type="submit"]:hover {
   text-align: right;                    /* Alineado a la derecha */
   user-select: none;                    /* No se puede seleccionar */
 }
+
+/* Mensaje de éxito */
 .success-message {
   background: #d4edda;                  /* Fondo verde claro */
   color: #155724;                       /* Texto verde oscuro */
@@ -144,6 +153,33 @@ button[type="submit"]:hover {
   display: none;                        /* Oculto hasta envío */
   font-weight: 700;                     /* Negrita */
   text-align: center;                   /* Centrar texto */
+}
+
+/* NUEVO: Mensaje de envío en progreso */
+.sending-message {
+  background: #fff3cd;                  /* Fondo amarillo claro (warning) */
+  color: #856404;                       /* Texto amarillo oscuro */
+  border: 1px solid #ffeaa7;           /* Borde amarillo */
+  padding: 14px 20px;                   /* Relleno */
+  border-radius: 10px;                  /* Bordes redondeados */
+  margin-top: 20px;                     /* Separación superior */
+  display: none;                        /* Oculto por defecto */
+  font-weight: 700;                     /* Negrita */
+  text-align: center;                   /* Centrar texto */
+  animation: pulse 1.5s infinite;       /* Animación de pulso */
+}
+
+/* Animación de pulso para el mensaje de envío */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Estilos para el icono "ojito" dentro del input */
