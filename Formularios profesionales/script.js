@@ -1,351 +1,563 @@
 /**
- * ===============================================================================
- * SCRIPT.JS — VALIDACIÓN Y ENVÍO CON EMAILJS
- * ===============================================================================
- * 
+ * FORMULARIO PROFESIONAL CON EMAILJS
  * Autor: Hector Arciniega
- * Proyecto: Formulario de Registro Profesional con EmailJS
- * Versión: 3.0 - EmailJS Edition
- * Fecha última actualización: 04/06/2025
+ * Versión: Final - Completamente funcional
  * 
- * DESCRIPCIÓN:
- * -----------
- * Este script implementa validación completa del formulario y envío de emails
- * usando EmailJS, permitiendo que funcione desde archivos locales sin servidor.
- * 
- * CONFIGURACIÓN REQUERIDA:
- * -----------------------
- * 1. Cuenta en EmailJS (emailjs.com)
- * 2. Servicio de email configurado (Gmail recomendado)
- * 3. Template de email creado
- * 4. Credenciales de EmailJS (ver sección de configuración abajo)
- * 
- * VARIABLES DEL TEMPLATE EMAILJS:
- * ------------------------------
- * - {{user_name}} - Nombre completo
- * - {{user_email}} - Correo electrónico
- * - {{user_email_confirm}} - Confirmación de correo
- * - {{user_password}} - Contraseña (opcional en template)
- * - {{user_age}} - Edad
- * - {{user_birthdate}} - Fecha de nacimiento
- * - {{user_comments}} - Comentarios
- * 
- * ===============================================================================
+ * DESCRIPCIÓN GENERAL:
+ * Este archivo implementa un formulario profesional con validaciones avanzadas
+ * y envío automático de correos electrónicos usando la librería EmailJS.
+ * Incluye validaciones en tiempo real, restricciones de entrada, toggle de contraseñas
+ * y manejo completo de estados de envío.
  */
 
-// ===============================================================================
-// CONFIGURACIÓN DE EMAILJS - ¡IMPORTANTE: REEMPLAZAR CON TUS CREDENCIALES!
-// ===============================================================================
+// ===================================================================
+// SECCIÓN 1: CONFIGURACIÓN EMAILJS
+// ===================================================================
 
 /**
- * PASO 1: REEMPLAZA ESTAS CREDENCIALES CON LAS TUYAS DE EMAILJS
+ * Objeto de configuración para EmailJS
+ * Contiene todas las credenciales necesarias para el envío de correos
  * 
- * Obtén estas credenciales desde tu dashboard de EmailJS:
- * - PUBLIC_KEY: En "Account" → "API Keys" → "Public Key"
- * - SERVICE_ID: En "Email Services" → Tu servicio → "Service ID"
- * - TEMPLATE_ID: En "Email Templates" → Tu template → "Template ID"
+ * @type {Object}
+ * @property {string} PUBLIC_KEY - Clave pública de la cuenta EmailJS
+ * @property {string} SERVICE_ID - Identificador del servicio de correo configurado
+ * @property {string} TEMPLATE_ID - Identificador de la plantilla de correo a utilizar
  */
 const EMAILJS_CONFIG = {
-  PUBLIC_KEY: "YOUR_PUBLIC_KEY_HERE",     // 🔑 Reemplazar con tu Public Key
-  SERVICE_ID: "YOUR_SERVICE_ID_HERE",     // 📧 Reemplazar con tu Service ID
-  TEMPLATE_ID: "YOUR_TEMPLATE_ID_HERE"    // 📝 Reemplazar con tu Template ID
+  PUBLIC_KEY: "poner public_key",    // Clave pública para autenticación
+  SERVICE_ID: "poner service_id",       // Servicio de correo (Gmail, Outlook, etc.)
+  TEMPLATE_ID: "poner template_id"      // Plantilla con formato del correo
 };
 
-// ===============================================================================
-// INICIALIZACIÓN Y PUNTO DE ENTRADA
-// ===============================================================================
-
 /**
- * Inicializar EmailJS cuando se carga el script
- * IMPORTANTE: Esto debe ejecutarse antes del DOMContentLoaded
+ * Inicialización de la librería EmailJS
+ * Debe ejecutarse antes de usar cualquier función de EmailJS
+ * Establece la clave pública para todas las operaciones posteriores
  */
 emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
 
+// ===================================================================
+// SECCIÓN 2: INICIALIZACIÓN PRINCIPAL
+// ===================================================================
+
 /**
- * Event Listener principal - Se ejecuta cuando el DOM está completamente cargado
+ * Event Listener principal que se ejecuta cuando el DOM está completamente cargado
+ * Garantiza que todos los elementos HTML estén disponibles antes de manipularlos
+ * 
+ * @event DOMContentLoaded
  */
-document.addEventListener('DOMContentLoaded', () => {
-
-  // ===============================================================================
-  // SECCIÓN 1: CAPTURA DE REFERENCIAS A ELEMENTOS DEL DOM
-  // ===============================================================================
-
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // ===================================================================
+  // SECCIÓN 3: REFERENCIAS A ELEMENTOS DEL DOM
+  // ===================================================================
+  
   /**
-   * ELEMENTOS PRINCIPALES DEL FORMULARIO
+   * Referencias a elementos principales del formulario
+   * Estas constantes almacenan referencias directas a elementos HTML
+   * para evitar búsquedas repetitivas en el DOM
    */
+  
+  // Elemento formulario principal
   const form = document.getElementById('professionalForm');
-  const success = document.getElementById('successMessage');
-  const sending = document.getElementById('sendingMessage');  // NUEVO: Mensaje de envío
-  const submitBtn = document.getElementById('submitBtn');     // NUEVO: Referencia al botón
-
+  
+  // Botón de envío del formulario
+  const submitBtn = document.getElementById('submitBtn');
+  
+  // Elementos de mensajes de estado
+  const successMessage = document.getElementById('successMessage');    // Mensaje de éxito
+  const sendingMessage = document.getElementById('sendingMessage');    // Mensaje de envío en progreso
+  const errorMessage = document.getElementById('errorMessage');        // Mensaje de error
+  
   /**
-   * CAMPOS DE ENTRADA DEL FORMULARIO
+   * Referencias a campos de entrada del formulario
+   * Cada constante representa un campo específico del formulario
    */
-  const nameIn = document.getElementById('name');
-  const emailIn = document.getElementById('email');
-  const emailC = document.getElementById('emailConfirm');
-  const passIn = document.getElementById('password');
-  const passC = document.getElementById('passwordConfirm');
-  const ageIn = document.getElementById('age');
-  const birthIn = document.getElementById('birthdate');
-  const commIn = document.getElementById('comments');
-  const commCnt = document.getElementById('commentsCounter');
-
+  const nameInput = document.getElementById('name');                   // Campo nombre
+  const emailInput = document.getElementById('email');                 // Campo email principal
+  const emailConfirmInput = document.getElementById('emailConfirm');   // Campo confirmación email
+  const passwordInput = document.getElementById('password');           // Campo contraseña
+  const passwordConfirmInput = document.getElementById('passwordConfirm'); // Campo confirmación contraseña
+  const ageInput = document.getElementById('age');                     // Campo edad
+  const birthdateInput = document.getElementById('birthdate');         // Campo fecha nacimiento
+  const commentsInput = document.getElementById('comments');           // Campo comentarios
+  const commentsCounter = document.getElementById('commentsCounter');  // Contador de caracteres
+  
   /**
-   * BOTONES DE TOGGLE PARA CONTRASEÑAS
+   * Referencias a botones de toggle para contraseñas
+   * Permiten mostrar/ocultar el contenido de los campos de contraseña
    */
-  const togP = document.getElementById('togglePassword');
-  const togPC = document.getElementById('togglePasswordConfirm');
+  const togglePassword = document.getElementById('togglePassword');           // Toggle contraseña principal
+  const togglePasswordConfirm = document.getElementById('togglePasswordConfirm'); // Toggle confirmación
 
-  // ===============================================================================
-  // SECCIÓN 2: CONFIGURACIÓN INICIAL Y RESTRICCIONES DE INTERFAZ
-  // ===============================================================================
-
+  // ===================================================================
+  // SECCIÓN 4: CONFIGURACIONES INICIALES
+  // ===================================================================
+  
   /**
-   * CONFIGURACIÓN DE FECHA MÁXIMA PARA FECHA DE NACIMIENTO
-   * Establece la fecha actual como máxima para prevenir fechas futuras
+   * Configuración de fecha máxima para el campo de fecha de nacimiento
+   * Previene que los usuarios seleccionen fechas futuras
    */
-  if (birthIn) {
-    birthIn.max = new Date().toISOString().split('T')[0];
+  if (birthdateInput) {
+    // Obtener fecha actual en formato ISO (YYYY-MM-DD)
+    const today = new Date().toISOString().split('T')[0];
+    
+    // Establecer fecha máxima permitida (hoy)
+    birthdateInput.max = today;
   }
 
+  // ===================================================================
+  // SECCIÓN 5: FUNCIONES DE UTILIDAD PARA MANEJO DE ERRORES
+  // ===================================================================
+  
   /**
-   * TRANSFORMACIÓN AUTOMÁTICA A MAYÚSCULAS
-   * Aplica a todos los inputs de tipo "text" excepto los de contraseña
+   * Muestra un mensaje de error para un campo específico
+   * 
+   * @param {string} fieldId - ID del campo al que pertenece el error
+   * @param {string} message - Mensaje de error a mostrar
+   * 
+   * Funcionamiento:
+   * 1. Busca el elemento de error usando convención 'error-{fieldId}'
+   * 2. Si existe, establece el mensaje y lo hace visible
+   * 3. Si no existe, no hace nada (previene errores)
    */
-  form.querySelectorAll('input[type="text"]').forEach(inp => {
-    inp.addEventListener('input', () => {
-      inp.value = inp.value.toUpperCase();
-    });
-  });
-
-  /**
-   * CONTADOR DE CARACTERES PARA TEXTAREA
-   * Actualiza dinámicamente el contador "X / 2000 caracteres"
-   */
-  if (commIn && commCnt) {
-    commIn.addEventListener('input', () => {
-      commCnt.textContent = `${commIn.value.length} / 2000 caracteres`;
-    });
-  }
-
-  /**
-   * FUNCIONALIDAD DE TOGGLE PARA CONTRASEÑAS
-   * Alterna entre mostrar/ocultar contraseñas con iconos 👁️/🙈
-   */
-  function toggleVisibility(inputField, button) {
-    if (inputField.type === 'password') {
-      inputField.type = 'text';
-      button.textContent = '🙈'; // Icono: ocultar
-    } else {
-      inputField.type = 'password';
-      button.textContent = '👁️'; // Icono: mostrar
+  function showError(fieldId, message) {
+    const errorElement = document.getElementById('error-' + fieldId);
+    if (errorElement) {
+      errorElement.textContent = message;        // Establecer texto del error
+      errorElement.style.display = 'block';     // Hacer visible el error
     }
   }
 
-  // Asignar eventos a los botones de toggle
-  togP.addEventListener('click', () => toggleVisibility(passIn, togP));
-  togPC.addEventListener('click', () => toggleVisibility(passC, togPC));
-
   /**
-   * RESTRICCIÓN NUMÉRICA PARA CAMPO EDAD
-   * Permite solo dígitos, elimina cualquier otro carácter
+   * Oculta el mensaje de error para un campo específico
+   * 
+   * @param {string} fieldId - ID del campo cuyo error se debe ocultar
+   * 
+   * Funcionamiento:
+   * 1. Busca el elemento de error correspondiente
+   * 2. Si existe, lo oculta y limpia su contenido
+   * 3. Previene errores si el elemento no existe
    */
-  if (ageIn) {
-    ageIn.addEventListener('input', () => {
-      ageIn.value = ageIn.value.replace(/\D/g, ''); // \D = no dígitos
-    });
+  function hideError(fieldId) {
+    const errorElement = document.getElementById('error-' + fieldId);
+    if (errorElement) {
+      errorElement.style.display = 'none';     // Ocultar elemento
+      errorElement.textContent = '';           // Limpiar contenido
+    }
   }
 
   /**
-   * RESTRICCIÓN ANTI-NÚMEROS PARA CAMPO NOMBRE
-   * Previene entrada de números tanto al escribir como al pegar
+   * Oculta todos los mensajes de estado del formulario
+   * 
+   * Se usa para limpiar la interfaz antes de mostrar nuevos mensajes
+   * Evita que se muestren múltiples mensajes simultáneamente
    */
-  if (nameIn) {
-    // Restricción al escribir
-    nameIn.addEventListener('input', () => {
-      nameIn.value = nameIn.value.replace(/[0-9]/g, '');
+  function hideAllMessages() {
+    successMessage.style.display = 'none';    // Ocultar mensaje de éxito
+    sendingMessage.style.display = 'none';    // Ocultar mensaje de envío
+    errorMessage.style.display = 'none';      // Ocultar mensaje de error
+  }
+
+  // ===================================================================
+  // SECCIÓN 6: RESTRICCIONES DE ENTRADA EN TIEMPO REAL
+  // ===================================================================
+  
+  /**
+   * Configuración de restricciones para el campo NOMBRE
+   * Permite solo letras y espacios, convierte a mayúsculas automáticamente
+   */
+  if (nameInput) {
+    /**
+     * Event listener para entrada de texto en tiempo real
+     * Se ejecuta cada vez que el usuario escribe en el campo
+     */
+    nameInput.addEventListener('input', function() {
+      // Remover todos los números del texto ingresado
+      this.value = this.value.replace(/[0-9]/g, '');
+      
+      // Convertir todo el texto a mayúsculas
+      this.value = this.value.toUpperCase();
     });
 
-    // Restricción al pegar
-    nameIn.addEventListener('paste', (e) => {
-      const pasted = e.clipboardData.getData('text');
-      if (/\d/.test(pasted)) { // Si contiene dígitos
-        e.preventDefault();
-        nameIn.value += pasted.replace(/[0-9]/g, ''); // Agregar solo sin números
+    /**
+     * Event listener para texto pegado
+     * Maneja el caso especial cuando el usuario pega texto desde el portapapeles
+     */
+    nameInput.addEventListener('paste', function(e) {
+      // Obtener el texto que se está pegando
+      const pastedText = e.clipboardData.getData('text');
+      
+      // Si el texto contiene números
+      if (/\d/.test(pastedText)) {
+        e.preventDefault();  // Prevenir el pegado normal
+        
+        // Pegar solo la parte sin números y en mayúsculas
+        this.value += pastedText.replace(/[0-9]/g, '').toUpperCase();
       }
     });
   }
 
-  // ===============================================================================
-  // SECCIÓN 3: SISTEMA DE VALIDACIÓN Y ENVÍO CON EMAILJS
-  // ===============================================================================
-
   /**
-   * EVENT LISTENER PRINCIPAL DEL FORMULARIO
-   * Maneja validación completa y envío con EmailJS
+   * Configuración de restricciones para el campo EDAD
+   * Permite solo números
    */
-  form.addEventListener('submit', e => {
-    e.preventDefault(); // Prevenir envío por defecto del navegador
-    let valid = true;   // Bandera de validación
-
+  if (ageInput) {
     /**
-     * FUNCIONES AUXILIARES PARA MANEJO DE ERRORES
+     * Event listener para entrada de texto en el campo edad
+     * Filtra todo excepto números
      */
-    const showErr = (id, msg) => {
-      const el = document.getElementById(id);
-      el.textContent = msg;
-      el.style.display = 'block';
-    };
+    ageInput.addEventListener('input', function() {
+      // Mantener solo números, remover letras y símbolos
+      this.value = this.value.replace(/[^0-9]/g, '');
+      
+      // Convertir a mayúsculas (aunque solo sean números, por consistencia)
+      this.value = this.value.toUpperCase();
+    });
+  }
 
-    const hideErr = id => {
-      const el = document.getElementById(id);
-      el.style.display = 'none';
-      el.textContent = '';
-    };
-
+  // ===================================================================
+  // SECCIÓN 7: CONTADOR DE CARACTERES PARA COMENTARIOS
+  // ===================================================================
+  
+  /**
+   * Funcionalidad del contador de caracteres para el campo de comentarios
+   * Muestra en tiempo real cuántos caracteres ha escrito el usuario
+   */
+  if (commentsInput && commentsCounter) {
     /**
-     * VALIDACIONES INDIVIDUALES POR CAMPO
-     * Cada validación sigue el patrón: verificar → mostrar/ocultar error → actualizar flag
+     * Event listener que actualiza el contador mientras el usuario escribe
      */
+    commentsInput.addEventListener('input', function() {
+      // Obtener la longitud actual del texto
+      const currentLength = this.value.length;
+      
+      // Actualizar el texto del contador
+      commentsCounter.textContent = `${currentLength} / 2000 caracteres`;
+      
+      // Cambiar color si excede el límite
+      if (currentLength > 2000) {
+        commentsCounter.style.color = '#d93025';  // Rojo para advertencia
+      } else {
+        commentsCounter.style.color = '#666';     // Gris normal
+      }
+    });
+  }
 
-    // VALIDACIÓN 1: NOMBRE COMPLETO
-    // Regex: Solo letras (incluye acentos españoles), espacios, sin números
-    if (!/^[A-ZÁÉÍÓÚÑ\s]+$/.test(nameIn.value.trim())) {
-      valid = false;
-      showErr('error-name', 'Sólo letras y espacios.');
-      nameIn.setAttribute('aria-invalid', 'true');
+  // ===================================================================
+  // SECCIÓN 8: FUNCIONALIDAD TOGGLE PARA CONTRASEÑAS
+  // ===================================================================
+  
+  /**
+   * Función genérica para configurar el toggle de visibilidad de contraseñas
+   * 
+   * @param {HTMLElement} inputElement - Campo de contraseña
+   * @param {HTMLElement} buttonElement - Botón de toggle
+   * 
+   * Funcionamiento:
+   * 1. Alterna entre type='password' y type='text'
+   * 2. Cambia el emoji del botón según el estado
+   * 3. Previene comportamientos no deseados del formulario
+   */
+  function setupPasswordToggle(inputElement, buttonElement) {
+    if (inputElement && buttonElement) {
+      buttonElement.addEventListener('click', function(e) {
+        e.preventDefault();     // Prevenir envío del formulario
+        e.stopPropagation();    // Prevenir propagación del evento
+        
+        // Alternar visibilidad de la contraseña
+        if (inputElement.type === 'password') {
+          inputElement.type = 'text';           // Mostrar contraseña
+          buttonElement.textContent = '🙈';     // Emoji "no ver"
+        } else {
+          inputElement.type = 'password';       // Ocultar contraseña
+          buttonElement.textContent = '👁️';     // Emoji "ojo"
+        }
+      });
+    }
+  }
+
+  // Configurar toggle para ambos campos de contraseña
+  setupPasswordToggle(passwordInput, togglePassword);
+  setupPasswordToggle(passwordConfirmInput, togglePasswordConfirm);
+
+  // ===================================================================
+  // SECCIÓN 9: SISTEMA DE VALIDACIONES COMPLETO
+  // ===================================================================
+  
+  /**
+   * Función principal de validación del formulario
+   * 
+   * @returns {boolean} true si todas las validaciones pasan, false en caso contrario
+   * 
+   * Esta función ejecuta todas las validaciones de forma secuencial
+   * y acumula el resultado en la variable isValid
+   */
+  function validateForm() {
+    let isValid = true;  // Bandera acumulativa de validación
+
+    // ===============================================================
+    // VALIDACIÓN DE NOMBRE
+    // ===============================================================
+    const nameValue = nameInput.value.trim();  // Obtener valor sin espacios extra
+    
+    if (!nameValue) {
+      // Caso: campo vacío
+      showError('name', 'El nombre es obligatorio.');
+      isValid = false;
+    } else if (!/^[A-ZÁÉÍÓÚÑ\s]+$/.test(nameValue)) {
+      // Caso: contiene caracteres no permitidos
+      // Regex explica: solo letras mayúsculas (incluye acentos) y espacios
+      showError('name', 'Solo se permiten letras y espacios.');
+      isValid = false;
     } else {
-      hideErr('error-name');
-      nameIn.removeAttribute('aria-invalid');
+      // Caso: validación exitosa
+      hideError('name');
     }
 
-    // VALIDACIÓN 2: CORREO ELECTRÓNICO
-    // Usa validación nativa del navegador (type="email")
-    if (!emailIn.value || !emailIn.checkValidity()) {
-      valid = false;
-      showErr('error-email', 'Correo inválido.');
-      emailIn.setAttribute('aria-invalid', 'true');
+    // ===============================================================
+    // VALIDACIÓN DE EMAIL PRINCIPAL
+    // ===============================================================
+    const emailValue = emailInput.value.trim();
+    
+    // Regex para validar formato de email
+    // Explica: texto@texto.texto (sin espacios ni caracteres especiales)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!emailValue) {
+      // Caso: campo vacío
+      showError('email', 'El correo electrónico es obligatorio.');
+      isValid = false;
+    } else if (!emailRegex.test(emailValue)) {
+      // Caso: formato inválido
+      showError('email', 'Por favor ingresa un correo electrónico válido.');
+      isValid = false;
     } else {
-      hideErr('error-email');
-      emailIn.removeAttribute('aria-invalid');
+      // Caso: validación exitosa
+      hideError('email');
     }
 
-    // VALIDACIÓN 3: CONFIRMACIÓN DE CORREO
-    // Debe coincidir exactamente con el correo principal
-    if (emailC.value !== emailIn.value) {
-      valid = false;
-      showErr('error-emailConfirm', 'Los correos no coinciden.');
-      emailC.setAttribute('aria-invalid', 'true');
+    // ===============================================================
+    // VALIDACIÓN DE CONFIRMACIÓN DE EMAIL
+    // ===============================================================
+    const emailConfirmValue = emailConfirmInput.value.trim();
+    
+    if (!emailConfirmValue) {
+      // Caso: campo vacío
+      showError('emailConfirm', 'La confirmación de correo es obligatoria.');
+      isValid = false;
+    } else if (emailConfirmValue !== emailValue) {
+      // Caso: no coinciden los emails
+      showError('emailConfirm', 'Los correos electrónicos no coinciden.');
+      isValid = false;
     } else {
-      hideErr('error-emailConfirm');
-      emailC.removeAttribute('aria-invalid');
+      // Caso: validación exitosa
+      hideError('emailConfirm');
     }
 
-    // VALIDACIÓN 4: CONTRASEÑA PRINCIPAL
-    // Reglas: mínimo 8 caracteres, al menos 1 mayúscula Y 1 minúscula
-    const passOK =
-      passIn.value.length >= 8 &&
-      /[a-z]/.test(passIn.value) &&  // Al menos una minúscula
-      /[A-Z]/.test(passIn.value);    // Al menos una mayúscula
-
-    if (!passOK) {
-      valid = false;
-      showErr('error-password', 'Mín. 8 caracteres, mayúsculas y minúsculas.');
-      passIn.setAttribute('aria-invalid', 'true');
+    // ===============================================================
+    // VALIDACIÓN DE CONTRASEÑA
+    // ===============================================================
+    const passwordValue = passwordInput.value;  // Sin trim para preservar espacios
+    
+    if (!passwordValue) {
+      // Caso: campo vacío
+      showError('password', 'La contraseña es obligatoria.');
+      isValid = false;
+    } else if (passwordValue.length < 8) {
+      // Caso: muy corta
+      showError('password', 'La contraseña debe tener al menos 8 caracteres.');
+      isValid = false;
+    } else if (!/[a-z]/.test(passwordValue) || !/[A-Z]/.test(passwordValue)) {
+      // Caso: no cumple requisitos de mayúsculas/minúsculas
+      // Regex explica: debe tener al menos una minúscula Y una mayúscula
+      showError('password', 'La contraseña debe contener al menos una mayúscula y una minúscula.');
+      isValid = false;
     } else {
-      hideErr('error-password');
-      passIn.removeAttribute('aria-invalid');
+      // Caso: validación exitosa
+      hideError('password');
     }
 
-    // VALIDACIÓN 5: CONFIRMACIÓN DE CONTRASEÑA
-    // Debe coincidir exactamente con la contraseña principal
-    if (passC.value !== passIn.value) {
-      valid = false;
-      showErr('error-passwordConfirm', 'Las contraseñas no coinciden.');
-      passC.setAttribute('aria-invalid', 'true');
+    // ===============================================================
+    // VALIDACIÓN DE CONFIRMACIÓN DE CONTRASEÑA
+    // ===============================================================
+    const passwordConfirmValue = passwordConfirmInput.value;
+    
+    if (!passwordConfirmValue) {
+      // Caso: campo vacío
+      showError('passwordConfirm', 'La confirmación de contraseña es obligatoria.');
+      isValid = false;
+    } else if (passwordConfirmValue !== passwordValue) {
+      // Caso: no coinciden las contraseñas
+      showError('passwordConfirm', 'Las contraseñas no coinciden.');
+      isValid = false;
     } else {
-      hideErr('error-passwordConfirm');
-      passC.removeAttribute('aria-invalid');
+      // Caso: validación exitosa
+      hideError('passwordConfirm');
     }
 
-    // VALIDACIÓN 6: EDAD
-    // Debe ser un número válido entre 1 y 120
-    const ageVal = Number(ageIn.value);
-    if (!ageVal || ageVal < 1 || ageVal > 120) {
-      valid = false;
-      showErr('error-age', 'Edad entre 1 y 120.');
-      ageIn.setAttribute('aria-invalid', 'true');
+    // ===============================================================
+    // VALIDACIÓN DE EDAD
+    // ===============================================================
+    const ageValue = parseInt(ageInput.value);  // Convertir a número entero
+    
+    if (!ageInput.value) {
+      // Caso: campo vacío
+      showError('age', 'La edad es obligatoria.');
+      isValid = false;
+    } else if (isNaN(ageValue) || ageValue < 1 || ageValue > 120) {
+      // Caso: no es número válido o fuera de rango
+      // isNaN verifica si la conversión falló
+      showError('age', 'La edad debe estar entre 1 y 120 años.');
+      isValid = false;
     } else {
-      hideErr('error-age');
-      ageIn.removeAttribute('aria-invalid');
+      // Caso: validación exitosa
+      hideError('age');
     }
 
-    // VALIDACIÓN 7: FECHA DE NACIMIENTO
-    // No puede estar vacía ni ser fecha futura
-    if (!birthIn.value || new Date(birthIn.value) > new Date()) {
-      valid = false;
-      showErr('error-birthdate', 'Fecha inválida.');
-      birthIn.setAttribute('aria-invalid', 'true');
+    // ===============================================================
+    // VALIDACIÓN DE FECHA DE NACIMIENTO
+    // ===============================================================
+    const birthdateValue = birthdateInput.value;
+    
+    if (!birthdateValue) {
+      // Caso: campo vacío
+      showError('birthdate', 'La fecha de nacimiento es obligatoria.');
+      isValid = false;
     } else {
-      hideErr('error-birthdate');
-      birthIn.removeAttribute('aria-invalid');
+      // Validar que no sea fecha futura
+      const birthDate = new Date(birthdateValue);  // Crear objeto Date
+      const today = new Date();                    // Fecha actual
+      
+      if (birthDate > today) {
+        // Caso: fecha futura
+        showError('birthdate', 'La fecha de nacimiento no puede ser futura.');
+        isValid = false;
+      } else {
+        // Caso: validación exitosa
+        hideError('birthdate');
+      }
     }
 
-    // VALIDACIÓN 8: COMENTARIOS
-    // Máximo 2000 caracteres (campo opcional)
-    if (commIn.value.length > 2000) {
-      valid = false;
-      showErr('error-comments', 'Máx. 2000 caracteres.');
-      commIn.setAttribute('aria-invalid', 'true');
+    // ===============================================================
+    // VALIDACIÓN DE COMENTARIOS (OPCIONAL PERO CON LÍMITE)
+    // ===============================================================
+    const commentsValue = commentsInput.value;
+    
+    if (commentsValue.length > 2000) {
+      // Caso: excede límite de caracteres
+      showError('comments', 'Los comentarios no pueden exceder 2000 caracteres.');
+      isValid = false;
     } else {
-      hideErr('error-comments');
-      commIn.removeAttribute('aria-invalid');
+      // Caso: validación exitosa (incluye campo vacío, que es válido)
+      hideError('comments');
     }
 
+    // Retornar resultado acumulativo de todas las validaciones
+    return isValid;
+  }
+
+  // ===================================================================
+  // SECCIÓN 10: MANEJO DEL ENVÍO DEL FORMULARIO
+  // ===================================================================
+  
+  /**
+   * Event listener para el envío del formulario
+   * Maneja todo el proceso desde validación hasta envío y respuesta
+   */
+  form.addEventListener('submit', function(e) {
+    // Prevenir envío tradicional del formulario
+    e.preventDefault();
+    
+    // Log para debugging
+    console.log('Formulario enviado - iniciando validación');
+    
+    // Limpiar mensajes previos para evitar confusión
+    hideAllMessages();
+    
+    // Ejecutar validaciones completas
+    if (!validateForm()) {
+      console.log('Validación fallida');
+      return;  // Detener proceso si hay errores
+    }
+    
+    console.log('Validación exitosa - enviando email');
+    
+    // ===============================================================
+    // FASE 1: PREPARACIÓN PARA ENVÍO
+    // ===============================================================
+    
+    // Mostrar indicador de envío en progreso
+    sendingMessage.style.display = 'block';
+    
+    // Deshabilitar botón para prevenir múltiples envíos
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';  // Cambiar texto del botón
+    
+    // ===============================================================
+    // FASE 2: ENVÍO VÍA EMAILJS
+    // ===============================================================
+    
     /**
-     * LÓGICA DE ENVÍO CON EMAILJS
-     * Si todas las validaciones pasaron, proceder con el envío
+     * emailjs.sendForm() envía el formulario completo
+     * Parámetros:
+     * 1. SERVICE_ID: servicio de correo configurado
+     * 2. TEMPLATE_ID: plantilla de correo a usar
+     * 3. form: elemento formulario con todos los datos
+     * 
+     * Retorna una Promise que maneja éxito/error
      */
-    if (valid) {
-      // PASO 1: Mostrar estado de envío
-      sending.style.display = 'block';
-      success.style.display = 'none';
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Enviando...';
+    emailjs.sendForm(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, form)
+      .then(function(response) {
+        // ===============================================================
+        // MANEJO DE ENVÍO EXITOSO
+        // ===============================================================
+        
+        console.log('Email enviado exitosamente:', response);
+        
+        // Ocultar mensaje de "enviando"
+        sendingMessage.style.display = 'none';
+        
+        // Mostrar mensaje de éxito
+        successMessage.style.display = 'block';
+        
+        // Limpiar formulario completamente
+        form.reset();
+        
+        // Resetear contador de comentarios si existe
+        if (commentsCounter) {
+          commentsCounter.textContent = '0 / 2000 caracteres';
+        }
+        
+        // Restaurar estado original del botón
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar información';
+        
+        // Redirigir a página de agradecimiento después de 3 segundos
+        setTimeout(function() {
+          window.location.href = 'gracias.html';
+        }, 3000);
+        
+      })
+      .catch(function(error) {
+        // ===============================================================
+        // MANEJO DE ERROR EN ENVÍO
+        // ===============================================================
+        
+        console.error('Error al enviar email:', error);
+        
+        // Ocultar mensaje de "enviando"
+        sendingMessage.style.display = 'none';
+        
+        // Mostrar mensaje de error
+        errorMessage.style.display = 'block';
+        
+        // Restaurar estado original del botón para permitir reintento
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar información';
+      });
+  });
 
-      // PASO 2: Enviar formulario con EmailJS
-      emailjs.sendForm(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, form)
-        .then(() => {
-          // ÉXITO: Email enviado correctamente
-          sending.style.display = 'none';
-          success.style.display = 'block';
-          
-          // OPCIÓN A: Redirigir a gracias.html después de 2 segundos
-          setTimeout(() => {
-            window.location.href = 'gracias.html';
-          }, 2000);
-          
-          // Limpiar formulario
-          form.reset();
-          if (commCnt) commCnt.textContent = '0 / 2000 caracteres';
-          
-          // Restaurar botón
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Enviar información';
-        })
-        .catch((error) => {
-          // ERROR: Mostrar mensaje de error
-          sending.style.display = 'none';
-          alert('Error al enviar el formulario. Inténtalo de nuevo.');
-          console.error('Error EmailJS:', error);
-          
-          // Restaurar botón
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Enviar información';
-        });
-    } else {
-      // Si hay errores de validación, ocultar mensajes de estado
-      success.style.display = 'none';
-      sending.style.display = 'none';
-    }
+  // Log final para confirmar inicialización completa
+  console.log('Script inicializado correctamente');
+});
