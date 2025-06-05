@@ -146,7 +146,7 @@ button[type="submit"]:hover {
   text-align: center;                   /* Centrar texto */
 }
 
-/* Estilos para el icono “ojito” dentro del input */
+/* Estilos para el icono "ojito" dentro del input */
 .input-password {
   position: relative;                   /* Contenedor relativo para posicionar botón */
 }
