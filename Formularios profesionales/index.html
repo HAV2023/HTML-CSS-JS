@@ -1,7 +1,7 @@
 <!--
   Documento: index.html
-  Descripción: Formulario profesional con envío por email usando FormSubmit
-  Cada sección está comentada para facilitar comprensión.
+  Descripción: Formulario profesional con envío por email usando EmailJS
+  FUNCIONA DESDE ARCHIVOS LOCALES (no requiere servidor)
 -->
 <!DOCTYPE html>
 <html lang="es">
@@ -19,6 +19,9 @@
     rel="stylesheet"
   />
 
+  <!-- SDK de EmailJS para envío de emails desde el cliente -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
   <!-- Enlace al archivo CSS externo que contiene los estilos del formulario -->
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -29,35 +32,21 @@
     <h1>Formulario de Registro</h1>
 
     <!-- 
-      FORMULARIO CON ENVÍO POR EMAIL
-      - action: URL de FormSubmit con tu email (CAMBIAR POR EMAIL REAL)
-      - method: POST para enviar datos
-      - Se mantiene novalidate para usar validación personalizada
+      FORMULARIO CONFIGURADO PARA EMAILJS
+      - novalidate: Desactiva validación nativa para usar la personalizada
+      - Los name attributes están optimizados para EmailJS
     -->
-    <form id="professionalForm" action="https://formsubmit.co/tu-email@gmail.com" method="POST" novalidate>
-      
-      <!-- CAMPOS OCULTOS PARA CONFIGURAR FORMSUBMIT -->
-      <!-- Página de redirección después del envío (opcional) -->
-      <input type="hidden" name="_next" value="https://tu-sitio.com/gracias.html">
-      
-      <!-- Asunto del email que recibirás -->
-      <input type="hidden" name="_subject" value="Nuevo registro desde formulario profesional">
-      
-      <!-- Desactivar CAPTCHA (opcional, pero recomendado para formularios internos) -->
-      <input type="hidden" name="_captcha" value="false">
-      
-      <!-- Plantilla de email (opcional - mejora el formato) -->
-      <input type="hidden" name="_template" value="table">
+    <form id="professionalForm" novalidate>
 
       <!-- Campo: Nombre completo -->
       <div>
         <!-- Label vinculado al input por su atributo for=id -->
         <label for="name" class="required">Nombre completo</label>
-        <!-- Input texto con validaciones HTML (required, pattern) y placeholder descriptivo -->
+        <!-- name="user_name" es la variable que usará EmailJS -->
         <input
           type="text"
           id="name"
-          name="Nombre_Completo"
+          name="user_name"
           placeholder="Escribe tu nombre completo"
           required
           pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$"
@@ -69,10 +58,11 @@
       <!-- Campo: Correo electrónico -->
       <div>
         <label for="email" class="required">Correo electrónico</label>
+        <!-- name="user_email" será usado por EmailJS -->
         <input
           type="email"
           id="email"
-          name="Correo_Electronico"
+          name="user_email"
           placeholder="ejemplo@dominio.com"
           required
         />
@@ -82,10 +72,11 @@
       <!-- Campo: Confirmar correo electrónico -->
       <div>
         <label for="emailConfirm" class="required">Confirmar correo electrónico</label>
+        <!-- name="user_email_confirm" para identificar en el template -->
         <input
           type="email"
           id="emailConfirm"
-          name="Confirmacion_Correo"
+          name="user_email_confirm"
           placeholder="Repite tu correo electrónico"
           required
         />
@@ -100,7 +91,7 @@
           <input
             type="password"
             id="password"
-            name="Contrasena"
+            name="user_password"
             placeholder="Ingresa tu contraseña"
             required
             minlength="8"
@@ -122,7 +113,7 @@
           <input
             type="password"
             id="passwordConfirm"
-            name="Confirmacion_Contrasena"
+            name="user_password_confirm"
             placeholder="Repite tu contraseña"
             required
             minlength="8"
@@ -142,7 +133,7 @@
         <input
           type="text"
           id="age"
-          name="Edad"
+          name="user_age"
           placeholder="Ejemplo: 35"
           required
           inputmode="numeric"
@@ -155,7 +146,7 @@
       <!-- Campo: Fecha de nacimiento, el max será establecido por JS a la fecha actual -->
       <div>
         <label for="birthdate" class="required">Fecha de nacimiento</label>
-        <input type="date" id="birthdate" name="Fecha_Nacimiento" required max="" />
+        <input type="date" id="birthdate" name="user_birthdate" required max="" />
         <div class="error-message" id="error-birthdate" aria-live="polite"></div>
       </div>
 
@@ -164,7 +155,7 @@
         <label for="comments">Comentarios (opcional)</label>
         <textarea
           id="comments"
-          name="Comentarios"
+          name="user_comments"
           placeholder="Escribe aquí tus comentarios"
           rows="5"
           cols="40"
@@ -176,7 +167,7 @@
       </div>
 
       <!-- Botón de envío principal -->
-      <button type="submit">Enviar información</button>
+      <button type="submit" id="submitBtn">Enviar información</button>
     </form>
 
     <!-- Mensaje de éxito que se muestra tras un envío válido -->
@@ -187,11 +178,21 @@
       aria-live="polite"
       role="alert"
     >
-      Formulario enviado con éxito. ¡Gracias!
+      ¡Formulario enviado con éxito! Te contactaremos pronto.
+    </div>
+
+    <!-- Mensaje de envío en progreso -->
+    <div
+      class="sending-message"
+      id="sendingMessage"
+      style="display:none;"
+      aria-live="polite"
+    >
+      Enviando... Por favor espera.
     </div>
   </div>
 
-  <!-- Referencia al script JS que contiene toda la lógica de validación y toggles -->
+  <!-- Referencia al script JS que contiene toda la lógica de validación y envío -->
   <script src="script.js"></script>
 </body>
 </html>
