@@ -1,787 +1,405 @@
-/* ===================================================================
-   RESET Y CONFIGURACIÓN BASE
-   =================================================================== */
+/* 
+=============================================================================
+FORMULARIO PROFESIONAL - ESTILOS CSS DOCUMENTADOS
+=============================================================================
+Autor: Hector Arciniega
+Descripción: Estilos completos para formulario con validación de email 
+             e indicador de fortaleza de contraseña
+Características: Responsive, animaciones, validación visual en tiempo real
+=============================================================================
+*/
 
-/* Reset universal para todos los elementos */
-/* box-sizing: border-box hace que padding y border se incluyan en el width/height total */
-/* Esto evita problemas de dimensionamiento y hace los cálculos más predecibles */
+/* =============================================================================
+   1. RESET Y CONFIGURACIÓN BASE
+============================================================================= */
+
+/* Reset universal para consistencia entre navegadores */
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; /* Incluye padding y border en el ancho total */
 }
 
-/* Estilos base para el body (contenedor principal de toda la página) */
+/* Configuración del body principal */
 body {
-  /* Fuente principal Lato, con fallback a sans-serif si no carga */
-  font-family: 'Lato', sans-serif;
-  
-  /* Color de fondo gris claro (#f0f2f5) para toda la página */
-  background: #f0f2f5;
-  
-  /* Eliminar márgenes por defecto del navegador */
-  margin: 0;
-  
-  /* Padding: 40px arriba/abajo, 20px izquierda/derecha */
-  /* Esto crea espacio alrededor del formulario */
-  padding: 40px 20px;
-  
-  /* Flexbox para centrar el contenido */
-  display: flex;
-  justify-content: center;    /* Centra horizontalmente */
-  align-items: flex-start;    /* Alinea al inicio verticalmente (no centrado completo) */
-  
-  /* Altura mínima de toda la ventana del navegador */
-  min-height: 100vh;
+  font-family: 'Lato', sans-serif;    /* Fuente principal Google Fonts */
+  background: #f0f2f5;                /* Color de fondo gris claro */
+  margin: 0;                          /* Eliminar márgenes por defecto */
+  padding: 40px 20px;                 /* Espaciado interno */
+  display: flex;                      /* Flexbox para centrado */
+  justify-content: center;            /* Centrado horizontal */
+  align-items: flex-start;            /* Alineación vertical al inicio */
+  min-height: 100vh;                  /* Altura mínima completa de viewport */
 }
 
-/* ===================================================================
-   CONTENEDOR PRINCIPAL DEL FORMULARIO
-   =================================================================== */
+/* =============================================================================
+   2. CONTENEDOR PRINCIPAL DEL FORMULARIO
+============================================================================= */
 
-/* Estilo para la caja blanca que contiene todo el formulario */
 .container {
-  /* Fondo blanco para contrastar con el fondo gris de la página */
-  background: #fff;
-  
-  /* Padding interno: 32px arriba/abajo, 36px izquierda/derecha */
-  padding: 32px 36px;
-  
-  /* Esquinas redondeadas de 12px para un look moderno */
-  border-radius: 12px;
-  
-  /* Sombra sutil: desplazamiento 0 4px, difuminado 15px, color negro al 10% opacidad */
-  /* Esto da efecto de "elevación" sobre el fondo */
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  
-  /* Ancho máximo de 480px para que no se extienda demasiado en pantallas grandes */
-  max-width: 480px;
-  
-  /* Ancho del 100% hasta llegar al max-width */
-  width: 100%;
+  background: #fff;                   /* Fondo blanco para el formulario */
+  padding: 32px 36px;                 /* Espaciado interno generoso */
+  border-radius: 12px;                /* Bordes redondeados modernos */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Sombra sutil para profundidad */
+  max-width: 480px;                   /* Ancho máximo para legibilidad */
+  width: 100%;                        /* Ancho completo hasta el máximo */
 }
 
-/* ===================================================================
-   TÍTULO PRINCIPAL
-   =================================================================== */
+/* =============================================================================
+   3. TIPOGRAFÍA Y TÍTULOS
+============================================================================= */
 
-/* Estilo para el título H1 del formulario */
+/* Título principal del formulario */
 h1 {
-  /* Fuente Roboto para títulos, más limpia y moderna que Lato */
-  font-family: 'Roboto', sans-serif;
-  
-  /* Peso de fuente 700 (bold) para destacar */
-  font-weight: 700;
-  
-  /* Color gris oscuro (#222) en lugar de negro puro para menos contraste */
-  color: #222;
-  
-  /* Margen inferior de 24px para separar del contenido siguiente */
-  margin-bottom: 24px;
-  
-  /* Texto centrado */
-  text-align: center;
+  font-family: 'Roboto', sans-serif;  /* Fuente secundaria para títulos */
+  font-weight: 700;                   /* Peso bold para destacar */
+  color: #222;                        /* Color oscuro para contraste */
+  margin-bottom: 24px;                /* Espaciado inferior */
+  text-align: center;                 /* Centrado horizontal */
 }
 
-/* ===================================================================
-   ESTRUCTURA DEL FORMULARIO
-   =================================================================== */
+/* =============================================================================
+   4. ESTRUCTURA DEL FORMULARIO
+============================================================================= */
 
-/* Contenedor del formulario usando Flexbox para layout vertical */
+/* Contenedor principal del formulario */
 form {
-  /* Flexbox con dirección columna (elementos uno debajo del otro) */
-  display: flex;
-  flex-direction: column;
-  
-  /* Gap de 20px entre cada campo del formulario */
-  /* Esto reemplaza tener que poner margin en cada elemento */
-  gap: 20px;
+  display: flex;                      /* Flexbox para layout vertical */
+  flex-direction: column;             /* Dirección vertical */
+  gap: 20px;                          /* Espaciado uniforme entre campos */
 }
 
-/* ===================================================================
-   ETIQUETAS (LABELS)
-   =================================================================== */
+/* =============================================================================
+   5. ETIQUETAS (LABELS)
+============================================================================= */
 
-/* Estilo base para todas las etiquetas de campos */
+/* Estilos base para todas las etiquetas */
 label {
-  /* Texto en negrita para que destaque */
-  font-weight: 700;
-  
-  /* Margen inferior de 6px para separar del input */
-  margin-bottom: 6px;
-  
-  /* Display inline-block permite aplicar margin y padding */
-  display: inline-block;
-  
-  /* Color gris medio para texto de etiquetas */
-  color: #444;
+  font-weight: 700;                   /* Peso bold para destacar */
+  margin-bottom: 6px;                 /* Espaciado inferior */
+  display: inline-block;              /* Permite márgenes verticales */
+  color: #444;                        /* Color gris oscuro */
 }
 
-/* Pseudo-elemento para campos obligatorios */
-/* Se aplica a labels con clase "required" */
+/* Asterisco rojo para campos obligatorios */
 label.required::after {
-  /* Contenido del asterisco rojo después del texto */
-  content: " *";
-  
-  /* Color rojo para indicar campo obligatorio */
-  color: #d93025;
+  content: " *";                      /* Contenido del asterisco */
+  color: #d93025;                     /* Color rojo para destacar */
 }
 
-/* ===================================================================
-   INPUTS Y CAMPOS DE ENTRADA
-   =================================================================== */
+/* =============================================================================
+   6. INPUTS Y CONTROLES DE FORMULARIO
+============================================================================= */
 
-/* Estilo base para todos los tipos de input y textarea */
+/* Estilos base para todos los inputs principales */
 input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="date"],
 textarea {
-  /* Ancho completo del contenedor */
-  width: 100%;
-  
-  /* Padding interno: 12px arriba/abajo, 14px izquierda/derecha */
-  padding: 12px 14px;
-  
-  /* Borde de 2px sólido gris claro */
-  border: 2px solid #ccc;
-  
-  /* Esquinas redondeadas de 10px */
-  border-radius: 10px;
-  
-  /* Tamaño de fuente estándar (1rem = 16px por defecto) */
-  font-size: 1rem;
-  
-  /* Fuente Roboto para texto de inputs */
-  font-family: 'Roboto', sans-serif;
-  
-  /* Transición suave para efectos hover/focus */
-  /* 0.3s de duración, ease para aceleración natural */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;                        /* Ancho completo del contenedor */
+  padding: 12px 14px;                 /* Espaciado interno cómodo */
+  border: 2px solid #ccc;             /* Borde gris claro */
+  border-radius: 10px;                /* Bordes redondeados */
+  font-size: 1rem;                    /* Tamaño de fuente legible */
+  font-family: 'Roboto', sans-serif;  /* Fuente consistente */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
 }
 
-/* ===================================================================
-   TRANSFORMACIÓN DE TEXTO EN INPUTS
-   =================================================================== */
-
-/* Solo los inputs de texto (nombre, edad) se convierten a mayúsculas */
-/* Esto es útil para estandarizar nombres y edades */
+/* Transformación a mayúsculas solo para campos de texto */
 input[type="text"] {
-  text-transform: uppercase;
+  text-transform: uppercase;          /* Solo nombre y edad en mayúsculas */
 }
 
-/* Los demás tipos de input NO se transforman */
-/* !important asegura que esta regla tenga prioridad */
+/* Evitar transformación en otros campos */
 input[type="email"],
 input[type="password"],
 input[type="date"],
 textarea {
-  text-transform: none !important;
+  text-transform: none !important;    /* Mantener texto original */
 }
 
-/* ===================================================================
-   ESTADOS DE FOCUS (CUANDO EL USUARIO HACE CLIC EN UN CAMPO)
-   =================================================================== */
-
-/* Efectos visuales cuando el usuario enfoca un campo */
+/* Estados de foco para todos los inputs */
 input:focus,
 textarea:focus {
-  /* Cambiar borde a color azul cuando está activo */
-  border-color: #3a86ff;
-  
-  /* Sombra azul brillante alrededor del campo */
-  /* Difuminado de 8px, color azul al 40% opacidad */
-  box-shadow: 0 0 8px rgba(58,134,255,0.4);
-  
-  /* Eliminar el outline por defecto del navegador */
-  outline: none;
+  border-color: #3a86ff;              /* Borde azul al enfocar */
+  box-shadow: 0 0 8px rgba(58,134,255,0.4); /* Sombra azul difusa */
+  outline: none;                      /* Eliminar outline por defecto */
 }
 
-/* ===================================================================
-   ESTADOS DE VALIDACIÓN DE EMAIL (FUNCIONALIDAD NUEVA)
-   =================================================================== */
+/* =============================================================================
+   7. ESTADOS DE VALIDACIÓN DE EMAIL
+============================================================================= */
 
-/* Estilo para email que está siendo validado en tiempo real */
+/* Email siendo validado con API externa */
 input.validating {
-  /* Color de borde naranja para indicar "procesando" */
-  /* !important asegura que tenga prioridad sobre otros estilos */
-  border-color: #ff9800 !important;
-  
-  /* Sombra naranja para feedback visual */
-  box-shadow: 0 0 8px rgba(255, 152, 0, 0.4) !important;
-  
-  /* Efecto de rayas diagonales animadas en el fondo */
-  /* linear-gradient crea patrón de rayas */
+  border-color: #ff9800 !important;   /* Borde naranja durante validación */
+  box-shadow: 0 0 8px rgba(255, 152, 0, 0.4) !important; /* Sombra naranja */
+  /* Patrón animado de rayas para indicar proceso */
   background-image: linear-gradient(45deg, transparent 35%, rgba(255, 152, 0, 0.1) 50%, transparent 65%);
-  
-  /* Tamaño del patrón de rayas */
   background-size: 20px 20px;
-  
-  /* Animación que mueve las rayas continuamente */
-  animation: loading-stripes 1s linear infinite;
+  animation: loading-stripes 1s linear infinite; /* Animación de carga */
 }
 
-/* Animación para el efecto de rayas móviles */
+/* Animación de rayas deslizantes para estado de validación */
 @keyframes loading-stripes {
-  0% { background-position: 0 0; }      /* Posición inicial */
-  100% { background-position: 20px 0; } /* Posición final (movimiento horizontal) */
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 0; }
 }
 
-/* Estilo para email válido (pasó todas las validaciones) */
+/* Email válido confirmado */
 input.valid {
-  /* Borde verde para indicar éxito */
-  border-color: #4CAF50 !important;
-  
-  /* Sombra verde */
-  box-shadow: 0 0 8px rgba(76, 175, 80, 0.4) !important;
-  
-  /* Fondo verde muy claro (5% opacidad) */
-  background-color: rgba(76, 175, 80, 0.05);
+  border-color: #4CAF50 !important;   /* Borde verde para éxito */
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.4) !important; /* Sombra verde */
+  background-color: rgba(76, 175, 80, 0.05); /* Fondo verde muy sutil */
 }
 
-/* Estilo para email inválido (falló validación) */
+/* Email inválido o con errores */
 input.invalid {
-  /* Borde rojo para indicar error */
-  border-color: #d93025 !important;
-  
-  /* Sombra roja */
-  box-shadow: 0 0 8px rgba(217, 48, 37, 0.4) !important;
-  
-  /* Fondo rojo muy claro (5% opacidad) */
-  background-color: rgba(217, 48, 37, 0.05);
+  border-color: #d93025 !important;   /* Borde rojo para error */
+  box-shadow: 0 0 8px rgba(217, 48, 37, 0.4) !important; /* Sombra roja */
+  background-color: rgba(217, 48, 37, 0.05); /* Fondo rojo muy sutil */
 }
 
-/* Spinner animado para campo que se está validando */
-/* Este pseudo-elemento crea un círculo giratorio */
-input.validating::after {
-  /* Contenido vacío (solo visual) */
-  content: '';
-  
-  /* Posicionamiento absoluto para colocar dentro del input */
-  position: absolute;
-  right: 10px;                    /* 10px desde el borde derecho */
-  top: 50%;                       /* Al centro vertical */
-  transform: translateY(-50%);    /* Ajuste fino para centrado perfecto */
-  
-  /* Dimensiones del spinner */
-  width: 16px;
-  height: 16px;
-  
-  /* Borde para crear círculo */
-  border: 2px solid #ff9800;           /* Borde naranja */
-  border-top: 2px solid transparent;   /* Parte superior transparente */
-  border-radius: 50%;                  /* Forma circular */
-  
-  /* Animación de rotación infinita */
-  animation: spin 1s linear infinite;
+/* =============================================================================
+   8. INDICADOR DE FORTALEZA DE CONTRASEÑA
+============================================================================= */
+
+/* Contenedor del campo de contraseña */
+.password-field {
+  position: relative;                 /* Para posicionamiento de elementos hijos */
 }
 
-/* Animación de rotación para el spinner */
-@keyframes spin {
-  0% { transform: translateY(-50%) rotate(0deg); }     /* Sin rotación */
-  100% { transform: translateY(-50%) rotate(360deg); } /* Rotación completa */
+/* Contenedor principal del indicador de fortaleza */
+.password-strength {
+  margin-top: 10px;                   /* Espaciado superior */
+  opacity: 0;                         /* Invisible por defecto */
+  transform: translateY(-10px);       /* Desplazado hacia arriba */
+  transition: all 0.3s ease;         /* Transición suave para aparecer */
 }
 
-/* ===================================================================
-   TEXTAREA (CAMPO DE COMENTARIOS)
-   =================================================================== */
+/* Estado visible del indicador */
+.password-strength.show {
+  opacity: 1;                         /* Completamente visible */
+  transform: translateY(0);           /* Posición normal */
+}
 
-/* Configuración específica para el área de texto */
+/* Etiqueta del indicador */
+.password-strength-label {
+  font-size: 0.85rem;                 /* Tamaño pequeño */
+  color: #666;                        /* Color gris */
+  margin-bottom: 6px;                 /* Espaciado inferior */
+  display: block;                     /* Ocupar línea completa */
+}
+
+/* Contenedor de la barra de progreso */
+.password-strength-bar-container {
+  height: 8px;                        /* Altura de la barra */
+  background: #e9ecef;                /* Fondo gris claro */
+  border-radius: 4px;                 /* Bordes redondeados */
+  overflow: hidden;                   /* Ocultar desbordamientos */
+  position: relative;                 /* Para posicionamiento de la barra */
+}
+
+/* Barra de progreso que indica la fortaleza */
+.password-strength-bar {
+  height: 100%;                       /* Altura completa del contenedor */
+  width: 0%;                          /* Ancho inicial 0% */
+  transition: all 0.4s ease;         /* Transición suave al cambiar */
+  border-radius: 4px;                 /* Bordes redondeados */
+  position: relative;                 /* Para efectos especiales */
+}
+
+/* =============================================================================
+   9. ESTADOS DE FORTALEZA DE CONTRASEÑA
+============================================================================= */
+
+/* Contraseña débil - Rojo */
+.strength-weak {
+  background: linear-gradient(90deg, #dc3545, #e74c3c); /* Gradiente rojo */
+  width: 33.33%;                      /* 1/3 de la barra */
+}
+
+/* Contraseña regular - Amarillo */
+.strength-medium {
+  background: linear-gradient(90deg, #ffc107, #f39c12); /* Gradiente amarillo */
+  width: 66.66%;                      /* 2/3 de la barra */
+}
+
+/* Contraseña fuerte - Verde */
+.strength-strong {
+  background: linear-gradient(90deg, #28a745, #20c997); /* Gradiente verde */
+  width: 100%;                        /* Barra completa */
+}
+
+/* Contraseña excelente - Azul con efectos especiales */
+.strength-very-strong {
+  background: linear-gradient(90deg, #007bff, #17a2b8); /* Gradiente azul */
+  width: 100%;                        /* Barra completa */
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3); /* Sombra azul */
+}
+
+/* =============================================================================
+   10. TEXTO DESCRIPTIVO DE FORTALEZA
+============================================================================= */
+
+/* Contenedor del texto descriptivo */
+.password-strength-text {
+  font-size: 0.8rem;                  /* Tamaño pequeño */
+  font-weight: 600;                   /* Peso semi-bold */
+  margin-top: 6px;                    /* Espaciado superior */
+  transition: color 0.3s ease;       /* Transición suave de color */
+}
+
+/* Colores del texto según el nivel de fortaleza */
+.text-weak {
+  color: #dc3545;                     /* Rojo para débil */
+}
+
+.text-medium {
+  color: #ffc107;                     /* Amarillo para regular */
+}
+
+.text-strong {
+  color: #28a745;                     /* Verde para fuerte */
+}
+
+.text-very-strong {
+  color: #007bff;                     /* Azul para excelente */
+}
+
+/* =============================================================================
+   11. ANIMACIÓN ESPECIAL PARA CONTRASEÑA EXCELENTE
+============================================================================= */
+
+/* Animación de pulso brillante para contraseñas excelentes */
+.strength-very-strong {
+  animation: pulse-glow 2s infinite;  /* Animación infinita cada 2 segundos */
+}
+
+/* Definición de la animación de pulso */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Sombra suave */
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.6); /* Sombra intensa */
+  }
+}
+
+/* =============================================================================
+   12. TEXTAREA Y CONTROLES ESPECIALES
+============================================================================= */
+
+/* Área de texto para comentarios */
 textarea {
-  /* Permitir solo redimensionamiento vertical */
-  /* El usuario puede hacer el textarea más alto/bajo pero no más ancho */
-  resize: vertical;
-  
-  /* Altura mínima de 100px */
-  min-height: 100px;
+  resize: vertical;                   /* Solo redimensionable verticalmente */
+  min-height: 100px;                  /* Altura mínima */
 }
 
-/* ===================================================================
-   CAMPOS DE CONTRASEÑA CON BOTÓN DE MOSTRAR/OCULTAR
-   =================================================================== */
+/* =============================================================================
+   13. CONTROLES DE CONTRASEÑA (MOSTRAR/OCULTAR)
+============================================================================= */
 
-/* Contenedor para inputs de contraseña con botón de toggle */
+/* Contenedor para input de contraseña con botón */
 .input-password {
-  /* Posicionamiento relativo para elementos absolutos internos */
-  position: relative;
+  position: relative;                 /* Para posicionar botón absolutamente */
 }
 
-/* Input dentro del contenedor de contraseña */
+/* Input de contraseña con espacio para el botón */
 .input-password input {
-  /* Padding extra a la derecha para hacer espacio al botón */
-  padding-right: 42px;
-  
-  /* Asegurar que no se transforme a mayúsculas */
-  text-transform: none !important;
+  padding-right: 42px;                /* Espacio a la derecha para el botón */
+  text-transform: none !important;    /* No transformar texto de contraseña */
 }
 
-/* Botón de mostrar/ocultar contraseña */
+/* Botón para mostrar/ocultar contraseña */
 .input-password button {
-  /* Posicionamiento absoluto dentro del input */
-  position: absolute;
-  right: 10px;                    /* 10px desde el borde derecho */
-  top: 50%;                       /* Centro vertical */
-  transform: translateY(-50%);    /* Ajuste fino de centrado */
-  
-  /* Quitar estilos de botón por defecto */
-  background: transparent;
-  border: none;
-  cursor: pointer;                /* Cursor de mano al pasar sobre él */
-  
-  /* Estilo del emoji/ícono */
-  font-size: 18px;
-  color: #666;                    /* Color gris medio */
-  
-  /* Prevenir selección de texto del emoji */
-  user-select: none;
-  
-  /* Transición suave para el cambio de color */
-  transition: color 0.3s ease;
-  
-  /* Padding para área de clic más grande */
-  padding: 4px;
+  position: absolute;                 /* Posicionamiento absoluto */
+  right: 10px;                        /* 10px desde el borde derecho */
+  top: 50%;                           /* Centrado verticalmente */
+  transform: translateY(-50%);        /* Ajuste fino del centrado */
+  background: transparent;            /* Fondo transparente */
+  border: none;                       /* Sin borde */
+  cursor: pointer;                    /* Cursor de mano */
+  font-size: 18px;                    /* Tamaño del emoji */
+  color: #666;                        /* Color gris */
+  user-select: none;                  /* No seleccionable */
+  transition: color 0.3s ease;       /* Transición suave de color */
+  padding: 4px;                       /* Área clickeable */
 }
 
-/* Efecto hover para el botón de contraseña */
+/* Estado hover del botón de contraseña */
 .input-password button:hover {
-  /* Cambiar a azul al pasar el mouse */
-  color: #3a86ff;
+  color: #3a86ff;                     /* Color azul al pasar el mouse */
 }
 
-/* ===================================================================
-   BOTÓN DE ENVÍO
-   =================================================================== */
+/* =============================================================================
+   14. BOTÓN DE ENVÍO
+============================================================================= */
 
-/* Estilo principal del botón de envío */
+/* Botón principal de envío del formulario */
 button[type="submit"] {
-  /* Color de fondo azul */
-  background: #3a86ff;
-  
-  /* Texto blanco */
-  color: #fff;
-  
-  /* Sin borde */
-  border: none;
-  
-  /* Esquinas redondeadas */
-  border-radius: 10px;
-  
-  /* Padding interno para tamaño adecuado */
-  padding: 14px 20px;
-  
-  /* Tamaño de fuente ligeramente mayor */
-  font-size: 1.1rem;
-  
-  /* Texto en negrita */
-  font-weight: 700;
-  
-  /* Fuente Roboto */
-  font-family: 'Roboto', sans-serif;
-  
-  /* Cursor de mano */
-  cursor: pointer;
-  
-  /* Transición suave para todos los efectos */
-  transition: all 0.3s ease;
+  background: #3a86ff;                /* Fondo azul principal */
+  color: #fff;                        /* Texto blanco */
+  border: none;                       /* Sin borde */
+  border-radius: 10px;                /* Bordes redondeados */
+  padding: 14px 20px;                 /* Espaciado interno generoso */
+  font-size: 1.1rem;                  /* Tamaño de fuente destacado */
+  font-weight: 700;                   /* Peso bold */
+  font-family: 'Roboto', sans-serif;  /* Fuente consistente */
+  cursor: pointer;                    /* Cursor de mano */
+  transition: all 0.3s ease;         /* Transiciones suaves */
 }
 
-/* Efecto hover del botón (solo si no está deshabilitado) */
+/* Estado hover del botón (solo si no está deshabilitado) */
 button[type="submit"]:hover:not(:disabled) {
-  /* Color más oscuro al hacer hover */
-  background: #265dcc;
-  
-  /* Efecto de "elevación" moviendo 1px hacia arriba */
-  transform: translateY(-1px);
+  background: #265dcc;                /* Azul más oscuro */
+  transform: translateY(-1px);        /* Ligero movimiento hacia arriba */
 }
 
-/* Estilo para botón deshabilitado */
+/* Estado deshabilitado del botón */
 button[type="submit"]:disabled {
-  /* Color gris para indicar que no está disponible */
-  background: #ccc;
-  
-  /* Cursor normal (no de mano) */
-  cursor: not-allowed;
-  
-  /* Sin transformación */
-  transform: none;
+  background: #ccc;                   /* Fondo gris */
+  cursor: not-allowed;                /* Cursor de prohibido */
+  transform: none;                    /* Sin movimiento */
 }
 
-/* ===================================================================
-   MENSAJES DE ERROR
-   =================================================================== */
+/* =============================================================================
+   15. MENSAJES DE ERROR
+============================================================================= */
 
-/* Estilo base para mensajes de error de campos individuales */
+/* Contenedor base para mensajes de error */
 .error-message {
-  /* Color rojo para errores */
-  color: #d93025;
-  
-  /* Tamaño de fuente más pequeño */
-  font-size: 0.875rem;
-  
-  /* Espacio superior */
-  margin-top: 4px;
-  
-  /* Oculto por defecto (se muestra con JavaScript) */
-  display: none;
-  
-  /* Altura mínima para evitar "saltos" en el layout */
-  min-height: 20px;
-  
-  /* Altura de línea para mejor legibilidad */
-  line-height: 1.4;
+  color: #d93025;                     /* Color rojo para errores */
+  font-size: 0.875rem;                /* Tamaño más pequeño */
+  margin-top: 4px;                    /* Espaciado superior mínimo */
+  display: none;                      /* Oculto por defecto */
+  min-height: 20px;                   /* Altura mínima para consistencia */
+  line-height: 1.4;                   /* Interlineado cómodo */
 }
 
 /* Botones dentro de mensajes de error (para sugerencias) */
 .error-message button {
-  /* Fondo naranja para sugerencias */
-  background: #ff9800;
-  
-  /* Texto blanco */
-  color: white;
-  
-  /* Sin borde */
-  border: none;
-  
-  /* Padding pequeño */
-  padding: 2px 6px;
-  
-  /* Esquinas redondeadas pequeñas */
-  border-radius: 3px;
-  
-  /* Espacio a la izquierda */
-  margin-left: 5px;
-  
-  /* Cursor de mano */
-  cursor: pointer;
-  
-  /* Fuente más pequeña */
-  font-size: 0.8rem;
-  
-  /* Transición para hover */
-  transition: background 0.3s ease;
+  background: #ff9800;                /* Fondo naranja */
+  color: white;                       /* Texto blanco */
+  border: none;                       /* Sin borde */
+  padding: 2px 6px;                   /* Espaciado mínimo */
+  border-radius: 3px;                 /* Bordes ligeramente redondeados */
+  margin-left: 5px;                   /* Espaciado izquierdo */
+  cursor: pointer;                    /* Cursor de mano */
+  font-size: 0.8rem;                  /* Tamaño pequeño */
+  transition: background 0.3s ease;  /* Transición suave */
 }
 
-/* Hover para botones en mensajes de error */
+/* Estado hover de botones en errores */
 .error-message button:hover {
-  /* Naranja más oscuro */
-  background: #f57c00;
+  background: #f57c00;                /* Naranja más oscuro */
 }
 
-/* Mensaje de error global (para errores del formulario completo) */
+/* Mensaje de error global del formulario */
 .error-message-global {
-  /* Fondo rojo claro */
-  background: #f8d7da;
-  
-  /* Texto rojo oscuro */
-  color: #721c24;
-  
-  /* Borde rojo */
-  border: 1px solid #f5c6cb;
-  
-  /* Padding para contenido */
-  padding: 14px 20px;
-  
-  /* Esquinas redondeadas */
-  border-radius: 10px;
-  
-  /* Espacio superior */
-  margin-top: 20px;
-  
-  /* Oculto por defecto */
-  display: none;
-  
-  /* Texto en negrita */
-  font-weight: 700;
-  
-  /* Texto centrado */
-  text-align: center;
-}
-
-/* ===================================================================
-   CONTADOR DE CARACTERES
-   =================================================================== */
-
-/* Estilo para el contador de caracteres del textarea */
-.char-counter {
-  /* Fuente pequeña */
-  font-size: 0.85rem;
-  
-  /* Color gris */
-  color: #666;
-  
-  /* Espacio superior */
-  margin-top: 4px;
-  
-  /* Alineado a la derecha */
-  text-align: right;
-  
-  /* No seleccionable (es solo informativo) */
-  user-select: none;
-}
-
-/* ===================================================================
-   MENSAJE DE ÉXITO
-   =================================================================== */
-
-/* Estilo para mensaje de éxito después del envío */
-.success-message {
-  /* Fondo verde claro */
-  background: #d4edda;
-  
-  /* Texto verde oscuro */
-  color: #155724;
-  
-  /* Borde verde */
-  border: 1px solid #c3e6cb;
-  
-  /* Padding interno */
-  padding: 14px 20px;
-  
-  /* Esquinas redondeadas */
-  border-radius: 10px;
-  
-  /* Espacio superior */
-  margin-top: 20px;
-  
-  /* Oculto por defecto */
-  display: none;
-  
-  /* Texto en negrita */
-  font-weight: 700;
-  
-  /* Texto centrado */
-  text-align: center;
-}
-
-/* ===================================================================
-   MENSAJE DE ENVÍO (LOADING)
-   =================================================================== */
-
-/* Estilo para mensaje mostrado mientras se envía el formulario */
-.sending-message {
-  /* Fondo amarillo claro */
-  background: #fff3cd;
-  
-  /* Texto amarillo oscuro */
-  color: #856404;
-  
-  /* Borde amarillo */
-  border: 1px solid #ffeaa7;
-  
-  /* Padding interno */
-  padding: 14px 20px;
-  
-  /* Esquinas redondeadas */
-  border-radius: 10px;
-  
-  /* Espacio superior */
-  margin-top: 20px;
-  
-  /* Oculto por defecto */
-  display: none;
-  
-  /* Texto en negrita */
-  font-weight: 700;
-  
-  /* Texto centrado */
-  text-align: center;
-  
-  /* Animación de pulso para indicar actividad */
-  animation: pulse 1.5s infinite;
-}
-
-/* Animación de pulso (cambio de opacidad) */
-@keyframes pulse {
-  0%, 100% { opacity: 1; }     /* Completamente visible */
-  50% { opacity: 0.7; }        /* Parcialmente transparente */
-}
-
-/* ===================================================================
-   ESTILOS ESPECÍFICOS PARA VALIDACIÓN DE EMAIL
-   =================================================================== */
-
-/* Campo de error específico para email */
-#error-email {
-  /* Altura mínima mayor para acomodar mensajes más largos */
-  min-height: 24px;
-}
-
-/* Texto en negrita dentro de mensajes de error de email */
-#error-email strong {
-  font-weight: bold;
-}
-
-/* ===================================================================
-   SUGERENCIAS DE DOMINIO
-   =================================================================== */
-
-/* Contenedor para sugerencias de corrección de dominio */
-.domain-suggestion {
-  /* Fondo amarillo claro */
-  background: #fff3cd;
-  
-  /* Borde amarillo */
-  border: 1px solid #ffeaa7;
-  
-  /* Padding interno */
-  padding: 10px;
-  
-  /* Esquinas redondeadas */
-  border-radius: 6px;
-  
-  /* Espacio superior */
-  margin-top: 5px;
-  
-  /* Fuente ligeramente más pequeña */
-  font-size: 0.9rem;
-  
-  /* Color de texto amarillo oscuro */
-  color: #856404;
-  
-  /* Flexbox para layout horizontal */
-  display: flex;
-  align-items: center;              /* Centrado vertical */
-  justify-content: space-between;   /* Espacio entre elementos */
-  flex-wrap: wrap;                  /* Permitir salto de línea en pantallas pequeñas */
-}
-
-/* Botón dentro de sugerencia de dominio */
-.domain-suggestion button {
-  /* Fondo amarillo oscuro */
-  background: #856404;
-  
-  /* Texto blanco */
-  color: white;
-  
-  /* Sin borde */
-  border: none;
-  
-  /* Padding pequeño */
-  padding: 4px 8px;
-  
-  /* Esquinas redondeadas */
-  border-radius: 4px;
-  
-  /* Cursor de mano */
-  cursor: pointer;
-  
-  /* Fuente pequeña */
-  font-size: 0.8rem;
-  
-  /* Espacio a la izquierda */
-  margin-left: 5px;
-  
-  /* Transición para hover */
-  transition: background 0.3s ease;
-}
-
-/* Hover para botón de sugerencia */
-.domain-suggestion button:hover {
-  /* Color más oscuro */
-  background: #6c5d03;
-}
-
-/* ===================================================================
-   INDICADORES DE ESTADO VISUAL
-   =================================================================== */
-
-/* Indicador visual para estado de validación */
-.validation-indicator {
-  /* Posicionamiento absoluto */
-  position: absolute;
-  right: 45px;                    /* Espacio para no solapar con otros elementos */
-  top: 50%;                       /* Centro vertical */
-  transform: translateY(-50%);    /* Ajuste fino */
-  
-  /* Tamaño del ícono */
-  font-size: 16px;
-  
-  /* No interfiere con clics */
-  pointer-events: none;
-}
-
-/* ===================================================================
-   ANIMACIÓN DE CARGA ESPECÍFICA PARA EMAIL
-   =================================================================== */
-
-/* Contenedor de campo de email */
-.email-field-container {
-  /* Posicionamiento relativo para elementos absolutos internos */
-  position: relative;
-}
-
-/* Spinner específico para validación de email */
-.email-field-container.loading::after {
-  /* Contenido vacío */
-  content: '';
-  
-  /* Posicionamiento absoluto */
-  position: absolute;
-  right: 15px;                    /* Posición desde la derecha */
-  top: 50%;                       /* Centro vertical */
-  transform: translateY(-50%);    /* Ajuste fino */
-  
-  /* Dimensiones del spinner */
-  width: 16px;
-  height: 16px;
-  
-  /* Crear círculo con borde */
-  border: 2px solid #ff9800;           /* Borde naranja */
-  border-top: 2px solid transparent;   /* Parte superior transparente */
-  border-radius: 50%;                  /* Forma circular */
-  
-  /* Animación de rotación */
-  animation: emailSpinner 1s linear infinite;
-  
-  /* Z-index alto para aparecer sobre otros elementos */
-  z-index: 10;
-}
-
-/* Animación específica para spinner de email */
-@keyframes emailSpinner {
-  0% { transform: translateY(-50%) rotate(0deg); }     /* Inicio */
-  100% { transform: translateY(-50%) rotate(360deg); } /* Rotación completa */
-}
-
-/* ===================================================================
-   RESPONSIVE DESIGN (ADAPTACIÓN A MÓVILES)
-   =================================================================== */
-
-/* Media query para pantallas pequeñas (600px o menos) */
-@media (max-width: 600px) {
-  
-  /* Ajustar contenedor principal para móviles */
-  .container {
-    /* Menos padding en pantallas pequeñas */
-    padding: 20px;
-    
-    /* Márgenes laterales para evitar que toque los bordes */
-    margin: 20px 10px;
-  }
-  
-  /* Título más pequeño en móviles */
-  h1 {
-    font-size: 1.5rem;
-  }
-  
-  /* Sugerencias de dominio en columna para móviles */
-  .domain-suggestion {
-    /* Cambiar a dirección vertical */
-    flex-direction: column;
-    
-    /* Alinear al inicio */
-    align-items: flex-start;
-    
-    /* Espacio entre elementos */
-    gap: 8px;
-  }
-  
-  /* Botón de sugerencia sin margen izquierdo en móviles */
-  .domain-suggestion button {
-    margin-left: 0;
-    margin-top: 5px;
-  }
-  
-  /* Mensajes de error más pequeños en móviles */
-  .error-message {
-    font-size: 0.8rem;
-  }
-}
+  background: #f8d7da;                /* Fondo rojo claro */
+  color: #721c24;                     /* Texto rojo oscuro */
+  border: 1px solid #f5c6cb;          /* Borde rojo claro */
+  padding: 14px 20px;                 /* Espaciado interno */
+  border-radius: 10px;                /* Bordes redondeados */
+  margin-top: 20px;                   /* Espaciado superior */
+  display: none;                      /* Oculto por defecto */
