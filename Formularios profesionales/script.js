@@ -1,563 +1,848 @@
 /**
- * FORMULARIO PROFESIONAL CON EMAILJS
+ * ===================================================================
+ * FORMULARIO PROFESIONAL CON EMAILJS Y VALIDACIÓN DE EMAIL
+ * ===================================================================
  * Autor: Hector Arciniega
- * Versión: Final - Completamente funcional
- * 
- * DESCRIPCIÓN GENERAL:
- * Este archivo implementa un formulario profesional con validaciones avanzadas
- * y envío automático de correos electrónicos usando la librería EmailJS.
- * Incluye validaciones en tiempo real, restricciones de entrada, toggle de contraseñas
- * y manejo completo de estados de envío.
+ * Versión: Con validación de email en tiempo real
+ * Descripción: Script que maneja validación completa de formulario,
+ *              envío por email y validación de existencia de emails
  */
 
-// ===================================================================
-// SECCIÓN 1: CONFIGURACIÓN EMAILJS
-// ===================================================================
+/* ===================================================================
+   CONFIGURACIONES GLOBALES Y CONSTANTES
+   =================================================================== */
 
-/**
- * Objeto de configuración para EmailJS
- * Contiene todas las credenciales necesarias para el envío de correos
- * 
- * @type {Object}
- * @property {string} PUBLIC_KEY - Clave pública de la cuenta EmailJS
- * @property {string} SERVICE_ID - Identificador del servicio de correo configurado
- * @property {string} TEMPLATE_ID - Identificador de la plantilla de correo a utilizar
- */
+// Configuración para el servicio EmailJS
+// EmailJS permite enviar emails sin servidor backend
 const EMAILJS_CONFIG = {
-  PUBLIC_KEY: "escribir public_key",    // Clave pública para autenticación
-  SERVICE_ID: "escribir service_id",       // Servicio de correo (Gmail, Outlook, etc.)
-  TEMPLATE_ID: "escribir template_id"      // Plantilla con formato del correo
+  // Clave pública de EmailJS (visible en frontend, es segura)
+  PUBLIC_KEY: "Escribir public_key",
+  
+  // ID del servicio de email configurado en EmailJS
+  SERVICE_ID: "Escribir service_id",
+  
+  // ID del template de email configurado en EmailJS
+  TEMPLATE_ID: "Escribir template_id"
 };
 
-/**
- * Inicialización de la librería EmailJS
- * Debe ejecutarse antes de usar cualquier función de EmailJS
- * Establece la clave pública para todas las operaciones posteriores
- */
+// Configuración para validación de emails con API externa
+const EMAIL_VALIDATION_CONFIG = {
+  // API Key de EmailValidation.io para verificar existencia de emails
+  API_KEY: "Escribir API_Key",
+  
+  // URL base de la API de validación
+  API_URL: "https://api.emailvalidation.io/v1/info"
+};
+
+/* ===================================================================
+   ESTADO GLOBAL DE VALIDACIÓN DE EMAIL
+   =================================================================== */
+
+// Objeto que mantiene el estado de la validación de email en tiempo real
+// Se usa para evitar validar el mismo email repetidamente
+let emailValidationState = {
+  // Indica si actualmente se está validando un email
+  isValidating: false,
+  
+  // Indica si el email actual es válido
+  isValid: false,
+  
+  // Mensaje de estado actual (para debugging)
+  message: '',
+  
+  // Último email que se validó (para evitar re-validaciones innecesarias)
+  lastValidatedEmail: ''
+};
+
+/* ===================================================================
+   INICIALIZACIÓN Y CONFIGURACIÓN INICIAL
+   =================================================================== */
+
+// Inicializar EmailJS con la clave pública
+// Esto debe hacerse antes de usar cualquier función de EmailJS
 emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
 
-// ===================================================================
-// SECCIÓN 2: INICIALIZACIÓN PRINCIPAL
-// ===================================================================
-
-/**
- * Event Listener principal que se ejecuta cuando el DOM está completamente cargado
- * Garantiza que todos los elementos HTML estén disponibles antes de manipularlos
- * 
- * @event DOMContentLoaded
- */
+// Event listener que se ejecuta cuando el DOM está completamente cargado
+// Esto asegura que todos los elementos HTML estén disponibles
 document.addEventListener('DOMContentLoaded', function() {
   
-  // ===================================================================
-  // SECCIÓN 3: REFERENCIAS A ELEMENTOS DEL DOM
-  // ===================================================================
+  /* ===================================================================
+     REFERENCIAS A ELEMENTOS DEL DOM
+     =================================================================== */
   
-  /**
-   * Referencias a elementos principales del formulario
-   * Estas constantes almacenan referencias directas a elementos HTML
-   * para evitar búsquedas repetitivas en el DOM
-   */
+  // === ELEMENTOS PRINCIPALES DEL FORMULARIO ===
   
-  // Elemento formulario principal
+  // Referencia al formulario completo
   const form = document.getElementById('professionalForm');
   
   // Botón de envío del formulario
   const submitBtn = document.getElementById('submitBtn');
   
-  // Elementos de mensajes de estado
-  const successMessage = document.getElementById('successMessage');    // Mensaje de éxito
-  const sendingMessage = document.getElementById('sendingMessage');    // Mensaje de envío en progreso
-  const errorMessage = document.getElementById('errorMessage');        // Mensaje de error
+  // Contenedores de mensajes de estado
+  const successMessage = document.getElementById('successMessage');   // Mensaje de éxito
+  const sendingMessage = document.getElementById('sendingMessage');   // Mensaje de "enviando..."
+  const errorMessage = document.getElementById('errorMessage');       // Mensaje de error global
   
-  /**
-   * Referencias a campos de entrada del formulario
-   * Cada constante representa un campo específico del formulario
-   */
-  const nameInput = document.getElementById('name');                   // Campo nombre
-  const emailInput = document.getElementById('email');                 // Campo email principal
-  const emailConfirmInput = document.getElementById('emailConfirm');   // Campo confirmación email
-  const passwordInput = document.getElementById('password');           // Campo contraseña
-  const passwordConfirmInput = document.getElementById('passwordConfirm'); // Campo confirmación contraseña
-  const ageInput = document.getElementById('age');                     // Campo edad
-  const birthdateInput = document.getElementById('birthdate');         // Campo fecha nacimiento
-  const commentsInput = document.getElementById('comments');           // Campo comentarios
-  const commentsCounter = document.getElementById('commentsCounter');  // Contador de caracteres
+  // === CAMPOS DE ENTRADA DEL FORMULARIO ===
   
-  /**
-   * Referencias a botones de toggle para contraseñas
-   * Permiten mostrar/ocultar el contenido de los campos de contraseña
-   */
-  const togglePassword = document.getElementById('togglePassword');           // Toggle contraseña principal
-  const togglePasswordConfirm = document.getElementById('togglePasswordConfirm'); // Toggle confirmación
+  // Campos de información personal
+  const nameInput = document.getElementById('name');                         // Campo nombre
+  const emailInput = document.getElementById('email');                       // Campo email principal
+  const emailConfirmInput = document.getElementById('emailConfirm');         // Campo confirmación email
+  const passwordInput = document.getElementById('password');                 // Campo contraseña
+  const passwordConfirmInput = document.getElementById('passwordConfirm');   // Campo confirmación contraseña
+  const ageInput = document.getElementById('age');                           // Campo edad
+  const birthdateInput = document.getElementById('birthdate');               // Campo fecha nacimiento
+  const commentsInput = document.getElementById('comments');                 // Campo comentarios (opcional)
+  
+  // Elemento que muestra el contador de caracteres del campo comentarios
+  const commentsCounter = document.getElementById('commentsCounter');
+  
+  // === BOTONES DE FUNCIONALIDAD ESPECIAL ===
+  
+  // Botones para mostrar/ocultar contraseñas
+  const togglePassword = document.getElementById('togglePassword');                   // Toggle contraseña principal
+  const togglePasswordConfirm = document.getElementById('togglePasswordConfirm');   // Toggle confirmación contraseña
 
-  // ===================================================================
-  // SECCIÓN 4: CONFIGURACIONES INICIALES
-  // ===================================================================
+  /* ===================================================================
+     CONFIGURACIONES INICIALES DEL FORMULARIO
+     =================================================================== */
   
-  /**
-   * Configuración de fecha máxima para el campo de fecha de nacimiento
-   * Previene que los usuarios seleccionen fechas futuras
-   */
+  // Configurar fecha máxima para el campo de fecha de nacimiento
+  // Esto previene que el usuario seleccione fechas futuras
   if (birthdateInput) {
     // Obtener fecha actual en formato ISO (YYYY-MM-DD)
     const today = new Date().toISOString().split('T')[0];
     
-    // Establecer fecha máxima permitida (hoy)
+    // Establecer como fecha máxima permitida
     birthdateInput.max = today;
   }
 
-  // ===================================================================
-  // SECCIÓN 5: FUNCIONES DE UTILIDAD PARA MANEJO DE ERRORES
-  // ===================================================================
-  
+  /* ===================================================================
+     FUNCIONES DE VALIDACIÓN DE EMAIL
+     =================================================================== */
+
   /**
-   * Muestra un mensaje de error para un campo específico
-   * 
-   * @param {string} fieldId - ID del campo al que pertenece el error
+   * Validación avanzada del formato de email
+   * Verifica múltiples aspectos del formato según estándares RFC
+   * @param {string} email - El email a validar
+   * @returns {object} - Objeto con resultado de validación y detalles
+   */
+  function validateEmailAdvanced(email) {
+    // Expresión regular robusta para validar formato de email
+    // Basada en RFC 5322 pero simplificada para uso práctico
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    
+    // Objeto con diferentes verificaciones del email
+    const checks = {
+      // Verificar que cumple con el patrón regex
+      format: emailRegex.test(email),
+      
+      // RFC 5321: longitud máxima de 254 caracteres
+      length: email.length <= 254,
+      
+      // RFC 5321: parte local (antes del @) máximo 64 caracteres
+      localPart: email.split('@')[0]?.length <= 64,
+      
+      // No permitir puntos consecutivos (..)
+      noConsecutiveDots: !email.includes('..'),
+      
+      // No puede empezar o terminar con punto
+      noStartEndDots: !email.startsWith('.') && !email.endsWith('.'),
+      
+      // Debe tener al menos un punto en la parte del dominio
+      validDomain: email.split('@')[1]?.includes('.') || false
+    };
+    
+    // Retornar resultado de validación
+    return {
+      // El email es válido si pasa todas las verificaciones
+      isValid: Object.values(checks).every(check => check),
+      
+      // Detalles de cada verificación para debugging
+      checks: checks
+    };
+  }
+
+  /**
+   * Detecta errores comunes de tipeo en dominios populares
+   * Sugiere la corrección automática para dominios mal escritos
+   * @param {string} email - El email a verificar
+   * @returns {object|null} - Objeto con sugerencia o null si no hay errores
+   */
+  function validateCommonDomains(email) {
+    // Extraer dominio del email y convertir a minúsculas
+    const domain = email.split('@')[1]?.toLowerCase();
+    
+    // Mapeo de dominios correctos y sus errores de tipeo comunes
+    const commonDomains = {
+      'gmail.com': ['gmai.com', 'gmial.com', 'gmail.co', 'gmaill.com', 'gmeil.com'],
+      'hotmail.com': ['hotmial.com', 'hotmai.com', 'hotmal.com', 'hotmeil.com'],
+      'yahoo.com': ['yaho.com', 'yahooo.com', 'yahoo.co', 'yhoo.com'],
+      'outlook.com': ['outlok.com', 'outllook.com', 'outlook.co'],
+      'icloud.com': ['iclod.com', 'icoud.com', 'icloud.co']
+    };
+    
+    // Buscar si el dominio actual está en la lista de errores
+    for (const [correct, typos] of Object.entries(commonDomains)) {
+      if (typos.includes(domain)) {
+        return {
+          // Email sugerido con corrección
+          suggestion: email.replace(domain, correct),
+          
+          // Dominio original (con error)
+          originalDomain: domain,
+          
+          // Dominio sugerido (correcto)
+          suggestedDomain: correct
+        };
+      }
+    }
+    
+    // No se encontraron errores de tipeo
+    return null;
+  }
+
+  /**
+   * Validación de email usando API externa (EmailValidation.io)
+   * Verifica si el email realmente existe y puede recibir correos
+   * @param {string} email - El email a validar
+   * @returns {Promise<object>} - Promesa con resultado de validación
+   */
+  async function validateEmailWithAPI(email) {
+    try {
+      // Construir URL de la API con parámetros
+      const url = `${EMAIL_VALIDATION_CONFIG.API_URL}?apikey=${EMAIL_VALIDATION_CONFIG.API_KEY}&email=${encodeURIComponent(email)}`;
+      
+      // Realizar petición HTTP a la API
+      const response = await fetch(url);
+      
+      // Verificar que la respuesta sea exitosa
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      // Convertir respuesta a JSON
+      const data = await response.json();
+      
+      // Log para debugging (ver respuesta de la API)
+      console.log('Respuesta de validación:', data);
+      
+      // Procesar respuesta de la API
+      return {
+        // Email es válido si:
+        // - Tiene formato correcto (format_valid)
+        // - El dominio tiene registros MX (mx_found) 
+        // - El buzón responde a SMTP (smtp_check)
+        // - NO es email desechable (!disposable)
+        isValid: data.format_valid && data.mx_found && data.smtp_check && !data.disposable,
+        
+        // Detalles de la validación
+        details: {
+          format: data.format_valid,      // Formato correcto
+          domain: data.mx_found,          // Dominio válido
+          mailbox: data.smtp_check,       // Buzón activo
+          disposable: data.disposable,    // Email temporal
+          role: data.role,                // Email de rol (admin, info, etc.)
+          suggestion: data.suggestion,    // Sugerencia de la API
+          status: data.state              // Estado general
+        },
+        
+        // Respuesta completa de la API (para debugging)
+        raw: data
+      };
+    } catch (error) {
+      // Manejar errores de red o de la API
+      console.error('Error validando email con API:', error);
+      return { 
+        isValid: false, 
+        error: 'Error de conexión con el servicio de validación',
+        details: {} 
+      };
+    }
+  }
+
+  /**
+   * Muestra visualmente el estado de validación del email
+   * Actualiza clases CSS y mensajes de error en tiempo real
+   * @param {string} status - Estado: 'valid', 'invalid', 'suggestion', o ''
+   * @param {string} message - Mensaje a mostrar al usuario
+   * @param {boolean} isLoading - Si está en proceso de validación
+   */
+  function showEmailValidationStatus(status, message, isLoading = false) {
+    // Obtener elemento donde se muestran errores de email
+    const errorElement = document.getElementById('error-email');
+    
+    // Limpiar clases CSS previas del input
+    emailInput.classList.remove('validating', 'valid', 'invalid');
+    
+    if (isLoading) {
+      // Estado: validando email con API
+      emailInput.classList.add('validating');                  // Clase CSS para efectos visuales
+      errorElement.innerHTML = '🔄 Validando email...';        // Mensaje con emoji
+      errorElement.style.color = '#ff9800';                    // Color naranja
+      errorElement.style.display = 'block';                    // Mostrar mensaje
+    } else if (status === 'valid') {
+      // Estado: email válido
+      emailInput.classList.add('valid');                       // Clase CSS verde
+      errorElement.innerHTML = '✅ Email válido y verificado';  // Mensaje de éxito
+      errorElement.style.color = '#4CAF50';                    // Color verde
+      errorElement.style.display = 'block';
+    } else if (status === 'invalid') {
+      // Estado: email inválido
+      emailInput.classList.add('invalid');                     // Clase CSS roja
+      errorElement.innerHTML = message || '❌ Email no válido'; // Mensaje de error
+      errorElement.style.color = '#d93025';                    // Color rojo
+      errorElement.style.display = 'block';
+    } else if (status === 'suggestion') {
+      // Estado: sugerencia de corrección
+      emailInput.classList.add('invalid');                     // Clase CSS roja
+      errorElement.innerHTML = message;                        // Mensaje con HTML (botón)
+      errorElement.style.color = '#ff9800';                    // Color naranja
+      errorElement.style.display = 'block';
+    } else {
+      // Estado: ocultar mensaje
+      errorElement.style.display = 'none';
+    }
+  }
+
+  /**
+   * Crea mensaje HTML con sugerencia de corrección de dominio
+   * Incluye botón para aplicar la corrección automáticamente
+   * @param {string} originalEmail - Email original con error
+   * @param {string} suggestedEmail - Email sugerido (no usado actualmente)
+   * @returns {string|null} - HTML del mensaje o null si no hay sugerencia
+   */
+  function createDomainSuggestion(originalEmail, suggestedEmail) {
+    // Verificar si hay sugerencia de dominio
+    const suggestion = validateCommonDomains(originalEmail);
+    if (suggestion) {
+      // Crear HTML con botón interactivo
+      return `❓ ¿Quisiste decir <strong>${suggestion.suggestion}</strong>? 
+              <button type="button" onclick="document.getElementById('email').value='${suggestion.suggestion}'; 
+              document.getElementById('email').dispatchEvent(new Event('input'));" 
+              style="background: #ff9800; color: white; border: none; padding: 2px 6px; border-radius: 3px; margin-left: 5px; cursor: pointer;">
+              Usar esta
+              </button>`;
+    }
+    return null;
+  }
+
+  /* ===================================================================
+     CONFIGURACIÓN DE VALIDACIÓN EN TIEMPO REAL
+     =================================================================== */
+
+  // Variable para almacenar el timeout de validación
+  // Se usa para implementar "debounce" (evitar validar en cada tecla)
+  let emailValidationTimeout;
+
+  /**
+   * Configura la validación de email en tiempo real
+   * Implementa debounce para evitar demasiadas llamadas a la API
+   */
+  function setupEmailValidation() {
+    // Agregar evento 'input' al campo de email
+    // Se ejecuta cada vez que el usuario escribe algo
+    emailInput.addEventListener('input', function() {
+      // Obtener valor actual del campo, sin espacios
+      const email = this.value.trim();
+      
+      // Cancelar validación anterior si existe
+      clearTimeout(emailValidationTimeout);
+      
+      // Resetear estado global de validación
+      emailValidationState.isValid = false;
+      emailValidationState.isValidating = false;
+      
+      // Si el campo está vacío, no mostrar nada
+      if (email.length === 0) {
+        showEmailValidationStatus('', '');
+        return;
+      }
+      
+      // === VALIDACIÓN INMEDIATA (SIN API) ===
+      
+      // Verificar formato básico sin llamar a la API
+      const basicValidation = validateEmailAdvanced(email);
+      if (!basicValidation.isValid) {
+        showEmailValidationStatus('invalid', '❌ Formato de email incorrecto');
+        return;
+      }
+      
+      // Verificar errores de tipeo en dominios comunes
+      const suggestionMessage = createDomainSuggestion(email);
+      if (suggestionMessage) {
+        showEmailValidationStatus('suggestion', suggestionMessage);
+        return;
+      }
+      
+      // === VALIDACIÓN CON API (DESPUÉS DE DELAY) ===
+      
+      // Configurar timeout para validar con API después de 1.5 segundos sin escribir
+      // Esto evita hacer muchas llamadas mientras el usuario escribe
+      emailValidationTimeout = setTimeout(async () => {
+        // Optimización: no re-validar el mismo email
+        if (emailValidationState.lastValidatedEmail === email && emailValidationState.isValid) {
+          showEmailValidationStatus('valid');
+          return;
+        }
+        
+        // Mostrar estado de "validando..."
+        showEmailValidationStatus('', '', true);
+        emailValidationState.isValidating = true;
+        
+        try {
+          // Llamar a la API de validación
+          const result = await validateEmailWithAPI(email);
+          
+          // Actualizar estado global
+          emailValidationState.isValidating = false;
+          emailValidationState.lastValidatedEmail = email;
+          emailValidationState.isValid = result.isValid;
+          
+          // Procesar resultado de la API
+          if (result.error) {
+            // Error de conexión o API
+            showEmailValidationStatus('invalid', `⚠️ ${result.error}`);
+          } else if (result.isValid) {
+            // Email válido
+            showEmailValidationStatus('valid');
+          } else {
+            // Email inválido - determinar razón específica
+            let reason = '❌ Email no válido';
+            
+            if (result.details.disposable) {
+              reason = '🚫 Email temporal/desechable detectado';
+            } else if (result.details.role) {
+              reason = '⚠️ Email de rol detectado (admin, info, etc.)';
+            } else if (!result.details.format) {
+              reason = '❌ Formato de email incorrecto';
+            } else if (!result.details.domain) {
+              reason = '❌ Dominio no válido o no existe';
+            } else if (!result.details.mailbox) {
+              reason = '❌ Buzón de correo no existe';
+            }
+            
+            showEmailValidationStatus('invalid', reason);
+          }
+        } catch (error) {
+          // Error inesperado en la validación
+          emailValidationState.isValidating = false;
+          showEmailValidationStatus('invalid', '⚠️ Error al validar email');
+        }
+      }, 1500); // Delay de 1.5 segundos
+    });
+  }
+
+  /* ===================================================================
+     FUNCIONES DE UTILIDAD PARA MANEJO DE ERRORES
+     =================================================================== */
+
+  /**
+   * Muestra mensaje de error para un campo específico
+   * @param {string} fieldId - ID del campo (sin prefijo 'error-')
    * @param {string} message - Mensaje de error a mostrar
-   * 
-   * Funcionamiento:
-   * 1. Busca el elemento de error usando convención 'error-{fieldId}'
-   * 2. Si existe, establece el mensaje y lo hace visible
-   * 3. Si no existe, no hace nada (previene errores)
    */
   function showError(fieldId, message) {
+    // Construir ID del elemento de error
     const errorElement = document.getElementById('error-' + fieldId);
     if (errorElement) {
-      errorElement.textContent = message;        // Establecer texto del error
-      errorElement.style.display = 'block';     // Hacer visible el error
+      // Establecer texto del mensaje
+      errorElement.textContent = message;
+      
+      // Mostrar el elemento
+      errorElement.style.display = 'block';
     }
   }
 
   /**
-   * Oculta el mensaje de error para un campo específico
-   * 
-   * @param {string} fieldId - ID del campo cuyo error se debe ocultar
-   * 
-   * Funcionamiento:
-   * 1. Busca el elemento de error correspondiente
-   * 2. Si existe, lo oculta y limpia su contenido
-   * 3. Previene errores si el elemento no existe
+   * Oculta mensaje de error para un campo específico
+   * @param {string} fieldId - ID del campo (sin prefijo 'error-')
    */
   function hideError(fieldId) {
+    // Construir ID del elemento de error
     const errorElement = document.getElementById('error-' + fieldId);
     if (errorElement) {
-      errorElement.style.display = 'none';     // Ocultar elemento
-      errorElement.textContent = '';           // Limpiar contenido
+      // Ocultar elemento
+      errorElement.style.display = 'none';
+      
+      // Limpiar contenido
+      errorElement.textContent = '';
     }
   }
 
   /**
-   * Oculta todos los mensajes de estado del formulario
-   * 
-   * Se usa para limpiar la interfaz antes de mostrar nuevos mensajes
-   * Evita que se muestren múltiples mensajes simultáneamente
+   * Oculta todos los mensajes globales de estado del formulario
    */
   function hideAllMessages() {
-    successMessage.style.display = 'none';    // Ocultar mensaje de éxito
-    sendingMessage.style.display = 'none';    // Ocultar mensaje de envío
-    errorMessage.style.display = 'none';      // Ocultar mensaje de error
+    successMessage.style.display = 'none';   // Ocultar mensaje de éxito
+    sendingMessage.style.display = 'none';   // Ocultar mensaje de envío
+    errorMessage.style.display = 'none';     // Ocultar mensaje de error global
   }
 
-  // ===================================================================
-  // SECCIÓN 6: RESTRICCIONES DE ENTRADA EN TIEMPO REAL
-  // ===================================================================
-  
-  /**
-   * Configuración de restricciones para el campo NOMBRE
-   * Permite solo letras y espacios, convierte a mayúsculas automáticamente
-   */
+  /* ===================================================================
+     RESTRICCIONES DE ENTRADA EN CAMPOS
+     =================================================================== */
+
+  // === CAMPO NOMBRE: Solo letras y espacios, convertir a mayúsculas ===
   if (nameInput) {
-    /**
-     * Event listener para entrada de texto en tiempo real
-     * Se ejecuta cada vez que el usuario escribe en el campo
-     */
+    // Evento 'input': se ejecuta cada vez que cambia el contenido
     nameInput.addEventListener('input', function() {
-      // Remover todos los números del texto ingresado
+      // Remover todos los números del texto
       this.value = this.value.replace(/[0-9]/g, '');
       
-      // Convertir todo el texto a mayúsculas
+      // Convertir todo a mayúsculas
       this.value = this.value.toUpperCase();
     });
 
-    /**
-     * Event listener para texto pegado
-     * Maneja el caso especial cuando el usuario pega texto desde el portapapeles
-     */
+    // Evento 'paste': se ejecuta cuando el usuario pega texto
     nameInput.addEventListener('paste', function(e) {
-      // Obtener el texto que se está pegando
+      // Obtener texto del portapapeles
       const pastedText = e.clipboardData.getData('text');
       
-      // Si el texto contiene números
+      // Si contiene números, prevenir pegado normal y limpiar
       if (/\d/.test(pastedText)) {
-        e.preventDefault();  // Prevenir el pegado normal
+        e.preventDefault(); // Cancelar pegado original
         
-        // Pegar solo la parte sin números y en mayúsculas
+        // Agregar solo la parte sin números, en mayúsculas
         this.value += pastedText.replace(/[0-9]/g, '').toUpperCase();
       }
     });
   }
 
-  /**
-   * Configuración de restricciones para el campo EDAD
-   * Permite solo números
-   */
+  // === CAMPO EDAD: Solo números ===
   if (ageInput) {
-    /**
-     * Event listener para entrada de texto en el campo edad
-     * Filtra todo excepto números
-     */
     ageInput.addEventListener('input', function() {
-      // Mantener solo números, remover letras y símbolos
+      // Mantener solo números, remover todo lo demás
       this.value = this.value.replace(/[^0-9]/g, '');
       
-      // Convertir a mayúsculas (aunque solo sean números, por consistencia)
+      // Convertir a mayúsculas (aunque sea redundante para números)
       this.value = this.value.toUpperCase();
     });
   }
 
-  // ===================================================================
-  // SECCIÓN 7: CONTADOR DE CARACTERES PARA COMENTARIOS
-  // ===================================================================
-  
-  /**
-   * Funcionalidad del contador de caracteres para el campo de comentarios
-   * Muestra en tiempo real cuántos caracteres ha escrito el usuario
-   */
+  /* ===================================================================
+     CONTADOR DE CARACTERES PARA COMENTARIOS
+     =================================================================== */
+
+  // Configurar contador solo si ambos elementos existen
   if (commentsInput && commentsCounter) {
-    /**
-     * Event listener que actualiza el contador mientras el usuario escribe
-     */
     commentsInput.addEventListener('input', function() {
-      // Obtener la longitud actual del texto
+      // Obtener longitud actual del texto
       const currentLength = this.value.length;
       
-      // Actualizar el texto del contador
+      // Actualizar texto del contador
       commentsCounter.textContent = `${currentLength} / 2000 caracteres`;
       
       // Cambiar color si excede el límite
       if (currentLength > 2000) {
-        commentsCounter.style.color = '#d93025';  // Rojo para advertencia
+        commentsCounter.style.color = '#d93025'; // Rojo si excede
       } else {
-        commentsCounter.style.color = '#666';     // Gris normal
+        commentsCounter.style.color = '#666';    // Gris normal
       }
     });
   }
 
-  // ===================================================================
-  // SECCIÓN 8: FUNCIONALIDAD TOGGLE PARA CONTRASEÑAS
-  // ===================================================================
-  
+  /* ===================================================================
+     FUNCIONALIDAD DE MOSTRAR/OCULTAR CONTRASEÑAS
+     =================================================================== */
+
   /**
-   * Función genérica para configurar el toggle de visibilidad de contraseñas
-   * 
+   * Configura botón para mostrar/ocultar contraseña
    * @param {HTMLElement} inputElement - Campo de contraseña
    * @param {HTMLElement} buttonElement - Botón de toggle
-   * 
-   * Funcionamiento:
-   * 1. Alterna entre type='password' y type='text'
-   * 2. Cambia el emoji del botón según el estado
-   * 3. Previene comportamientos no deseados del formulario
    */
   function setupPasswordToggle(inputElement, buttonElement) {
+    // Verificar que ambos elementos existan
     if (inputElement && buttonElement) {
       buttonElement.addEventListener('click', function(e) {
-        e.preventDefault();     // Prevenir envío del formulario
-        e.stopPropagation();    // Prevenir propagación del evento
+        // Prevenir comportamiento por defecto del botón
+        e.preventDefault();
+        e.stopPropagation();
         
-        // Alternar visibilidad de la contraseña
+        // Alternar entre mostrar y ocultar
         if (inputElement.type === 'password') {
-          inputElement.type = 'text';           // Mostrar contraseña
-          buttonElement.textContent = '🙈';     // Emoji "no ver"
+          // Cambiar a texto visible
+          inputElement.type = 'text';
+          buttonElement.textContent = '🙈'; // Emoji "no ver"
         } else {
-          inputElement.type = 'password';       // Ocultar contraseña
-          buttonElement.textContent = '👁️';     // Emoji "ojo"
+          // Cambiar a contraseña oculta
+          inputElement.type = 'password';
+          buttonElement.textContent = '👁️'; // Emoji "ojo"
         }
       });
     }
   }
 
-  // Configurar toggle para ambos campos de contraseña
+  // Configurar toggles para ambos campos de contraseña
   setupPasswordToggle(passwordInput, togglePassword);
   setupPasswordToggle(passwordConfirmInput, togglePasswordConfirm);
 
-  // ===================================================================
-  // SECCIÓN 9: SISTEMA DE VALIDACIONES COMPLETO
-  // ===================================================================
-  
+  /* ===================================================================
+     FUNCIÓN PRINCIPAL DE VALIDACIÓN DEL FORMULARIO
+     =================================================================== */
+
   /**
-   * Función principal de validación del formulario
-   * 
-   * @returns {boolean} true si todas las validaciones pasan, false en caso contrario
-   * 
-   * Esta función ejecuta todas las validaciones de forma secuencial
-   * y acumula el resultado en la variable isValid
+   * Valida todos los campos del formulario antes del envío
+   * @returns {boolean} - true si todos los campos son válidos
    */
   function validateForm() {
-    let isValid = true;  // Bandera acumulativa de validación
+    let isValid = true; // Flag para rastrear si el formulario es válido
 
-    // ===============================================================
-    // VALIDACIÓN DE NOMBRE
-    // ===============================================================
-    const nameValue = nameInput.value.trim();  // Obtener valor sin espacios extra
-    
+    // === VALIDACIÓN DEL NOMBRE ===
+    const nameValue = nameInput.value.trim();
     if (!nameValue) {
-      // Caso: campo vacío
+      // Campo vacío
       showError('name', 'El nombre es obligatorio.');
       isValid = false;
     } else if (!/^[A-ZÁÉÍÓÚÑ\s]+$/.test(nameValue)) {
-      // Caso: contiene caracteres no permitidos
-      // Regex explica: solo letras mayúsculas (incluye acentos) y espacios
+      // Contiene caracteres no permitidos
+      // Regex permite solo letras (incluyendo acentos) y espacios
       showError('name', 'Solo se permiten letras y espacios.');
       isValid = false;
     } else {
-      // Caso: validación exitosa
+      // Válido
       hideError('name');
     }
 
-    // ===============================================================
-    // VALIDACIÓN DE EMAIL PRINCIPAL
-    // ===============================================================
+    // === VALIDACIÓN DEL EMAIL (CON API) ===
     const emailValue = emailInput.value.trim();
-    
-    // Regex para validar formato de email
-    // Explica: texto@texto.texto (sin espacios ni caracteres especiales)
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
     if (!emailValue) {
-      // Caso: campo vacío
+      // Campo vacío
       showError('email', 'El correo electrónico es obligatorio.');
       isValid = false;
-    } else if (!emailRegex.test(emailValue)) {
-      // Caso: formato inválido
-      showError('email', 'Por favor ingresa un correo electrónico válido.');
+    } else if (emailValidationState.isValidating) {
+      // Aún se está validando con la API
+      showError('email', 'Esperando validación de email...');
+      isValid = false;
+    } else if (!emailValidationState.isValid) {
+      // No pasó la validación de la API
+      showError('email', 'Por favor ingresa un email válido y existente.');
       isValid = false;
     } else {
-      // Caso: validación exitosa
+      // Válido
       hideError('email');
     }
 
-    // ===============================================================
-    // VALIDACIÓN DE CONFIRMACIÓN DE EMAIL
-    // ===============================================================
+    // === VALIDACIÓN DE CONFIRMACIÓN DE EMAIL ===
     const emailConfirmValue = emailConfirmInput.value.trim();
-    
     if (!emailConfirmValue) {
-      // Caso: campo vacío
+      // Campo vacío
       showError('emailConfirm', 'La confirmación de correo es obligatoria.');
       isValid = false;
     } else if (emailConfirmValue !== emailValue) {
-      // Caso: no coinciden los emails
+      // No coincide con el email principal
       showError('emailConfirm', 'Los correos electrónicos no coinciden.');
       isValid = false;
     } else {
-      // Caso: validación exitosa
+      // Válido
       hideError('emailConfirm');
     }
 
-    // ===============================================================
-    // VALIDACIÓN DE CONTRASEÑA
-    // ===============================================================
-    const passwordValue = passwordInput.value;  // Sin trim para preservar espacios
-    
+    // === VALIDACIÓN DE CONTRASEÑA ===
+    const passwordValue = passwordInput.value;
     if (!passwordValue) {
-      // Caso: campo vacío
+      // Campo vacío
       showError('password', 'La contraseña es obligatoria.');
       isValid = false;
     } else if (passwordValue.length < 8) {
-      // Caso: muy corta
+      // Muy corta
       showError('password', 'La contraseña debe tener al menos 8 caracteres.');
       isValid = false;
     } else if (!/[a-z]/.test(passwordValue) || !/[A-Z]/.test(passwordValue)) {
-      // Caso: no cumple requisitos de mayúsculas/minúsculas
-      // Regex explica: debe tener al menos una minúscula Y una mayúscula
+      // No contiene mayúsculas y minúsculas
       showError('password', 'La contraseña debe contener al menos una mayúscula y una minúscula.');
       isValid = false;
     } else {
-      // Caso: validación exitosa
+      // Válido
       hideError('password');
     }
 
-    // ===============================================================
-    // VALIDACIÓN DE CONFIRMACIÓN DE CONTRASEÑA
-    // ===============================================================
+    // === VALIDACIÓN DE CONFIRMACIÓN DE CONTRASEÑA ===
     const passwordConfirmValue = passwordConfirmInput.value;
-    
     if (!passwordConfirmValue) {
-      // Caso: campo vacío
+      // Campo vacío
       showError('passwordConfirm', 'La confirmación de contraseña es obligatoria.');
       isValid = false;
     } else if (passwordConfirmValue !== passwordValue) {
-      // Caso: no coinciden las contraseñas
+      // No coincide con la contraseña principal
       showError('passwordConfirm', 'Las contraseñas no coinciden.');
       isValid = false;
     } else {
-      // Caso: validación exitosa
+      // Válido
       hideError('passwordConfirm');
     }
 
-    // ===============================================================
-    // VALIDACIÓN DE EDAD
-    // ===============================================================
-    const ageValue = parseInt(ageInput.value);  // Convertir a número entero
-    
+    // === VALIDACIÓN DE EDAD ===
+    const ageValue = parseInt(ageInput.value);
     if (!ageInput.value) {
-      // Caso: campo vacío
+      // Campo vacío
       showError('age', 'La edad es obligatoria.');
       isValid = false;
     } else if (isNaN(ageValue) || ageValue < 1 || ageValue > 120) {
-      // Caso: no es número válido o fuera de rango
-      // isNaN verifica si la conversión falló
+      // Fuera del rango válido
       showError('age', 'La edad debe estar entre 1 y 120 años.');
       isValid = false;
     } else {
-      // Caso: validación exitosa
+      // Válido
       hideError('age');
     }
 
-    // ===============================================================
-    // VALIDACIÓN DE FECHA DE NACIMIENTO
-    // ===============================================================
+    // === VALIDACIÓN DE FECHA DE NACIMIENTO ===
     const birthdateValue = birthdateInput.value;
-    
     if (!birthdateValue) {
-      // Caso: campo vacío
+      // Campo vacío
       showError('birthdate', 'La fecha de nacimiento es obligatoria.');
       isValid = false;
     } else {
-      // Validar que no sea fecha futura
-      const birthDate = new Date(birthdateValue);  // Crear objeto Date
-      const today = new Date();                    // Fecha actual
-      
+      // Verificar que no sea fecha futura
+      const birthDate = new Date(birthdateValue);
+      const today = new Date();
       if (birthDate > today) {
-        // Caso: fecha futura
         showError('birthdate', 'La fecha de nacimiento no puede ser futura.');
         isValid = false;
       } else {
-        // Caso: validación exitosa
+        // Válido
         hideError('birthdate');
       }
     }
 
-    // ===============================================================
-    // VALIDACIÓN DE COMENTARIOS (OPCIONAL PERO CON LÍMITE)
-    // ===============================================================
+    // === VALIDACIÓN DE COMENTARIOS (OPCIONAL) ===
     const commentsValue = commentsInput.value;
-    
     if (commentsValue.length > 2000) {
-      // Caso: excede límite de caracteres
+      // Excede límite de caracteres
       showError('comments', 'Los comentarios no pueden exceder 2000 caracteres.');
       isValid = false;
     } else {
-      // Caso: validación exitosa (incluye campo vacío, que es válido)
+      // Válido (o vacío, que está permitido)
       hideError('comments');
     }
 
-    // Retornar resultado acumulativo de todas las validaciones
+    // Retornar resultado general de validación
     return isValid;
   }
 
-  // ===================================================================
-  // SECCIÓN 10: MANEJO DEL ENVÍO DEL FORMULARIO
-  // ===================================================================
-  
-  /**
-   * Event listener para el envío del formulario
-   * Maneja todo el proceso desde validación hasta envío y respuesta
-   */
+  /* ===================================================================
+     MANEJO DEL ENVÍO DEL FORMULARIO
+     =================================================================== */
+
+  // Agregar evento de envío al formulario
   form.addEventListener('submit', function(e) {
-    // Prevenir envío tradicional del formulario
+    // Prevenir envío por defecto del navegador
     e.preventDefault();
     
     // Log para debugging
     console.log('Formulario enviado - iniciando validación');
     
-    // Limpiar mensajes previos para evitar confusión
+    // Ocultar mensajes de estado previos
     hideAllMessages();
     
-    // Ejecutar validaciones completas
+    // Ejecutar validación completa
     if (!validateForm()) {
       console.log('Validación fallida');
-      return;  // Detener proceso si hay errores
+      return; // Salir sin enviar si hay errores
     }
     
+    // Log para debugging
     console.log('Validación exitosa - enviando email');
     
-    // ===============================================================
-    // FASE 1: PREPARACIÓN PARA ENVÍO
-    // ===============================================================
+    // === CAMBIAR ESTADO VISUAL DURANTE EL ENVÍO ===
     
-    // Mostrar indicador de envío en progreso
+    // Mostrar mensaje de "enviando..."
     sendingMessage.style.display = 'block';
     
-    // Deshabilitar botón para prevenir múltiples envíos
+    // Deshabilitar botón para evitar envíos múltiples
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Enviando...';  // Cambiar texto del botón
     
-    // ===============================================================
-    // FASE 2: ENVÍO VÍA EMAILJS
-    // ===============================================================
+    // Cambiar texto del botón para feedback visual
+    submitBtn.textContent = 'Enviando...';
     
-    /**
-     * emailjs.sendForm() envía el formulario completo
-     * Parámetros:
-     * 1. SERVICE_ID: servicio de correo configurado
-     * 2. TEMPLATE_ID: plantilla de correo a usar
-     * 3. form: elemento formulario con todos los datos
-     * 
-     * Retorna una Promise que maneja éxito/error
-     */
+    // === ENVÍO CON EMAILJS ===
+    
+    // EmailJS envía el formulario usando la configuración establecida
+    // SERVICE_ID: servicio de email configurado
+    // TEMPLATE_ID: plantilla de email configurada  
+    // form: elemento del formulario HTML con todos los campos
     emailjs.sendForm(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, form)
       .then(function(response) {
-        // ===============================================================
-        // MANEJO DE ENVÍO EXITOSO
-        // ===============================================================
+        // === MANEJO DE ENVÍO EXITOSO ===
         
+        // Log para debugging
         console.log('Email enviado exitosamente:', response);
         
-        // Ocultar mensaje de "enviando"
+        // Ocultar mensaje de "enviando..."
         sendingMessage.style.display = 'none';
         
         // Mostrar mensaje de éxito
         successMessage.style.display = 'block';
         
-        // Limpiar formulario completamente
+        // === LIMPIAR FORMULARIO DESPUÉS DEL ENVÍO ===
+        
+        // Resetear todos los campos del formulario
         form.reset();
         
-        // Resetear contador de comentarios si existe
+        // Restaurar contador de comentarios manualmente
+        // (form.reset() no dispara eventos 'input')
         if (commentsCounter) {
           commentsCounter.textContent = '0 / 2000 caracteres';
         }
         
-        // Restaurar estado original del botón
+        // Resetear estado de validación de email
+        // Esto es importante para nuevos envíos
+        emailValidationState = {
+          isValidating: false,
+          isValid: false,
+          message: '',
+          lastValidatedEmail: ''
+        };
+        
+        // === RESTAURAR ESTADO DEL BOTÓN ===
+        
+        // Rehabilitar botón
         submitBtn.disabled = false;
+        
+        // Restaurar texto original
         submitBtn.textContent = 'Enviar información';
         
+        // === REDIRECCIÓN AUTOMÁTICA ===
+        
         // Redirigir a página de agradecimiento después de 3 segundos
+        // Esto da tiempo al usuario para ver el mensaje de éxito
         setTimeout(function() {
           window.location.href = 'gracias.html';
         }, 3000);
         
       })
       .catch(function(error) {
-        // ===============================================================
-        // MANEJO DE ERROR EN ENVÍO
-        // ===============================================================
+        // === MANEJO DE ERROR EN EL ENVÍO ===
         
+        // Log del error para debugging
         console.error('Error al enviar email:', error);
         
-        // Ocultar mensaje de "enviando"
+        // Ocultar mensaje de "enviando..."
         sendingMessage.style.display = 'none';
         
-        // Mostrar mensaje de error
+        // Mostrar mensaje de error global
         errorMessage.style.display = 'block';
         
-        // Restaurar estado original del botón para permitir reintento
+        // === RESTAURAR ESTADO DEL BOTÓN ===
+        
+        // Rehabilitar botón para permitir reintento
         submitBtn.disabled = false;
+        
+        // Restaurar texto original
         submitBtn.textContent = 'Enviar información';
       });
   });
 
-  // Log final para confirmar inicialización completa
-  console.log('Script inicializado correctamente');
+  /* ===================================================================
+     INICIALIZACIÓN FINAL
+     =================================================================== */
+
+  // Activar validación de email en tiempo real
+  // Esta función configura todos los eventos necesarios
+  setupEmailValidation();
+
+  // Log de confirmación para debugging
+  console.log('Script inicializado correctamente con validación de email');
 });
