@@ -1,71 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Configuración de codificación de caracteres UTF-8 para soporte completo de caracteres especiales -->
+  <!-- CONFIGURACIÓN BÁSICA DEL DOCUMENTO -->
   <meta charset="UTF-8" />
-  
-  <!-- Configuración de viewport para diseño responsive en dispositivos móviles -->
-  <!-- width=device-width: el ancho de la página debe coincidir con el ancho de la pantalla del dispositivo -->
-  <!-- initial-scale=1: el nivel de zoom inicial cuando la página se carga por primera vez -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <!-- Título que aparece en la pestaña del navegador -->
   <title>Formulario Profesional con Validación de Email</title>
   
-  <!-- Importación de fuentes Google Fonts -->
-  <!-- Lato: Fuente principal para el cuerpo del texto, incluye pesos 400 (normal) y 700 (bold) -->
-  <!-- Roboto: Fuente secundaria para títulos y elementos destacados -->
-  <!-- display=swap: mejora la performance al mostrar texto de respaldo hasta que la fuente se carga -->
+  <!-- FUENTES EXTERNAS GOOGLE FONTS -->
+  <!-- Lato: Fuente principal para el cuerpo del texto -->
+  <!-- Roboto: Fuente secundaria para títulos y botones -->
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   
-  <!-- SDK de EmailJS para envío de emails sin servidor backend -->
+  <!-- SDK DE EMAILJS PARA ENVÍO DE EMAILS -->
+  <!-- Biblioteca externa que permite enviar emails desde el frontend -->
   <!-- Versión 3 es la más estable y compatible -->
-  <!-- CDN de EmailJS para manejo de envío de formularios por email -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   
-  <!-- Importación de hoja de estilos CSS personalizada -->
-  <!-- Contiene todos los estilos visuales del formulario -->
+  <!-- ARCHIVO CSS EXTERNO -->
+  <!-- Contiene todos los estilos del formulario -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Contenedor principal que centra y da estilo al formulario -->
-  <!-- La clase 'container' está definida en styles.css -->
+  <!-- CONTENEDOR PRINCIPAL DEL FORMULARIO -->
+  <!-- Se centra en la página y contiene todo el contenido -->
   <div class="container">
     
-    <!-- Título principal del formulario -->
-    <!-- Usa la fuente Roboto con peso 700 (definido en CSS) -->
+    <!-- TÍTULO PRINCIPAL -->
     <h1>Formulario de Registro</h1>
     
-    <!-- Mensaje informativo sobre la nueva funcionalidad de validación -->
-    <!-- Estilos inline para personalización específica -->
-    <!-- text-align: center - centra el texto -->
-    <!-- color: #666 - color gris medio para texto secundario -->
-    <!-- margin-bottom: 30px - espacio inferior antes del formulario -->
-    <!-- font-size: 0.9rem - tamaño ligeramente menor que el texto normal -->
+    <!-- DESCRIPCIÓN CON CARACTERÍSTICAS NUEVAS -->
+    <!-- Informa al usuario sobre las validaciones implementadas -->
     <p style="text-align: center; color: #666; margin-bottom: 30px; font-size: 0.9rem;">
-      <!-- Emoji ✨ para llamar la atención -->
-      ✨ <strong>Nuevo:</strong> Validación automática de correos electrónicos en tiempo real
+      ✨ <strong>Nuevo:</strong> Validación automática de correos y medidor de fortaleza de contraseña
     </p>
 
-    <!-- Formulario principal con validación personalizada -->
-    <!-- id="professionalForm": identificador único para JavaScript -->
-    <!-- novalidate: desactiva la validación HTML5 nativa para usar validación personalizada -->
+    <!-- FORMULARIO PRINCIPAL -->
+    <!-- novalidate: Desactiva la validación nativa del navegador para usar validación personalizada -->
     <form id="professionalForm" novalidate>
 
-      <!-- === CAMPO: NOMBRE COMPLETO === -->
-      <!-- Contenedor div para agrupar label, input y mensaje de error -->
+      <!-- CAMPO: NOMBRE COMPLETO -->
       <div>
-        <!-- Label asociado al campo nombre -->
-        <!-- for="name": asocia la etiqueta con el input mediante su ID -->
-        <!-- class="required": clase CSS que agrega asterisco rojo (*) -->
+        <!-- Label con clase 'required' que añade asterisco rojo automáticamente -->
         <label for="name" class="required">Nombre completo</label>
         
-        <!-- Input para el nombre -->
-        <!-- type="text": campo de texto simple -->
-        <!-- id="name": identificador único para JavaScript y label -->
-        <!-- name="user_name": nombre que se envía al servicio de email -->
-        <!-- placeholder: texto de ayuda que aparece cuando el campo está vacío -->
-        <!-- required: atributo HTML5 de validación (aunque usamos validación personalizada) -->
+        <!-- Input de texto que se convierte automáticamente a mayúsculas -->
+        <!-- Solo permite letras, no números (validado por JavaScript) -->
         <input
           type="text"
           id="name"
@@ -74,25 +53,18 @@
           required
         />
         
-        <!-- Contenedor para mensajes de error específicos del campo nombre -->
-        <!-- class="error-message": estilo CSS para mensajes de error -->
-        <!-- id="error-name": identificador único para mostrar errores desde JavaScript -->
-        <!-- aria-live="polite": accesibilidad - anuncia cambios a lectores de pantalla -->
+        <!-- Contenedor para mensajes de error específicos de este campo -->
+        <!-- aria-live="polite": Anuncia cambios a lectores de pantalla -->
         <div class="error-message" id="error-name" aria-live="polite"></div>
       </div>
 
-      <!-- === CAMPO: CORREO ELECTRÓNICO === -->
-      <!-- Contenedor especial para el campo de email con validación en tiempo real -->
-      <!-- class="email-field-container": clase CSS para efectos visuales de validación -->
+      <!-- CAMPO: CORREO ELECTRÓNICO -->
+      <!-- Contenedor especial con clase para validación de email -->
       <div class="email-field-container">
-        <!-- Label para el campo de email -->
         <label for="email" class="required">Correo electrónico</label>
         
-        <!-- Input para el email -->
-        <!-- type="email": tipo específico para emails (activa teclado especial en móviles) -->
-        <!-- id="email": identificador único para validación en tiempo real -->
-        <!-- name="user_email": nombre que se envía al servicio de email -->
-        <!-- autocomplete="email": ayuda al navegador a autocompletar con emails guardados -->
+        <!-- Input de email con autocompletado habilitado -->
+        <!-- La validación se hace en tiempo real con API externa -->
         <input
           type="email"
           id="email"
@@ -102,25 +74,21 @@
           autocomplete="email"
         />
         
-        <!-- Contenedor para mensajes de error/validación del email -->
-        <!-- Este campo es especial porque mostrará estados: validando, válido, inválido -->
+        <!-- Contenedor para mensajes de validación de email -->
         <div class="error-message" id="error-email" aria-live="polite"></div>
         
-        <!-- Mensaje informativo sobre la validación automática -->
-        <!-- Estilos inline para texto pequeño e informativo -->
+        <!-- Información adicional sobre la validación -->
         <div style="font-size: 0.8rem; color: #666; margin-top: 4px;">
           📧 Verificaremos automáticamente que tu email sea válido
         </div>
       </div>
 
-      <!-- === CAMPO: CONFIRMAR CORREO ELECTRÓNICO === -->
+      <!-- CAMPO: CONFIRMAR CORREO ELECTRÓNICO -->
       <div>
-        <!-- Label para confirmación de email -->
         <label for="emailConfirm" class="required">Confirmar correo electrónico</label>
         
-        <!-- Input para confirmar email -->
-        <!-- id="emailConfirm": identificador para validación de coincidencia -->
-        <!-- name="user_email_confirm": nombre para el servicio de email -->
+        <!-- Input para confirmar el email -->
+        <!-- Se valida que coincida exactamente con el email principal -->
         <input
           type="email"
           id="emailConfirm"
@@ -130,22 +98,17 @@
           autocomplete="email"
         />
         
-        <!-- Contenedor para errores de confirmación de email -->
         <div class="error-message" id="error-emailConfirm" aria-live="polite"></div>
       </div>
 
-      <!-- === CAMPO: CONTRASEÑA === -->
-      <div>
-        <!-- Label para contraseña -->
+      <!-- CAMPO: CONTRASEÑA CON INDICADOR DE FORTALEZA -->
+      <!-- Contenedor especial con clase 'password-field' para el indicador -->
+      <div class="password-field">
         <label for="password" class="required">Contraseña</label>
         
-        <!-- Contenedor especial para input con botón de mostrar/ocultar -->
-        <!-- class="input-password": clase CSS que posiciona el botón de toggle -->
+        <!-- Contenedor para input de contraseña y botón de mostrar/ocultar -->
         <div class="input-password">
-          <!-- Input para contraseña -->
-          <!-- type="password": oculta el texto por seguridad -->
-          <!-- id="password": identificador para validación y toggle -->
-          <!-- autocomplete="new-password": indica al navegador que es una contraseña nueva -->
+          <!-- Input de contraseña con autocompletado para nueva contraseña -->
           <input
             type="password"
             id="password"
@@ -156,25 +119,40 @@
           />
           
           <!-- Botón para mostrar/ocultar contraseña -->
-          <!-- type="button": evita que envíe el formulario al hacer clic -->
-          <!-- id="togglePassword": identificador para el evento JavaScript -->
-          <!-- aria-label: descripción para lectores de pantalla -->
+          <!-- aria-label: Descripción para lectores de pantalla -->
           <button type="button" id="togglePassword" aria-label="Mostrar/ocultar contraseña">👁️</button>
         </div>
         
-        <!-- Contenedor para errores de contraseña -->
+        <!-- INDICADOR DE FORTALEZA DE CONTRASEÑA -->
+        <!-- Se muestra automáticamente cuando el usuario empieza a escribir -->
+        <!-- display: none: Oculto por defecto, se muestra via JavaScript -->
+        <div class="password-strength" id="passwordStrength" style="display: none;">
+          
+          <!-- Etiqueta del indicador -->
+          <span class="password-strength-label">Fortaleza de la contraseña:</span>
+          
+          <!-- Contenedor de la barra de progreso -->
+          <div class="password-strength-bar-container">
+            <!-- Barra que cambia de color y tamaño según la fortaleza -->
+            <!-- Colores: Rojo (débil) → Amarillo (regular) → Verde (fuerte) → Azul (excelente) -->
+            <div class="password-strength-bar" id="strengthBar"></div>
+          </div>
+          
+          <!-- Texto descriptivo que cambia según la fortaleza -->
+          <!-- Incluye emojis para mayor claridad visual -->
+          <div class="password-strength-text" id="strengthText">Escribe tu contraseña</div>
+        </div>
+        
+        <!-- Contenedor para errores de validación de contraseña -->
         <div class="error-message" id="error-password" aria-live="polite"></div>
       </div>
 
-      <!-- === CAMPO: CONFIRMAR CONTRASEÑA === -->
+      <!-- CAMPO: CONFIRMAR CONTRASEÑA -->
       <div>
-        <!-- Label para confirmación de contraseña -->
         <label for="passwordConfirm" class="required">Confirmar contraseña</label>
         
-        <!-- Contenedor con botón de toggle para confirmación de contraseña -->
+        <!-- Segundo input de contraseña para confirmación -->
         <div class="input-password">
-          <!-- Input para confirmar contraseña -->
-          <!-- id="passwordConfirm": identificador para validación de coincidencia -->
           <input
             type="password"
             id="passwordConfirm"
@@ -184,23 +162,20 @@
             autocomplete="new-password"
           />
           
-          <!-- Botón de toggle para confirmación de contraseña -->
+          <!-- Botón independiente para mostrar/ocultar la confirmación -->
           <button type="button" id="togglePasswordConfirm" aria-label="Mostrar/ocultar contraseña">👁️</button>
         </div>
         
-        <!-- Contenedor para errores de confirmación de contraseña -->
         <div class="error-message" id="error-passwordConfirm" aria-live="polite"></div>
       </div>
 
-      <!-- === CAMPO: EDAD === -->
+      <!-- CAMPO: EDAD -->
       <div>
-        <!-- Label para edad -->
         <label for="age" class="required">Edad</label>
         
-        <!-- Input para edad -->
-        <!-- type="text": aunque es numérico, usamos text para mayor control en JavaScript -->
-        <!-- maxlength="3": máximo 3 caracteres (hasta 999 años) -->
-        <!-- JavaScript convierte automáticamente a mayúsculas y filtra solo números -->
+        <!-- Input de texto que solo acepta números -->
+        <!-- maxlength="3": Máximo 3 dígitos (hasta 999 años) -->
+        <!-- Se convierte automáticamente a mayúsculas -->
         <input
           type="text"
           id="age"
@@ -210,33 +185,28 @@
           maxlength="3"
         />
         
-        <!-- Contenedor para errores de edad -->
         <div class="error-message" id="error-age" aria-live="polite"></div>
       </div>
 
-      <!-- === CAMPO: FECHA DE NACIMIENTO === -->
+      <!-- CAMPO: FECHA DE NACIMIENTO -->
       <div>
-        <!-- Label para fecha de nacimiento -->
         <label for="birthdate" class="required">Fecha de nacimiento</label>
         
-        <!-- Input para fecha -->
-        <!-- type="date": activa selector de fecha nativo del navegador -->
-        <!-- JavaScript establece automáticamente max="fecha_actual" para prevenir fechas futuras -->
+        <!-- Input de fecha nativo del navegador -->
+        <!-- Se establece automáticamente la fecha máxima (hoy) via JavaScript -->
         <input type="date" id="birthdate" name="user_birthdate" required />
         
-        <!-- Contenedor para errores de fecha de nacimiento -->
         <div class="error-message" id="error-birthdate" aria-live="polite"></div>
       </div>
 
-      <!-- === CAMPO: COMENTARIOS (OPCIONAL) === -->
+      <!-- CAMPO: COMENTARIOS (OPCIONAL) -->
       <div>
-        <!-- Label para comentarios (sin clase required porque es opcional) -->
+        <!-- Label sin clase 'required' porque es opcional -->
         <label for="comments">Comentarios (opcional)</label>
         
-        <!-- Textarea para comentarios largos -->
-        <!-- rows="5": altura inicial de 5 líneas -->
-        <!-- maxlength="2000": límite de 2000 caracteres -->
-        <!-- JavaScript muestra contador de caracteres en tiempo real -->
+        <!-- Textarea con límite de caracteres -->
+        <!-- rows="5": Altura inicial del textarea -->
+        <!-- maxlength="2000": Límite máximo de caracteres -->
         <textarea
           id="comments"
           name="user_comments"
@@ -245,90 +215,67 @@
           maxlength="2000"
         ></textarea>
         
-        <!-- Contador de caracteres (actualizado por JavaScript) -->
-        <!-- class="char-counter": estilo CSS para el contador -->
-        <!-- id="commentsCounter": identificador para actualización dinámica -->
+        <!-- Contador de caracteres en tiempo real -->
+        <!-- Se actualiza via JavaScript conforme el usuario escribe -->
         <div class="char-counter" id="commentsCounter">0 / 2000 caracteres</div>
         
-        <!-- Contenedor para errores de comentarios -->
         <div class="error-message" id="error-comments" aria-live="polite"></div>
       </div>
 
-      <!-- === BOTÓN DE ENVÍO === -->
-      <!-- Botón principal para enviar el formulario -->
-      <!-- type="submit": tipo submit para enviar formulario -->
-      <!-- id="submitBtn": identificador para controlar estado (habilitado/deshabilitado) -->
+      <!-- BOTÓN DE ENVÍO -->
+      <!-- Se deshabilita durante el envío para evitar envíos múltiples -->
       <button type="submit" id="submitBtn">Enviar información</button>
     </form>
 
-    <!-- === INFORMACIÓN SOBRE VALIDACIÓN DE EMAIL === -->
-    <!-- Panel informativo sobre las características de validación -->
-    <!-- Estilos inline para diseño específico de este elemento -->
-    <!-- background: #e3f2fd - fondo azul claro -->
-    <!-- border: 1px solid #2196F3 - borde azul -->
-    <!-- padding: 12px - espacio interior -->
-    <!-- border-radius: 8px - esquinas redondeadas -->
-    <!-- margin-top: 20px - espacio superior -->
-    <!-- font-size: 0.85rem - texto ligeramente más pequeño -->
-    <!-- color: #1565C0 - texto azul oscuro -->
+    <!-- INFORMACIÓN SOBRE CARACTERÍSTICAS DE SEGURIDAD -->
+    <!-- Caja informativa que explica las validaciones implementadas -->
     <div style="background: #e3f2fd; border: 1px solid #2196F3; padding: 12px; border-radius: 8px; margin-top: 20px; font-size: 0.85rem; color: #1565C0;">
-      <!-- Título del panel informativo -->
-      <strong>🔍 Validación de Email:</strong>
-      
-      <!-- Lista de características de validación -->
-      <!-- margin: 8px 0 - espaciado vertical -->
-      <!-- padding-left: 20px - indentación para las viñetas -->
+      <strong>🔍 Características de seguridad:</strong>
       <ul style="margin: 8px 0; padding-left: 20px;">
-        <li>Verificamos el formato del email</li>                    <!-- Validación sintáctica -->
-        <li>Validamos que el dominio existe</li>                     <!-- Verificación DNS MX -->
-        <li>Confirmamos que el buzón de correo está activo</li>       <!-- Verificación SMTP -->
-        <li>Detectamos emails temporales o desechables</li>          <!-- Filtrado de spam -->
+        <li>Verificación completa del email</li>
+        <li>Medidor de fortaleza de contraseña</li>
+        <li>Validación en tiempo real</li>
+        <li>Detección de contraseñas comunes</li>
       </ul>
     </div>
 
-    <!-- === MENSAJES DE ESTADO (OCULTOS INICIALMENTE) === -->
+    <!-- MENSAJES DE ESTADO DEL FORMULARIO -->
     
-    <!-- Mensaje de éxito (se muestra cuando el formulario se envía correctamente) -->
-    <!-- class="success-message": estilo CSS verde para éxito -->
-    <!-- id="successMessage": identificador para mostrar desde JavaScript -->
-    <!-- style="display:none": oculto inicialmente -->
+    <!-- MENSAJE DE ÉXITO -->
+    <!-- Se muestra cuando el formulario se envía correctamente -->
+    <!-- display:none: Oculto por defecto, se muestra via JavaScript -->
     <div class="success-message" id="successMessage" style="display:none;">
       ¡Formulario enviado con éxito! Te contactaremos pronto.
       <br><br>
       
-      <!-- Enlace a página de agradecimiento -->
-      <!-- Estilos inline para enlace destacado -->
+      <!-- Enlace a la página de agradecimiento -->
       <a href="gracias.html" style="color: #155724; text-decoration: underline; font-weight: bold;">
         Ver página de agradecimiento completa →
       </a>
       <br><br>
       
-      <!-- Botón para recargar página y enviar otro formulario -->
-      <!-- onclick="window.location.reload()": recarga la página -->
-      <!-- Estilos inline para botón verde -->
+      <!-- Botón para recargar la página y enviar otro formulario -->
       <button onclick="window.location.reload()" style="background: #155724; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-weight: bold;">
         Enviar otro formulario
       </button>
     </div>
 
-    <!-- Mensaje de envío (se muestra mientras se procesa el envío) -->
-    <!-- class="sending-message": estilo CSS amarillo con animación de pulso -->
-    <!-- id="sendingMessage": identificador para mostrar desde JavaScript -->
+    <!-- MENSAJE DE ENVÍO EN PROGRESO -->
+    <!-- Se muestra mientras se está enviando el email -->
     <div class="sending-message" id="sendingMessage" style="display:none;">
       Enviando... Por favor espera.
     </div>
 
-    <!-- Mensaje de error (se muestra si falla el envío) -->
-    <!-- class="error-message-global": estilo CSS rojo para errores globales -->
-    <!-- id="errorMessage": identificador para mostrar desde JavaScript -->
+    <!-- MENSAJE DE ERROR GLOBAL -->
+    <!-- Se muestra si hay un error en el envío del formulario -->
     <div class="error-message-global" id="errorMessage" style="display:none;">
       Error al enviar el formulario. Por favor, inténtalo de nuevo.
     </div>
   </div>
 
-  <!-- === IMPORTACIÓN DE JAVASCRIPT === -->
-  <!-- Archivo JavaScript que contiene toda la lógica del formulario -->
-  <!-- Incluye: validaciones, envío con EmailJS, validación de email con API -->
+  <!-- ARCHIVO JAVASCRIPT EXTERNO -->
+  <!-- Contiene toda la lógica de validación, indicadores y envío -->
+  <!-- Se carga al final para asegurar que el DOM esté listo -->
   <script src="script.js"></script>
 </body>
 </html>
