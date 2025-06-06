@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   /**
-   * Detecta errores comunes de tipeo en dominios populares
+   * Detecta errores comunes de escritura en dominios populares
    * Sugiere la corrección automática para dominios mal escritos
    * @param {string} email - El email a verificar
    * @returns {object|null} - Objeto con sugerencia o null si no hay errores
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Extraer dominio del email y convertir a minúsculas
     const domain = email.split('@')[1]?.toLowerCase();
     
-    // Mapeo de dominios correctos y sus errores de tipeo comunes
+    // Mapeo de dominios correctos y sus errores de escritura comunes
     const commonDomains = {
       'gmail.com': ['gmai.com', 'gmial.com', 'gmail.co', 'gmaill.com', 'gmeil.com'],
       'hotmail.com': ['hotmial.com', 'hotmai.com', 'hotmal.com', 'hotmeil.com'],
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     
-    // No se encontraron errores de tipeo
+    // No se encontraron errores de escritura
     return null;
   }
 
@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
-      // Verificar errores de tipeo en dominios comunes
+      // Verificar errores de escritura en dominios comunes
       const suggestionMessage = createDomainSuggestion(email);
       if (suggestionMessage) {
         showEmailValidationStatus('suggestion', suggestionMessage);
