@@ -21,9 +21,9 @@
  * EmailJS permite enviar emails directamente desde el frontend sin backend
  */
 const EMAILJS_CONFIG = {
-  PUBLIC_KEY: "h4Tg7EWpnWF4KFAS9",    // Clave pública de EmailJS
-  SERVICE_ID: "service_nfepreu",       // ID del servicio de email configurado
-  TEMPLATE_ID: "template_io3adnr"      // ID de la plantilla de email
+  PUBLIC_KEY: "Escribir public_key",    // Clave pública de EmailJS
+  SERVICE_ID: "Escribir service_id",       // ID del servicio de email configurado
+  TEMPLATE_ID: "Escribir template_id"      // ID de la plantilla de email
 };
 
 /**
@@ -31,7 +31,7 @@ const EMAILJS_CONFIG = {
  * EmailValidation.io es un servicio que verifica si un email existe realmente
  */
 const EMAIL_VALIDATION_CONFIG = {
-  API_KEY: "ema_live_4t63hZuLgvVCvYJQMWOTkCAfBVwwaFGCRTIueyA1",  // Clave de API
+  API_KEY: "Escribir API_kEY",  // Clave de API
   API_URL: "https://api.emailvalidation.io/v1/info"              // Endpoint de la API
 };
 
