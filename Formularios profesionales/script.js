@@ -18,7 +18,7 @@
 
 /**
  * CONFIGURACIÓN EMAILJS - Credenciales para el servicio de envío de emails
- * EmailJS permite enviar emails directamente desde el frontend sin backend
+ * EmailJS https://www.emailjs.com/ permite enviar emails directamente desde el frontend sin backend
  */
 const EMAILJS_CONFIG = {
   PUBLIC_KEY: "Escribir public_key",    // Clave pública de EmailJS
@@ -28,7 +28,7 @@ const EMAILJS_CONFIG = {
 
 /**
  * CONFIGURACIÓN DE VALIDACIÓN DE EMAIL - API externa para verificar emails
- * EmailValidation.io es un servicio que verifica si un email existe realmente
+ * https://emailvalidation.io/ es un servicio que verifica si un email existe realmente
  */
 const EMAIL_VALIDATION_CONFIG = {
   API_KEY: "Escribir API_kEY",  // Clave de API
