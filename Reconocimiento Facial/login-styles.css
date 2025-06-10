@@ -283,7 +283,7 @@ div[class*="status error"] {
 }
 
 /* ===================================================================
-   DISEÑO RESPONSIVO - CORREGIDO
+   DISEÑO ADAPTABLE - CORREGIDO
    ================================================================ */
 
 @media (max-width: 600px) {
