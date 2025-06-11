@@ -76,16 +76,20 @@
 
 .user-info p {
     margin: 5px 0 0 0 !important;
-    color: #333333 !important;
+    color: #2c3e50 !important;
     font-size: 0.95rem !important;
     line-height: 1.4 !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
 }
 
 /* Específicamente para el ID */
 .user-info p[style*="color: #28a745"] {
-    color: #2d7a2d !important;
-    font-weight: 600 !important;
+    color: #155724 !important;
+    font-weight: 700 !important;
+    background: rgba(40, 167, 69, 0.1) !important;
+    padding: 4px 8px !important;
+    border-radius: 4px !important;
+    border: 1px solid #28a745 !important;
 }
 
 /* ===================================================================
@@ -115,7 +119,7 @@
 
 .user-profile.registered {
     border-color: #28a745 !important;
-    background: linear-gradient(135deg, #f8fff9, #e8f5e8) !important;
+    background: linear-gradient(135deg, #ffffff, #f0f8f0) !important;
     box-shadow: 0 4px 15px rgba(40, 167, 69, 0.15) !important;
 }
 
@@ -161,7 +165,19 @@
 }
 
 .user-info * {
-    color: #333333 !important;
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
+}
+
+/* Asegurar contraste en todos los elementos de perfil */
+.user-profile .user-info h3 {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+}
+
+.user-profile .user-info p {
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
 }
 
 /* Para elementos que puedan estar heredando colores tenues */
