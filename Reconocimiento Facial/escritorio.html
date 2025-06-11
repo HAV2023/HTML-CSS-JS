@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Escritorio corporativo con autenticación facial">
+    <meta name="keywords" content="escritorio, intranet, corporativo, facial, autenticación">
+    <meta name="author" content="Hector Arciniega">
+    <title>Escritorio - Intranet Corporativa</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='32' font-size='32'>🏢</text></svg>">
+    <meta name="theme-color" content="#667eea">
+    
+    <!-- Estilos CSS integrados -->
+    <style>
+        /* ===================================================================
+           RESET Y CONFIGURACIÓN BASE
+           ================================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        /* ===================================================================
+           HEADER Y NAVEGACIÓN
+           ================================================================ */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 10px 15px;
+            border-radius: 25px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #667eea;
+        }
+
+        .logout-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ffa8a8);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        /* ===================================================================
+           CONTENIDO PRINCIPAL
+           ================================================================ */
+        .main-content {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-section h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+        }
+
+        .welcome-section p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .login-time {
+            background: #e3f2fd;
+            border: 1px solid #2196F3;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            color: #1565C0;
+            font-weight: 600;
+        }
+
+        /* ===================================================================
+           GRID DE WIDGETS
+           ================================================================ */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .widget {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .widget:hover {
+            transform: translateY(-5px);
+        }
+
+        .widget h3 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+
+        .widget-icon {
+            font-size: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin: 15px 0;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* ===================================================================
+           SECCIÓN DE ACTIVIDADES
+           ================================================================ */
+        .activity-feed {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .activity-icon.login {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .activity-icon.security {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .activity-icon.system {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .activity-time {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* ===================================================================
+           ACCESOS RÁPIDOS
+           ================================================================ */
+        .quick-actions {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .action-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .action-btn-icon {
+            font-size: 2rem;
+        }
+
+        .action-btn-text {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* ===================================================================
+           ALERTAS
+           ================================================================ */
+        .security-alert {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .security-alert.hidden {
+            display: none;
+        }
+
+        /* ===================================================================
+           ANIMACIONES
+           ================================================================ */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* ===================================================================
+           DISEÑO RESPONSIVO
+           ================================================================ */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .user-menu {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
+            .welcome-section h1 {
+                font-size: 2rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <span>🏢</span>
+            <span>Intranet Corporativa</span>
+        </div>
+        <div class="user-menu">
+            <div class="user-info">
+                <img id="userAvatar" src="" alt="Avatar" class="user-avatar">
+                <div>
+                    <div style="font-weight: 600; color: #333;" id="userName">Usuario</div>
+                    <div style="font-size: 0.8rem; color: #666;">Autenticado por IA</div>
+                </div>
+            </div>
+            <button class="logout-btn" onclick="logout()">🚪 Cerrar Sesión</button>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+        <!-- ALERTA DE SEGURIDAD -->
+        <div id="securityAlert" class="security-alert">
+            <span>🔒</span>
+            <div>
+                <strong>Sesión Segura:</strong> Tu identidad fue verificada mediante reconocimiento facial.
+                <button onclick="hideSecurityAlert()" style="margin-left: 15px; background: none; border: none; color: #721c24; cursor: pointer; font-weight: bold;">✕</button>
+            </div>
+        </div>
+
+        <!-- SECCIÓN DE BIENVENIDA -->
+        <section class="welcome-section fade-in">
+            <h1 id="welcomeMessage">¡Bienvenido/a de vuelta!</h1>
+            <p>Has ingresado exitosamente al sistema mediante reconocimiento facial</p>
+            <div class="login-time" id="loginTime">
+                🕐 Última conexión: Cargando...
+            </div>
+        </section>
+
+        <!-- GRID DE WIDGETS ESTADÍSTICAS -->
+        <section class="dashboard-grid">
+            <div class="widget fade-in">
+                <h3><span class="widget-icon">👥</span>Usuarios Activos</h3>
+                <div class="stat-number" id="activeUsers">15</div>
+                <div class="stat-label">Conectados ahora</div>
+            </div>
+
+            <div class="widget fade-in">
+                <h3><span class="widget-icon">🔐</span>Logins Hoy</h3>
+                <div class="stat-number" id="todayLogins">47</div>
+                <div class="stat-label">Autenticaciones exitosas</div>
+            </div>
+
+            <div class="widget fade-in">
+                <h3><span class="widget-icon">📊</span>Rendimiento</h3>
+                <div class="stat-number">98.5%</div>
+                <div class="stat-label">Tiempo de actividad</div>
+            </div>
+
+            <div class="widget fade-in">
+                <h3><span class="widget-icon">🛡️</span>Seguridad</h3>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Sin amenazas detectadas</div>
+            </div>
+        </section>
+
+        <!-- FEED DE ACTIVIDADES -->
+        <section class="activity-feed fade-in">
+            <h3 style="margin-bottom: 20px;">📋 Actividad Reciente</h3>
+            <div id="activityFeed">
+                <!-- Las actividades se generan dinámicamente -->
+            </div>
+        </section>
+
+        <!-- ACCESOS RÁPIDOS -->
+        <section class="quick-actions fade-in">
+            <h3 style="margin-bottom: 20px;">⚡ Accesos Rápidos</h3>
+            <div class="actions-grid">
+                <button class="action-btn" onclick="openFeature('profile')">
+                    <span class="action-btn-icon">👤</span>
+                    <span class="action-btn-text">Mi Perfil</span>
+                </button>
+                <button class="action-btn" onclick="openFeature('documents')">
+                    <span class="action-btn-icon">📁</span>
+                    <span class="action-btn-text">Documentos</span>
+                </button>
+                <button class="action-btn" onclick="openFeature('calendar')">
+                    <span class="action-btn-icon">📅</span>
+                    <span class="action-btn-text">Calendario</span>
+                </button>
+                <button class="action-btn" onclick="openFeature('messages')">
+                    <span class="action-btn-icon">💬</span>
+                    <span class="action-btn-text">Mensajes</span>
+                </button>
+                <button class="action-btn" onclick="openFeature('reports')">
+                    <span class="action-btn-icon">📈</span>
+                    <span class="action-btn-text">Reportes</span>
+                </button>
+                <button class="action-btn" onclick="openFeature('settings')">
+                    <span class="action-btn-icon">⚙️</span>
+                    <span class="action-btn-text">Configuración</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- JAVASCRIPT DEL ESCRITORIO -->
+    <script>
+        // ===================================================================
+        // VARIABLES Y CONFIGURACIÓN
+        // ===================================================================
+        let currentUser = null;
+        let sessionStartTime = new Date();
+
+        // ===================================================================
+        // INICIALIZACIÓN DEL ESCRITORIO
+        // ===================================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDashboard();
+            startRealTimeUpdates();
+            generateActivityFeed();
+        });
+
+        /**
+         * INICIALIZAR ESCRITORIO
+         */
+        function initializeDashboard() {
+            currentUser = getCurrentUser();
+            
+            if (!currentUser) {
+                alert('⚠️ Sesión no válida. Serás redirigido al login.');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Configurar información del usuario
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('userAvatar').src = currentUser.image;
+            document.getElementById('welcomeMessage').textContent = `¡Bienvenido/a ${currentUser.name}!`;
+            
+            // Mostrar tiempo de último login
+            updateLoginTime();
+            
+            console.log('✅ Escritorio inicializado para:', currentUser.name);
+        }
+
+        /**
+         * OBTENER USUARIO ACTUAL
+         */
+        function getCurrentUser() {
+            try {
+                let userData = sessionStorage.getItem('currentUser');
+                
+                if (!userData) {
+                    const faceLoginData = JSON.parse(localStorage.getItem('faceLoginData') || '{}');
+                    const lastLoginUser = faceLoginData.lastLoginUser;
+                    
+                    if (lastLoginUser) {
+                        const faces = faceLoginData.faces || [];
+                        userData = faces.find(user => user.id === lastLoginUser);
+                    }
+                }
+                
+                return typeof userData === 'string' ? JSON.parse(userData) : userData;
+                
+            } catch (error) {
+                console.error('❌ Error obteniendo usuario actual:', error);
+                return null;
+            }
+        }
+
+        /**
+         * ACTUALIZAR TIEMPO DE LOGIN
+         */
+        function updateLoginTime() {
+            const loginTime = document.getElementById('loginTime');
+            
+            if (currentUser && currentUser.lastLogin) {
+                loginTime.innerHTML = `🕐 Último acceso: ${currentUser.lastLogin}`;
+            } else {
+                loginTime.innerHTML = `🕐 Conectado: ${new Date().toLocaleString('es-ES')}`;
+            }
+        }
+
+        /**
+         * GENERAR FEED DE ACTIVIDADES
+         */
+        function generateActivityFeed() {
+            const activities = [
+                {
+                    icon: 'login',
+                    title: `${currentUser.name} inició sesión`,
+                    time: 'Hace unos momentos',
+                    emoji: '🔐'
+                },
+                {
+                    icon: 'security',
+                    title: 'Verificación facial completada',
+                    time: 'Hace 1 minuto',
+                    emoji: '🛡️'
+                },
+                {
+                    icon: 'system',
+                    title: 'Sistema actualizado a la versión 2.1.4',
+                    time: 'Hace 2 horas',
+                    emoji: '🔄'
+                },
+                {
+                    icon: 'login',
+                    title: 'María García inició sesión',
+                    time: 'Hace 15 minutos',
+                    emoji: '👤'
+                },
+                {
+                    icon: 'security',
+                    title: 'Backup automático completado',
+                    time: 'Hace 1 hora',
+                    emoji: '💾'
+                }
+            ];
+
+            const activityFeed = document.getElementById('activityFeed');
+            
+            activityFeed.innerHTML = activities.map(activity => `
+                <div class="activity-item">
+                    <div class="activity-icon ${activity.icon}">
+                        ${activity.emoji}
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">${activity.title}</div>
+                        <div class="activity-time">${activity.time}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /**
+         * INICIAR ACTUALIZACIONES EN TIEMPO REAL
+         */
+        function startRealTimeUpdates() {
+            // Actualizar usuarios activos cada 30 segundos
+            setInterval(() => {
+                const activeUsers = document.getElementById('activeUsers');
+                const randomUsers = Math.floor(Math.random() * 10) + 10;
+                activeUsers.textContent = randomUsers;
+            }, 30000);
+
+            // Actualizar logins del día cada minuto
+            setInterval(() => {
+                const todayLogins = document.getElementById('todayLogins');
+                const currentCount = parseInt(todayLogins.textContent);
+                todayLogins.textContent = currentCount + Math.floor(Math.random() * 3);
+            }, 60000);
+        }
+
+        /**
+         * ABRIR FUNCIONALIDADES
+         */
+        function openFeature(feature) {
+            const features = {
+                profile: {
+                    title: 'Mi Perfil',
+                    message: `Perfil de ${currentUser.name}\n\n📧 Email: usuario@empresa.com\n🏢 Departamento: Tecnología\n📱 Teléfono: +52 555-0123\n📅 Último acceso: ${currentUser.lastLogin || 'Primera vez'}`
+                },
+                documents: {
+                    title: 'Documentos',
+                    message: 'Funcionalidad de documentos:\n\n📁 Mis Documentos\n📋 Compartidos conmigo\n🔄 Recientes\n⭐ Favoritos\n\n(En desarrollo)'
+                },
+                calendar: {
+                    title: 'Calendario',
+                    message: 'Calendario corporativo:\n\n📅 Reuniones de hoy: 3\n⏰ Próxima reunión: 14:30\n📝 Eventos pendientes: 7\n\n(Funcionalidad completa próximamente)'
+                },
+                messages: {
+                    title: 'Mensajes',
+                    message: 'Centro de mensajes:\n\n💬 Mensajes nuevos: 5\n📧 Emails: 12\n🔔 Notificaciones: 3\n\n(Sistema de mensajería en desarrollo)'
+                },
+                reports: {
+                    title: 'Reportes',
+                    message: 'Sistema de reportes:\n\n📊 Reportes disponibles: 15\n📈 Análisis de datos\n📋 Exportar información\n\n(Panel de reportes en construcción)'
+                },
+                settings: {
+                    title: 'Configuración',
+                    message: 'Configuración del sistema:\n\n⚙️ Preferencias de usuario\n🔐 Seguridad y privacidad\n🔔 Notificaciones\n🎨 Tema de la interfaz\n\n(Panel de configuración próximamente)'
+                }
+            };
+
+            const featureData = features[feature];
+            if (featureData) {
+                alert(`${featureData.title}\n\n${featureData.message}`);
+            }
+        }
+
+        /**
+         * CERRAR SESIÓN
+         */
+        function logout() {
+            const confirmLogout = confirm(`¿Estás seguro de que quieres cerrar la sesión, ${currentUser.name}?`);
+            
+            if (confirmLogout) {
+                console.log('🚪 Cerrando sesión de:', currentUser.name);
+                
+                // Limpiar datos de sesión
+                sessionStorage.removeItem('currentUser');
+                
+                // Actualizar localStorage para quitar el flag de usuario activo
+                try {
+                    const faceLoginData = JSON.parse(localStorage.getItem('faceLoginData') || '{}');
+                    delete faceLoginData.lastLoginUser;
+                    localStorage.setItem('faceLoginData', JSON.stringify(faceLoginData));
+                } catch (error) {
+                    console.error('Error limpiando datos de sesión:', error);
+                }
+                
+                // Mostrar mensaje de despedida
+                alert('👋 ¡Hasta luego! Sesión cerrada correctamente.');
+                
+                // Redirigir al login
+                window.location.href = 'index.html';
+            }
+        }
+
+        /**
+         * OCULTAR ALERTA DE SEGURIDAD
+         */
+        function hideSecurityAlert() {
+            document.getElementById('securityAlert').classList.add('hidden');
+        }
+
+        /**
+         * MANEJAR ERRORES GLOBALES
+         */
+        window.addEventListener('error', function(event) {
+            console.error('❌ Error en escritorio:', event.error);
+        });
+
+        /**
+         * PREVENIR NAVEGACIÓN ACCIDENTAL
+         */
+        window.addEventListener('beforeunload', function(event) {
+            if (currentUser) {
+                event.preventDefault();
+                event.returnValue = '¿Estás seguro de que quieres salir? Se recomienda cerrar sesión correctamente.';
+                return event.returnValue;
+            }
+        });
+
+        /**
+         * FORMATEAR FECHA
+         */
+        function formatDate(date) {
+            return new Date(date).toLocaleString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        /**
+         * ANIMAR CONTADOR
+         */
+        function animateCounter(element, target, duration = 1000) {
+            const start = parseInt(element.textContent) || 0;
+            const range = target - start;
+            const startTime = Date.now();
+            
+            const timer = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(start + range * progress);
+                
+                element.textContent = current;
+                
+                if (progress === 1) {
+                    clearInterval(timer);
+                }
+            }, 16);
+        }
+
+        console.log('🚀 Escritorio cargado correctamente');
+    </script>
+</body>
+</html>

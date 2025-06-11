@@ -1,0 +1,1679 @@
+/* ===================================================================
+   INDICADOR DE CONEXIÓN - CORREGIDO
+   ================================================================ */
+
+.connection-status {
+    position: fixed !important;
+    bottom: 20px !important;
+    left: 20px !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: white !important;
+    padding: 10px 15px !important;
+    border-radius: 20px !important;
+    font-size: 0.8rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.3s ease !important;
+    z-index: 1000 !important;
+    box-sizing: border-box !important;
+}
+
+.connection-indicator {
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background: #28a745 !important;
+    animation: pulse-connection 2s infinite !important;
+    flex-shrink: 0 !important;
+}
+
+.connection-indicator.offline {
+    background: #dc3545 !important;
+    animation: none !important;
+}
+
+@keyframes pulse-connection {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+/* ===================================================================
+   TIPOGRAFÍA ULTRA VISIBLE - CORREGIDO
+   ================================================================ */
+
+.user-profiles h3 {
+    color: #1a1a1a !important;
+    margin-bottom: 15px !important;
+    margin-top: 0 !important;
+    text-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.user-info h3 {
+    margin: 0 !important;
+    color: #1a1a1a !important;
+    font-size: 1.2rem !important;
+    text-align: left !important;
+    display: block !important;
+    justify-content: flex-start !important;
+    font-weight: 700 !important;
+    text-shadow: none !important;
+    line-height: 1.3 !important;
+}
+
+.user-info p {
+    margin: 5px 0 0 0 !important;
+    color: #333333 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.4 !important;
+    font-weight: 500 !important;
+}
+
+/* Específicamente para el ID */
+.user-info p[style*="color: #28a745"] {
+    color: #2d7a2d !important;
+    font-weight: 600 !important;
+}
+
+/* ===================================================================
+   PERFILES DE USUARIO - CONTRASTE MEJORADO
+   ================================================================ */
+
+.user-profiles {
+    margin: 30px 0 !important;
+    text-align: left !important;
+    padding: 0 !important;
+}
+
+.user-profile {
+    display: flex !important;
+    align-items: center !important;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa) !important;
+    padding: 18px !important;
+    margin: 12px 0 !important;
+    border-radius: 15px !important;
+    border: 2px solid transparent !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.user-profile.registered {
+    border-color: #28a745 !important;
+    background: linear-gradient(135deg, #f8fff9, #e8f5e8) !important;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.15) !important;
+}
+
+.user-profile img {
+    width: 65px !important;
+    height: 65px !important;
+    border-radius: 50% !important;
+    margin-right: 18px !important;
+    object-fit: cover !important;
+    border: 3px solid #28a745 !important;
+    transition: transform 0.3s ease !important;
+    flex-shrink: 0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.user-profile:hover img {
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.user-info {
+    flex: 1 !important;
+}
+
+/* ===================================================================
+   TEXTO EXTRA VISIBLE EN TODOS LOS ELEMENTOS
+   ================================================================ */
+
+/* Asegurar que TODOS los textos sean visibles */
+.login-container h1,
+.login-container h2,
+.login-container h3,
+.login-container p,
+.login-container span,
+.login-container div,
+.login-container li {
+    color: inherit !important;
+}
+
+/* Específico para elementos con texto muy tenue */
+.user-profiles * {
+    color: #1a1a1a !important;
+}
+
+.user-info * {
+    color: #333333 !important;
+}
+
+/* Para elementos que puedan estar heredando colores tenues */
+.instructions,
+.instructions *,
+.instructions h3,
+.instructions li {
+    color: #1565C0 !important;
+}
+
+/* Status text ultra visible */
+.status,
+.status * {
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Buttons text */
+.btn,
+.btn * {
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ===================================================================
+   TEXTO ULTRA VISIBLE - MODO AGRESIVO
+   ================================================================ */
+
+/* Forzar texto visible en TODOS los status */
+.status,
+.status *,
+#status,
+#status *,
+div[class*="status"],
+div[class*="status"] * {
+    font-weight: 900 !important;
+    letter-spacing: 0.5px !important;
+    font-family: 'Segoe UI', 'Arial Black', Arial, sans-serif !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    text-rendering: optimizeLegibility !important;
+}
+
+/* Status específicos con texto súper visible */
+.status.info,
+#status.info,
+div[class*="status info"] {
+    background: linear-gradient(135deg, #1976D2, #0D47A1) !important;
+    color: #FFFFFF !important;
+    text-shadow: 
+        1px 1px 0 #000000,
+        2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    border: 3px solid #0D47A1 !important;
+    font-size: 1.1rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.8px !important;
+}
+
+.status.loading,
+#status.loading,
+div[class*="status loading"] {
+    background: linear-gradient(135deg, #E65100, #BF360C) !important;
+    color: #FFFFFF !important;
+    text-shadow: 
+        1px 1px 0 #000000,
+        2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    border: 3px solid #BF360C !important;
+    font-weight: 900 !important;
+}
+
+.status.success,
+#status.success,
+div[class*="status success"] {
+    background: linear-gradient(135deg, #2E7D32, #1B5E20) !important;
+    color: #FFFFFF !important;
+    text-shadow: 
+        1px 1px 0 #000000,
+        2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    border: 3px solid #1B5E20 !important;
+    font-weight: 900 !important;
+}
+
+.status.error,
+#status.error,
+div[class*="status error"] {
+    background: linear-gradient(135deg, #C62828, #B71C1C) !important;
+    color: #FFFFFF !important;
+    text-shadow: 
+        1px 1px 0 #000000,
+        2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    border: 3px solid #B71C1C !important;
+    font-weight: 900 !important;
+}
+
+/* Override directo para el elemento con cualquier contenido */
+.status {
+    background: linear-gradient(135deg, #1976D2, #0D47A1) !important;
+    color: #FFFFFF !important;
+    border: 3px solid #0D47A1 !important;
+    box-shadow: 
+        0 8px 25px rgba(25, 118, 210, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    font-size: 1.1rem !important;
+    font-weight: 900 !important;
+    text-shadow: 
+        1px 1px 0 #000000,
+        2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    letter-spacing: 0.8px !important;
+    text-transform: none !important;
+    font-family: 'Segoe UI', 'Arial Black', Arial, sans-serif !important;
+    line-height: 1.4 !important;
+}
+
+/* Asegurar que el texto siempre sea blanco en status */
+.status, .status *, #status, #status * {
+    color: #FFFFFF !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* ===================================================================
+   DISEÑO RESPONSIVO - CORREGIDO
+   ================================================================ */
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px !important;
+    }
+    
+    .login-container {
+        padding: 25px !important;
+        margin: 5px !important;
+        border-radius: 15px !important;
+        max-width: 100% !important;
+    }
+
+    h1 {
+        font-size: 2rem !important;
+    }
+
+    .face-icon {
+        font-size: 3rem !important;
+    }
+
+    .controls {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+
+    .btn {
+        width: 100% !important;
+        max-width: 250px !important;
+        padding: 15px !important;
+        margin: 2px 0 !important;
+    }
+    
+    .camera-container {
+        min-height: 250px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .instructions {
+        padding: 15px !important;
+        margin: 15px 0 !important;
+    }
+    
+    .instructions li {
+        padding-left: 25px !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .user-profile {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 10px !important;
+        padding: 20px !important;
+    }
+    
+    .user-profile img {
+        margin: 0 0 10px 0 !important;
+    }
+    
+    .user-info h3,
+    .user-info p {
+        text-align: center !important;
+    }
+    
+    .connection-status {
+        bottom: 10px !important;
+        left: 10px !important;
+        font-size: 0.7rem !important;
+        padding: 8px 12px !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .login-container {
+        padding: 20px !important;
+    }
+    
+    h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    .btn {
+        padding: 12px !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .instructions {
+        padding: 12px !important;
+    }
+    
+    .camera-container {
+        min-height: 200px !important;
+    }
+}
+
+/* ===================================================================
+   EFECTOS ADICIONALES - CORREGIDO
+   ================================================================ */
+
+.security-warning {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7) !important;
+    border: 2px solid #ff9500 !important;
+    color: #856404 !important;
+    padding: 15px !important;
+    border-radius: 10px !important;
+    margin: 15px 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    animation: securityPulse 2s infinite !important;
+    box-sizing: border-box !important;
+}
+
+@keyframes securityPulse {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(255, 149, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(255, 149, 0, 0.5);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.invisible {
+    visibility: hidden !important;
+}
+
+.opacity-0 {
+    opacity: 0 !important;
+}
+
+.opacity-50 {
+    opacity: 0.5 !important;
+}
+
+.opacity-100 {
+    opacity: 1 !important;
+}
+
+/* ===================================================================
+   ESTADOS DE CÁMARA - CORREGIDO
+   ================================================================ */
+
+.camera-container.detecting {
+    border: 3px solid #28a745 !important;
+    animation: pulse-border-green 1.5s infinite !important;
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.3) !important;
+}
+
+@keyframes pulse-border-green {
+    0%, 100% {
+        border-color: #28a745 !important;
+        box-shadow: 0 0 20px rgba(40, 167, 69, 0.3) !important;
+    }
+    50% {
+        border-color: #56ab2f !important;
+        box-shadow: 0 0 30px rgba(40, 167, 69, 0.5) !important;
+    }
+}
+
+.camera-container.registering {
+    border: 3px solid #007bff !important;
+    animation: pulse-border-blue 1.5s infinite !important;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.3) !important;
+}
+
+@keyframes pulse-border-blue {
+    0%, 100% {
+        border-color: #007bff !important;
+        box-shadow: 0 0 20px rgba(0, 123, 255, 0.3) !important;
+    }
+    50% {
+        border-color: #0056b3 !important;
+        box-shadow: 0 0 30px rgba(0, 123, 255, 0.5) !important;
+    }
+}
+
+/* ===================================================================
+   OTROS ELEMENTOS - CORREGIDO
+   ================================================================ */
+
+.shortcuts-help {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    color: white !important;
+    padding: 15px !important;
+    border-radius: 10px !important;
+    font-size: 0.8rem !important;
+    max-width: 250px !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.3s ease !important;
+    z-index: 1000 !important;
+    box-sizing: border-box !important;
+}
+
+.shortcuts-help.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.shortcut-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    margin: 5px 0 !important;
+    padding: 3px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.shortcut-key {
+    background: rgba(255, 255, 255, 0.2) !important;
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+    font-family: monospace !important;
+}
+
+/* ===================================================================
+   FIXES PARA COMPATIBILIDAD
+   ================================================================ */
+
+/* Reset adicional para asegurar que no haya conflictos */
+.login-container * {
+    box-sizing: border-box !important;
+}
+
+/* Asegurar que el texto sea legible */
+.login-container p,
+.login-container span,
+.login-container div {
+    color: inherit !important;
+}
+
+/* Fix para overlays */
+.loading-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 9999 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.3s ease !important;
+}
+
+.loading-overlay.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* ===================================================================
+   ACCESIBILIDAD
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .face-icon,
+    .spinner,
+    .status.loading,
+    .camera-container.detecting,
+    .camera-container.registering,
+    .security-warning {
+        animation: none !important;
+    }
+    
+    .login-container {
+        animation: none !important;
+    }
+    
+    .btn::before,
+    .user-profile::before {
+        display: none !important;
+    }
+}
+
+/**
+ * ESTILOS COMPLETOS PARA LOGIN CON RECONOCIMIENTO FACIAL
+ * Versión mejorada con mejor integración al escritorio
+ * Autor: Sistema de IA
+ * Versión: 2.0
+ */
+
+/* ===================================================================
+   RESET Y CONFIGURACIÓN BASE
+   ================================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(90deg, #2196F3, #21CBF3);
+}
+
+.instructions h3 {
+    color: #1565C0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.instructions ul {
+    color: #1565C0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.instructions li {
+    margin: 10px 0;
+    padding-left: 30px;
+    position: relative;
+}
+
+.instructions li::before {
+    content: '▶';
+    position: absolute;
+    left: 10px;
+    color: #2196F3;
+    font-size: 0.8rem;
+}
+
+/* ===================================================================
+   PERFILES DE USUARIO
+   ================================================================ */
+
+.user-profiles {
+    margin: 30px 0;
+    text-align: left;
+}
+
+.user-profiles h3 {
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 15px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.user-profile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.user-profile:hover::before {
+    left: 100%;
+}
+
+.user-profile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile.registered {
+    border-color: #28a745;
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+}
+
+.user-profile img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    border: 3px solid #28a745;
+    transition: transform 0.3s ease;
+}
+
+.user-profile:hover img {
+    transform: scale(1.1);
+}
+
+.user-info h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.user-info p {
+    margin: 5px 0 0 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* ===================================================================
+   ANIMACIONES Y EFECTOS AVANZADOS
+   ================================================================ */
+
+.spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+    position: relative;
+}
+
+.spinner::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top: 2px solid #764ba2;
+    animation: spin 0.8s linear infinite reverse;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===================================================================
+   ESTADOS ESPECÍFICOS PARA RECONOCIMIENTO
+   ================================================================ */
+
+.camera-container.detecting {
+    border: 3px solid #28a745;
+    animation: pulse-border-green 1.5s infinite;
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.3);
+}
+
+@keyframes pulse-border-green {
+    0%, 100% {
+        border-color: #28a745;
+        box-shadow: 0 0 20px rgba(40, 167, 69, 0.3);
+    }
+    50% {
+        border-color: #56ab2f;
+        box-shadow: 0 0 30px rgba(40, 167, 69, 0.5);
+    }
+}
+
+.camera-container.registering {
+    border: 3px solid #007bff;
+    animation: pulse-border-blue 1.5s infinite;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+}
+
+@keyframes pulse-border-blue {
+    0%, 100% {
+        border-color: #007bff;
+        box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+    }
+    50% {
+        border-color: #0056b3;
+        box-shadow: 0 0 30px rgba(0, 123, 255, 0.5);
+    }
+}
+
+/* ===================================================================
+   EFECTOS DE SEGURIDAD
+   ================================================================ */
+
+.security-warning {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    border: 2px solid #ff9500;
+    color: #856404;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: securityPulse 2s infinite;
+}
+
+@keyframes securityPulse {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(255, 149, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(255, 149, 0, 0.5);
+    }
+}
+
+.locked-state {
+    filter: grayscale(50%);
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* ===================================================================
+   BARRA DE PROGRESO
+   ================================================================ */
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #e9ecef;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* ===================================================================
+   OVERLAY DE CARGA
+   ================================================================ */
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    max-width: 300px;
+}
+
+.loading-spinner-large {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+/* ===================================================================
+   INDICADOR DE CONEXIÓN
+   ================================================================ */
+
+.connection-status {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.connection-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #28a745;
+    animation: pulse-connection 2s infinite;
+}
+
+.connection-indicator.offline {
+    background: #dc3545;
+    animation: none;
+}
+
+@keyframes pulse-connection {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+/* ===================================================================
+   AYUDA DE ATAJOS DE TECLADO
+   ================================================================ */
+
+.shortcuts-help {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    max-width: 250px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.shortcuts-help.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.shortcut-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.shortcut-key {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+/* ===================================================================
+   NOTIFICACIONES
+   ================================================================ */
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 10px;
+    padding: 15px 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.success {
+    border-left: 4px solid #28a745;
+}
+
+.notification.error {
+    border-left: 4px solid #dc3545;
+}
+
+.notification.warning {
+    border-left: 4px solid #ffc107;
+}
+
+.notification.info {
+    border-left: 4px solid #17a2b8;
+}
+
+/* ===================================================================
+   TOOLTIPS
+   ================================================================ */
+
+.tooltip {
+    position: relative;
+    cursor: help;
+}
+
+.tooltip::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #333;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===================================================================
+   DISEÑO RESPONSIVO
+   ================================================================ */
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    
+    .login-container {
+        padding: 25px;
+        margin: 5px;
+        border-radius: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .face-icon {
+        font-size: 3rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 250px;
+        padding: 15px;
+    }
+    
+    .camera-container {
+        min-height: 250px;
+    }
+    
+    .instructions {
+        padding: 15px;
+    }
+    
+    .user-profile {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .user-profile img {
+        margin: 0;
+    }
+    
+    .connection-status {
+        bottom: 10px;
+        left: 10px;
+        font-size: 0.7rem;
+        padding: 8px 12px;
+    }
+    
+    .shortcuts-help {
+        bottom: 10px;
+        right: 10px;
+        max-width: 200px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .login-container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .btn {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+}
+
+/* ===================================================================
+   TEMA OSCURO
+   ================================================================ */
+
+@media (prefers-color-scheme: dark) {
+    .login-container {
+        background: rgba(33, 37, 41, 0.95);
+        color: #f8f9fa;
+    }
+    
+    h1 {
+        color: #f8f9fa;
+    }
+    
+    .instructions {
+        background: rgba(52, 58, 64, 0.8);
+        border-color: #495057;
+        color: #f8f9fa;
+    }
+    
+    .instructions h3,
+    .instructions ul,
+    .instructions li {
+        color: #adb5bd;
+    }
+    
+    .user-profile {
+        background: rgba(52, 58, 64, 0.8);
+        color: #f8f9fa;
+    }
+    
+    .user-profile.registered {
+        background: rgba(40, 167, 69, 0.2);
+    }
+    
+    .user-info h3 {
+        color: #f8f9fa;
+    }
+    
+    .user-info p {
+        color: #adb5bd;
+    }
+}
+
+/* ===================================================================
+   EFECTOS DE ACCESIBILIDAD
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .face-icon,
+    .spinner,
+    .status.loading,
+    .camera-container.detecting,
+    .camera-container.registering,
+    .security-warning {
+        animation: none;
+    }
+    
+    .login-container {
+        animation: none;
+    }
+    
+    .btn::before,
+    .user-profile::before {
+        display: none;
+    }
+}
+
+/* ===================================================================
+   UTILIDADES
+   ================================================================ */
+
+.hidden {
+    display: none !important;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.opacity-100 {
+    opacity: 1;
+}
+
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+.pointer-events-none {
+    pointer-events: none;
+}
+
+.cursor-not-allowed {
+    cursor: not-allowed;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* ===================================================================
+   PRINT STYLES
+   ================================================================ */
+
+@media print {
+    .login-container {
+        background: white;
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+    
+    .camera-container,
+    .controls,
+    .btn {
+        display: none;
+    }
+    
+    .instructions,
+    .user-profiles {
+        background: transparent;
+        border: 1px solid #000;
+    }
+}
+
+/* ===================================================================
+   RESET Y CONFIGURACIÓN BASE - CONTINUACIÓN
+   ================================================================ */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* ===================================================================
+   CONTENEDOR PRINCIPAL
+   ================================================================ */
+
+.login-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================================================
+   HEADER MODERNO - NUEVO DISEÑO
+   ================================================================ */
+
+.login-header {
+    position: relative !important;
+    margin: -40px -40px 30px -40px !important;
+    padding: 40px 40px 30px 40px !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border-radius: 20px 20px 0 0 !important;
+    overflow: hidden !important;
+    text-align: center !important;
+}
+
+.header-background {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%) !important;
+    animation: headerGlow 6s ease-in-out infinite alternate !important;
+}
+
+@keyframes headerGlow {
+    0% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.header-content {
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+.face-icon-container {
+    position: relative !important;
+    display: inline-block !important;
+    margin-bottom: 20px !important;
+}
+
+.face-icon {
+    font-size: 4rem !important;
+    display: block !important;
+    color: white !important;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+    animation: iconFloat 3s ease-in-out infinite !important;
+    position: relative !important;
+    z-index: 3 !important;
+}
+
+@keyframes iconFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.icon-glow {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 100px !important;
+    height: 100px !important;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%) !important;
+    border-radius: 50% !important;
+    animation: glowPulse 2s ease-in-out infinite !important;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+.login-header h1 {
+    color: white !important;
+    margin: 0 0 10px 0 !important;
+    font-size: 2.8rem !important;
+    font-weight: 300 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    letter-spacing: 1px !important;
+}
+
+.login-header h1::after {
+    display: none !important;
+}
+
+.header-subtitle {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.1rem !important;
+    font-weight: 400 !important;
+    margin: 0 0 25px 0 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+    opacity: 0.9 !important;
+}
+
+.header-divider {
+    width: 60px !important;
+    height: 3px !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent) !important;
+    margin: 0 auto !important;
+    border-radius: 2px !important;
+    animation: dividerShine 3s ease-in-out infinite !important;
+}
+
+@keyframes dividerShine {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scaleX(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scaleX(1.2);
+    }
+}
+
+/* ===================================================================
+   INSTRUCCIONES - CORREGIDO
+   ================================================================ */
+
+.instructions {
+    background: linear-gradient(135deg, #e3f2fd, #f0f9ff) !important;
+    border: 1px solid #2196F3 !important;
+    border-radius: 15px !important;
+    padding: 20px !important;
+    margin: 20px 0 !important;
+    text-align: left !important;
+    position: relative !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+.instructions::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 4px !important;
+    background: linear-gradient(90deg, #2196F3, #21CBF3) !important;
+}
+
+/* ===================================================================
+   CONTENEDOR DE CÁMARA - CORREGIDO
+   ================================================================ */
+
+.camera-container {
+    position: relative !important;
+    margin: 30px 0 !important;
+    border-radius: 15px !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+    background: #000 !important;
+    min-height: 300px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease !important;
+}
+
+.camera-container::before {
+    content: '📹 Cámara inactiva' !important;
+    position: absolute !important;
+    color: white !important;
+    font-size: 1.2rem !important;
+    z-index: 1 !important;
+    opacity: 0.7 !important;
+}
+
+.camera-container.active::before {
+    display: none !important;
+}
+
+#video {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 400px !important;
+    object-fit: cover !important;
+    transition: opacity 0.3s ease !important;
+}
+
+#canvas {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+}
+
+/* ===================================================================
+   CONTROLES Y BOTONES
+   ================================================================ */
+
+.controls {
+    margin: 30px 0;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    min-width: 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn:disabled::before {
+    display: none;
+}
+
+.btn.success {
+    background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+}
+
+.btn.danger {
+    background: linear-gradient(45deg, #ff6b6b, #ffa8a8);
+}
+
+.btn.warning {
+    background: linear-gradient(45deg, #ff9500, #ffb347);
+}
+
+/* ===================================================================
+   MENSAJES DE ESTADO
+   ================================================================ */
+
+.status {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: 600;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.status::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: currentColor;
+    opacity: 0.5;
+}
+
+.status.loading {
+    background: linear-gradient(270deg, #fff3cd, #ffeaa7, #fff3cd);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.status.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    animation: successPulse 0.6s ease-out;
+}
+
+@keyframes successPulse {
+    0% { transform: scale(0.95); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.status.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    animation: errorShake 0.5s ease-out;
+}
+
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.status.info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
