@@ -59,7 +59,11 @@
     gap: 10px !important;
     font-size: 1.3rem !important;
     font-weight: 700 !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    padding: 10px 15px !important;
+    border-radius: 8px !important;
+    border: 2px solid #667eea !important;
 }
 
 .user-info h3 {
