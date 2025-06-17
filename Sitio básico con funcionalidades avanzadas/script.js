@@ -23,9 +23,9 @@
  * - ES6+ (async/await, arrow functions, template literals)
  * - Navegadores modernos (Chrome 55+, Firefox 52+, Safari 10+)
  * 
- * @author Tu nombre
- * @version 2.0
- * @since 2024
+ * @author Hector Arciniega Valencia
+ * @version 3.0
+ * @since 2025
  */
 
 /* ===============================================
