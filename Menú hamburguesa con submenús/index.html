@@ -1,1 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración de metadatos básicos del documento -->
+    <meta charset="UTF-8"> <!-- Codificación de caracteres UTF-8 para soporte completo de idiomas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuración responsive para dispositivos móviles -->
+    <title>Menú Hamburguesa con Submenús</title> <!-- Título que aparece en la pestaña del navegador -->
+    
+    <!-- Enlace al archivo CSS externo para estilos -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- =========================== HEADER PRINCIPAL =========================== -->
+    <!-- Cabecera fija que contiene el botón hamburguesa y el logo -->
+    <header class="header">
+        
+        <!-- Botón hamburguesa animado con 3 líneas que se transforma en X -->
+        <button class="hamburger-btn" id="hamburgerBtn">
+            <span></span> <!-- Primera línea del botón hamburguesa -->
+            <span></span> <!-- Segunda línea del botón hamburguesa (se oculta al activar) -->
+            <span></span> <!-- Tercera línea del botón hamburguesa -->
+        </button>
+        
+        <!-- Logo o nombre del sitio web -->
+        <div class="logo">Mi Sitio Web</div>
+    </header>
 
+    <!-- =========================== OVERLAY DE FONDO =========================== -->
+    <!-- Capa semitransparente que aparece cuando el menú está abierto -->
+    <!-- Al hacer clic en esta área, se cierra el menú -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- =========================== MENÚ LATERAL DESLIZANTE =========================== -->
+    <!-- Contenedor principal del menú hamburguesa que se desliza desde la izquierda -->
+    <nav class="sidebar" id="sidebar">
+        
+        <!-- Cabecera del menú lateral con título -->
+        <div class="sidebar-header">
+            Menú de Navegación
+        </div>
+        
+        <!-- Contenido scrolleable del menú -->
+        <div class="sidebar-content">
+            
+            <!-- ========== ELEMENTO DE MENÚ SIMPLE (SIN SUBMENÚ) ========== -->
+            <!-- Elemento de menú básico que enlaza directamente a una página -->
+            <div class="menu-item">
+                <a href="#" class="menu-link">
+                    <div style="display: flex; align-items: center;">
+                        <!-- Icono SVG de casa para "Inicio" -->
+                        <svg class="menu-icon" viewBox="0 0 24 24">
+                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                        </svg>
+                        Inicio
+                    </div>
+                </a>
+            </div>
+
+            <!-- ========== ELEMENTO DE MENÚ CON SUBMENÚ DESPLEGABLE ========== -->
+            <!-- Menú "Productos" con submenú desplegable vertical -->
+            <div class="menu-item">
+                <!-- Elemento clickeable que activa/desactiva el submenú -->
+                <!-- onclick="toggleSubmenu('productos')" llama a la función JavaScript -->
+                <div class="menu-link" onclick="toggleSubmenu('productos')">
+                    <div style="display: flex; align-items: center;">
+                        <!-- Icono SVG de bolsa de compras para "Productos" -->
+                        <svg class="menu-icon" viewBox="0 0 24 24">
+                            <path d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1zM10 6a2 2 0 0 1 4 0v1h-4V6zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2v10z"/>
+                        </svg>
+                        Productos
+                    </div>
+                    <!-- Flecha indicadora que rota cuando se abre el submenú -->
+                    <svg class="dropdown-arrow" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z"/>
+                    </svg>
+                </div>
+                
+                <!-- Submenú desplegable con ID único para identificación en JavaScript -->
+                <div class="submenu" id="productos">
+                    <!-- Elementos individuales del submenú -->
+                    <a href="#" class="submenu-item">Electrónicos</a>
+                    <a href="#" class="submenu-item">Ropa y Accesorios</a>
+                    <a href="#" class="submenu-item">Hogar y Jardín</a>
+                    <a href="#" class="submenu-item">Deportes</a>
+                    <a href="#" class="submenu-item">Libros</a>
+                </div>
+            </div>
+
+            <!-- ========== SEGUNDO ELEMENTO CON SUBMENÚ ========== -->
+            <!-- Menú "Servicios" con submenú desplegable -->
+            <div class="menu-item">
+                <div class="menu-link" onclick="toggleSubmenu('services')">
+                    <div style="display: flex; align-items: center;">
+                        <!-- Icono SVG de check circle para "Servicios" -->
+                        <svg class="menu-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        Servicios
+                    </div>
+                    <!-- Flecha desplegable -->
+                    <svg class="dropdown-arrow" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z"/>
+                    </svg>
+                </div>
+                
+                <!-- Submenú con ID único "services" -->
+                <div class="submenu" id="services">
+                    <a href="#" class="submenu-item">Consultoría</a>
+                    <a href="#" class="submenu-item">Desarrollo Web</a>
+                    <a href="#" class="submenu-item">Marketing Digital</a>
+                    <a href="#" class="submenu-item">Soporte Técnico</a>
+                </div>
+            </div>
+
+            <!-- ========== TERCER ELEMENTO CON SUBMENÚ ========== -->
+            <!-- Menú "Empresa" con submenú desplegable -->
+            <div class="menu-item">
+                <div class="menu-link" onclick="toggleSubmenu('empresa')">
+                    <div style="display: flex; align-items: center;">
+                        <!-- Icono SVG de personas para "Empresa" -->
+                        <svg class="menu-icon" viewBox="0 0 24 24">
+                            <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A2.001 2.001 0 0 0 18.06 7h-.72c-.8 0-1.54.5-1.85 1.26L14.7 10.5l-.7-.5L12 8l-2 2v12h2v-5h2v5h2zm-7.5-10.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10.5s.67 1.5 1.5 1.5zM5.5 6c1.11 0 2-.89 2-2s-.89-2-2-2-2 .89-2 2 .89 2 2 2zm1.5 16v-6H9l-1.5-3H6l-1.5 3H7v6h2z"/>
+                        </svg>
+                        Empresa
+                    </div>
+                    <!-- Flecha desplegable -->
+                    <svg class="dropdown-arrow" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z"/>
+                    </svg>
+                </div>
+                
+                <!-- Submenú con ID único "empresa" -->
+                <div class="submenu" id="empresa">
+                    <a href="#" class="submenu-item">Sobre Nosotros</a>
+                    <a href="#" class="submenu-item">Nuestro Equipo</a>
+                    <a href="#" class="submenu-item">Historia</a>
+                    <a href="#" class="submenu-item">Misión y Visión</a>
+                    <a href="#" class="submenu-item">Certificaciones</a>
+                </div>
+            </div>
+
+            <!-- ========== ELEMENTOS DE MENÚ SIMPLES ADICIONALES ========== -->
+            <!-- Elemento "Blog" sin submenú -->
+            <div class="menu-item">
+                <a href="#" class="menu-link">
+                    <div style="display: flex; align-items: center;">
+                        <!-- Icono SVG de check circle para "Blog" -->
+                        <svg class="menu-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        Blog
+                    </div>
+                </a>
+            </div>
+
+            <!-- Elemento "Contacto" sin submenú -->
+            <div class="menu-item">
+                <a href="#" class="menu-link">
+                    <div style="display: flex; align-items: center;">
+                        <!-- Icono SVG de email para "Contacto" -->
+                        <svg class="menu-icon" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        Contacto
+                    </div>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- =========================== CONTENIDO PRINCIPAL =========================== -->
+    <!-- Área principal del sitio web que se desplaza hacia abajo por el header fijo -->
+    <main class="main-content">
+        <h1>¡Bienvenido!</h1>
+        <p>Este es un ejemplo de menú hamburguesa con submenús desplegables. Haz clic en el botón hamburguesa para ver el menú lateral con las opciones desplegables funcionando perfectamente.</p>
+    </main>
+
+    <!-- =========================== SCRIPT JAVASCRIPT =========================== -->
+    <!-- Enlace al archivo JavaScript externo que maneja toda la funcionalidad -->
+    <script src="script.js"></script>
+</body>
+</html>
