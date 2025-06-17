@@ -1,0 +1,88 @@
+{
+  "es": {
+    "search": {
+      "placeholder": "Buscar...",
+      "noSuggestions": "No se encontraron sugerencias",
+      "suggestions": [
+        { "text": "Tecnología", "category": "General", "icon": "fas fa-microchip" },
+        { "text": "Software", "category": "Productos", "icon": "fas fa-code" },
+        { "text": "Hardware", "category": "Productos", "icon": "fas fa-desktop" },
+        { "text": "Accesorios", "category": "Productos", "icon": "fas fa-plug" },
+        { "text": "Consultoría", "category": "Servicios", "icon": "fas fa-handshake" },
+        { "text": "Soporte", "category": "Servicios", "icon": "fas fa-tools" },
+        { "text": "Noticias", "category": "Información", "icon": "fas fa-newspaper" },
+        { "text": "Contacto", "category": "Información", "icon": "fas fa-envelope" },
+        { "text": "Inteligencia Artificial", "category": "Tecnología", "icon": "fas fa-robot" },
+        { "text": "Desarrollo Web", "category": "Software", "icon": "fas fa-globe" },
+        { "text": "Ciberseguridad", "category": "Servicios", "icon": "fas fa-shield-alt" },
+        { "text": "Cloud Computing", "category": "Servicios", "icon": "fas fa-cloud" },
+        { "text": "Programación", "category": "Software", "icon": "fas fa-laptop-code" },
+        { "text": "Redes", "category": "Hardware", "icon": "fas fa-network-wired" }
+      ],
+      "categories": {
+        "General": "General",
+        "Productos": "Productos",
+        "Servicios": "Servicios",
+        "Información": "Información",
+        "Tecnología": "Tecnología",
+        "Software": "Software",
+        "Hardware": "Hardware"
+      }
+    },
+    "menu": {
+      "home": "Inicio",
+      "products": "Productos",
+      "services": "Servicios",
+      "news": "Noticias",
+      "contact": "Contacto",
+      "software": "Software",
+      "hardware": "Hardware",
+      "accessories": "Accesorios",
+      "consulting": "Consultoría",
+      "support": "Soporte"
+    }
+  },
+  "en": {
+    "search": {
+      "placeholder": "Search...",
+      "noSuggestions": "No suggestions found",
+      "suggestions": [
+        { "text": "Technology", "category": "General", "icon": "fas fa-microchip" },
+        { "text": "Software", "category": "Products", "icon": "fas fa-code" },
+        { "text": "Hardware", "category": "Products", "icon": "fas fa-desktop" },
+        { "text": "Accessories", "category": "Products", "icon": "fas fa-plug" },
+        { "text": "Consulting", "category": "Services", "icon": "fas fa-handshake" },
+        { "text": "Support", "category": "Services", "icon": "fas fa-tools" },
+        { "text": "News", "category": "Information", "icon": "fas fa-newspaper" },
+        { "text": "Contact", "category": "Information", "icon": "fas fa-envelope" },
+        { "text": "Artificial Intelligence", "category": "Technology", "icon": "fas fa-robot" },
+        { "text": "Web Development", "category": "Software", "icon": "fas fa-globe" },
+        { "text": "Cybersecurity", "category": "Services", "icon": "fas fa-shield-alt" },
+        { "text": "Cloud Computing", "category": "Services", "icon": "fas fa-cloud" },
+        { "text": "Programming", "category": "Software", "icon": "fas fa-laptop-code" },
+        { "text": "Networks", "category": "Hardware", "icon": "fas fa-network-wired" }
+      ],
+      "categories": {
+        "General": "General",
+        "Productos": "Products",
+        "Servicios": "Services",
+        "Información": "Information",
+        "Tecnología": "Technology",
+        "Software": "Software",
+        "Hardware": "Hardware"
+      }
+    },
+    "menu": {
+      "home": "Home",
+      "products": "Products",
+      "services": "Services",
+      "news": "News",
+      "contact": "Contact",
+      "software": "Software",
+      "hardware": "Hardware",
+      "accessories": "Accessories",
+      "consulting": "Consulting",
+      "support": "Support"
+    }
+  }
+}
