@@ -1,1 +1,537 @@
+/* ================================================================
+   RESET Y CONFIGURACIÓN GLOBAL
+   ================================================================ */
 
+/* Reset CSS universal - elimina márgenes, rellenos y establece box-sizing */
+* {
+    margin: 0;                    /* Elimina márgenes por defecto de todos los elementos */
+    padding: 0;                   /* Elimina rellenos por defecto de todos los elementos */
+    box-sizing: border-box;       /* Incluye padding y border en el ancho total del elemento */
+}
+
+/* Estilos base del cuerpo del documento */
+body {
+    font-family: 'Arial', sans-serif;                           /* Fuente principal del sitio */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradiente de fondo diagonal */
+    min-height: 100vh;                                          /* Altura mínima de toda la ventana */
+    color: #333;                                                /* Color de texto por defecto */
+}
+
+/* ================================================================
+   HEADER PRINCIPAL Y NAVEGACIÓN SUPERIOR
+   ================================================================ */
+
+/* Cabecera fija que permanece en la parte superior al hacer scroll */
+.header {
+    position: fixed;                              /* Posición fija en la ventana */
+    top: 0;                                       /* Pegado al borde superior */
+    left: 0;                                      /* Pegado al borde izquierdo */
+    right: 0;                                     /* Pegado al borde derecho */
+    height: 70px;                                 /* Altura fija del header */
+    background: rgba(255, 255, 255, 0.95);       /* Fondo blanco semitransparente */
+    backdrop-filter: blur(10px);                  /* Efecto de desenfoque de fondo (glassmorphism) */
+    display: flex;                                /* Layout flexbox */
+    align-items: center;                          /* Centra verticalmente el contenido */
+    padding: 0 20px;                              /* Relleno horizontal */
+    z-index: 1000;                                /* Capa alta para estar sobre otros elementos */
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);   /* Sombra sutil debajo del header */
+}
+
+/* ================================================================
+   BOTÓN HAMBURGUESA ANIMADO
+   ================================================================ */
+
+/* Contenedor del botón hamburguesa */
+.hamburger-btn {
+    width: 40px;                                  /* Ancho del botón */
+    height: 40px;                                 /* Alto del botón */
+    background: none;                             /* Sin fondo */
+    border: none;                                 /* Sin borde */
+    cursor: pointer;                              /* Cursor de mano al pasar por encima */
+    display: flex;                                /* Layout flexbox */
+    flex-direction: column;                       /* Apila las líneas verticalmente */
+    justify-content: center;                      /* Centra verticalmente */
+    align-items: center;                          /* Centra horizontalmente */
+    transition: all 0.3s ease;                   /* Transición suave para todas las propiedades */
+}
+
+/* Líneas individuales del botón hamburguesa */
+.hamburger-btn span {
+    width: 25px;                                  /* Ancho de cada línea */
+    height: 3px;                                  /* Grosor de cada línea */
+    background: #333;                             /* Color de las líneas */
+    margin: 3px 0;                                /* Espaciado vertical entre líneas */
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Transición con curva suave */
+    border-radius: 2px;                           /* Bordes redondeados */
+}
+
+/* Animación de la primera línea cuando el botón está activo */
+.hamburger-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px); /* Rota y mueve para formar la X */
+}
+
+/* Animación de la segunda línea (línea central) - se oculta */
+.hamburger-btn.active span:nth-child(2) {
+    opacity: 0;                                   /* Se vuelve transparente */
+}
+
+/* Animación de la tercera línea cuando el botón está activo */
+.hamburger-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px); /* Rota en dirección opuesta para formar la X */
+}
+
+/* Logo del sitio web */
+.logo {
+    margin-left: 20px;                            /* Separación del botón hamburguesa */
+    font-size: 24px;                              /* Tamaño de fuente del logo */
+    font-weight: bold;                            /* Texto en negrita */
+    color: #333;                                  /* Color del texto */
+}
+
+/* ================================================================
+   OVERLAY DE FONDO OSCURO
+   ================================================================ */
+
+/* Capa que oscurece el fondo cuando el menú está abierto */
+.overlay {
+    position: fixed;                              /* Posición fija en la ventana */
+    top: 0;                                       /* Cubre desde arriba */
+    left: 0;                                      /* Cubre desde la izquierda */
+    width: 100%;                                  /* Ancho completo */
+    height: 100%;                                 /* Alto completo */
+    background: rgba(0, 0, 0, 0.5);               /* Fondo negro semitransparente */
+    opacity: 0;                                   /* Inicialmente invisible */
+    visibility: hidden;                           /* Inicialmente oculto */
+    transition: all 0.3s ease;                    /* Transición suave */
+    z-index: 998;                                 /* Debajo del menú pero sobre el contenido */
+}
+
+/* Estado activo del overlay */
+.overlay.active {
+    opacity: 1;                                   /* Se vuelve visible */
+    visibility: visible;                          /* Se muestra */
+}
+
+/* ================================================================
+   MENÚ LATERAL DESLIZANTE
+   ================================================================ */
+
+/* Contenedor principal del menú lateral */
+.sidebar {
+    position: fixed;                              /* Posición fija en la ventana */
+    top: 0;                                       /* Desde la parte superior */
+    left: -350px;                                 /* Inicialmente oculto a la izquierda */
+    width: 350px;                                 /* Ancho del menú */
+    height: 100%;                                 /* Alto completo de la ventana */
+    background: #fff;                             /* Fondo blanco */
+    z-index: 999;                                 /* Capa alta para estar sobre el overlay */
+    transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Animación de deslizamiento suave */
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1);   /* Sombra a la derecha del menú */
+}
+
+/* Estado activo del menú lateral */
+.sidebar.active {
+    left: 0;                                      /* Se desliza hacia la posición visible */
+}
+
+/* Cabecera del menú lateral */
+.sidebar-header {
+    height: 70px;                                 /* Misma altura que el header principal */
+    display: flex;                                /* Layout flexbox */
+    align-items: center;                          /* Centra verticalmente */
+    padding: 0 30px;                              /* Relleno horizontal */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradiente de fondo */
+    color: white;                                 /* Texto blanco */
+    font-size: 20px;                              /* Tamaño de fuente */
+    font-weight: bold;                            /* Texto en negrita */
+}
+
+/* Contenido scrolleable del menú */
+.sidebar-content {
+    padding: 0;                                   /* Sin relleno */
+    height: calc(100% - 70px);                    /* Alto total menos la cabecera */
+    overflow-y: auto;                             /* Scroll vertical si es necesario */
+}
+
+/* ================================================================
+   ELEMENTOS DEL MENÚ PRINCIPAL
+   ================================================================ */
+
+/* Contenedor de cada elemento del menú */
+.menu-item {
+    border-bottom: 1px solid #f0f0f0;             /* Línea separadora entre elementos */
+}
+
+/* Enlaces y elementos clickeables del menú */
+.menu-link {
+    display: flex;                                /* Layout flexbox */
+    align-items: center;                          /* Centra verticalmente el contenido */
+    justify-content: space-between;               /* Espacia el contenido entre extremos */
+    padding: 18px 30px;                           /* Relleno interno generoso */
+    color: #333;                                  /* Color del texto */
+    text-decoration: none;                        /* Sin subrayado */
+    font-size: 16px;                              /* Tamaño de fuente */
+    transition: all 0.3s ease;                    /* Transición suave para efectos hover */
+    cursor: pointer;                              /* Cursor de mano */
+}
+
+/* Efecto hover en los enlaces del menú */
+.menu-link:hover {
+    background: #f8f9fa;                          /* Fondo gris claro al pasar el mouse */
+    color: #667eea;                               /* Cambia el color del texto */
+    padding-left: 40px;                           /* Desplaza el contenido hacia la derecha */
+}
+
+/* Iconos SVG dentro de los elementos del menú */
+.menu-icon {
+    width: 20px;                                  /* Ancho del icono */
+    height: 20px;                                 /* Alto del icono */
+    margin-right: 15px;                           /* Separación del texto */
+    fill: currentColor;                           /* Usa el color actual del texto */
+}
+
+/* Flecha indicadora de submenús desplegables */
+.dropdown-arrow {
+    width: 12px;                                  /* Ancho de la flecha */
+    height: 12px;                                 /* Alto de la flecha */
+    transition: transform 0.3s ease;              /* Transición suave para la rotación */
+    fill: currentColor;                           /* Usa el color actual del texto */
+}
+
+/* Estado rotado de la flecha cuando el submenú está abierto */
+.dropdown-arrow.rotated {
+    transform: rotate(180deg);                    /* Rota 180 grados */
+}
+
+/* ================================================================
+   SUBMENÚS DESPLEGABLES VERTICALES
+   ================================================================ */
+
+/* Contenedor de los submenús desplegables */
+.submenu {
+    max-height: 0;                                /* Inicialmente colapsado (altura 0) */
+    overflow: hidden;                             /* Oculta el contenido que sobresale */
+    background: #f8f9fa;                          /* Fondo gris claro para diferenciar */
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Animación suave de expansión */
+}
+
+/* Estado activo de los submenús (cuando están abiertos) */
+.submenu.active {
+    max-height: 500px;                            /* Altura máxima cuando está expandido */
+}
+
+/* Elementos individuales dentro de los submenús */
+.submenu-item {
+    padding: 15px 30px 15px 70px;                 /* Relleno con indentación mayor a la izquierda */
+    color: #666;                                  /* Color de texto más tenue */
+    text-decoration: none;                        /* Sin subrayado */
+    display: block;                               /* Elemento de bloque para ocupar todo el ancho */
+    font-size: 14px;                              /* Tamaño de fuente menor que el menú principal */
+    transition: all 0.3s ease;                    /* Transición suave para efectos hover */
+    border-bottom: 1px solid #e9ecef;             /* Línea separadora entre elementos del submenú */
+}
+
+/* Efecto hover en los elementos del submenú */
+.submenu-item:hover {
+    background: #e9ecef;                          /* Fondo aún más claro al pasar el mouse */
+    color: #667eea;                               /* Cambia el color del texto */
+    padding-left: 80px;                           /* Aumenta la indentación al hacer hover */
+}
+
+/* Elimina la línea separadora del último elemento del submenú */
+.submenu-item:last-child {
+    border-bottom: none;                          /* Sin borde inferior */
+}
+
+/* ================================================================
+   CONTENIDO PRINCIPAL DE LA PÁGINA
+   ================================================================ */
+
+/* Área principal del contenido */
+.main-content {
+    margin-top: 70px;                             /* Margen superior igual a la altura del header */
+    padding: 50px 30px;                           /* Relleno generoso */
+    text-align: center;                           /* Texto centrado */
+    color: white;                                 /* Texto blanco para contrastar con el fondo */
+}
+
+/* Título principal */
+.main-content h1 {
+    font-size: 3rem;                              /* Tamaño de fuente grande */
+    margin-bottom: 20px;                          /* Separación inferior */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra del texto para mejor legibilidad */
+}
+
+/* Párrafo descriptivo */
+.main-content p {
+    font-size: 1.2rem;                            /* Tamaño de fuente mediano */
+    opacity: 0.9;                                 /* Ligeramente transparente */
+    max-width: 600px;                             /* Ancho máximo para mejor legibilidad */
+    margin: 0 auto;                               /* Centrado horizontalmente */
+    line-height: 1.6;                             /* Espaciado entre líneas para mejor lectura */
+}
+
+/* ================================================================
+   DISEÑO RESPONSIVO PARA DISPOSITIVOS MÓVILES
+   ================================================================ */
+
+/* Media query para pantallas de 768px o menos (tablets y móviles) */
+@media (max-width: 768px) {
+    
+    /* Ajustes del menú lateral para pantallas pequeñas */
+    .sidebar {
+        width: 280px;                             /* Ancho menor para pantallas pequeñas */
+        left: -280px;                             /* Posición inicial ajustada */
+    }
+    
+    /* Ajustes del título principal en móviles */
+    .main-content h1 {
+        font-size: 2rem;                          /* Tamaño de fuente menor */
+    }
+    
+    /* Ajustes del párrafo en móviles */
+    .main-content p {
+        font-size: 1rem;                          /* Tamaño de fuente menor */
+        padding: 0 20px;                          /* Relleno adicional en los lados */
+    }
+}/* ================================================================
+   RESET Y CONFIGURACIÓN GLOBAL
+   ================================================================ */
+
+/* Reset CSS universal - elimina márgenes, rellenos y establece box-sizing */
+* {
+    margin: 0;                    /* Elimina márgenes por defecto de todos los elementos */
+    padding: 0;                   /* Elimina rellenos por defecto de todos los elementos */
+    box-sizing: border-box;       /* Incluye padding y border en el ancho total del elemento */
+}
+
+/* Estilos base del cuerpo del documento */
+body {
+    font-family: 'Arial', sans-serif;                           /* Fuente principal del sitio */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradiente de fondo diagonal */
+    min-height: 100vh;                                          /* Altura mínima de toda la ventana */
+    color: #333;                                                /* Color de texto por defecto */
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón hamburguesa */
+.hamburger-btn {
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.hamburger-btn span {
+    width: 25px;
+    height: 3px;
+    background: #333;
+    margin: 3px 0;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border-radius: 2px;
+}
+
+.hamburger-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.logo {
+    margin-left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 998;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Menú lateral */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -350px;
+    width: 350px;
+    height: 100%;
+    background: #fff;
+    z-index: 999;
+    transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar-header {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.sidebar-content {
+    padding: 0;
+    height: calc(100% - 70px);
+    overflow-y: auto;
+}
+
+/* Elementos del menú */
+.menu-item {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 30px;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.menu-link:hover {
+    background: #f8f9fa;
+    color: #667eea;
+    padding-left: 40px;
+}
+
+.menu-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    fill: currentColor;
+}
+
+.dropdown-arrow {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.3s ease;
+    fill: currentColor;
+}
+
+.dropdown-arrow.rotated {
+    transform: rotate(180deg);
+}
+
+/* Submenú desplegable */
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    background: #f8f9fa;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.submenu.active {
+    max-height: 500px;
+}
+
+.submenu-item {
+    padding: 15px 30px 15px 70px;
+    color: #666;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.submenu-item:hover {
+    background: #e9ecef;
+    color: #667eea;
+    padding-left: 80px;
+}
+
+.submenu-item:last-child {
+    border-bottom: none;
+}
+
+/* Contenido principal */
+.main-content {
+    margin-top: 70px;
+    padding: 50px 30px;
+    text-align: center;
+    color: white;
+}
+
+.main-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.main-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Adaptable - Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 280px;
+        left: -280px;
+    }
+    
+    .main-content h1 {
+        font-size: 2rem;
+    }
+    
+    .main-content p {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+}
