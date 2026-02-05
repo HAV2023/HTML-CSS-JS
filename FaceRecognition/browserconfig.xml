@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    BROWSERCONFIG.XML - CONFIGURACIÓN PARA WINDOWS/EDGE
+    ===================================================
+    
+    Este archivo configura los tiles de Windows y Edge para una mejor
+    integración en dispositivos Windows. Define íconos, colores y
+    comportamiento específico para el ecosistema Microsoft.
+    
+    UBICACIÓN: Raíz del sitio web (/browserconfig.xml)
+    
+    CARACTERÍSTICAS:
+    - Tiles personalizados para Windows Start Menu
+    - Colores de tema consistentes
+    - Múltiples tamaños de íconos
+    - Configuración de notificaciones
+-->
+<browserconfig>
+    <msapplication>
+        <!-- =============================================================
+             CONFIGURACIÓN DE TILES PARA WINDOWS
+             ============================================================= -->
+        
+        <tile>
+            <!-- Tile pequeño 70x70 (opcional) -->
+            <square70x70logo src="/icons/ms-icon-70x70.png"/>
+            
+            <!-- Tile mediano 150x150 (más común) -->
+            <square150x150logo src="/icons/ms-icon-150x150.png"/>
+            
+            <!-- Tile grande 310x310 (para más información) -->
+            <square310x310logo src="/icons/ms-icon-310x310.png"/>
+            
+            <!-- Tile ancho 310x150 (para información extendida) -->
+            <wide310x150logo src="/icons/ms-icon-310x150.png"/>
+            
+            <!-- Color de fondo del tile (coincide con theme-color) -->
+            <TileColor>#667eea</TileColor>
+        </tile>
+        
+        <!-- =============================================================
+             CONFIGURACIÓN DE POLLING Y NOTIFICACIONES
+             ============================================================= -->
+        
+        <!-- Configuración de polling para tiles dinámicos (opcional) -->
+        <polling-uri src="/api/tile-updates" />
+        <frequency>30</frequency> <!-- minutos -->
+        
+        <!-- =============================================================
+             CONFIGURACIÓN DE NAVEGACIÓN Y COMPORTAMIENTO
+             ============================================================= -->
+        
+        <!-- URL de inicio cuando se accede desde tile -->
+        <starturl src="/"/>
+        
+        <!-- Configuración de navegación -->
+        <navbutton-color>#667eea</navbutton-color>
+        
+        <!-- =============================================================
+             CONFIGURACIÓN DE BADGES Y NOTIFICACIONES
+             ============================================================= -->
+        
+        <!-- Configuración de badges en el tile -->
+        <badge>
+            <polling-uri src="/api/badge-count"/>
+            <frequency>15</frequency> <!-- minutos -->
+        </badge>
+        
+        <!-- =============================================================
+             METADATOS ADICIONALES
+             ============================================================= -->
+        
+        <!-- Tooltip que aparece al hacer hover sobre el tile -->
+        <tooltip>Login con Reconocimiento Facial - Acceso Seguro</tooltip>
+        
+        <!-- =============================================================
+             CONFIGURACIÓN DE TASKBAR Y JUMPLIST
+             ============================================================= -->
+        
+        <!-- Configuración de Jump List para Windows -->
+        <jumplist>
+            <task>
+                <name>Reconocimiento Rápido</name>
+                <description>Iniciar reconocimiento facial directo</description>
+                <icon-uri src="/icons/shortcut-recognize.ico"/>
+                <arguments>?action=recognize</arguments>
+            </task>
+            
+            <task>
+                <name>Registrar Usuario</name>
+                <description>Registrar nuevo usuario en el sistema</description>
+                <icon-uri src="/icons/shortcut-register.ico"/>
+                <arguments>?action=register</arguments>
+            </task>
+            
+            <task>
+                <name>Ver Usuarios</name>
+                <description>Mostrar lista de usuarios registrados</description>
+                <icon-uri src="/icons/shortcut-users.ico"/>
+                <arguments>?action=users</arguments>
+            </task>
+        </jumplist>
+        
+        <!-- =============================================================
+             CONFIGURACIÓN DE SEGURIDAD Y PRIVACIDAD
+             ============================================================= -->
+        
+        <!-- Configuración de dominio permitido -->
+        <alloweddomain src="https://tu-dominio.com"/>
+        <alloweddomain src="https://www.tu-dominio.com"/>
+        
+        <!-- =============================================================
+             CONFIGURACIÓN DE CACHE Y ACTUALIZACIONES
+             ============================================================= -->
+        
+        <!-- Configuración de cache para tiles -->
+        <cachesettings>
+            <cache-duration>1440</cache-duration> <!-- 24 horas en minutos -->
+            <auto-update>true</auto-update>
+        </cachesettings>
+    </msapplication>
+</browserconfig>

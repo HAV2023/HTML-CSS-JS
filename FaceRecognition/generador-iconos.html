@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<!--
+    GENERADOR AUTOMÁTICO DE ÍCONOS PWA
+    ==================================
+    
+    Esta página genera automáticamente todos los íconos necesarios
+    para tu PWA en los tamaños requeridos. Simplemente abre este
+    archivo en tu navegador y haz clic en generar.
+    
+    FUNCIONALIDADES:
+    - Genera todos los tamaños estándar
+    - Descarga automática de archivos
+    - Preview en tiempo real
+    - Personalización de colores y diseño
+    - Compatible con todos los dispositivos
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Íconos PWA - Login Facial</title>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .control-group {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .control-group h3 {
+            margin: 0 0 15px 0;
+            color: #495057;
+            font-size: 1.2rem;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0 5px 0;
+            color: #495057;
+            font-weight: 600;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .color-input {
+            height: 50px;
+            cursor: pointer;
+        }
+        
+        .preview-section {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+        
+        .preview-item {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .preview-canvas {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .preview-label {
+            font-size: 12px;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+            min-width: 200px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn.success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+        
+        .btn.warning {
+            background: linear-gradient(45deg, #ffc107, #fd7e14);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .actions {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .progress {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+            position: relative;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            border: 1px solid #2196F3;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .instructions h3 {
+            color: #1565C0;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            color: #1565C0;
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .preview-grid {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Generador de Íconos PWA</h1>
+        
+        <!-- Controles de personalización -->
+        <div class="controls">
+            <!-- Diseño básico -->
+            <div class="control-group">
+                <h3>🎯 Diseño Básico</h3>
+                
+                <label for="iconText">Emoji/Texto del Ícono:</label>
+                <input type="text" id="iconText" value="🔐" maxlength="4">
+                
+                <label for="backgroundColor1">Color de Fondo 1:</label>
+                <input type="color" id="backgroundColor1" value="#667eea" class="color-input">
+                
+                <label for="backgroundColor2">Color de Fondo 2:</label>
+                <input type="color" id="backgroundColor2" value="#764ba2" class="color-input">
+                
+                <label for="textColor">Color del Texto:</label>
+                <input type="color" id="textColor" value="#ffffff" class="color-input">
+            </div>
+            
+            <!-- Configuración avanzada -->
+            <div class="control-group">
+                <h3>⚙️ Configuración</h3>
+                
+                <label for="gradientType">Tipo de Gradiente:</label>
+                <select id="gradientType">
+                    <option value="linear">Linear</option>
+                    <option value="radial">Radial</option>
+                    <option value="solid">Color Sólido</option>
+                </select>
+                
+                <label for="borderRadius">Radio de Borde (%):</label>
+                <input type="range" id="borderRadius" min="0" max="50" value="20">
+                <span id="borderRadiusValue">20%</span>
+                
+                <label for="iconSize">Tamaño del Ícono (%):</label>
+                <input type="range" id="iconSize" min="30" max="80" value="60">
+                <span id="iconSizeValue">60%</span>
+            </div>
+        </div>
+        
+        <!-- Vista previa -->
+        <div class="preview-section">
+            <h3>👀 Vista Previa</h3>
+            <div class="preview-grid" id="previewGrid">
+                <!-- Los previews se generan dinámicamente -->
+            </div>
+        </div>
+        
+        <!-- Barra de progreso -->
+        <div class="progress" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <!-- Acciones principales -->
+        <div class="actions">
+            <button class="btn" id="generateBtn" onclick="generateAllIcons()">
+                🚀 Generar Todos los Íconos
+            </button>
+            
+            <button class="btn success" id="previewBtn" onclick="updatePreview()">
+                👁️ Actualizar Vista Previa
+            </button>
+            
+            <button class="btn warning" id="downloadZipBtn" onclick="downloadAsZip()" style="display: none;">
+                📦 Descargar ZIP
+            </button>
+        </div>
+        
+        <!-- Instrucciones -->
+        <div class="instructions">
+            <h3>📋 Instrucciones de Uso:</h3>
+            <ol>
+                <li>Personaliza el diseño usando los controles de arriba</li>
+                <li>Haz clic en "Actualizar Vista Previa" para ver los cambios</li>
+                <li>Cuando estés satisfecho, haz clic en "Generar Todos los Íconos"</li>
+                <li>Los archivos se descargarán automáticamente</li>
+                <li>Sube los archivos a la carpeta /icons/ de tu proyecto</li>
+                <li>Actualiza las rutas en tu manifest.json si es necesario</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        /**
+         * GENERADOR DE ÍCONOS PWA
+         * =======================
+         */
+        
+        // Tamaños estándar para PWA
+        const iconSizes = [
+            16, 32, 48, 57, 60, 72, 76, 96, 114, 120, 128, 144, 
+            152, 180, 192, 384, 512
+        ];
+        
+        // Configuración especial para diferentes tipos
+        const specialIcons = {
+            'apple': [57, 60, 72, 76, 114, 120, 144, 152, 180],
+            'android': [36, 48, 72, 96, 144, 192],
+            'microsoft': [70, 150, 310]
+        };
+        
+        let generatedIcons = [];
+        
+        /**
+         * INICIALIZACIÓN
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎨 Generador de íconos iniciado');
+            
+            // Configurar event listeners
+            setupEventListeners();
+            
+            // Generar vista previa inicial
+            updatePreview();
+        });
+        
+        /**
+         * CONFIGURAR EVENT LISTENERS
+         */
+        function setupEventListeners() {
+            // Actualizar valores de sliders
+            document.getElementById('borderRadius').addEventListener('input', function() {
+                document.getElementById('borderRadiusValue').textContent = this.value + '%';
+            });
+            
+            document.getElementById('iconSize').addEventListener('input', function() {
+                document.getElementById('iconSizeValue').textContent = this.value + '%';
+            });
+            
+            // Auto-preview en cambios
+            const inputs = document.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('change', debounce(updatePreview, 500));
+            });
+        }
+        
+        /**
+         * DEBOUNCE FUNCTION
+         */
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
+        /**
+         * ACTUALIZAR VISTA PREVIA
+         */
+        function updatePreview() {
+            const previewGrid = document.getElementById('previewGrid');
+            previewGrid.innerHTML = '';
+            
+            // Generar previews para los tamaños más comunes
+            const previewSizes = [48, 72, 96, 144, 192, 512];
+            
+            previewSizes.forEach(size => {
+                const canvas = createIcon(size);
+                const previewItem = document.createElement('div');
+                previewItem.className = 'preview-item';
+                
+                canvas.className = 'preview-canvas';
+                canvas.style.width = '60px';
+                canvas.style.height = '60px';
+                
+                const label = document.createElement('div');
+                label.className = 'preview-label';
+                label.textContent = `${size}x${size}`;
+                
+                previewItem.appendChild(canvas);
+                previewItem.appendChild(label);
+                previewGrid.appendChild(previewItem);
+            });
+            
+            console.log('👁️ Vista previa actualizada');
+        }
+        
+        /**
+         * CREAR ÍCONO
+         */
+        function createIcon(size) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = size;
+            canvas.height = size;
+            
+            // Obtener configuración
+            const config = getIconConfig();
+            
+            // Dibujar fondo
+            drawBackground(ctx, size, config);
+            
+            // Dibujar texto/emoji
+            drawIcon(ctx, size, config);
+            
+            return canvas;
+        }
+        
+        /**
+         * OBTENER CONFIGURACIÓN DEL ÍCONO
+         */
+        function getIconConfig() {
+            return {
+                iconText: document.getElementById('iconText').value,
+                backgroundColor1: document.getElementById('backgroundColor1').value,
+                backgroundColor2: document.getElementById('backgroundColor2').value,
+                textColor: document.getElementById('textColor').value,
+                gradientType: document.getElementById('gradientType').value,
+                borderRadius: parseInt(document.getElementById('borderRadius').value),
+                iconSize: parseInt(document.getElementById('iconSize').value)
+            };
+        }
+        
+        /**
+         * DIBUJAR FONDO
+         */
+        function drawBackground(ctx, size, config) {
+            const borderRadius = (config.borderRadius / 100) * size;
+            
+            // Crear path con bordes redondeados
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, borderRadius);
+            ctx.clip();
+            
+            // Aplicar gradiente o color sólido
+            if (config.gradientType === 'solid') {
+                ctx.fillStyle = config.backgroundColor1;
+            } else if (config.gradientType === 'linear') {
+                const gradient = ctx.createLinearGradient(0, 0, size, size);
+                gradient.addColorStop(0, config.backgroundColor1);
+                gradient.addColorStop(1, config.backgroundColor2);
+                ctx.fillStyle = gradient;
+            } else if (config.gradientType === 'radial') {
+                const gradient = ctx.createRadialGradient(
+                    size/2, size/2, 0,
+                    size/2, size/2, size/2
+                );
+                gradient.addColorStop(0, config.backgroundColor1);
+                gradient.addColorStop(1, config.backgroundColor2);
+                ctx.fillStyle = gradient;
+            }
+            
+            ctx.fillRect(0, 0, size, size);
+        }
+        
+        /**
+         * DIBUJAR ÍCONO/TEXTO
+         */
+        function drawIcon(ctx, size, config) {
+            const fontSize = (config.iconSize / 100) * size;
+            
+            ctx.font = `${fontSize}px Arial, "Segoe UI Emoji", "Apple Color Emoji"`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = config.textColor;
+            
+            // Añadir sombra para mejor legibilidad
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+            ctx.shadowBlur = size * 0.02;
+            ctx.shadowOffsetX = size * 0.01;
+            ctx.shadowOffsetY = size * 0.01;
+            
+            ctx.fillText(config.iconText, size / 2, size / 2);
+            
+            // Resetear sombra
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+        }
+        
+        /**
+         * GENERAR TODOS LOS ÍCONOS
+         */
+        async function generateAllIcons() {
+            const generateBtn = document.getElementById('generateBtn');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const downloadZipBtn = document.getElementById('downloadZipBtn');
+            
+            // Deshabilitar botón y mostrar progreso
+            generateBtn.disabled = true;
+            generateBtn.textContent = '⏳ Generando...';
+            progressContainer.style.display = 'block';
+            
+            generatedIcons = [];
+            const totalIcons = iconSizes.length;
+            
+            try {
+                for (let i = 0; i < iconSizes.length; i++) {
+                    const size = iconSizes[i];
+                    
+                    // Actualizar progreso
+                    const progress = ((i + 1) / totalIcons) * 100;
+                    progressBar.style.width = progress + '%';
+                    
+                    // Generar ícono
+                    const canvas = createIcon(size);
+                    
+                    // Convertir a blob
+                    const blob = await new Promise(resolve => {
+                        canvas.toBlob(resolve, 'image/png', 1.0);
+                    });
+                    
+                    // Guardar ícono generado
+                    generatedIcons.push({
+                        size: size,
+                        filename: `icon-${size}x${size}.png`,
+                        blob: blob
+                    });
+                    
+                    // Pequeña pausa para no bloquear la UI
+                    await new Promise(resolve => setTimeout(resolve, 50));
+                }
+                
+                // Generar íconos especiales
+                await generateSpecialIcons();
+                
+                // Descargar todos los íconos
+                downloadAllIcons();
+                
+                // Mostrar botón de ZIP
+                downloadZipBtn.style.display = 'inline-block';
+                
+                console.log(`✅ ${generatedIcons.length} íconos generados correctamente`);
+                showNotification('🎉 ¡Íconos generados exitosamente!', 'success');
+                
+            } catch (error) {
+                console.error('❌ Error generando íconos:', error);
+                showNotification('❌ Error generando íconos. Intenta nuevamente.', 'error');
+            } finally {
+                // Restaurar estado
+                generateBtn.disabled = false;
+                generateBtn.textContent = '🚀 Generar Todos los Íconos';
+                progressContainer.style.display = 'none';
+                progressBar.style.width = '0%';
+            }
+        }
+        
+        /**
+         * GENERAR ÍCONOS ESPECIALES
+         */
+        async function generateSpecialIcons() {
+            // Apple touch icons
+            for (const size of specialIcons.apple) {
+                if (!iconSizes.includes(size)) {
+                    const canvas = createIcon(size);
+                    const blob = await new Promise(resolve => {
+                        canvas.toBlob(resolve, 'image/png', 1.0);
+                    });
+                    
+                    generatedIcons.push({
+                        size: size,
+                        filename: `apple-icon-${size}x${size}.png`,
+                        blob: blob
+                    });
+                }
+            }
+            
+            // Android icons
+            for (const size of specialIcons.android) {
+                if (!iconSizes.includes(size)) {
+                    const canvas = createIcon(size);
+                    const blob = await new Promise(resolve => {
+                        canvas.toBlob(resolve, 'image/png', 1.0);
+                    });
+                    
+                    generatedIcons.push({
+                        size: size,
+                        filename: `android-icon-${size}x${size}.png`,
+                        blob: blob
+                    });
+                }
+            }
+            
+            // Microsoft icons
+            for (const size of specialIcons.microsoft) {
+                const canvas = createIcon(size);
+                const blob = await new Promise(resolve => {
+                    canvas.toBlob(resolve, 'image/png', 1.0);
+                });
+                
+                generatedIcons.push({
+                    size: size,
+                    filename: `ms-icon-${size}x${size}.png`,
+                    blob: blob
+                });
+            }
+            
+            // Favicon ICO (convertir desde PNG 32x32)
+            const favicon32 = generatedIcons.find(icon => icon.size === 32);
+            if (favicon32) {
+                generatedIcons.push({
+                    size: 32,
+                    filename: 'favicon.ico',
+                    blob: favicon32.blob // Simplificado, en producción convertir a ICO
+                });
+            }
+        }
+        
+        /**
+         * DESCARGAR TODOS LOS ÍCONOS
+         */
+        function downloadAllIcons() {
+            generatedIcons.forEach(icon => {
+                downloadBlob(icon.blob, icon.filename);
+            });
+        }
+        
+        /**
+         * DESCARGAR BLOB COMO ARCHIVO
+         */
+        function downloadBlob(blob, filename) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.style.display = 'none';
+            
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            // Limpiar URL después de un tiempo
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }
+        
+        /**
+         * DESCARGAR COMO ZIP
+         */
+        async function downloadAsZip() {
+            if (generatedIcons.length === 0) {
+                showNotification('❌ No hay íconos generados para comprimir', 'error');
+                return;
+            }
+            
+            try {
+                // Crear archivo de texto con instrucciones
+                const instructions = `
+ÍCONOS PWA GENERADOS
+===================
+
+Estos íconos han sido generados automáticamente para tu PWA.
+
+INSTRUCCIONES DE INSTALACIÓN:
+
+1. Crea una carpeta llamada "icons" en la raíz de tu proyecto
+2. Sube todos los archivos PNG a esa carpeta
+3. Asegúrate de que tu manifest.json apunte a las rutas correctas
+4. El favicon.ico debe ir en la raíz del proyecto
+
+ARCHIVOS INCLUIDOS:
+- icon-*.png: Íconos estándar para PWA
+- apple-icon-*.png: Íconos específicos para iOS
+- android-icon-*.png: Íconos específicos para Android
+- ms-icon-*.png: Íconos específicos para Windows
+- favicon.ico: Favicon tradicional
+
+CONFIGURACIÓN UTILIZADA:
+- Texto/Emoji: ${document.getElementById('iconText').value}
+- Color 1: ${document.getElementById('backgroundColor1').value}
+- Color 2: ${document.getElementById('backgroundColor2').value}
+- Tipo: ${document.getElementById('gradientType').value}
+
+Total de archivos: ${generatedIcons.length}
+Generado el: ${new Date().toLocaleString()}
+`;
+                
+                // Simular ZIP con descarga individual y archivo de instrucciones
+                const instructionsBlob = new Blob([instructions], { type: 'text/plain' });
+                downloadBlob(instructionsBlob, 'INSTRUCCIONES_ICONOS.txt');
+                
+                showNotification('📦 Archivos preparados para descarga', 'success');
+                
+            } catch (error) {
+                console.error('❌ Error creando ZIP:', error);
+                showNotification('❌ Error preparando archivos', 'error');
+            }
+        }
+        
+        /**
+         * MOSTRAR NOTIFICACIÓN
+         */
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#d4edda' : 
+                            type === 'error' ? '#f8d7da' : '#d1ecf1'};
+                color: ${type === 'success' ? '#155724' : 
+                        type === 'error' ? '#721c24' : '#0c5460'};
+                padding: 15px 20px;
+                border-radius: 10px;
+                border: 1px solid ${type === 'success' ? '#c3e6cb' : 
+                                  type === 'error' ? '#f5c6cb' : '#bee5eb'};
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                z-index: 1000;
+                max-width: 300px;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+                font-weight: 600;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 4000);
+        }
+        
+        /**
+         * POLYFILL PARA roundRect (COMPATIBILIDAD)
+         */
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+                this.beginPath();
+                this.moveTo(x + radius, y);
+                this.lineTo(x + width - radius, y);
+                this.quadraticCurveTo(x + width, y, x + width, y + radius);
+                this.lineTo(x + width, y + height - radius);
+                this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                this.lineTo(x + radius, y + height);
+                this.quadraticCurveTo(x, y + height, x, y + height - radius);
+                this.lineTo(x, y + radius);
+                this.quadraticCurveTo(x, y, x + radius, y);
+                this.closePath();
+            };
+        }
+        
+        // Log inicial
+        console.log('🎨 Generador de íconos PWA listo');
+        console.log(`📊 Se generarán ${iconSizes.length} íconos estándar`);
+        console.log(`🔧 Tamaños: ${iconSizes.join(', ')}`);
+    </script>
+</body>
+</html>

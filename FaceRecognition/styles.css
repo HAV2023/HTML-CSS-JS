@@ -1,0 +1,1931 @@
+/**
+ * SISTEMA DE LOGIN CON RECONOCIMIENTO FACIAL - CSS DOCUMENTADO
+ * ================================================================
+ * 
+ * Este archivo contiene los estilos para un sistema completo de autenticación
+ * mediante reconocimiento facial, con diseño moderno, responsive y accesible.
+ * 
+ * CARACTERÍSTICAS PRINCIPALES:
+ * - Diseño glassmorphism con efectos de desenfoque
+ * - Animaciones CSS avanzadas y transiciones suaves
+ * - Sistema de estados visuales para el reconocimiento facial
+ * - Responsive design con mobile-first approach
+ * - Soporte para tema oscuro y preferencias de accesibilidad
+ * - Componentes modulares y reutilizables
+ * 
+ * ESTRUCTURA:
+ * 1. Reset y configuración base
+ * 2. Indicador de conexión
+ * 3. Tipografía y visibilidad
+ * 4. Perfiles de usuario
+ * 5. Header moderno
+ * 6. Contenedor principal
+ * 7. Cámara y controles
+ * 8. Estados y mensajes
+ * 9. Animaciones
+ * 10. Responsive design
+ * 11. Accesibilidad
+ * 
+ * AUTOR: Hector Arciniega
+ * VERSIÓN: 2.0
+ * ÚLTIMA ACTUALIZACIÓN: 2025
+ */
+
+/* ===================================================================
+   RESET Y CONFIGURACIÓN BASE
+   ================================================================ */
+
+/**
+ * Reset universal para eliminar márgenes y paddings por defecto
+ * Box-sizing: border-box para un control más predecible del layout
+ */
+* {
+    margin: 0;                    /* Elimina márgenes por defecto */
+    padding: 0;                   /* Elimina paddings por defecto */
+    box-sizing: border-box;       /* Incluye padding y border en el width/height */
+}
+
+/**
+ * Configuración del elemento body
+ * - Fuente del sistema para mejor rendimiento y consistencia
+ * - Gradiente de fondo con colores azules
+ * - Flexbox para centrado perfecto del contenido
+ * - Altura mínima de viewport para ocupar toda la pantalla
+ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente del sistema */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradiente diagonal */
+    min-height: 100vh;            /* Altura mínima = altura del viewport */
+    display: flex;                /* Flexbox para centrado */
+    justify-content: center;      /* Centrado horizontal */
+    align-items: center;          /* Centrado vertical */
+    padding: 20px;                /* Padding para evitar que el contenido toque los bordes */
+    overflow-x: hidden;           /* Oculta scroll horizontal innecesario */
+}
+
+/* ===================================================================
+   INDICADOR DE CONEXIÓN - COMPONENTE FLOTANTE
+   ================================================================ */
+
+/**
+ * Indicador de estado de conexión flotante
+ * Posicionado de forma fija en la esquina inferior izquierda
+ * Utiliza glassmorphism con fondo semi-transparente
+ */
+.connection-status {
+    position: fixed !important;           /* Posición fija respecto al viewport */
+    bottom: 20px !important;             /* 20px desde el borde inferior */
+    left: 20px !important;               /* 20px desde el borde izquierdo */
+    background: rgba(0, 0, 0, 0.8) !important; /* Fondo negro semi-transparente */
+    color: white !important;             /* Texto blanco para contraste */
+    padding: 10px 15px !important;       /* Padding interno */
+    border-radius: 20px !important;      /* Bordes redondeados */
+    font-size: 0.8rem !important;        /* Tamaño de fuente pequeño */
+    display: flex !important;            /* Flexbox para alineación */
+    align-items: center !important;      /* Centrado vertical de elementos */
+    gap: 8px !important;                 /* Espacio entre elementos */
+    transition: all 0.3s ease !important; /* Transición suave para cambios */
+    z-index: 1000 !important;            /* Z-index alto para estar por encima */
+    box-sizing: border-box !important;   /* Border-box para cálculos exactos */
+}
+
+/**
+ * Indicador visual circular de conexión
+ * Círculo pequeño que cambia de color según el estado
+ */
+.connection-indicator {
+    width: 8px !important;               /* Ancho del círculo */
+    height: 8px !important;              /* Alto del círculo */
+    border-radius: 50% !important;       /* Círculo perfecto */
+    background: #28a745 !important;      /* Verde para conexión activa */
+    animation: pulse-connection 2s infinite !important; /* Animación de pulso */
+    flex-shrink: 0 !important;           /* No se encoge en flexbox */
+}
+
+/**
+ * Estado offline del indicador
+ * Cambia a rojo y desactiva la animación
+ */
+.connection-indicator.offline {
+    background: #dc3545 !important;      /* Rojo para desconexión */
+    animation: none !important;          /* Sin animación cuando está offline */
+}
+
+/**
+ * Animación de pulso para el indicador de conexión
+ * Efecto de latido que indica actividad
+ */
+@keyframes pulse-connection {
+    0%, 100% {
+        opacity: 1;                      /* Opacidad completa */
+        transform: scale(1);             /* Tamaño normal */
+    }
+    50% {
+        opacity: 0.5;                    /* Opacidad reducida */
+        transform: scale(1.2);           /* Escala aumentada */
+    }
+}
+
+/* ===================================================================
+   TIPOGRAFÍA ULTRA VISIBLE - SISTEMA DE CONTRASTE MEJORADO
+   ================================================================ */
+
+/**
+ * Títulos principales de la sección de perfiles de usuario
+ * Diseño con gradiente y bordes para máxima visibilidad
+ */
+.user-profiles h3 {
+    color: #ffffff !important;           /* Texto blanco */
+    margin-bottom: 15px !important;      /* Margen inferior */
+    margin-top: 0 !important;            /* Sin margen superior */
+    text-align: center !important;       /* Texto centrado */
+    display: flex !important;            /* Flexbox para alineación */
+    align-items: center !important;      /* Centrado vertical */
+    justify-content: center !important;  /* Centrado horizontal */
+    gap: 10px !important;                /* Espacio entre elementos */
+    font-size: 1.3rem !important;        /* Tamaño de fuente grande */
+    font-weight: 700 !important;         /* Peso de fuente bold */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important; /* Sombra de texto */
+    background: linear-gradient(135deg, #667eea, #764ba2) !important; /* Fondo gradiente */
+    padding: 15px 20px !important;       /* Padding interno */
+    border-radius: 12px !important;      /* Bordes redondeados */
+    border: 3px solid #ffffff !important; /* Borde blanco */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important; /* Sombra de caja */
+}
+
+/**
+ * Títulos dentro de la información de usuario
+ * Estilo más discreto para información secundaria
+ */
+.user-info h3 {
+    margin: 0 !important;                /* Sin márgenes */
+    color: #1a1a1a !important;          /* Color oscuro */
+    font-size: 1.2rem !important;        /* Tamaño mediano */
+    text-align: left !important;         /* Alineación izquierda */
+    display: block !important;           /* Display block */
+    justify-content: flex-start !important; /* Alineación al inicio */
+    font-weight: 700 !important;         /* Peso bold */
+    text-shadow: none !important;        /* Sin sombra de texto */
+    line-height: 1.3 !important;         /* Altura de línea ajustada */
+}
+
+/**
+ * Párrafos de información de usuario
+ * Texto secundario con buena legibilidad
+ */
+.user-info p {
+    margin: 5px 0 0 0 !important;        /* Margen superior mínimo */
+    color: #2c3e50 !important;           /* Color gris oscuro */
+    font-size: 0.95rem !important;       /* Tamaño ligeramente menor */
+    line-height: 1.4 !important;         /* Altura de línea cómoda */
+    font-weight: 600 !important;         /* Peso semi-bold */
+}
+
+/**
+ * Estilo específico para el campo ID
+ * Destacado con fondo coloreado y borde
+ */
+.user-info p[style*="color: #28a745"] {
+    color: #155724 !important;           /* Verde oscuro */
+    font-weight: 700 !important;         /* Peso bold */
+    background: rgba(40, 167, 69, 0.1) !important; /* Fondo verde muy claro */
+    padding: 4px 8px !important;         /* Padding pequeño */
+    border-radius: 4px !important;       /* Bordes redondeados */
+    border: 1px solid #28a745 !important; /* Borde verde */
+}
+
+/* ===================================================================
+   PERFILES DE USUARIO - DISEÑO DE TARJETAS
+   ================================================================ */
+
+/**
+ * Contenedor principal de perfiles de usuario
+ * Sección organizada con margen y alineación
+ */
+.user-profiles {
+    margin: 30px 0 !important;           /* Márgenes superior e inferior */
+    text-align: left !important;         /* Alineación izquierda */
+    padding: 0 !important;               /* Sin padding */
+}
+
+/**
+ * Tarjeta individual de perfil de usuario
+ * Diseño tipo card con efectos hover y gradientes
+ */
+.user-profile {
+    display: flex !important;            /* Flexbox para layout horizontal */
+    align-items: center !important;      /* Centrado vertical de contenido */
+    background: linear-gradient(135deg, #ffffff, #f8f9fa) !important; /* Gradiente sutil */
+    padding: 18px !important;            /* Padding generoso */
+    margin: 12px 0 !important;           /* Margen vertical */
+    border-radius: 15px !important;      /* Bordes muy redondeados */
+    border: 2px solid transparent !important; /* Borde transparente inicial */
+    transition: all 0.3s ease !important; /* Transición suave */
+    position: relative !important;       /* Posición relativa para pseudo-elementos */
+    overflow: hidden !important;         /* Oculta desbordamientos */
+    box-sizing: border-box !important;   /* Border-box para cálculos */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important; /* Sombra sutil */
+}
+
+/**
+ * Estado registrado del perfil de usuario
+ * Variante visual para usuarios ya registrados
+ */
+.user-profile.registered {
+    border-color: #28a745 !important;    /* Borde verde */
+    background: linear-gradient(135deg, #ffffff, #f0f8f0) !important; /* Gradiente verdoso */
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.15) !important; /* Sombra verde */
+}
+
+/**
+ * Avatar/imagen de perfil de usuario
+ * Imagen circular con efectos de hover
+ */
+.user-profile img {
+    width: 65px !important;              /* Ancho fijo */
+    height: 65px !important;             /* Alto fijo */
+    border-radius: 50% !important;       /* Círculo perfecto */
+    margin-right: 18px !important;       /* Margen derecho */
+    object-fit: cover !important;        /* Recorte proporcional */
+    border: 3px solid #28a745 !important; /* Borde verde */
+    transition: transform 0.3s ease !important; /* Transición de transformación */
+    flex-shrink: 0 !important;           /* No se encoge */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important; /* Sombra de imagen */
+}
+
+/**
+ * Efecto hover en la imagen de perfil
+ * Escala ligeramente la imagen al pasar el cursor
+ */
+.user-profile:hover img {
+    transform: scale(1.05) !important;   /* Escala al 105% */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important; /* Sombra aumentada */
+}
+
+/**
+ * Contenedor de información textual del usuario
+ * Ocupa el espacio restante con flex
+ */
+.user-info {
+    flex: 1 !important;                  /* Ocupa todo el espacio disponible */
+}
+
+/* ===================================================================
+   HEADER MODERNO - DISEÑO GLASSMORPHISM
+   ================================================================ */
+
+/**
+ * Header principal con efecto glassmorphism
+ * Sección superior con gradiente y efectos visuales avanzados
+ */
+.login-header {
+    position: relative !important;       /* Posición relativa para elementos absolutos */
+    margin: -40px -40px 30px -40px !important; /* Márgenes negativos para sangrado */
+    padding: 40px 40px 30px 40px !important; /* Padding interno */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important; /* Gradiente principal */
+    border-radius: 20px 20px 0 0 !important; /* Bordes redondeados superiores */
+    overflow: hidden !important;         /* Oculta desbordamientos */
+    text-align: center !important;       /* Texto centrado */
+}
+
+/**
+ * Fondo animado del header
+ * Crea efectos de luz con gradientes radiales
+ */
+.header-background {
+    position: absolute !important;       /* Posición absoluta */
+    top: 0 !important;                   /* Pegado arriba */
+    left: 0 !important;                  /* Pegado izquierda */
+    right: 0 !important;                 /* Pegado derecha */
+    bottom: 0 !important;                /* Pegado abajo */
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%) !important;
+    animation: headerGlow 6s ease-in-out infinite alternate !important; /* Animación de resplandor */
+}
+
+/**
+ * Animación de resplandor del header
+ * Cambia la opacidad suavemente para efecto de respiración
+ */
+@keyframes headerGlow {
+    0% {
+        opacity: 0.5;                    /* Opacidad inicial */
+    }
+    100% {
+        opacity: 1;                      /* Opacidad final */
+    }
+}
+
+/**
+ * Contenido del header por encima del fondo
+ * Z-index elevado para estar por encima de efectos
+ */
+.header-content {
+    position: relative !important;       /* Posición relativa */
+    z-index: 2 !important;               /* Z-index para estar encima */
+}
+
+/**
+ * Contenedor del ícono principal
+ * Wrapper para efectos del ícono facial
+ */
+.face-icon-container {
+    position: relative !important;       /* Posición relativa */
+    display: inline-block !important;    /* Display inline-block */
+    margin-bottom: 20px !important;      /* Margen inferior */
+}
+
+/**
+ * Ícono principal (emoji de cara)
+ * Ícono grande con animación flotante
+ */
+.face-icon {
+    font-size: 4rem !important;          /* Tamaño muy grande */
+    display: block !important;           /* Display block */
+    color: white !important;             /* Color blanco */
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important; /* Sombra de texto */
+    animation: iconFloat 3s ease-in-out infinite !important; /* Animación flotante */
+    position: relative !important;       /* Posición relativa */
+    z-index: 3 !important;               /* Z-index alto */
+}
+
+/**
+ * Animación flotante del ícono
+ * Movimiento vertical sutil y continuo
+ */
+@keyframes iconFloat {
+    0%, 100% {
+        transform: translateY(0px);       /* Posición inicial */
+    }
+    50% {
+        transform: translateY(-10px);     /* Posición elevada */
+    }
+}
+
+/**
+ * Efecto de resplandor detrás del ícono
+ * Círculo difuso que pulsa detrás del ícono
+ */
+.icon-glow {
+    position: absolute !important;       /* Posición absoluta */
+    top: 50% !important;                 /* Centrado vertical */
+    left: 50% !important;                /* Centrado horizontal */
+    transform: translate(-50%, -50%) !important; /* Centrado perfecto */
+    width: 100px !important;             /* Ancho del resplandor */
+    height: 100px !important;            /* Alto del resplandor */
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%) !important;
+    border-radius: 50% !important;       /* Círculo perfecto */
+    animation: glowPulse 2s ease-in-out infinite !important; /* Animación de pulso */
+}
+
+/**
+ * Animación de pulso del resplandor
+ * Escala y opacidad que varían rítmicamente
+ */
+@keyframes glowPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1); /* Escala normal */
+        opacity: 0.5;                    /* Opacidad reducida */
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2); /* Escala aumentada */
+        opacity: 0.8;                    /* Opacidad aumentada */
+    }
+}
+
+/**
+ * Título principal del header
+ * Tipografía grande y elegante
+ */
+.login-header h1 {
+    color: white !important;             /* Texto blanco */
+    margin: 0 0 10px 0 !important;       /* Márgenes específicos */
+    font-size: 2.8rem !important;        /* Tamaño grande */
+    font-weight: 300 !important;         /* Peso ligero */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important; /* Sombra de texto */
+    letter-spacing: 1px !important;      /* Espaciado entre letras */
+}
+
+/**
+ * Removes default h1 after pseudo-element
+ * Elimina elementos decorativos por defecto
+ */
+.login-header h1::after {
+    display: none !important;            /* Oculta pseudo-elemento */
+}
+
+/**
+ * Subtítulo del header
+ * Texto secundario con estilo elegante
+ */
+.header-subtitle {
+    color: rgba(255, 255, 255, 0.9) !important; /* Blanco semi-transparente */
+    font-size: 1.1rem !important;        /* Tamaño mediano */
+    font-weight: 400 !important;         /* Peso normal */
+    margin: 0 0 25px 0 !important;       /* Márgenes específicos */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important; /* Sombra sutil */
+    opacity: 0.9 !important;             /* Opacidad reducida */
+}
+
+/**
+ * Línea divisoria decorativa
+ * Elemento visual para separar secciones
+ */
+.header-divider {
+    width: 60px !important;              /* Ancho de la línea */
+    height: 3px !important;              /* Alto de la línea */
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent) !important;
+    margin: 0 auto !important;           /* Centrado horizontal */
+    border-radius: 2px !important;       /* Bordes redondeados */
+    animation: dividerShine 3s ease-in-out infinite !important; /* Animación de brillo */
+}
+
+/**
+ * Animación de brillo del divisor
+ * Efecto de brillo que se intensifica y atenúa
+ */
+@keyframes dividerShine {
+    0%, 100% {
+        opacity: 0.6;                    /* Opacidad reducida */
+        transform: scaleX(1);            /* Escala normal */
+    }
+    50% {
+        opacity: 1;                      /* Opacidad completa */
+        transform: scaleX(1.2);          /* Escala aumentada */
+    }
+}
+
+/* ===================================================================
+   CONTENEDOR PRINCIPAL - GLASSMORPHISM AVANZADO
+   ================================================================ */
+
+/**
+ * Contenedor principal de la aplicación
+ * Glassmorphism con backdrop-filter y animación de entrada
+ */
+.login-container {
+    background: rgba(255, 255, 255, 0.95) !important; /* Fondo semi-transparente */
+    backdrop-filter: blur(10px) !important; /* Efecto de desenfoque */
+    border-radius: 20px !important;      /* Bordes muy redondeados */
+    padding: 40px !important;            /* Padding generoso */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important; /* Sombra pronunciada */
+    max-width: 500px !important;         /* Ancho máximo */
+    width: 100% !important;              /* Ancho completo disponible */
+    text-align: center !important;       /* Texto centrado */
+    position: relative !important;       /* Posición relativa */
+    animation: slideIn 0.6s ease-out !important; /* Animación de entrada */
+}
+
+/**
+ * Animación de entrada del contenedor
+ * Deslizamiento desde abajo con fade-in
+ */
+@keyframes slideIn {
+    from {
+        opacity: 0;                      /* Invisible inicialmente */
+        transform: translateY(30px);     /* Desplazado hacia abajo */
+    }
+    to {
+        opacity: 1;                      /* Completamente visible */
+        transform: translateY(0);        /* Posición final */
+    }
+}
+
+/* ===================================================================
+   INSTRUCCIONES - DISEÑO DE PANEL INFORMATIVO
+   ================================================================ */
+
+/**
+ * Panel de instrucciones
+ * Área informativa con gradiente azul y diseño estructurado
+ */
+.instructions {
+    background: linear-gradient(135deg, #e3f2fd, #f0f9ff) !important; /* Gradiente azul claro */
+    border: 1px solid #2196F3 !important; /* Borde azul */
+    border-radius: 15px !important;      /* Bordes redondeados */
+    padding: 20px !important;            /* Padding interno */
+    margin: 20px 0 !important;           /* Márgenes verticales */
+    text-align: left !important;         /* Alineación izquierda */
+    position: relative !important;       /* Posición relativa */
+    overflow: hidden !important;         /* Oculta desbordamientos */
+    box-sizing: border-box !important;   /* Border-box para cálculos */
+}
+
+/**
+ * Banda superior decorativa de las instrucciones
+ * Línea de color en la parte superior
+ */
+.instructions::before {
+    content: '' !important;              /* Contenido vacío */
+    position: absolute !important;       /* Posición absoluta */
+    top: 0 !important;                   /* Pegado arriba */
+    left: 0 !important;                  /* Pegado izquierda */
+    width: 100% !important;              /* Ancho completo */
+    height: 4px !important;              /* Alto de la banda */
+    background: linear-gradient(90deg, #2196F3, #21CBF3) !important; /* Gradiente azul */
+}
+
+/**
+ * Títulos de las instrucciones
+ * Estilo para los h3 dentro de instrucciones
+ */
+.instructions h3 {
+    color: #1565C0 !important;           /* Azul oscuro */
+    margin-bottom: 15px !important;      /* Margen inferior */
+    display: flex !important;            /* Flexbox para alineación */
+    align-items: center !important;      /* Centrado vertical */
+    gap: 10px !important;                /* Espacio entre elementos */
+}
+
+/**
+ * Listas dentro de instrucciones
+ * Sin estilo de lista por defecto
+ */
+.instructions ul {
+    color: #1565C0 !important;           /* Color azul */
+    padding-left: 0 !important;          /* Sin padding izquierdo */
+    list-style: none !important;         /* Sin marcadores de lista */
+}
+
+/**
+ * Items de lista en instrucciones
+ * Con indicador personalizado
+ */
+.instructions li {
+    margin: 10px 0 !important;           /* Márgenes verticales */
+    padding-left: 30px !important;       /* Padding para el indicador */
+    position: relative !important;       /* Posición relativa */
+}
+
+/**
+ * Indicador personalizado para items de lista
+ * Flecha como marcador visual
+ */
+.instructions li::before {
+    content: '▶' !important;             /* Carácter de flecha */
+    position: absolute !important;       /* Posición absoluta */
+    left: 10px !important;               /* Posición desde la izquierda */
+    color: #2196F3 !important;           /* Color azul */
+    font-size: 0.8rem !important;        /* Tamaño pequeño */
+}
+
+/* ===================================================================
+   CONTENEDOR DE CÁMARA - SISTEMA DE VIDEO
+   ================================================================ */
+
+/**
+ * Contenedor principal de la cámara
+ * Área donde se muestra el video de la cámara web
+ */
+.camera-container {
+    position: relative !important;       /* Posición relativa para elementos absolutos */
+    margin: 30px 0 !important;           /* Márgenes verticales */
+    border-radius: 15px !important;      /* Bordes redondeados */
+    overflow: hidden !important;         /* Oculta contenido desbordado */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important; /* Sombra pronunciada */
+    background: #000 !important;         /* Fondo negro */
+    min-height: 300px !important;        /* Altura mínima */
+    display: flex !important;            /* Flexbox para centrado */
+    align-items: center !important;      /* Centrado vertical */
+    justify-content: center !important;  /* Centrado horizontal */
+    transition: all 0.3s ease !important; /* Transición suave */
+}
+
+/**
+ * Mensaje de cámara inactiva
+ * Texto que se muestra cuando la cámara no está activa
+ */
+.camera-container::before {
+    content: '📹 Cámara inactiva' !important; /* Emoji y texto */
+    position: absolute !important;       /* Posición absoluta */
+    color: white !important;             /* Texto blanco */
+    font-size: 1.2rem !important;        /* Tamaño mediano */
+    z-index: 1 !important;               /* Z-index bajo */
+    opacity: 0.7 !important;             /* Opacidad reducida */
+}
+
+/**
+ * Oculta el mensaje cuando la cámara está activa
+ */
+.camera-container.active::before {
+    display: none !important;            /* Oculta completamente */
+}
+
+/**
+ * Elemento de video
+ * Video stream de la cámara web
+ */
+#video {
+    width: 100% !important;              /* Ancho completo */
+    height: auto !important;             /* Alto automático */
+    max-height: 400px !important;        /* Alto máximo */
+    object-fit: cover !important;        /* Recorte proporcional */
+    transition: opacity 0.3s ease !important; /* Transición de opacidad */
+}
+
+/**
+ * Canvas para overlays
+ * Elemento canvas para dibujar sobre el video
+ */
+#canvas {
+    position: absolute !important;       /* Posición absoluta */
+    top: 0 !important;                   /* Pegado arriba */
+    left: 0 !important;                  /* Pegado izquierda */
+    width: 100% !important;              /* Ancho completo */
+    height: 100% !important;             /* Alto completo */
+    pointer-events: none !important;     /* No interfiere con el mouse */
+}
+
+/* ===================================================================
+   ESTADOS ESPECÍFICOS DE RECONOCIMIENTO FACIAL
+   ================================================================ */
+
+/**
+ * Estado de detección activa
+ * Borde verde pulsante cuando se detecta una cara
+ */
+.camera-container.detecting {
+    border: 3px solid #28a745 !important; /* Borde verde */
+    animation: pulse-border-green 1.5s infinite !important; /* Animación de pulso */
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.3) !important; /* Sombra verde */
+}
+
+/**
+ * Animación de pulso verde
+ * Para el estado de detección facial
+ */
+@keyframes pulse-border-green {
+    0%, 100% {
+        border-color: #28a745 !important; /* Verde estándar */
+        box-shadow: 0 0 20px rgba(40, 167, 69, 0.3) !important;
+    }
+    50% {
+        border-color: #56ab2f !important; /* Verde más claro */
+        box-shadow: 0 0 30px rgba(40, 167, 69, 0.5) !important; /* Sombra más intensa */
+    }
+}
+
+/**
+ * Estado de registro activo
+ * Borde azul pulsante durante el proceso de registro
+ */
+.camera-container.registering {
+    border: 3px solid #007bff !important; /* Borde azul */
+    animation: pulse-border-blue 1.5s infinite !important; /* Animación de pulso azul */
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.3) !important; /* Sombra azul */
+}
+
+/**
+ * Animación de pulso azul
+ * Para el estado de registro facial
+ */
+@keyframes pulse-border-blue {
+    0%, 100% {
+        border-color: #007bff !important; /* Azul estándar */
+        box-shadow: 0 0 20px rgba(0, 123, 255, 0.3) !important;
+    }
+    50% {
+        border-color: #0056b3 !important; /* Azul más oscuro */
+        box-shadow: 0 0 30px rgba(0, 123, 255, 0.5) !important; /* Sombra más intensa */
+    }
+}
+
+/* ===================================================================
+   CONTROLES Y BOTONES - SISTEMA INTERACTIVO
+   ================================================================ */
+
+/**
+ * Contenedor de controles
+ * Área que contiene los botones de acción principales
+ */
+.controls {
+    margin: 30px 0 !important;           /* Márgenes verticales generosos */
+    display: flex !important;            /* Flexbox para distribución */
+    gap: 15px !important;                /* Espacio entre botones */
+    justify-content: center !important;  /* Centrado horizontal */
+    flex-wrap: wrap !important;          /* Permite que los botones se envuelvan */
+}
+
+/**
+ * Botones principales del sistema
+ * Diseño moderno con gradientes y efectos hover avanzados
+ */
+.btn {
+    background: linear-gradient(45deg, #667eea, #764ba2) !important; /* Gradiente principal */
+    color: white !important;             /* Texto blanco */
+    border: none !important;             /* Sin borde */
+    padding: 12px 25px !important;       /* Padding interno */
+    border-radius: 25px !important;      /* Bordes muy redondeados */
+    cursor: pointer !important;          /* Cursor de puntero */
+    font-size: 1rem !important;          /* Tamaño de fuente estándar */
+    font-weight: 600 !important;         /* Peso semi-bold */
+    transition: all 0.3s ease !important; /* Transición suave */
+    min-width: 120px !important;         /* Ancho mínimo */
+    position: relative !important;       /* Posición relativa para efectos */
+    overflow: hidden !important;         /* Oculta desbordamientos */
+}
+
+/**
+ * Efecto de brillo deslizante en botones
+ * Pseudo-elemento que crea efecto de luz deslizante
+ */
+.btn::before {
+    content: '' !important;              /* Contenido vacío */
+    position: absolute !important;       /* Posición absoluta */
+    top: 0 !important;                   /* Pegado arriba */
+    left: -100% !important;              /* Fuera del botón inicialmente */
+    width: 100% !important;              /* Ancho completo */
+    height: 100% !important;             /* Alto completo */
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+    transition: left 0.5s !important;    /* Transición del movimiento */
+}
+
+/**
+ * Activación del efecto de brillo en hover
+ * El brillo se desliza de izquierda a derecha
+ */
+.btn:hover::before {
+    left: 100% !important;               /* Se mueve completamente a la derecha */
+}
+
+/**
+ * Efectos hover del botón
+ * Elevación y sombra al pasar el cursor
+ */
+.btn:hover {
+    transform: translateY(-2px) !important; /* Elevación sutil */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important; /* Sombra pronunciada */
+}
+
+/**
+ * Estado activo/pressed del botón
+ * Regresa a la posición original al hacer clic
+ */
+.btn:active {
+    transform: translateY(0) !important; /* Sin elevación */
+}
+
+/**
+ * Estado deshabilitado del botón
+ * Apariencia atenuada y sin interactividad
+ */
+.btn:disabled {
+    opacity: 0.6 !important;             /* Opacidad reducida */
+    cursor: not-allowed !important;      /* Cursor de prohibido */
+    transform: none !important;          /* Sin transformaciones */
+}
+
+/**
+ * Oculta el efecto de brillo en botones deshabilitados
+ */
+.btn:disabled::before {
+    display: none !important;            /* Sin efecto de brillo */
+}
+
+/**
+ * Variante de botón de éxito
+ * Gradiente verde para acciones positivas
+ */
+.btn.success {
+    background: linear-gradient(45deg, #56ab2f, #a8e6cf) !important; /* Gradiente verde */
+}
+
+/**
+ * Variante de botón de peligro
+ * Gradiente rojo para acciones destructivas
+ */
+.btn.danger {
+    background: linear-gradient(45deg, #ff6b6b, #ffa8a8) !important; /* Gradiente rojo */
+}
+
+/**
+ * Variante de botón de advertencia
+ * Gradiente naranja para acciones de precaución
+ */
+.btn.warning {
+    background: linear-gradient(45deg, #ff9500, #ffb347) !important; /* Gradiente naranja */
+}
+
+/* ===================================================================
+   MENSAJES DE ESTADO - SISTEMA DE RETROALIMENTACIÓN
+   ================================================================ */
+
+/**
+ * Contenedor base para mensajes de estado
+ * Sistema unificado para mostrar diferentes tipos de mensajes
+ */
+.status {
+    margin: 20px 0 !important;           /* Márgenes verticales */
+    padding: 15px !important;            /* Padding interno */
+    border-radius: 10px !important;      /* Bordes redondeados */
+    font-weight: 600 !important;         /* Peso semi-bold */
+    min-height: 50px !important;         /* Altura mínima */
+    display: flex !important;            /* Flexbox para centrado */
+    align-items: center !important;      /* Centrado vertical */
+    justify-content: center !important;  /* Centrado horizontal */
+    transition: all 0.3s ease !important; /* Transición suave */
+    position: relative !important;       /* Posición relativa */
+    overflow: hidden !important;         /* Oculta desbordamientos */
+}
+
+/**
+ * Indicador lateral de estado
+ * Línea coloreada en el borde izquierdo
+ */
+.status::before {
+    content: '' !important;              /* Contenido vacío */
+    position: absolute !important;       /* Posición absoluta */
+    top: 0 !important;                   /* Pegado arriba */
+    left: 0 !important;                  /* Pegado izquierda */
+    width: 4px !important;               /* Ancho de la línea */
+    height: 100% !important;             /* Alto completo */
+    background: currentColor !important; /* Color actual del texto */
+    opacity: 0.5 !important;             /* Opacidad reducida */
+}
+
+/**
+ * Estado de carga/loading
+ * Con gradiente animado y color naranja
+ */
+.status.loading {
+    background: linear-gradient(270deg, #fff3cd, #ffeaa7, #fff3cd) !important; /* Gradiente animable */
+    background-size: 200% 200% !important; /* Tamaño expandido para animación */
+    animation: gradientShift 3s ease infinite !important; /* Animación de gradiente */
+    color: #856404 !important;           /* Texto marrón oscuro */
+    border: 1px solid #ffeaa7 !important; /* Borde amarillo claro */
+}
+
+/**
+ * Animación de gradiente deslizante
+ * Para el estado de carga
+ */
+@keyframes gradientShift {
+    0% { background-position: 0% 50% !important; }    /* Posición inicial */
+    50% { background-position: 100% 50% !important; } /* Posición intermedia */
+    100% { background-position: 0% 50% !important; }  /* Regresa al inicio */
+}
+
+/**
+ * Estado de éxito
+ * Verde con animación de pulso de confirmación
+ */
+.status.success {
+    background: #d4edda !important;      /* Fondo verde claro */
+    color: #155724 !important;           /* Texto verde oscuro */
+    border: 1px solid #c3e6cb !important; /* Borde verde */
+    animation: successPulse 0.6s ease-out !important; /* Animación de pulso */
+}
+
+/**
+ * Animación de pulso para éxito
+ * Efecto de confirmación visual
+ */
+@keyframes successPulse {
+    0% { transform: scale(0.95) !important; }  /* Escala reducida */
+    50% { transform: scale(1.02) !important; } /* Escala aumentada */
+    100% { transform: scale(1) !important; }   /* Escala normal */
+}
+
+/**
+ * Estado de error
+ * Rojo con animación de vibración
+ */
+.status.error {
+    background: #f8d7da !important;      /* Fondo rojo claro */
+    color: #721c24 !important;           /* Texto rojo oscuro */
+    border: 1px solid #f5c6cb !important; /* Borde rojo */
+    animation: errorShake 0.5s ease-out !important; /* Animación de vibración */
+}
+
+/**
+ * Animación de vibración para errores
+ * Movimiento horizontal para llamar la atención
+ */
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0) !important; }    /* Posición central */
+    25% { transform: translateX(-5px) !important; }      /* Izquierda */
+    75% { transform: translateX(5px) !important; }       /* Derecha */
+}
+
+/**
+ * Estado informativo
+ * Azul para mensajes informativos
+ */
+.status.info {
+    background: #d1ecf1 !important;      /* Fondo azul claro */
+    color: #0c5460 !important;           /* Texto azul oscuro */
+    border: 1px solid #bee5eb !important; /* Borde azul */
+}
+
+/* ===================================================================
+   ANIMACIONES AVANZADAS - EFECTOS VISUALES COMPLEJOS
+   ================================================================ */
+
+/**
+ * Spinner de carga principal
+ * Indicador de carga con doble anillo rotatorio
+ */
+.spinner {
+    border: 3px solid #f3f3f3 !important; /* Borde base gris claro */
+    border-top: 3px solid #667eea !important; /* Borde superior coloreado */
+    border-radius: 50% !important;       /* Círculo perfecto */
+    width: 30px !important;              /* Ancho del spinner */
+    height: 30px !important;             /* Alto del spinner */
+    animation: spin 1s linear infinite !important; /* Rotación continua */
+    margin: 0 auto 15px !important;      /* Centrado horizontal con margen */
+    position: relative !important;       /* Posición relativa para pseudo-elemento */
+}
+
+/**
+ * Anillo interior del spinner
+ * Segundo anillo que rota en dirección opuesta
+ */
+.spinner::after {
+    content: '' !important;              /* Contenido vacío */
+    position: absolute !important;       /* Posición absoluta */
+    top: 2px !important;                 /* Posición desde arriba */
+    left: 2px !important;                /* Posición desde izquierda */
+    right: 2px !important;               /* Posición desde derecha */
+    bottom: 2px !important;              /* Posición desde abajo */
+    border-radius: 50% !important;       /* Círculo perfecto */
+    border: 2px solid transparent !important; /* Borde transparente */
+    border-top: 2px solid #764ba2 !important; /* Solo borde superior coloreado */
+    animation: spin 0.8s linear infinite reverse !important; /* Rotación inversa */
+}
+
+/**
+ * Animación de rotación
+ * Rotación completa de 360 grados
+ */
+@keyframes spin {
+    0% { transform: rotate(0deg) !important; }    /* Posición inicial */
+    100% { transform: rotate(360deg) !important; } /* Rotación completa */
+}
+
+/* ===================================================================
+   EFECTOS DE SEGURIDAD - ALERTAS Y ADVERTENCIAS
+   ================================================================ */
+
+/**
+ * Advertencia de seguridad
+ * Panel de advertencia con animación de pulso
+ */
+.security-warning {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7) !important; /* Gradiente amarillo */
+    border: 2px solid #ff9500 !important; /* Borde naranja */
+    color: #856404 !important;           /* Texto marrón */
+    padding: 15px !important;            /* Padding interno */
+    border-radius: 10px !important;      /* Bordes redondeados */
+    margin: 15px 0 !important;           /* Márgenes verticales */
+    display: flex !important;            /* Flexbox para alineación */
+    align-items: center !important;      /* Centrado vertical */
+    gap: 10px !important;                /* Espacio entre elementos */
+    animation: securityPulse 2s infinite !important; /* Animación de pulso */
+    box-sizing: border-box !important;   /* Border-box para cálculos */
+}
+
+/**
+ * Animación de pulso de seguridad
+ * Efecto de sombra pulsante para llamar la atención
+ */
+@keyframes securityPulse {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(255, 149, 0, 0.3) !important; /* Sombra suave */
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(255, 149, 0, 0.5) !important; /* Sombra intensa */
+    }
+}
+
+/**
+ * Estado bloqueado
+ * Aplicado a elementos que están temporalmente deshabilitados
+ */
+.locked-state {
+    filter: grayscale(50%) !important;   /* Filtro de escala de grises */
+    pointer-events: none !important;     /* Desactiva interacciones */
+    opacity: 0.7 !important;             /* Opacidad reducida */
+}
+
+/* ===================================================================
+   BARRA DE PROGRESO - INDICADOR DE PROCESO
+   ================================================================ */
+
+/**
+ * Contenedor de la barra de progreso
+ * Base gris para la barra de progreso
+ */
+.progress-bar {
+    width: 100% !important;              /* Ancho completo */
+    height: 6px !important;              /* Alto de la barra */
+    background: #e9ecef !important;      /* Fondo gris claro */
+    border-radius: 3px !important;       /* Bordes redondeados */
+    overflow: hidden !important;         /* Oculta desbordamientos */
+    margin: 15px 0 !important;           /* Márgenes verticales */
+}
+
+/**
+ * Relleno de la barra de progreso
+ * Parte coloreada que indica el progreso
+ */
+.progress-fill {
+    height: 100% !important;             /* Alto completo */
+    background: linear-gradient(45deg, #667eea, #764ba2) !important; /* Gradiente */
+    border-radius: 3px !important;       /* Bordes redondeados */
+    transition: width 0.3s ease !important; /* Transición suave del ancho */
+    position: relative !important;       /* Posición relativa para efecto */
+}
+
+/**
+ * Efecto shimmer en la barra de progreso
+ * Brillo deslizante que indica actividad
+ */
+.progress-fill::after {
+    content: '' !important;              /* Contenido vacío */
+    position: absolute !important;       /* Posición absoluta */
+    top: 0 !important;                   /* Pegado arriba */
+    left: 0 !important;                  /* Pegado izquierda */
+    right: 0 !important;                 /* Pegado derecha */
+    bottom: 0 !important;                /* Pegado abajo */
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent) !important;
+    animation: shimmer 2s infinite !important; /* Animación de brillo */
+}
+
+/**
+ * Animación shimmer
+ * Brillo que se desliza de izquierda a derecha
+ */
+@keyframes shimmer {
+    0% { transform: translateX(-100%) !important; } /* Fuera por la izquierda */
+    100% { transform: translateX(100%) !important; } /* Fuera por la derecha */
+}
+
+/* ===================================================================
+   OVERLAY DE CARGA - PANTALLA COMPLETA
+   ================================================================ */
+
+/**
+ * Overlay de carga de pantalla completa
+ * Bloquea la interfaz durante procesos importantes
+ */
+.loading-overlay {
+    position: fixed !important;          /* Posición fija al viewport */
+    top: 0 !important;                   /* Pegado arriba */
+    left: 0 !important;                  /* Pegado izquierda */
+    width: 100% !important;              /* Ancho completo */
+    height: 100% !important;             /* Alto completo */
+    background: rgba(0, 0, 0, 0.8) !important; /* Fondo negro semi-transparente */
+    display: flex !important;            /* Flexbox para centrado */
+    justify-content: center !important;  /* Centrado horizontal */
+    align-items: center !important;      /* Centrado vertical */
+    z-index: 9999 !important;            /* Z-index muy alto */
+    opacity: 0 !important;               /* Invisible inicialmente */
+    visibility: hidden !important;       /* Oculto inicialmente */
+    transition: all 0.3s ease !important; /* Transición suave */
+}
+
+/**
+ * Estado activo del overlay
+ * Cuando se muestra el overlay de carga
+ */
+.loading-overlay.active {
+    opacity: 1 !important;               /* Completamente visible */
+    visibility: visible !important;      /* Visible */
+}
+
+/**
+ * Contenido del overlay de carga
+ * Caja central con el spinner y mensaje
+ */
+.loading-content {
+    background: white !important;        /* Fondo blanco */
+    padding: 40px !important;            /* Padding generoso */
+    border-radius: 20px !important;      /* Bordes muy redondeados */
+    text-align: center !important;       /* Texto centrado */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important; /* Sombra pronunciada */
+    max-width: 300px !important;         /* Ancho máximo */
+}
+
+/**
+ * Spinner grande para overlay
+ * Versión más grande del spinner para pantalla completa
+ */
+.loading-spinner-large {
+    width: 60px !important;              /* Ancho grande */
+    height: 60px !important;             /* Alto grande */
+    border: 4px solid #f3f3f3 !important; /* Borde base */
+    border-top: 4px solid #667eea !important; /* Borde superior coloreado */
+    border-radius: 50% !important;       /* Círculo perfecto */
+    animation: spin 1s linear infinite !important; /* Rotación continua */
+    margin: 0 auto 20px !important;      /* Centrado con margen inferior */
+}
+
+/* ===================================================================
+   AYUDA DE ATAJOS DE TECLADO - PANEL INFORMATIVO
+   ================================================================ */
+
+/**
+ * Panel de ayuda de atajos de teclado
+ * Información flotante sobre shortcuts disponibles
+ */
+.shortcuts-help {
+    position: fixed !important;          /* Posición fija */
+    bottom: 20px !important;             /* 20px desde abajo */
+    right: 20px !important;              /* 20px desde la derecha */
+    background: rgba(0, 0, 0, 0.9) !important; /* Fondo negro semi-transparente */
+    color: white !important;             /* Texto blanco */
+    padding: 15px !important;            /* Padding interno */
+    border-radius: 10px !important;      /* Bordes redondeados */
+    font-size: 0.8rem !important;        /* Texto pequeño */
+    max-width: 250px !important;         /* Ancho máximo */
+    opacity: 0 !important;               /* Invisible inicialmente */
+    visibility: hidden !important;       /* Oculto inicialmente */
+    transition: all 0.3s ease !important; /* Transición suave */
+    z-index: 1000 !important;            /* Z-index alto */
+    box-sizing: border-box !important;   /* Border-box */
+}
+
+/**
+ * Estado visible de la ayuda
+ * Cuando se muestra el panel de ayuda
+ */
+.shortcuts-help.show {
+    opacity: 1 !important;               /* Completamente visible */
+    visibility: visible !important;      /* Visible */
+}
+
+/**
+ * Item individual de shortcut
+ * Línea individual que muestra un atajo de teclado
+ */
+.shortcut-item {
+    display: flex !important;            /* Flexbox para distribución */
+    justify-content: space-between !important; /* Espaciado entre elementos */
+    margin: 5px 0 !important;            /* Márgenes verticales */
+    padding: 3px 0 !important;           /* Padding vertical pequeño */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; /* Línea separadora */
+}
+
+/**
+ * Tecla de shortcut
+ * Estilo para mostrar las teclas del atajo
+ */
+.shortcut-key {
+    background: rgba(255, 255, 255, 0.2) !important; /* Fondo semi-transparente */
+    padding: 2px 6px !important;         /* Padding pequeño */
+    border-radius: 3px !important;       /* Bordes redondeados */
+    font-family: monospace !important;   /* Fuente monoespaciada */
+}
+
+/* ===================================================================
+   SISTEMA DE NOTIFICACIONES - TOASTS
+   ================================================================ */
+
+/**
+ * Notificación toast
+ * Sistema de notificaciones no intrusivas
+ */
+.notification {
+    position: fixed !important;          /* Posición fija */
+    top: 20px !important;                /* 20px desde arriba */
+    right: 20px !important;              /* 20px desde la derecha */
+    background: white !important;        /* Fondo blanco */
+    border-radius: 10px !important;      /* Bordes redondeados */
+    padding: 15px 20px !important;       /* Padding interno */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important; /* Sombra sutil */
+    max-width: 300px !important;         /* Ancho máximo */
+    transform: translateX(400px) !important; /* Fuera de pantalla inicialmente */
+    transition: transform 0.3s ease !important; /* Transición de deslizamiento */
+    z-index: 1000 !important;            /* Z-index alto */
+}
+
+/**
+ * Estado visible de notificación
+ * Cuando la notificación se desliza hacia la vista
+ */
+.notification.show {
+    transform: translateX(0) !important; /* Posición visible */
+}
+
+/**
+ * Notificación de éxito
+ * Borde verde para acciones exitosas
+ */
+.notification.success {
+    border-left: 4px solid #28a745 !important; /* Borde verde izquierdo */
+}
+
+/**
+ * Notificación de error
+ * Borde rojo para errores
+ */
+.notification.error {
+    border-left: 4px solid #dc3545 !important; /* Borde rojo izquierdo */
+}
+
+/**
+ * Notificación de advertencia
+ * Borde amarillo para advertencias
+ */
+.notification.warning {
+    border-left: 4px solid #ffc107 !important; /* Borde amarillo izquierdo */
+}
+
+/**
+ * Notificación informativa
+ * Borde azul para información
+ */
+.notification.info {
+    border-left: 4px solid #17a2b8 !important; /* Borde azul izquierdo */
+}
+
+/* ===================================================================
+   SISTEMA DE TOOLTIPS - AYUDA CONTEXTUAL
+   ================================================================ */
+
+/**
+ * Elemento con tooltip
+ * Base para elementos que muestran ayuda al hover
+ */
+.tooltip {
+    position: relative !important;       /* Posición relativa para tooltip */
+    cursor: help !important;             /* Cursor de ayuda */
+}
+
+/**
+ * Contenido del tooltip
+ * Caja de texto que aparece al hacer hover
+ */
+.tooltip::before {
+    content: attr(data-tooltip) !important; /* Contenido del atributo data-tooltip */
+    position: absolute !important;       /* Posición absoluta */
+    bottom: 120% !important;             /* Posición arriba del elemento */
+    left: 50% !important;                /* Centrado horizontalmente */
+    transform: translateX(-50%) !important; /* Centrado perfecto */
+    background: #333 !important;         /* Fondo oscuro */
+    color: white !important;             /* Texto blanco */
+    padding: 8px 12px !important;        /* Padding interno */
+    border-radius: 6px !important;       /* Bordes redondeados */
+    font-size: 0.8rem !important;        /* Texto pequeño */
+    white-space: nowrap !important;      /* Sin salto de línea */
+    opacity: 0 !important;               /* Invisible inicialmente */
+    visibility: hidden !important;       /* Oculto inicialmente */
+    transition: all 0.3s ease !important; /* Transición suave */
+    z-index: 1000 !important;            /* Z-index alto */
+}
+
+/**
+ * Flecha del tooltip
+ * Pequeña flecha que apunta al elemento
+ */
+.tooltip::after {
+    content: '' !important;              /* Contenido vacío */
+    position: absolute !important;       /* Posición absoluta */
+    bottom: 110% !important;             /* Posición de la flecha */
+    left: 50% !important;                /* Centrado horizontalmente */
+    transform: translateX(-50%) !important; /* Centrado perfecto */
+    border: 5px solid transparent !important; /* Borde transparente */
+    border-top-color: #333 !important;   /* Color del borde superior (flecha) */
+    opacity: 0 !important;               /* Invisible inicialmente */
+    visibility: hidden !important;       /* Oculto inicialmente */
+    transition: all 0.3s ease !important; /* Transición suave */
+}
+
+/**
+ * Estado visible del tooltip
+ * Muestra el tooltip y la flecha al hacer hover
+ */
+.tooltip:hover::before,
+.tooltip:hover::after {
+    opacity: 1 !important;               /* Completamente visible */
+    visibility: visible !important;      /* Visible */
+}
+
+/* ===================================================================
+   DISEÑO RESPONSIVE - ADAPTACIÓN MÓVIL
+   ================================================================ */
+
+/**
+ * BREAKPOINT TABLET - MAX-WIDTH: 600px
+ * Adaptaciones para dispositivos de tamaño mediano
+ */
+@media (max-width: 600px) {
+    /**
+     * Ajustes del body para móvil
+     * Padding reducido para aprovechar mejor el espacio
+     */
+    body {
+        padding: 10px !important;        /* Padding reducido */
+    }
+    
+    /**
+     * Contenedor principal responsive
+     * Ajustes de espaciado y bordes para móvil
+     */
+    .login-container {
+        padding: 25px !important;        /* Padding reducido */
+        margin: 5px !important;          /* Márgenes mínimos */
+        border-radius: 15px !important;  /* Bordes menos redondeados */
+        max-width: 100% !important;      /* Ancho completo disponible */
+    }
+
+    /**
+     * Título principal responsive
+     * Tamaño reducido para pantallas pequeñas
+     */
+    h1 {
+        font-size: 2rem !important;      /* Tamaño más pequeño */
+    }
+
+    /**
+     * Ícono facial responsive
+     * Tamaño reducido para móvil
+     */
+    .face-icon {
+        font-size: 3rem !important;      /* Tamaño más pequeño */
+    }
+
+    /**
+     * Controles responsive
+     * Layout vertical para móvil
+     */
+    .controls {
+        flex-direction: column !important; /* Disposición vertical */
+        align-items: center !important;  /* Centrado horizontal */
+        gap: 10px !important;            /* Espacio reducido */
+    }
+
+    /**
+     * Botones responsive
+     * Ancho completo en móvil con limitación máxima
+     */
+    .btn {
+        width: 100% !important;          /* Ancho completo */
+        max-width: 250px !important;     /* Ancho máximo limitado */
+        padding: 15px !important;        /* Padding aumentado */
+        margin: 2px 0 !important;        /* Márgenes verticales pequeños */
+    }
+    
+    /**
+     * Contenedor de cámara responsive
+     * Altura mínima reducida para móvil
+     */
+    .camera-container {
+        min-height: 250px !important;    /* Altura mínima reducida */
+        margin: 20px 0 !important;       /* Márgenes reducidos */
+    }
+    
+    /**
+     * Instrucciones responsive
+     * Padding y márgenes ajustados para móvil
+     */
+    .instructions {
+        padding: 15px !important;        /* Padding reducido */
+        margin: 15px 0 !important;       /* Márgenes reducidos */
+    }
+    
+    /**
+     * Items de lista responsive
+     * Espaciado y tamaño de fuente ajustados
+     */
+    .instructions li {
+        padding-left: 25px !important;   /* Padding reducido */
+        font-size: 0.9rem !important;    /* Fuente más pequeña */
+    }
+    
+    /**
+     * Perfil de usuario responsive
+     * Layout vertical para móvil
+     */
+    .user-profile {
+        flex-direction: column !important; /* Disposición vertical */
+        text-align: center !important;   /* Texto centrado */
+        gap: 10px !important;            /* Espacio entre elementos */
+        padding: 20px !important;        /* Padding aumentado */
+    }
+    
+    /**
+     * Imagen de perfil responsive
+     * Sin margen derecho en layout vertical
+     */
+    .user-profile img {
+        margin: 0 0 10px 0 !important;   /* Solo margen inferior */
+    }
+    
+    /**
+     * Información de usuario responsive
+     * Texto centrado en layout vertical
+     */
+    .user-info h3,
+    .user-info p {
+        text-align: center !important;   /* Texto centrado */
+    }
+    
+    /**
+     * Indicador de conexión responsive
+     * Posición y tamaño ajustados para móvil
+     */
+    .connection-status {
+        bottom: 10px !important;         /* Más cerca del borde */
+        left: 10px !important;           /* Más cerca del borde */
+        font-size: 0.7rem !important;    /* Fuente más pequeña */
+        padding: 8px 12px !important;    /* Padding reducido */
+    }
+}
+
+/**
+ * BREAKPOINT MÓVIL PEQUEÑO - MAX-WIDTH: 400px
+ * Adaptaciones para dispositivos muy pequeños
+ */
+@media (max-width: 400px) {
+    /**
+     * Contenedor principal para móviles pequeños
+     * Padding mínimo para aprovechar espacio
+     */
+    .login-container {
+        padding: 20px !important;        /* Padding mínimo */
+    }
+    
+    /**
+     * Título principal para móviles pequeños
+     * Tamaño aún más reducido
+     */
+    h1 {
+        font-size: 1.8rem !important;    /* Tamaño muy pequeño */
+    }
+    
+    /**
+     * Botones para móviles pequeños
+     * Padding y fuente reducidos
+     */
+    .btn {
+        padding: 12px !important;        /* Padding reducido */
+        font-size: 0.9rem !important;    /* Fuente más pequeña */
+    }
+    
+    /**
+     * Instrucciones para móviles pequeños
+     * Padding mínimo
+     */
+    .instructions {
+        padding: 12px !important;        /* Padding mínimo */
+    }
+    
+    /**
+     * Cámara para móviles pequeños
+     * Altura mínima muy reducida
+     */
+    .camera-container {
+        min-height: 200px !important;    /* Altura mínima muy pequeña */
+    }
+}
+
+/* ===================================================================
+   TEMA OSCURO - DARK MODE SUPPORT
+   ================================================================ */
+
+/**
+ * PREFERENCIA DE TEMA OSCURO
+ * Adaptaciones automáticas para usuarios que prefieren tema oscuro
+ */
+@media (prefers-color-scheme: dark) {
+    /**
+     * Contenedor principal en tema oscuro
+     * Fondo oscuro con texto claro
+     */
+    .login-container {
+        background: rgba(33, 37, 41, 0.95) !important; /* Fondo gris muy oscuro */
+        color: #f8f9fa !important;       /* Texto muy claro */
+    }
+    
+    /**
+     * Título principal en tema oscuro
+     * Texto claro para contraste
+     */
+    h1 {
+        color: #f8f9fa !important;       /* Texto muy claro */
+    }
+    
+    /**
+     * Instrucciones en tema oscuro
+     * Fondo y borde más oscuros
+     */
+    .instructions {
+        background: rgba(52, 58, 64, 0.8) !important; /* Fondo gris oscuro */
+        border-color: #495057 !important; /* Borde gris medio */
+        color: #f8f9fa !important;       /* Texto claro */
+    }
+    
+    /**
+     * Elementos de texto en instrucciones - tema oscuro
+     * Colores ajustados para buena legibilidad
+     */
+    .instructions h3,
+    .instructions ul,
+    .instructions li {
+        color: #adb5bd !important;       /* Gris claro para texto secundario */
+    }
+    
+    /**
+     * Perfiles de usuario en tema oscuro
+     * Fondo oscuro con texto claro
+     */
+    .user-profile {
+        background: rgba(52, 58, 64, 0.8) !important; /* Fondo gris oscuro */
+        color: #f8f9fa !important;       /* Texto claro */
+    }
+    
+    /**
+     * Perfiles registrados en tema oscuro
+     * Tinte verde manteniendo la oscuridad
+     */
+    .user-profile.registered {
+        background: rgba(40, 167, 69, 0.2) !important; /* Verde muy tenue */
+    }
+    
+    /**
+     * Títulos de usuario en tema oscuro
+     * Texto claro para buena legibilidad
+     */
+    .user-info h3 {
+        color: #f8f9fa !important;       /* Texto muy claro */
+    }
+    
+    /**
+     * Párrafos de usuario en tema oscuro
+     * Texto secundario en gris claro
+     */
+    .user-info p {
+        color: #adb5bd !important;       /* Gris claro */
+    }
+}
+
+/* ===================================================================
+   EFECTOS DE ACCESIBILIDAD - PREFERENCIAS DEL USUARIO
+   ================================================================ */
+
+/**
+ * PREFERENCIA DE MOVIMIENTO REDUCIDO
+ * Para usuarios que prefieren menos animaciones
+ */
+@media (prefers-reduced-motion: reduce) {
+    /**
+     * Desactiva animaciones principales
+     * Remove animaciones en elementos clave
+     */
+    .face-icon,
+    .spinner,
+    .status.loading,
+    .camera-container.detecting,
+    .camera-container.registering,
+    .security-warning {
+        animation: none !important;      /* Sin animaciones */
+    }
+    
+    /**
+     * Desactiva animación del contenedor
+     * Remove la animación de entrada
+     */
+    .login-container {
+        animation: none !important;      /* Sin animación de entrada */
+    }
+    
+    /**
+     * Desactiva efectos de pseudo-elementos
+     * Remove efectos visuales dinámicos
+     */
+    .btn::before,
+    .user-profile::before {
+        display: none !important;        /* Oculta efectos de hover */
+    }
+}
+
+/* ===================================================================
+   UTILIDADES - CLASES DE AYUDA
+   ================================================================ */
+
+/**
+ * Clase para ocultar elementos
+ * Oculta completamente del DOM y lectores de pantalla
+ */
+.hidden {
+    display: none !important;            /* Completamente oculto */
+}
+
+/**
+ * Clase para hacer elementos invisibles
+ * Mantiene el espacio pero oculta visualmente
+ */
+.invisible {
+    visibility: hidden !important;       /* Invisible pero ocupa espacio */
+}
+
+/**
+ * Clases de opacidad
+ * Control granular de transparencia
+ */
+.opacity-0 {
+    opacity: 0 !important;               /* Completamente transparente */
+}
+
+.opacity-50 {
+    opacity: 0.5 !important;             /* Semi-transparente */
+}
+
+.opacity-100 {
+    opacity: 1 !important;               /* Completamente opaco */
+}
+
+/**
+ * Clase de transición universal
+ * Aplica transición suave a todos los cambios
+ */
+.transition-all {
+    transition: all 0.3s ease !important; /* Transición suave universal */
+}
+
+/**
+ * Clase para desactivar selección de texto
+ * Previene la selección accidental de texto
+ */
+.no-select {
+    user-select: none !important;        /* Sin selección */
+    -webkit-user-select: none !important; /* Safari */
+    -moz-user-select: none !important;   /* Firefox */
+}
+
+/**
+ * Clase para desactivar eventos de puntero
+ * Hace que elementos no respondan a clics
+ */
+.pointer-events-none {
+    pointer-events: none !important;     /* Sin interacción con puntero */
+}
+
+/**
+ * Clase para cursor de no permitido
+ * Indica que una acción no está disponible
+ */
+.cursor-not-allowed {
+    cursor: not-allowed !important;      /* Cursor de prohibido */
+}
+
+/**
+ * Clases de alineación de texto
+ * Controles básicos de alineación
+ */
+.text-center {
+    text-align: center !important;       /* Texto centrado */
+}
+
+.text-left {
+    text-align: left !important;         /* Texto alineado a la izquierda */
+}
+
+.text-right {
+    text-align: right !important;        /* Texto alineado a la derecha */
+}
+
+/* ===================================================================
+   ESTILOS PARA IMPRESIÓN - PRINT STYLES
+   ================================================================ */
+
+/**
+ * MEDIA QUERY PARA IMPRESIÓN
+ * Adaptaciones para cuando el documento se imprime
+ */
+@media print {
+    /**
+     * Contenedor principal para impresión
+     * Fondo blanco y borde simple
+     */
+    .login-container {
+        background: white !important;    /* Fondo blanco sólido */
+        box-shadow: none !important;     /* Sin sombras */
+        border: 1px solid #000 !important; /* Borde negro simple */
+    }
+    
+    /**
+     * Elementos interactivos ocultos en impresión
+     * Oculta elementos que no son relevantes en papel
+     */
+    .camera-container,
+    .controls,
+    .btn {
+        display: none !important;        /* Ocultos en impresión */
+    }
+    
+    /**
+     * Elementos informativos para impresión
+     * Mantiene información pero sin decoraciones
+     */
+    .instructions,
+    .user-profiles {
+        background: transparent !important; /* Fondo transparente */
+        border: 1px solid #000 !important; /* Borde negro simple */
+    }
+}
+
+/* ===================================================================
+   ESTADOS ULTRA VISIBLES - FORZADO DE CONTRASTE
+   ================================================================ */
+
+/**
+ * FORZADO DE VISIBILIDAD PARA ELEMENTOS DE ESTADO
+ * Asegura que todos los textos de estado sean claramente visibles
+ */
+
+/**
+ * Texto ultra visible - modo agresivo
+ * Fuerza visibilidad máxima en elementos de estado
+ */
+.status,
+.status *,
+#status,
+#status *,
+div[class*="status"],
+div[class*="status"] * {
+    font-weight: 900 !important;         /* Peso de fuente máximo */
+    letter-spacing: 0.5px !important;    /* Espaciado entre letras */
+    font-family: 'Segoe UI', 'Arial Black', Arial, sans-serif !important; /* Fuente robusta */
+    -webkit-font-smoothing: antialiased !important; /* Suavizado WebKit */
+    -moz-osx-font-smoothing: grayscale !important; /* Suavizado Firefox */
+    text-rendering: optimizeLegibility !important; /* Optimización de legibilidad */
+}
+
+/**
+ * Status informativo ultra visible
+ * Fondo azul intenso con texto contrastante
+ */
+.status.info,
+#status.info,
+div[class*="status info"] {
+    background: linear-gradient(135deg, #1976D2, #0D47A1) !important; /* Gradiente azul intenso */
+    color: #FFFFFF !important;           /* Texto blanco puro */
+    text-shadow: 
+        1px 1px 0 #000000,
+        2px 2px 4px rgba(0, 0, 0, 0.8) !important; /* Sombra de texto múltiple */
+    border: 3px solid #0D47A1 !important; /* Borde azul oscuro */
+    font-size: 1.1rem !important;        /* Tamaño aumentado */
+    font-weight: 900 !important;         /* Peso máximo */
+    letter-spacing: 0.8px !important;    /* Espaciado aumentado */
+}
+
+/**
+ * Status de carga ultra visible
+ * Fondo naranja intenso con máximo contraste
+ */
+.status.loading,
+#status.loading,
+div[class*="status loading"] {
+    background: linear-gradient(135deg, #E65100, #BF360C) !important; /* Gradiente naranja intenso */
+    color: #FFFFFF !important;           /* Texto blanco puro */
+    text-shadow: 
+        1px 1px 0 #000000,
+        2px 2px 4px rgba(0, 0, 0, 0.8) !important; /* Sombra de texto múltiple */
+    border: 3px solid #BF360C !important; /* Borde naranja oscuro */
+    font-weight: 900 !important;         /* Peso máximo */
+}
+
+/**
+ * Status de éxito ultra visible
+ * Fondo verde intenso con máximo contraste
+ */
+.status.success,
+#status.success,
+div[class*="status success"] {
+    background: linear-gradient(135deg, #2E7D32, #1B5E20) !important; /* Gradiente verde intenso */
+    color: #FFFFFF !important;           /* Texto blanco puro */
+    text-shadow: 
+        1px 1px 0 #000000,
+        2px 2px 4px rgba(0, 0, 0, 0.8) !important; /* Sombra de texto múltiple */
+    border: 3px solid #1B5E20 !important; /* Borde verde oscuro */
+    font-weight: 900 !important;         /* Peso máximo */
+}
+
+/**
+ * Status de error ultra visible
+ * Fondo rojo intenso con máximo contraste
+ */
+.status.error,
+#status.error,
+div[class*="status error"] {
+    background: linear-gradient(135deg, #C62828, #B71C1C) !important; /* Gradiente rojo intenso */
+    color: #FFFFFF !important;           /* Texto blanco puro */
+    text-shadow: 
+        1px 1px 0 #000000,
+        2px 2px 4px rgba(0, 0, 0, 0.8) !important; /* Sombra de texto múltiple */
+    border: 3px solid #B71C1C !important; /* Borde rojo oscuro */
+    font-weight: 900 !important;         /* Peso máximo */
+}
+
+/**
+ * Override directo para elemento status genérico
+ * Asegura que cualquier elemento .status tenga máxima visibilidad
+ */
+.status {
+    background: linear-gradient(135deg, #1976D2, #0D47A1) !important; /* Gradiente azul por defecto */
+    color: #FFFFFF !important;           /* Texto blanco puro */
+    border: 3px solid #0D47A1 !important; /* Borde azul oscuro */
+    box-shadow: 
+        0 8px 25px rgba(25, 118, 210, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important; /* Sombra externa e interna */
+    font-size: 1.1rem !important;        /* Tamaño aumentado */
+    font-weight: 900 !important;         /* Peso máximo */
+    text-shadow: 
+        1px 1px 0 #000000,
+        2px 2px 4px rgba(0, 0, 0, 0.8) !important; /* Sombra de texto múltiple */
+    letter-spacing: 0.8px !important;    /* Espaciado aumentado */
+    text-transform: none !important;     /* Sin transformación de texto */
+    font-family: 'Segoe UI', 'Arial Black', Arial, sans-serif !important; /* Fuente robusta */
+    line-height: 1.4 !important;         /* Altura de línea cómoda */
+}
+
+/**
+ * Asegurar texto blanco en todos los elementos de status
+ * Override absoluto para garantizar visibilidad
+ */
+.status, 
+.status *, 
+#status, 
+#status * {
+    color: #FFFFFF !important;           /* Texto blanco forzado */
+    opacity: 1 !important;               /* Opacidad completa */
+    visibility: visible !important;      /* Visibilidad forzada */
+}
+
+/**
+ * Asegurar contraste en elementos de texto generales
+ * Para evitar problemas de visibilidad en elementos diversos
+ */
+.login-container h1,
+.login-container h2,
+.login-container h3,
+.login-container p,
+.login-container span,
+.login-container div,
+.login-container li {
+    color: inherit !important;           /* Hereda color del contenedor */
+}
+
+/**
+ * Elementos específicos con texto ultra visible
+ * Asegura que elementos críticos tengan máxima legibilidad
+ */
+.user-profiles * {
+    color: #1a1a1a !important;          /* Texto muy oscuro */
+}
+
+.user-info * {
+    color: #2c3e50 !important;          /* Texto gris oscuro */
+    font-weight: 600 !important;         /* Peso semi-bold */
+}
+
+/**
+ * Reset para compatibilidad y consistencia
+ * Asegura que no haya conflictos con otros estilos
+ */
+.login-container * {
+    box-sizing: border-box !important;   /* Border-box universal */
+}
+
+/**
+ * COMENTARIOS FINALES Y NOTAS DE MANTENIMIENTO
+ * ============================================
+ * 
+ * Este archivo CSS está diseñado para ser:
+ * 
+ * 1. MODULAR: Cada sección tiene una responsabilidad específica
+ * 2. MANTENIBLE: Comentarios detallados explican cada decisión
+ * 3. RESPONSIVE: Adapta a diferentes tamaños de pantalla
+ * 4. ACCESIBLE: Respeta preferencias del usuario y estándares
+ * 5. PERFORMANTE: Utiliza propiedades CSS eficientes
+ * 
+ * TÉCNICAS UTILIZADAS:
+ * - Flexbox para layouts responsivos
+ * - Gradientes CSS para efectos visuales
+ * - Transformaciones CSS para animaciones
+ * - Media queries para responsive design
+ * - Pseudo-elementos para efectos decorativos
+ * - Variables CSS implícitas a través de currentColor
+ * - Backdrop-filter para efectos glassmorphism
+ * - Z-index estratificado para layering
+ * 
+ * CONSIDERACIONES DE RENDIMIENTO:
+ * - Uso de transform en lugar de cambios de layout
+ * - Transiciones CSS en lugar de JavaScript
+ * - Selectores específicos para evitar re-cálculos
+ * - Will-change implícito a través de transform
+ * 
+ * MANTENIMIENTO FUTURO:
+ * - Añadir custom properties CSS para theming
+ * - Considerar container queries para layouts complejos
+ * - Implementar animaciones con View Transitions API
+ * - Optimizar para dispositivos de alto DPI
+ * 
+ * COMPATIBILIDAD:
+ * - Navegadores modernos (Chrome 60+, Firefox 55+, Safari 12+)
+ * - Fallbacks para navegadores sin soporte de backdrop-filter
+ * - Prefijos vendor incluidos donde sea necesario
+ */
