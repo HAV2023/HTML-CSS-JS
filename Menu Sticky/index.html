@@ -3,17 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Menú Sticky + Volver Arriba (Pure CSS Corregido)</title>
+    <title>Menú Sticky + Volver Arriba (Pure CSS - Siempre Lado Derecho)</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html {
             scroll-behavior: smooth;
-            overflow-y: scroll; /* Crucial para Safari en file:// */
+            overflow-y: scroll;
         }
 
         body {
@@ -42,11 +38,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 
         .nav-list {
             display: flex;
@@ -85,10 +77,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        h2 {
-            color: #1e40af;
-            margin-bottom: 1.2rem;
-        }
+        h2 { color: #1e40af; margin-bottom: 1.2rem; }
 
         .dummy-text {
             height: 100vh;
@@ -102,23 +91,30 @@
             margin: 2rem 0;
         }
 
-        /* Botón Volver Arriba - versión fija simple y visible después de scroll (sin JS) */
+        /* Contenedor alto que retrasa la aparición + fuerza alineación derecha */
+        .back-to-top-wrapper {
+            height: 120vh; /* Ajusta para controlar cuándo aparece */
+            width: 100%;
+            display: flex;
+            justify-content: flex-end; /* Fuerza todo a la derecha */
+            align-items: flex-end;
+        }
+
+        /* Botón sticky alineado a la derecha */
         .scroll-top-btn {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
+            position: sticky;
+            bottom: 30px;
+            right: 30px;
             width: 60px;
             height: 60px;
             background-color: #3b82f6;
             color: white;
             border: none;
             border-radius: 50%;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             cursor: pointer;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.3);
-            transition: opacity 0.4s ease, transform 0.3s ease;
-            opacity: 0; /* Oculto al inicio */
-            pointer-events: none; /* No clicable al inicio */
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
             z-index: 999;
             display: flex;
             align-items: center;
@@ -126,30 +122,22 @@
             text-decoration: none;
         }
 
-        /* Truco para mostrarlo después de scroll: usamos un elemento alto + sticky */
-        .scroll-top-anchor {
-            height: 120vh; /* Retraso de aparición - ajusta este valor */
-            position: relative;
-        }
-
-        .scroll-top-anchor ~ .scroll-top-btn {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
         .scroll-top-btn:hover {
-            background-color: #2563eb;
-            transform: translateY(-5px);
+            background-color: #1d4ed8;
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.35);
         }
 
         @media (max-width: 600px) {
             .scroll-top-btn {
-                bottom: 30px;
-                right: 30px;
+                bottom: 20px;
+                right: 20px;
                 width: 55px;
                 height: 55px;
-                font-size: 1.6rem;
+                font-size: 1.7rem;
+            }
+            .back-to-top-wrapper {
+                justify-content: flex-end;
             }
         }
     </style>
@@ -158,9 +146,7 @@
 
     <div id="top"></div>
 
-    <div class="top-bar">
-        Mi Sitio Web Increíble
-    </div>
+    <div class="top-bar">Mi Sitio Web Increíble</div>
 
     <nav class="navbar">
         <div class="nav-container">
@@ -177,38 +163,22 @@
     <div class="content">
         <div class="section" id="inicio">
             <h2>Bienvenidos</h2>
-            <p>Más texto para personalizar.</p>
+            <p>El botón ↑ ahora está **definitivamente en el lado derecho inferior** cuando aparece al bajar la página.</p>
         </div>
 
-        <div class="dummy-text">
-            ↓↓↓ Baja para ver el botón aparecer ↑ ↓↓↓
-        </div>
+        <div class="dummy-text">↓↓↓ Baja para ver el botón en el lado derecho ↑ ↓↓↓</div>
 
-        <div class="section" id="nosotros">
-            <h2>Nosotros</h2>
-            <p>Lorem ipsum dolor sit amet...</p>
-        </div>
-
+        <div class="section" id="nosotros"><h2>Nosotros</h2><p>Lorem ipsum...</p></div>
         <div class="dummy-text">Más contenido...</div>
-
-        <div class="section" id="servicios">
-            <h2>Servicios</h2>
-            <p>Ut enim ad minim veniam...</p>
-        </div>
-
+        <div class="section" id="servicios"><h2>Servicios</h2><p>Ut enim...</p></div>
         <div class="dummy-text">Sigue bajando</div>
+        <div class="section" id="contacto"><h2>Contacto</h2><p>Duis aute...</p></div>
 
-        <div class="section" id="contacto">
-            <h2>Contacto</h2>
-            <p>Duis aute irure dolor...</p>
+        <!-- Wrapper que fuerza alineación a la derecha + retraso -->
+        <div class="back-to-top-wrapper">
+            <a href="#top" class="scroll-top-btn" title="Volver arriba">↑</a>
         </div>
-
-        <!-- Elemento alto para retrasar la aparición del botón -->
-        <div class="scroll-top-anchor"></div>
     </div>
-
-    <!-- Botón Volver Arriba (sibling del anchor alto) -->
-    <a href="#top" class="scroll-top-btn" title="Volver arriba">↑</a>
 
 </body>
 </html>
