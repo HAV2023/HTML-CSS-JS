@@ -1,191 +1,172 @@
-<!DOCTYPE html>                      <!-- Obligatorio: indica que es un documento HTML5 moderno -->
-<html lang="es">                     <!-- Define el idioma principal del documento (español) -->
-
-<head>                               <!-- Sección de metadatos y configuración (no se ve en la página) -->
-
-    <meta charset="UTF-8" />         <!-- Permite mostrar correctamente ñ, acentos y caracteres especiales -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
-    <!-- Hace que la página se vea bien en celulares: usa el ancho real del dispositivo y zoom inicial 1 -->
-
-    <title>Menú Sticky + Volver Arriba (Pure CSS Universal)</title>  
-    <!-- Texto que aparece en la pestaña del navegador y en marcadores -->
-
-    <style>                          <!-- Inicia la sección de estilos CSS (todo el diseño va aquí) -->
-
-        * {                          <!-- Selector universal: aplica a TODOS los elementos -->
-            margin: 0;               <!-- Elimina márgenes por defecto del navegador -->
-            padding: 0;              <!-- Elimina rellenos (padding) por defecto -->
-            box-sizing: border-box;  <!-- El padding y border se incluyen dentro del ancho y alto -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Menú Sticky + Volver Arriba (Pure CSS Corregido)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        html {                       <!-- Estilos para la etiqueta <html> -->
-            scroll-behavior: smooth;     <!-- Hace que los saltos con #ancla (enlaces) sean suaves -->
-            overflow-y: scroll;          <!-- Mantiene la barra de scroll vertical siempre visible (mejora Safari) -->
+        html {
+            scroll-behavior: smooth;
+            overflow-y: scroll; /* Crucial para Safari en file:// */
         }
 
-        body {                       <!-- Estilos para todo el cuerpo de la página -->
-            min-height: 100vh;           <!-- Ocupa al menos toda la altura de la ventana -->
-            font-family: system-ui, -apple-system, sans-serif;  
-            <!-- Usa la fuente del sistema (moderna y legible en Windows, Mac, etc.) -->
-            background-color: #f0f2f5;   <!-- Color de fondo gris muy claro -->
-            color: #333;                 <!-- Color principal del texto (gris oscuro) -->
-            line-height: 1.6;            <!-- Espaciado entre líneas más cómodo para leer -->
+        body {
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
         }
 
-        .top-bar {                   <!-- Barra superior decorativa (no se mueve) -->
-            background: linear-gradient(90deg, #1e3a8a, #3b82f6);  
-            <!-- Fondo con degradado de azul oscuro a azul claro -->
-            color: white;                <!-- Color del texto blanco -->
-            text-align: center;          <!-- Centra el texto horizontalmente -->
-            padding: 2rem 1rem;          <!-- Espacio interno: 2rem arriba/abajo, 1rem lados -->
-            font-size: 1.8rem;           <!-- Tamaño de letra grande -->
-            font-weight: bold;           <!-- Texto en negrita -->
+        .top-bar {
+            background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 1.8rem;
+            font-weight: bold;
         }
 
-        .navbar {                    <!-- El menú principal (el que se queda pegado) -->
-            background-color: #111827;   <!-- Fondo gris muy oscuro / casi negro -->
-            color: white;                <!-- Texto blanco -->
-            position: sticky;            <!-- Se queda fijo en la parte superior al hacer scroll -->
-            top: 0;                      <!-- Se pega exactamente en el borde superior -->
-            z-index: 1000;               <!-- Está por encima de casi todo el resto del contenido -->
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);  
-            <!-- Sombra suave debajo para que se vea elevado -->
-            transition: all 0.3s ease;   <!-- Cualquier cambio de propiedad será suave (0.3 segundos) -->
+        .navbar {
+            background-color: #111827;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
         }
 
-        .nav-container {             <!-- Contenedor centrado del menú -->
-            max-width: 1200px;           <!-- Ancho máximo para no estirarse demasiado -->
-            margin: 0 auto;              <!-- Centra horizontalmente -->
-            padding: 0 1.5rem;           <!-- Espacio interno a los lados -->
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
-        .nav-list {                  <!-- Lista de enlaces del menú -->
-            display: flex;               <!-- Coloca los elementos uno al lado del otro -->
-            list-style: none;            <!-- Quita los puntitos de la lista <ul> -->
-            justify-content: center;     <!-- Centra los elementos horizontalmente -->
-            gap: 2.5rem;                 <!-- Espacio entre cada ítem del menú -->
+        .nav-list {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            gap: 2.5rem;
         }
 
-        .nav-list li a {             <!-- Cada enlace dentro de la lista -->
-            display: block;              <!-- Convierte el <a> en bloque (mejor área clicable) -->
-            padding: 1.2rem 0.8rem;      <!-- Espacio interno: arriba/abajo 1.2rem, lados 0.8rem -->
-            color: #d1d5db;              <!-- Color gris claro para los enlaces -->
-            text-decoration: none;       <!-- Elimina la línea subrayada por defecto -->
-            font-weight: 500;            <!-- Grosor medio de la letra -->
-            transition: all 0.25s ease;  <!-- Cambios suaves al pasar el mouse -->
+        .nav-list li a {
+            display: block;
+            padding: 1.2rem 0.8rem;
+            color: #d1d5db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.25s ease;
         }
 
-        .nav-list li a:hover,        <!-- Cuando el mouse está encima del enlace -->
-        .nav-list li a.active {      <!-- O cuando el enlace está marcado como activo -->
-            color: white;                <!-- Texto blanco -->
-            background-color: #374151;   <!-- Fondo gris oscuro -->
-            border-radius: 6px 6px 0 0;  <!-- Redondeado solo en las esquinas superiores -->
+        .nav-list li a:hover,
+        .nav-list li a.active {
+            color: white;
+            background-color: #374151;
+            border-radius: 6px 6px 0 0;
         }
 
-        .content {                   <!-- Contenedor principal del contenido -->
-            max-width: 1100px;           <!-- Ancho máximo del contenido -->
-            margin: 3rem auto;           <!-- Centrado + 3rem de espacio arriba y abajo -->
-            padding: 0 2rem;             <!-- Espacio interno a los lados -->
-            position: relative;          <!-- Crea contexto para posicionar elementos absolutos dentro -->
+        .content {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 2rem;
         }
 
-        .section {                   <!-- Cada sección de contenido -->
-            background: white;           <!-- Fondo blanco -->
-            padding: 2.5rem;             <!-- Espacio interno grande -->
-            margin-bottom: 2.5rem;       <!-- Espacio debajo de cada sección -->
-            border-radius: 12px;         <!-- Esquinas redondeadas -->
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);  
-            <!-- Sombra muy suave para dar profundidad -->
+        .section {
+            background: white;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        h2 {                         <!-- Todos los títulos <h2> -->
-            color: #1e40af;              <!-- Color azul oscuro bonito -->
-            margin-bottom: 1.2rem;       <!-- Espacio debajo del título -->
+        h2 {
+            color: #1e40af;
+            margin-bottom: 1.2rem;
         }
 
-        .dummy-text {                <!-- Cajas de prueba para generar scroll -->
-            height: 100vh;               <!-- Altura = 1 pantalla completa -->
-            background: linear-gradient(to bottom, #f3f4f6, #e5e7eb);  
-            <!-- Degradado gris claro para diferenciar -->
-            display: flex;               <!-- Para centrar el texto vertical y horizontal -->
-            align-items: center;         <!-- Centra verticalmente -->
-            justify-content: center;     <!-- Centra horizontalmente -->
-            font-size: 3rem;             <!-- Texto muy grande -->
-            color: #6b7280;              <!-- Gris medio -->
-            border-radius: 12px;         <!-- Esquinas redondeadas -->
-            margin: 2rem 0;              <!-- Espacio arriba y abajo -->
+        .dummy-text {
+            height: 100vh;
+            background: linear-gradient(to bottom, #f3f4f6, #e5e7eb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #6b7280;
+            border-radius: 12px;
+            margin: 2rem 0;
         }
 
-        .scroll-top-wrapper {        <!-- Contenedor del botón "volver arriba" -->
-            position: absolute;          <!-- Posicionado respecto al .content -->
-            top: 120vh;                  <!-- Aparece después de bajar más de 1 pantalla -->
-            right: 40px;                 <!-- Distancia desde la derecha -->
-            bottom: 40px;                <!-- Distancia desde abajo (límite) -->
-            z-index: 999;                <!-- Por encima de casi todo, pero debajo del menú -->
+        /* Botón Volver Arriba - versión fija simple y visible después de scroll (sin JS) */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+            transition: opacity 0.4s ease, transform 0.3s ease;
+            opacity: 0; /* Oculto al inicio */
+            pointer-events: none; /* No clicable al inicio */
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
         }
 
-        .scroll-top-btn {            <!-- El botón circular ↑ -->
-            position: -webkit-sticky;    <!-- Versión para Safari / iOS -->
-            position: sticky;            <!-- Se pega en la pantalla al llegar al punto -->
-            top: calc(100vh - 100px);    <!-- Se fija a 100px del fondo de la ventana -->
-            width: 60px;                 <!-- Ancho del botón -->
-            height: 60px;                <!-- Alto del botón -->
-            background-color: #3b82f6;   <!-- Color azul principal -->
-            color: white;                <!-- Flecha blanca -->
-            border: none;                <!-- Sin borde -->
-            border-radius: 50%;          <!-- Forma circular perfecta -->
-            font-size: 1.8rem;           <!-- Tamaño de la flecha -->
-            cursor: pointer;             <!-- Cambia el cursor a mano -->
-            box-shadow: 0 6px 14px rgba(0,0,0,0.3);  
-            <!-- Sombra para que flote -->
-            transition: all 0.3s ease;   <!-- Animaciones suaves -->
-            display: flex;               <!-- Para centrar la flecha -->
-            align-items: center;         <!-- Centra vertical -->
-            justify-content: center;     <!-- Centra horizontal -->
-            text-decoration: none;       <!-- Quita subrayado del enlace -->
+        /* Truco para mostrarlo después de scroll: usamos un elemento alto + sticky */
+        .scroll-top-anchor {
+            height: 120vh; /* Retraso de aparición - ajusta este valor */
+            position: relative;
         }
 
-        .scroll-top-btn:hover {      <!-- Al pasar el mouse sobre el botón -->
-            background-color: #2563eb;   <!-- Azul más oscuro -->
-            transform: translateY(-5px); <!-- Sube 5 píxeles (efecto flotar) -->
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);  
-            <!-- Sombra más fuerte -->
+        .scroll-top-anchor ~ .scroll-top-btn {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
         }
 
-        @media (max-width: 600px) {  <!-- Reglas solo para pantallas ≤ 600px (móviles) -->
+        .scroll-top-btn:hover {
+            background-color: #2563eb;
+            transform: translateY(-5px);
+        }
 
-            .scroll-top-wrapper {    <!-- Ajustes del contenedor en móvil -->
-                right: 30px;             <!-- Más cerca del borde derecho -->
-                bottom: 30px;            <!-- Más cerca del borde inferior -->
-            }
-
-            .scroll-top-btn {        <!-- Ajustes del botón en móvil -->
-                width: 55px;             <!-- Un poco más pequeño -->
-                height: 55px;            <!-- Un poco más pequeño -->
-                font-size: 1.6rem;       <!-- Flecha un poco más pequeña -->
-                top: calc(100vh - 85px); <!-- Ajuste de posición para pantallas pequeñas -->
+        @media (max-width: 600px) {
+            .scroll-top-btn {
+                bottom: 30px;
+                right: 30px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
             }
         }
+    </style>
+</head>
+<body>
 
-    </style>                         <!-- Fin de los estilos CSS -->
+    <div id="top"></div>
 
-</head>                              <!-- Cierre de la sección <head> -->
-
-<body>                               <!-- Aquí empieza lo que el usuario ve -->
-
-    <div id="top"></div>             <!-- Ancla invisible para que el botón ↑ regrese al inicio -->
-
-    <div class="top-bar">            <!-- Barra superior de bienvenida -->
+    <div class="top-bar">
         Mi Sitio Web Increíble
     </div>
 
-    <nav class="navbar">             <!-- Barra de navegación principal -->
-        <div class="nav-container">  <!-- Contenedor centrado -->
-            <ul class="nav-list">    <!-- Lista de enlaces -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-list">
                 <li><a href="#inicio" class="active">Inicio</a></li>
-                <!-- Enlace a la sección inicio (marcado como activo por defecto) -->
                 <li><a href="#nosotros">Nosotros</a></li>
-                <!-- Enlace a sección "Nosotros" -->
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#galeria">Galería</a></li>
                 <li><a href="#contacto">Contacto</a></li>
@@ -193,14 +174,13 @@
         </div>
     </nav>
 
-    <div class="content">            <!-- Área principal con todo el contenido -->
-
-        <div class="section" id="inicio">   <!-- Primera sección -->
+    <div class="content">
+        <div class="section" id="inicio">
             <h2>Bienvenidos</h2>
             <p>Más texto para personalizar.</p>
         </div>
 
-        <div class="dummy-text">         <!-- Texto de prueba para hacer scroll -->
+        <div class="dummy-text">
             ↓↓↓ Baja para ver el botón aparecer ↑ ↓↓↓
         </div>
 
@@ -223,13 +203,12 @@
             <p>Duis aute irure dolor...</p>
         </div>
 
-        <div class="scroll-top-wrapper">   <!-- Contenedor del botón volver arriba -->
-            <a href="#top" class="scroll-top-btn" title="Volver arriba">↑</a>
-            <!-- Enlace que sube al #top + tooltip al pasar mouse -->
-        </div>
+        <!-- Elemento alto para retrasar la aparición del botón -->
+        <div class="scroll-top-anchor"></div>
+    </div>
 
-    </div>                           <!-- Fin del contenedor .content -->
+    <!-- Botón Volver Arriba (sibling del anchor alto) -->
+    <a href="#top" class="scroll-top-btn" title="Volver arriba">↑</a>
 
-</body>                              <!-- Fin del cuerpo visible -->
-
-</html>                              <!-- Fin completo del documento HTML -->
+</body>
+</html>
