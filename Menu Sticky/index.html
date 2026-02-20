@@ -1,37 +1,214 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sticky Menu</title>
-    <link rel="stylesheet" href="estilos.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menú Sticky + Volver Arriba (Pure CSS Universal)</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;  /* Scroll suave - compatible en Safari moderno */
+      overflow-y: scroll;       /* Ayuda en Safari para scroll consistente */
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .top-bar {
+      background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .navbar {
+      background-color: #111827;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .nav-list {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .nav-list li a {
+      display: block;
+      padding: 1.2rem 0.8rem;
+      color: #d1d5db;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.25s ease;
+    }
+
+    .nav-list li a:hover,
+    .nav-list li a.active {
+      color: white;
+      background-color: #374151;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .content {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+      position: relative;  /* Importante: contexto para el botón absoluto */
+    }
+
+    .section {
+      background: white;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      color: #1e40af;
+      margin-bottom: 1.2rem;
+    }
+
+    .dummy-text {
+      height: 100vh;
+      background: linear-gradient(to bottom, #f3f4f6, #e5e7eb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: #6b7280;
+      border-radius: 12px;
+      margin: 2rem 0;
+    }
+
+    /* === Botón Volver Arriba Pure CSS === */
+    .scroll-top-wrapper {
+      position: absolute;
+      top: 120vh;          /* Retraso: aparece después de bajar ~120vh - ajusta este valor */
+      right: 40px;
+      bottom: 40px;        /* Detiene antes del final si hay footer - ajusta si necesitas */
+      z-index: 999;
+    }
+
+    .scroll-top-btn {
+      position: -webkit-sticky;  /* Prefijo para Safari */
+      position: sticky;
+      top: calc(100vh - 100px);  /* Pega cerca del fondo (100vh - height 60px - offset 40px) */
+      width: 60px;
+      height: 60px;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .scroll-top-btn:hover {
+      background-color: #2563eb;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 600px) {
+      .scroll-top-wrapper {
+        right: 30px;
+        bottom: 30px;
+      }
+      .scroll-top-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 1.6rem;
+        top: calc(100vh - 85px);  /* Ajuste para móvil */
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav class="sticky-menu">
-            <ul>
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#about">Acerca de</a></li>
-                <li><a href="#services">Servicios</a></li>
-                <li><a href="#contact">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
-    <section id="home">
-        <h1>Bienvenido</h1>
-        <p>Este es un ejemplo de un menú "sticky" que se ajusta a cualquier pantalla.</p>
-    </section>
-    <section id="about">
-        <h2>Acerca de</h2>
-        <p>Información sobre nosotros.</p>
-    </section>
-    <section id="services">
-        <h2>Servicios</h2>
-        <p>Descripción de los servicios ofrecidos.</p>
-    </section>
-    <section id="contact">
-        <h2>Contacto</h2>
-        <p>Cómo ponerse en contacto con nosotros.</p>
-    </section>
+
+  <div id="top"></div>  <!-- Ancla para volver arriba -->
+
+  <div class="top-bar">
+    Mi Sitio Web Increíble
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <ul class="nav-list">
+        <li><a href="#inicio" class="active">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="content">
+
+    <div class="section" id="inicio">
+      <h2>Bienvenidos</h2>
+      <p>¡Versión corregida! Baja la página (al menos 1-2 pantallas) y el botón azul ↑ aparecerá pegado abajo a la derecha. Funciona en Safari sin JS.</p>
+    </div>
+
+    <div class="dummy-text">
+      ↓↓↓ Baja para ver el botón aparecer ↑ ↓↓↓
+    </div>
+
+    <div class="section" id="nosotros">
+      <h2>Nosotros</h2>
+      <p>Lorem ipsum dolor sit amet...</p>
+    </div>
+
+    <div class="dummy-text">Más contenido...</div>
+
+    <div class="section" id="servicios">
+      <h2>Servicios</h2>
+      <p>Ut enim ad minim veniam...</p>
+    </div>
+
+    <div class="dummy-text">Sigue bajando</div>
+
+    <div class="section" id="contacto">
+      <h2>Contacto</h2>
+      <p>Duis aute irure dolor...</p>
+    </div>
+
+    <!-- Botón Volver Arriba (al final del .content) -->
+    <div class="scroll-top-wrapper">
+      <a href="#top" class="scroll-top-btn" title="Volver arriba">↑</a>
+    </div>
+
+  </div>
+
 </body>
 </html>
