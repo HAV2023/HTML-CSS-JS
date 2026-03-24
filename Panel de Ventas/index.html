@@ -1,1 +1,143 @@
+<!-- DEFINICIÓN DEL TIPO DE DOCUMENTO -->
+<!-- Le indica al navegador que este es un documento HTML5 estándar -->
+<!DOCTYPE html>
 
+<!-- ETIQUETA RAÍZ -->
+<!-- Envuelve todo el código de la página. 'lang="es"' define el idioma como español -->
+<html lang="es">
+
+    <!-- CABECERA DEL DOCUMENTO -->
+    <!-- Contiene información técnica y metadatos que no se ven en la página -->
+    <head>
+        <!-- CODIFICACIÓN DE CARACTERES -->
+        <!-- Permite usar tildes, ñ y símbolos especiales sin errores -->
+        <meta charset="UTF-8">
+
+        <!-- CONFIGURACIÓN DE VISTA (VIEWPORT) -->
+        <!-- Hace que la página se adapte a pantallas de móviles y tablets -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- TÍTULO DE LA PESTAÑA -->
+        <!-- Texto que aparece en la parte superior del navegador -->
+        <title>Reporte de Ventas Interactivo</title>
+
+        <!-- VÍNCULO A HOJA DE ESTILOS -->
+        <!-- Conecta este HTML con el archivo 'style.css' para el diseño -->
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <!-- CUERPO DEL DOCUMENTO -->
+    <!-- Contiene todo lo que el usuario ve visualmente en la página -->
+    <body>
+
+        <!-- CONTENEDOR PRINCIPAL -->
+        <!-- Caja central que agrupa todo el contenido para centrarlo -->
+        <div class="container">
+
+            <!-- ENCABEZADO DE LA PÁGINA -->
+            <!-- Sección semántica para el título principal -->
+            <header>
+                <!-- TÍTULO DE NIVEL 1 -->
+                <!-- El título más importante de la estructura -->
+                <h1>Panel de Control de Ventas</h1>
+            </header>
+
+            <!-- SECCIÓN DEL FORMULARIO -->
+            <!-- Área dedicada a ingresar nuevos datos -->
+            <section class="form-section">
+                <!-- SUBTÍTULO DE LA SECCIÓN -->
+                <h2>Registrar Nueva Venta</h2>
+                
+                <!-- ETIQUETA DE FORMULARIO -->
+                <!-- 'id' permite identificarlo desde JavaScript para capturar datos -->
+                <form id="formulario-venta">
+                    
+                    <!-- GRUPO DE INPUTS -->
+                    <!-- Contenedor flexible para organizar los campos en fila -->
+                    <div class="input-group">
+                        
+                        <!-- CAMPO DE TEXTO: PRODUCTO -->
+                        <!-- 'required' obliga al usuario a llenarlo antes de enviar -->
+                        <input type="text" id="producto" placeholder="Producto" required>
+                        
+                        <!-- CAMPO DE TEXTO: VENDEDOR -->
+                        <!-- 'id' único para recuperar el valor luego -->
+                        <input type="text" id="vendedor" placeholder="Vendedor" required>
+                        
+                        <!-- CAMPO NUMÉRICO: PRECIO -->
+                        <!-- 'step="0.01"' permite decimales para centavos -->
+                        <input type="number" id="precio" placeholder="Precio" min="0" step="0.01" required>
+                        
+                        <!-- CAMPO NUMÉRICO: CANTIDAD -->
+                        <!-- 'min="1"' evita cantidades negativas o cero -->
+                        <input type="number" id="cantidad" placeholder="Cantidad" min="1" required>
+                        
+                        <!-- BOTÓN DE ENVÍO -->
+                        <!-- 'type="submit"' activa el evento de envío del formulario -->
+                        <button type="submit">Agregar Venta</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- SECCIÓN DE RESULTADOS -->
+            <!-- Área donde se muestran los cálculos totales -->
+            <section class="results">
+                
+                <!-- TARJETA 1: INGRESO TOTAL -->
+                <div class="card">
+                    <h2>Ingreso Total</h2>
+                    <!-- Párrafo con ID para actualizar el dinero desde JavaScript -->
+                    <p id="total-ingreso">$0.00</p>
+                </div>
+
+                <!-- TARJETA 2: PRODUCTO DESTACADO -->
+                <div class="card">
+                    <h2>Producto Más Vendido</h2>
+                    <!-- Párrafo para el nombre del producto -->
+                    <p id="producto-destacado">-</p>
+                    <!-- Texto pequeño para la cantidad de unidades -->
+                    <small id="cantidad-vendida">0 unidades</small>
+                </div>
+            </section>
+
+            <!-- SECCIÓN DE TABLA -->
+            <!-- Contenedor para la lista de ventas altas -->
+            <section class="table-container">
+                <h2>Ventas Altas (Mayores a $500)</h2>
+                
+                <!-- TABLA DE DATOS -->
+                <!-- Estructura estándar para mostrar filas y columnas -->
+                <table id="tabla-ventas">
+                    
+                    <!-- CABECERA DE LA TABLA -->
+                    <thead>
+                        <!-- FILA DE ENCABEZADOS -->
+                        <tr>
+                            <!-- CELDAS DE TÍTULO -->
+                            <th>Producto</th>
+                            <th>Vendedor</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+
+                    <!-- CUERPO DE LA TABLA -->
+                    <!-- Aquí JavaScript insertará las filas dinámicamente -->
+                    <tbody>
+                        <!-- Se llena con JavaScript -->
+                    </tbody>
+                </table>
+
+                <!-- MENSAJE OCULTO -->
+                <!-- Se muestra solo si no hay datos en la tabla -->
+                <p id="mensaje-vacio" style="text-align: center; display: none;">No hay ventas que cumplan los criterios.</p>
+            </section>
+
+        </div>
+
+        <!-- VÍNCULO A JAVASCRIPT -->
+        <!-- Carga el script al final para asegurar que el HTML ya exista -->
+        <script src="script.js"></script>
+    </body>
+</html>
