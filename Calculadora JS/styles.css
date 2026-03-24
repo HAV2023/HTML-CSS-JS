@@ -1,1 +1,146 @@
+/* ESTILOS GENERALES DEL CUERPO */
+body {
+    /* Define la tipografía de toda la página */
+    font-family: Arial, sans-serif;
+    
+    /* Color de fondo gris claro para toda la ventana */
+    background-color: #f4f4f4;
+    
+    /* Usamos Flexbox para centrar el contenido */
+    display: flex;
+    
+    /* Centrado horizontal */
+    justify-content: center;
+    
+    /* Centrado vertical */
+    align-items: center;
+    
+    /* La altura mínima es el 100% de la ventana visible */
+    height: 100vh;
+    
+    /* Eliminamos el margen por defecto que ponen los navegadores */
+    margin: 0;
+}
 
+/* ESTILOS DEL CONTENEDOR PRINCIPAL */
+.contenedor {
+    /* Fondo blanco para la caja central */
+    background-color: white;
+    
+    /* Espacio interno alrededor del contenido */
+    padding: 20px;
+    
+    /* Bordes redondeados en las esquinas */
+    border-radius: 8px;
+    
+    /* Sombra suave para dar efecto de elevación */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    
+    /* Ancho fijo para la caja */
+    width: 300px;
+    
+    /* Alineamos el texto al centro dentro de la caja */
+    text-align: center;
+}
+
+/* ESTILOS DEL TÍTULO H1 */
+h1 {
+    /* Tamaño de letra reducido para que no ocupe demasiado */
+    font-size: 18px;
+    
+    /* Color gris oscuro para el texto */
+    color: #333;
+    
+    /* Espacio inferior para separar del resto */
+    margin-bottom: 20px;
+}
+
+/* ESTILOS PARA CADA GRUPO DE CAMPO */
+.campo {
+    /* Espacio inferior entre cada par etiqueta-input */
+    margin-bottom: 15px;
+    
+    /* Alineamos el texto a la izquierda dentro del campo */
+    text-align: left;
+}
+
+/* ESTILOS DE LAS ETIQUETAS (LABEL) */
+label {
+    /* Hacemos que la etiqueta ocupe su propia línea */
+    display: block;
+    
+    /* Pequeño espacio debajo de la etiqueta */
+    margin-bottom: 5px;
+    
+    /* Letra en negrita */
+    font-weight: bold;
+    
+    /* Color gris medio */
+    color: #555;
+}
+
+/* ESTILOS DE LOS CAMPOS DE ENTRADA (INPUT) */
+input {
+    /* Ancho completo respecto a su contenedor */
+    width: 100%;
+    
+    /* Espacio interno dentro del campo de texto */
+    padding: 8px;
+    
+    /* IMPORTANTE: Incluye el padding y borde en el ancho total */
+    box-sizing: border-box;
+    
+    /* Borde gris suave */
+    border: 1px solid #ccc;
+    
+    /* Bordes ligeramente redondeados */
+    border-radius: 4px;
+}
+
+/* ESTILOS DEL BOTÓN */
+button {
+    /* Ancho completo */
+    width: 100%;
+    
+    /* Espacio interno vertical */
+    padding: 10px;
+    
+    /* Color de fondo azul */
+    background-color: #007BFF;
+    
+    /* Color de texto blanco */
+    color: white;
+    
+    /* Sin borde predeterminado */
+    border: none;
+    
+    /* Bordes redondeados */
+    border-radius: 4px;
+    
+    /* Cambia el cursor a una mano al pasar por encima */
+    cursor: pointer;
+    
+    /* Tamaño de la letra */
+    font-size: 16px;
+}
+
+/* EFECTO AL PASAR EL MOUSE POR EL BOTÓN (HOVER) */
+button:hover {
+    /* Cambia a un azul más oscuro para indicar interacción */
+    background-color: #0056b3;
+}
+
+/* ESTILOS PARA EL ÁREA DE RESULTADO */
+.resultado {
+    /* Espacio superior para separar del botón */
+    margin-top: 20px;
+    
+    /* Tamaño de letra grande para destacar el resultado */
+    font-size: 18px;
+    
+    /* Letra en negrita */
+    font-weight: bold;
+    
+    /* Color de texto gris oscuro */
+    color: #333;
+}
