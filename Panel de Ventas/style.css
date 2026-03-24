@@ -1,1 +1,247 @@
+/* ESTILOS GENERALES DEL CUERPO */
+/* Define la fuente y el fondo de toda la página */
+body {
+    /* Familia de fuentes tipográficas */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Color de fondo gris claro */
+    background-color: #f4f4f4;
+    /* Color de texto principal */
+    color: #333;
+    /* Elimina márgenes por defecto del navegador */
+    margin: 0;
+    /* Elimina rellenos por defecto del navegador */
+    padding: 0;
+}
 
+/* CONTENEDOR PRINCIPAL */
+/* Caja blanca central que contiene todo el contenido */
+.container {
+    /* Ancho máximo para pantallas grandes */
+    max-width: 900px;
+    /* Centrado horizontal con márgenes verticales */
+    margin: 40px auto;
+    /* Relleno interno para que el contenido no toque los bordes */
+    padding: 20px;
+    /* Fondo blanco */
+    background-color: #fff;
+    /* Sombra suave para dar efecto de elevación */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    /* Bordes redondeados en las esquinas */
+    border-radius: 8px;
+}
+
+/* ENCABEZADO */
+/* Estilo para la sección superior con el título */
+header {
+    /* Centra el texto horizontalmente */
+    text-align: center;
+    /* Espacio debajo del encabezado */
+    margin-bottom: 30px;
+    /* Línea inferior azul */
+    border-bottom: 2px solid #0056b3;
+    /* Espacio entre el texto y la línea */
+    padding-bottom: 10px;
+}
+
+/* SECCIÓN DEL FORMULARIO */
+/* Fondo diferenciado para el área de ingreso de datos */
+.form-section {
+    /* Fondo grisáceo */
+    background-color: #e9ecef;
+    /* Relleno interno */
+    padding: 20px;
+    /* Bordes ligeramente redondeados */
+    border-radius: 5px;
+    /* Espacio debajo del formulario */
+    margin-bottom: 30px;
+}
+
+/* GRUPO DE INPUTS */
+/* Configura los campos para que se alineen en fila */
+.input-group {
+    /* Activa el modelo flexible (Flexbox) */
+    display: flex;
+    /* Espacio entre cada elemento */
+    gap: 10px;
+    /* Permite que los elementos bajen de línea si no hay espacio */
+    flex-wrap: wrap;
+    /* Alinea los elementos verticalmente al centro */
+    align-items: center;
+}
+
+/* CAMPOS DE ENTRADA (INPUTS) */
+/* Estilo para las cajas de texto dentro del grupo */
+.input-group input {
+    /* Relleno interno del texto */
+    padding: 10px;
+    /* Borde gris suave */
+    border: 1px solid #ccc;
+    /* Bordes redondeados */
+    border-radius: 4px;
+    /* Hace que los inputs ocupen el espacio disponible */
+    flex: 1;
+    /* Ancho mínimo para que no se encojan demasiado */
+    min-width: 120px;
+}
+
+/* BOTÓN DEL FORMULARIO */
+/* Estilo para el botón de agregar */
+.input-group button {
+    /* Relleno vertical y horizontal */
+    padding: 10px 20px;
+    /* Color de fondo verde */
+    background-color: #28a745;
+    /* Color de texto blanco */
+    color: white;
+    /* Sin borde */
+    border: none;
+    /* Bordes redondeados */
+    border-radius: 4px;
+    /* Cambia el cursor a mano al pasar por encima */
+    cursor: pointer;
+    /* Texto en negrita */
+    font-weight: bold;
+    /* Suaviza la transición de color al pasar el mouse */
+    transition: background 0.3s;
+}
+
+/* EFECTO HOVER DEL BOTÓN */
+/* Cambia el color cuando el mouse está encima */
+.input-group button:hover {
+    /* Verde más oscuro */
+    background-color: #218838;
+}
+
+/* SECCIÓN DE RESULTADOS */
+/* Contenedor flexible para las tarjetas de datos */
+.results {
+    /* Distribuye el espacio entre las tarjetas */
+    display: flex;
+    /* Espacio alrededor */
+    justify-content: space-around;
+    /* Espacio debajo de la sección */
+    margin-bottom: 30px;
+    /* Permite wrapping en móviles */
+    flex-wrap: wrap;
+}
+
+/* TARJETAS INDIVIDUALES */
+/* Cajas grises para mostrar los totales */
+.card {
+    /* Fondo gris claro */
+    background-color: #e9ecef;
+    /* Relleno interno */
+    padding: 20px;
+    /* Bordes redondeados */
+    border-radius: 5px;
+    /* Texto centrado */
+    text-align: center;
+    /* Ancho del 40% del contenedor padre */
+    width: 40%;
+    /* Ancho mínimo para móviles */
+    min-width: 250px;
+    /* Espacio debajo de la tarjeta */
+    margin-bottom: 20px;
+}
+
+/* TÍTULOS DE TARJETA */
+/* Estilo para los h2 dentro de las cards */
+.card h2 {
+    /* Sin margen superior */
+    margin-top: 0;
+    /* Tamaño de fuente */
+    font-size: 1.2rem;
+    /* Color gris oscuro */
+    color: #555;
+}
+
+/* PÁRRAFOS DE TARJETA */
+/* Estilo para los números grandes */
+.card p {
+    /* Tamaño de fuente grande */
+    font-size: 1.5rem;
+    /* Texto en negrita */
+    font-weight: bold;
+    /* Color azul */
+    color: #0056b3;
+    /* Márgenes verticales */
+    margin: 10px 0;
+}
+
+/* TEXTO PEQUEÑO DE TARJETA */
+/* Estilo para la etiqueta de unidades */
+.card small {
+    /* Color gris */
+    color: #666;
+}
+
+/* CONTENEDOR DE TABLA */
+/* Espaciado para la sección inferior */
+.table-container {
+    /* Espacio superior */
+    margin-top: 30px;
+}
+
+/* TABLA */
+/* Estructura principal de la tabla */
+table {
+    /* Ancho completo */
+    width: 100%;
+    /* Colapsa los bordes para que no haya doble línea */
+    border-collapse: collapse;
+    /* Espacio superior */
+    margin-top: 10px;
+}
+
+/* CELDAS DE TABLA */
+/* Estilo para encabezados y datos */
+th, td {
+    /* Relleno interno */
+    padding: 12px;
+    /* Alineación a la izquierda */
+    text-align: left;
+    /* Línea inferior separadora */
+    border-bottom: 1px solid #ddd;
+}
+
+/* ENCABEZADOS DE TABLA */
+/* Estilo específico para la fila superior */
+th {
+    /* Fondo azul */
+    background-color: #0056b3;
+    /* Texto blanco */
+    color: white;
+}
+
+/* FILAS DE TABLA */
+/* Efecto al pasar el mouse por una fila */
+tr:hover {
+    /* Fondo gris muy suave */
+    background-color: #f1f1f1;
+}
+
+/* BOTÓN DE ELIMINAR */
+/* Estilo para el botón rojo en la tabla */
+.btn-delete {
+    /* Fondo rojo */
+    background-color: #dc3545;
+    /* Texto blanco */
+    color: white;
+    /* Sin borde */
+    border: none;
+    /* Relleno pequeño */
+    padding: 5px 10px;
+    /* Bordes redondeados */
+    border-radius: 3px;
+    /* Cursor de mano */
+    cursor: pointer;
+    /* Tamaño de fuente */
+    font-size: 0.9rem;
+}
+
+/* EFECTO HOVER DEL BOTÓN ELIMINAR */
+/* Cambia el color al pasar el mouse */
+.btn-delete:hover {
+    /* Rojo más oscuro */
+    background-color: #c82333;
+}
