@@ -1,220 +1,92 @@
 // ============================================================================
-// 1. ESTRUCTURA DE DATOS
+// 1. DEFINICIÓN DE FUNCIÓN
 // ============================================================================
 
-// 'let' permite reasignar la variable. Usamos un array literal [...] para almacenar objetos.
-// Cada objeto {} representa un registro en memoria con claves específicas.
-let ventas = [
-    { id: 1, producto: "Laptop", precio: 1200, cantidad: 2, vendedor: "Carlos" },
-    { id: 2, producto: "Mouse", precio: 25, cantidad: 10, vendedor: "Ana" },
-    { id: 3, producto: "Teclado", precio: 75, cantidad: 5, vendedor: "Carlos" },
-    { id: 4, producto: "Monitor", precio: 300, cantidad: 3, vendedor: "Luis" },
-    { id: 5, producto: "Laptop", precio: 1200, cantidad: 1, vendedor: "Ana" }
-];
+// 'function' es una palabra reservada que declara un bloque de código reutilizable.
+// 'calcularTotal' es el identificador (nombre) de la función.
+// '()' indica que esta función no recibe parámetros externos; leerá directamente del DOM.
+function calcularTotal() {
 
-// ============================================================================
-// 2. LÓGICA DE PROCESAMIENTO
-// ============================================================================
+    // ==========================================================================
+    // 2. OBTENCIÓN DE REFERENCIAS DEL DOM
+    // ==========================================================================
 
-// Función que recibe una referencia al array 'datos'.
-function calcularIngresoTotal(datos) {
-    // 'reduce' ejecuta una función acumuladora por cada elemento del array.
-    // (acc, item) => ... es una función flecha (arrow function).
-    // 'acc' (acumulador): Guarda el resultado de la iteración anterior.
-    // 'item' (valor actual): El objeto que se está procesando en este turno.
-    return datos.reduce((acc, item) => {
-        // 1. Calculamos subtotal: accede a propiedades del objeto con punto.
-        const subtotal = item.precio * item.cantidad;
-        // 2. Sumamos al acumulador y retornamos el nuevo valor para la siguiente vuelta.
-        return acc + subtotal;
-    }, 0); // El '0' inicializa el acumulador en la primera iteración.
-}
+    // document: Objeto global que representa toda la página HTML cargada.
+    // getElementById('precio'): Busca en el árbol DOM el elemento con id="precio".
+    // .value: Propiedad que lee el contenido actual del input (siempre devuelve STRING).
+    // Se almacena en la variable 'precioInput' para usarla después.
+    var precioInput = document.getElementById('precio').value;
 
-// Función para filtrar elementos.
-function filtrarVentasAltas(datos) {
-    // 'filter' crea un NUEVO array. No modifica el original.
-    return datos.filter(item => {
-        // La función debe devolver true (se queda) o false (se descarta).
-        // Calculamos el monto total de esta venta individual.
-        const totalVenta = item.precio * item.cantidad;
-        // Operador de comparación mayor que. Devuelve booleano.
-        return totalVenta > 500;
-    });
-}
+    // Mismo proceso para el campo de impuesto.
+    // Nota: El valor viene como texto, ej: "10" no como número 10.
+    var impuestoInput = document.getElementById('impuesto').value;
 
-// Función para agrupar y contar datos dinámicamente.
-function encontrarProductoMasVendido(datos) {
-    // Creamos un objeto vacío. Servirá como mapa hash (diccionario).
-    // En memoria se reserva espacio para almacenar pares clave-valor.
-    const cantidades = {};
+    // Aquí no usamos .value porque queremos modificar el CONTENIDO del div,
+    // no lo que el usuario escribe (un div no tiene valor de entrada).
+    // Guardamos la referencia al elemento para modificar su HTML después.
+    var resultadoDiv = document.getElementById('resultado');
 
-    // 'forEach' itera sobre el array pero no retorna nada (void).
-    // Se usa aquí por efecto secundario (modificar el objeto 'cantidades').
-    datos.forEach(item => {
-        // ACCESO DINÁMICO A PROPIEDADES:
-        // item.producto contiene un string (ej: "Laptop").
-        // cantidades["Laptop"] accede a esa propiedad específica.
+    // ==========================================================================
+    // 3. VALIDACIÓN DE DATOS (CONTROL DE FLUJO)
+    // ==========================================================================
+
+    // Operador lógico OR (||): La condición es verdadera si AL MENOS UNA de las dos es true.
+    // === es comparación estricta: verifica valor Y tipo de dato.
+    // Comparamos con "" (string vacío) para detectar si el usuario no escribió nada.
+    if (precioInput === "" || impuestoInput === "") {
         
-        // CONDICIONAL DE EXISTENCIA:
-        // Si la propiedad ya existe, su valor será un número (truthy).
-        if (cantidades[item.producto]) {
-            // OPERADOR DE ASIGNACIÓN COMPUESTA (+=):
-            // 1. Lee el valor actual en cantidades[item.producto].
-            // 2. Le suma item.cantidad.
-            // 3. Guarda el resultado en la misma propiedad.
-            cantidades[item.producto] += item.cantidad;
-        } else {
-            // Si es la primera vez que vemos este producto, la propiedad es undefined.
-            // Creamos la propiedad y le asignamos la cantidad inicial.
-            cantidades[item.producto] = item.cantidad;
-        }
-    });
-
-    // Variables locales para rastrear el máximo durante la búsqueda.
-    let productoMax = "";
-    let cantidadMax = 0;
-
-    // Bucle for-in: Itera sobre las CLAVES (keys) de un objeto.
-    for (const producto in cantidades) {
-        // Accedemos al valor usando la clave actual 'producto'.
-        if (cantidades[producto] > cantidadMax) {
-            // Actualizamos el máximo encontrado hasta ahora.
-            cantidadMax = cantidades[producto];
-            productoMax = producto;
-        }
-    }
-
-    // RETORNO DE OBJETO LITERAL:
-    // Como necesitamos devolver dos datos, creamos un objeto nuevo al vuelo.
-    // Clave 'producto' recibe el valor de la variable 'productoMax'.
-    // Clave 'cantidad' recibe el valor de la variable 'cantidadMax'.
-    return { producto: productoMax, cantidad: cantidadMax };
-}
-
-// ============================================================================
-// 3. MANIPULACIÓN DEL DOM (DOCUMENT OBJECT MODEL)
-// ============================================================================
-
-function render() {
-    // 1. Ejecutamos las funciones lógicas y guardamos resultados en variables locales.
-    const total = calcularIngresoTotal(ventas);
-    const ventasAltas = filtrarVentasAltas(ventas);
-    const masVendido = encontrarProductoMasVendido(ventas);
-
-    // 2. Selección de elementos del DOM.
-    // getElementById busca en el árbol HTML el nodo con ese ID específico.
-    // Devuelve un objeto Elemento HTML o null si no existe.
-    document.getElementById('total-ingreso').textContent = `$${total.toFixed(2)}`;
-    // .textContent es una propiedad que inserta texto plano dentro de la etiqueta.
-    // .toFixed(2) convierte el número a string con 2 decimales.
-
-    // Validación de existencia de datos antes de pintar.
-    if (masVendido.producto) {
-        document.getElementById('producto-destacado').textContent = masVendido.producto;
-        document.getElementById('cantidad-vendida').textContent = `${masVendido.cantidad} unidades`;
-    } else {
-        document.getElementById('producto-destacado').textContent = "-";
-        document.getElementById('cantidad-vendida').textContent = "0 unidades";
-    }
-
-    // 3. Renderizado de la tabla.
-    // querySelector permite usar selectores CSS (ej: #id elemento).
-    const tbody = document.querySelector('#tabla-ventas tbody');
-    const mensajeVacio = document.getElementById('mensaje-vacio');
-    
-    // Limpieza previa: Eliminamos el HTML interno anterior para no duplicar filas.
-    tbody.innerHTML = '';
-
-    // Comprobamos longitud del array (número de elementos).
-    if (ventasAltas.length === 0) {
-        // Modificamos el estilo CSS en línea desde JS.
-        mensajeVacio.style.display = 'block';
-    } else {
-        mensajeVacio.style.display = 'none';
+        // .innerHTML: Propiedad que permite insertar código HTML como texto dentro del elemento.
+        // Asignamos un string que se mostrará visible en la página.
+        resultadoDiv.innerHTML = "Por favor, ingrese ambos valores.";
         
-        // Iteramos para crear elementos HTML dinámicamente.
-        ventasAltas.forEach(venta => {
-            const totalVenta = venta.precio * venta.cantidad;
-            
-            // createElement genera un nodo HTML en memoria (aún no visible en pantalla).
-            const row = document.createElement('tr');
-            
-            // Template literals (backticks) permiten interpolar variables ${} dentro del string.
-            // onclick="eliminarVenta(...)" inyecta código JS que se ejecutará al hacer clic.
-            row.innerHTML = `
-                <td>${venta.producto}</td>
-                <td>${venta.vendedor}</td>
-                <td>${venta.cantidad}</td>
-                <td>$${totalVenta.toFixed(2)}</td>
-                <td><button class="btn-delete" onclick="eliminarVenta(${venta.id})">Eliminar</button></td>
-            `;
-            
-            // appendChild inserta el nodo creado dentro del nodo padre (tbody) en el DOM visible.
-            tbody.appendChild(row);
-        });
-    }
-}
-
-// ============================================================================
-// 4. GESTIÓN DE EVENTOS
-// ============================================================================
-
-// Seleccionamos el formulario y escuchamos el evento 'submit' (envío).
-document.getElementById('formulario-venta').addEventListener('submit', function(e) {
-    // e es el objeto Event. preventDefault() evita la recarga de página por defecto.
-    e.preventDefault();
-
-    // Captura de valores: .value lee el contenido actual del input.
-    const producto = document.getElementById('producto').value;
-    const vendedor = document.getElementById('vendedor').value;
-    
-    // Conversión de tipos: Los inputs devuelven string, necesitamos números.
-    // parseFloat para decimales, parseInt para enteros.
-    const precio = parseFloat(document.getElementById('precio').value);
-    const cantidad = parseInt(document.getElementById('cantidad').value);
-
-    // Creación del nuevo objeto de datos.
-    // Date.now() devuelve milisegundos desde 1970, útil para IDs únicos rápidos.
-    const nuevaVenta = {
-        id: Date.now(),
-        producto: producto,
-        vendedor: vendedor,
-        precio: precio,
-        cantidad: cantidad
-    };
-
-    // Mutación del array principal: push añade al final.
-    ventas.push(nuevaVenta);
-    
-    // Refresco de la interfaz para mostrar los cambios.
-    render();
-    
-    // 'this' se refiere al elemento que disparó el evento (el formulario).
-    // reset() limpia todos los inputs a su valor original.
-    this.reset();
-});
-
-// ============================================================================
-// 5. ELIMINACIÓN DE DATOS
-// ============================================================================
-
-// Asignamos la función al objeto 'window' para hacerla global y accesible desde el HTML.
-window.eliminarVenta = function(id) {
-    // Confirmación nativa del navegador. Bloquea la ejecución hasta que el usuario responde.
-    if(confirm('¿Estás seguro de eliminar este registro?')) {
-        // Filtrado inverso: Creamos un nuevo array con todo LO QUE NO COINCIDA con el ID.
-        // El operador !== es desigualdad estricta (valor y tipo).
-        ventas = ventas.filter(venta => venta.id !== id);
+        // .style: Objeto que permite modificar propiedades CSS desde JavaScript.
+        // .color: Equivalente a la propiedad CSS 'color'.
+        // Cambiamos a rojo para señal visual de error.
+        resultadoDiv.style.color = "red";
         
-        // Volvemos a pintar con el array actualizado (más corto).
-        render();
+        // return: Palabra reservada que TERMINA la ejecución de la función inmediatamente.
+        // El código que está debajo NO se ejecutará si entramos en este bloque.
+        // Esto evita que hagamos cálculos con datos inválidos.
+        return;
     }
-};
 
-// ============================================================================
-// 6. CICLO DE VIDA
-// ============================================================================
+    // ==========================================================================
+    // 4. CONVERSIÓN DE TIPOS (TYPE COERCION)
+    // ==========================================================================
 
-// DOMContentLoaded se dispara cuando el HTML ha sido completamente cargado y parseado (convertido a un lenguaje que comprende la computadora).
-// Esto asegura que los elementos existan antes de que JS intente buscarlos.
-document.addEventListener('DOMContentLoaded', render);
+    // parseFloat(): Función nativa que toma un STRING y devuelve un NUMBER con decimales.
+    // Es necesario porque "100" + "50" en texto da "10050", no 150.
+    // Necesitamos números reales para operar matemáticamente.
+    var precio = parseFloat(precioInput);
+
+    // Mismo proceso para el impuesto.
+    // Si el texto no es un número válido, parseFloat devolverá NaN (Not a Number).
+    var impuesto = parseFloat(impuestoInput);
+
+    // ==========================================================================
+    // 5. LÓGICA DE CÁLCULO MATEMÁTICO
+    // ==========================================================================
+
+    // Operación aritmética:
+    // 1. (impuesto / 100): Convierte el porcentaje a decimal (ej: 21 / 100 = 0.21)
+    // 2. precio * 0.21: Calcula cuánto dinero representa ese porcentaje.
+    // 3. El resultado se guarda en la variable 'montoImpuesto' en memoria.
+    var montoImpuesto = precio * (impuesto / 100);
+
+    // Suma simple: Precio base más el impuesto calculado.
+    // El resultado se almacena en 'precioTotal'.
+    var precioTotal = precio + montoImpuesto;
+
+    // ==========================================================================
+    // 6. MOSTRAR RESULTADO EN PANTALLA (RENDERIZADO)
+    // ==========================================================================
+
+    // .toFixed(2): Método de los números que devuelve un STRING con 2 decimales fijos.
+    // Ej: 120.5 se convierte en "120.50" (importante para mostrar moneda).
+    // Concatenamos strings con '+' para formar el mensaje final.
+    resultadoDiv.innerHTML = "Precio Final: $" + precioTotal.toFixed(2);
+
+    // Cambiamos el color a verde para indicar éxito visualmente.
+    // Esto modifica el CSS en línea del elemento en el DOM.
+    resultadoDiv.style.color = "green";
+}
