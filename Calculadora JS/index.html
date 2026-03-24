@@ -1,1 +1,75 @@
+<!-- DEFINICIÓN DEL TIPO DE DOCUMENTO -->
+<!-- Le indica al navegador que este es un documento HTML5 estándar -->
+<!DOCTYPE html>
 
+<!-- ETIQUETA RAÍZ -->
+<!-- Envuelve todo el código de la página. 'lang="es"' define el idioma como español -->
+<html lang="es">
+
+    <!-- CABECERA DEL DOCUMENTO -->
+    <!-- Contiene información técnica y metadatos que no se ven en la página -->
+    <head>
+        <!-- CODIFICACIÓN DE CARACTERES -->
+        <!-- Permite usar tildes, ñ y símbolos especiales sin errores -->
+        <meta charset="UTF-8">
+
+        <!-- CONFIGURACIÓN DE VISTA (VIEWPORT) -->
+        <!-- Hace que la página se adapte a pantallas de móviles y tablets -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- TÍTULO DE LA PESTAÑA -->
+        <!-- Texto que aparece en la pestaña del navegador, no en la página -->
+        <title>Calculadora de Precio Final</title>
+
+        <!-- VINCULAR HOJA DE ESTILOS -->
+        <!-- Conecta este HTML con el archivo CSS para dar diseño y colores -->
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <!-- CUERPO DEL DOCUMENTO -->
+    <!-- Aquí va todo el contenido visible para el usuario -->
+    <body>
+
+        <!-- CONTENEDOR PRINCIPAL -->
+        <!-- Un bloque 'div' para agrupar elementos. La clase 'contenedor' se usa en el CSS -->
+        <div class="contenedor">
+            
+            <!-- TÍTULO VISIBLE -->
+            <!-- Encabezado de nivel 1, el más importante de la página -->
+            <h1>Calculadora de Precio Final</h1>
+            
+            <!-- GRUPO DE CAMPO 1 (PRECIO) -->
+            <div class="campo">
+                <!-- ETIQUETA PARA EL INPUT -->
+                <!-- 'for="precio"' conecta este texto con el input de abajo -->
+                <label for="precio">Precio del producto ($):</label>
+                
+                <!-- CAMPO DE ENTRADA -->
+                <!-- 'type="number"' solo permite números. 'id' es su identificador único -->
+                <input type="number" id="precio" placeholder="Ej: 100">
+            </div>
+
+            <!-- GRUPO DE CAMPO 2 (IMPUESTO) -->
+            <div class="campo">
+                <!-- ETIQUETA PARA EL INPUT -->
+                <label for="impuesto">Porcentaje de impuesto (%):</label>
+                
+                <!-- CAMPO DE ENTRADA -->
+                <!-- Otro input numérico con su propio id -->
+                <input type="number" id="impuesto" placeholder="Ej: 21">
+            </div>
+
+            <!-- BOTÓN DE ACCIÓN -->
+            <!-- 'onclick' ejecuta la función de JavaScript cuando se hace clic -->
+            <button onclick="calcularTotal()">Calcular</button>
+
+            <!-- ÁREA DE RESULTADO -->
+            <!-- Un div vacío donde JavaScript escribirá el resultado final -->
+            <div id="resultado" class="resultado"></div>
+        </div>
+
+        <!-- VINCULAR JAVASCRIPT -->
+        <!-- Carga el archivo JS al final para que el HTML ya esté listo -->
+        <script src="script.js"></script>
+    </body>
+</html>
