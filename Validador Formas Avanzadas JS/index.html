@@ -1,1 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Completo con Domicilio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
+    <div class="contenedor-principal">
+        <h2>Registro de Usuario</h2>
+        <form id="formularioRegistro" novalidate>
+            
+            <!-- Datos Personales -->
+            <div class="seccion">
+                <h3>Datos Personales</h3>
+                <div class="grupo-input">
+                    <label for="nombre">Nombre Completo:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ej: HECTOR PEREZ">
+                    <span class="mensaje-error" id="error-nombre"></span>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="edad">Edad:</label>
+                    <input type="text" id="edad" name="edad" placeholder="Ej: 30" inputmode="numeric">
+                    <span class="mensaje-error" id="error-edad"></span>
+                </div>
+            </div>
+
+            <!-- Contacto -->
+            <div class="seccion">
+                <h3>Contacto</h3>
+                <div class="grupo-input">
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="text" id="email" name="email" placeholder="ejemplo@correo.com">
+                    <span class="mensaje-error" id="error-email"></span>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="confirmar-email">Confirmar Correo:</label>
+                    <input type="text" id="confirmar-email" name="confirmar-email" placeholder="Repita el correo">
+                    <span class="mensaje-error" id="error-confirmar-email"></span>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="pais">País:</label>
+                    <select id="pais" name="pais">
+                        <option value="" disabled selected>Seleccione un país</option>
+                        <option value="MX">🇲🇽 México</option>
+                        <option value="US">🇺🇸 Estados Unidos</option>
+                        <option value="CO">🇨🇴 Colombia</option>
+                        <option value="ES">🇪🇸 España</option>
+                        <option value="AR">🇦🇷 Argentina</option>
+                    </select>
+                    <span class="mensaje-error" id="error-pais"></span>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="telefono">Teléfono:</label>
+                    <div class="input-con-prefix">
+                        <span id="prefijo-telefono" class="prefijo">+__</span>
+                        <input type="text" id="telefono" name="telefono" placeholder="Seleccione un país" inputmode="tel" disabled>
+                    </div>
+                    <span class="mensaje-error" id="error-telefono"></span>
+                </div>
+            </div>
+
+            <!-- Domicilio -->
+            <div class="seccion">
+                <h3>Domicilio</h3>
+                <div class="grupo-input">
+                    <label for="calle">Calle:</label>
+                    <input type="text" id="calle" name="calle" placeholder="Nombre de la calle">
+                    <span class="mensaje-error" id="error-calle"></span>
+                </div>
+
+                <div class="fila-doble">
+                    <div class="grupo-input">
+                        <label for="numero">Número Exterior:</label>
+                        <input type="text" id="numero" name="numero" placeholder="Ej: 123">
+                        <span class="mensaje-error" id="error-numero"></span>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="cp">Código Postal:</label>
+                        <input type="text" id="cp" name="cp" placeholder="Ej: 06600" inputmode="numeric">
+                        <span class="mensaje-error" id="error-cp"></span>
+                    </div>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="colonia">Colonia / Barrio:</label>
+                    <input type="text" id="colonia" name="colonia" placeholder="Nombre de la colonia">
+                    <span class="mensaje-error" id="error-colonia"></span>
+                </div>
+
+                <div class="fila-doble">
+                    <div class="grupo-input">
+                        <label for="ciudad">Ciudad:</label>
+                        <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad">
+                        <span class="mensaje-error" id="error-ciudad"></span>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="estado">Estado / Provincia:</label>
+                        <input type="text" id="estado" name="estado" placeholder="Estado">
+                        <span class="mensaje-error" id="error-estado"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seguridad -->
+            <div class="seccion">
+                <h3>Seguridad</h3>
+                <div class="grupo-input">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" placeholder="Mínimo 8 caracteres">
+                    <span class="mensaje-error" id="error-password"></span>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="confirmar-password">Confirmar Contraseña:</label>
+                    <input type="password" id="confirmar-password" name="confirmar-password" placeholder="Repita la contraseña">
+                    <span class="mensaje-error" id="error-confirmar-password"></span>
+                </div>
+            </div>
+
+            <button type="submit" id="btn-enviar">Registrar Datos</button>
+            <div id="mensaje-exito" class="mensaje-exito"></div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
